@@ -25,9 +25,7 @@ public class InputReaderData : ScriptableObject, GameControls.IPlayerActions
     {
         _interact.performed -= OnInteract;
         _playerInputActions.Player.Disable();
-
     }
-
     public void OnInteract(InputAction.CallbackContext context)
     {
         if (_interact.WasPerformedThisFrame())

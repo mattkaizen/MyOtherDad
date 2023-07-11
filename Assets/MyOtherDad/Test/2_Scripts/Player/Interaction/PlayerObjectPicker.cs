@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Objects;
+using UnityEngine;
 
 namespace Player
 {
@@ -14,13 +15,13 @@ namespace Player
         private void Awake()
         {
             if (inputReader != null)
-                inputReader.Interacted += TryPickupObject;
+                inputReader.Interacted += RaycastToPickupObject;
         }
 
         private void OnDisable()
         {
             if (inputReader != null)
-                inputReader.Interacted -= TryPickupObject;
+                inputReader.Interacted -= RaycastToPickupObject;
         }
 
         private void OnDrawGizmos()
@@ -28,14 +29,24 @@ namespace Player
             Debug.DrawRay(transform.position, transform.forward * rayDistance, Color.green, 0.5f);
         }
 
-        private void TryPickupObject()
+        private void TryPickup(IPickable item)
+        {
+            if (playerInventory == null)
+            {
+                Debug.LogWarning($"Empty {typeof(PlayerInventory)}");
+            }
+            
+            playerInventory.Add(item.Pickup());
+        }
+
+        private void RaycastToPickupObject()
         {
             if (Physics.Raycast(transform.position, transform.forward, out var hitInfo,
                     rayDistance, layerMask, QueryTriggerInteraction.Ignore))
             {
                 if (hitInfo.transform.TryGetComponent<IPickable>(out var pickable))
                 {
-                    pickable.Pickup();
+                    TryPickup(pickable);
                 }
             }
         }

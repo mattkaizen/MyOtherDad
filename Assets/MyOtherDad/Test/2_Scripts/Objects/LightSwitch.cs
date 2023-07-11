@@ -5,9 +5,18 @@ namespace Objects
 {
     public class LightSwitch : MonoBehaviour, ISwitchable
     {
-        public void Toggle()
+        public bool IsActive { get => _isActive; }
+        private bool _isActive;
+        public void Activate()
         {
-            throw new System.NotImplementedException();
+            _isActive = true;
         }
+
+        public void Deactivate()
+        {
+            _isActive = false;
+
+        }
+
     }
 }

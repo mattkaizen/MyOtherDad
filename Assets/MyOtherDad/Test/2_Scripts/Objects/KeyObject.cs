@@ -1,13 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using Objects;
-using UnityEngine;
 
-public class KeyObject : ItemPickable
+public class KeyObject : InteractiveItem, IPickable
 {
-    public override void Pickup()
+    public ItemData Pickup()
     {
-        Debug.Log("Pickup");
         gameObject.SetActive(false);
+        return Data;
     }
 }

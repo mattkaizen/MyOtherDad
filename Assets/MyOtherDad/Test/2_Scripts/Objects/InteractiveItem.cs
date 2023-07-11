@@ -1,12 +1,10 @@
-﻿using Interfaces;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Objects
 {
-    public abstract class Item : MonoBehaviour
+    public abstract class InteractiveItem : MonoBehaviour
     {
         public ItemData Data => _itemData;
-
         [SerializeField] private ItemData _itemData;
     }
 }

@@ -1,9 +1,10 @@
-﻿using UnityEngine;
-
+﻿
 namespace Interfaces
 {
     public interface ISwitchable
     {
-        public void Toggle();
+        public bool IsActive { get; }
+        public void Activate();
+        public void Deactivate();
     }
 }

@@ -1,30 +1,25 @@
 using System.Collections.Generic;
-using Objects;
 using UnityEngine;
 
 public class PlayerInventory : MonoBehaviour
 {
-    public Dictionary<ItemData, int> KeysInformation => _keysInformation;
+    public Dictionary<ItemData, int> ItemInformation => _itemInformation;
 
-    private Dictionary<ItemData, int> _keysInformation = new Dictionary<ItemData, int>();
-    
-    private Dictionary<ItemPickable, int> _itemsInformation = new Dictionary<ItemPickable, int>();
-
+    private Dictionary<ItemData, int> _itemInformation = new Dictionary<ItemData, int>();
     public void Add(ItemData item)
     {
         if (item == null)
             return;
 
-        if (_keysInformation.ContainsKey(item))
+        if (_itemInformation.ContainsKey(item))
         {
-            _keysInformation[item] += 1;
-            Debug.Log($"I have {_keysInformation[item]} {item.name} keys");
+            _itemInformation[item] += 1;
+            Debug.Log($"I have {_itemInformation[item]} {item.name} keys");
         }
         else
         {
-            _keysInformation.Add(item, 1);
+            _itemInformation.Add(item, 1);
             Debug.Log($"I added a new {item.name}");
         }
     }
-
 }
