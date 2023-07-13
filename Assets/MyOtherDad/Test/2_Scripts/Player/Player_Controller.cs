@@ -1,3 +1,4 @@
+using Cinemachine;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -22,15 +23,19 @@ public class Player_Controller : MonoBehaviour
     [SerializeField] AudioClip walk;
     bool isWalking;
 
-    [Header("Gravedad")] [Space] public Transform groundCheck;
+    [Header("Gravedad")] 
+    [Space] 
+    public Transform groundCheck;
     public LayerMask groundMask;
     public float groundDistance = 0.3f;
     private float gravity = -9.8f;
-    Vector3 velocity;
-    bool isGrounded;
+    private Vector3 velocity;
+    private bool isGrounded;
 
-    [Header("Camara")] [Space] [SerializeField]
-    Camera cam;
+    [Header("Camara")] 
+    [Space] 
+    [SerializeField] Transform cam;
+    // [SerializeField] Camera cam;
     // Camera cam;
 
     float mouseHorizontal = 3f;
@@ -43,18 +48,9 @@ public class Player_Controller : MonoBehaviour
     public Transform Flashlight;
 
     Vector3 xyz;
-
-
-    public float PlayerSpeed
-    {
-        get => playerSpeed;
-    } //Utilizado en Enter de PatrolMinion y PatrolBoss script
-
     void Awake()
     {
         player = GetComponent<CharacterController>();
-        //cam = FindObjectOfType<Camera>();
-        // cam = Camera.main;
 
         staminaMAX = stamina;
         isWalking = false;
@@ -117,7 +113,8 @@ public class Player_Controller : MonoBehaviour
 
         v_mouse = Mathf.Clamp(v_mouse, minRotation, maxRotation);
 
-        cam.transform.localEulerAngles = new Vector3(-v_mouse, 0, 0);
+        // cam.transform.localEulerAngles = new Vector3(-v_mouse, 0, 0);
+        cam.localEulerAngles = new Vector3(-v_mouse, 0, 0);
 
         transform.Rotate(0, h_mouse, 0);
     }
