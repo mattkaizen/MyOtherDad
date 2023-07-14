@@ -1,5 +1,4 @@
-﻿using Objects;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Player
 {

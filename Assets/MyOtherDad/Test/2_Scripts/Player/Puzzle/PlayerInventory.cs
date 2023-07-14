@@ -14,12 +14,12 @@ public class PlayerInventory : MonoBehaviour
         if (_itemInformation.ContainsKey(item))
         {
             _itemInformation[item] += 1;
-            Debug.Log($"I have {_itemInformation[item]} {item.name} keys");
+            Debug.Log($"I have {_itemInformation[item]} {item.Name}");
         }
         else
         {
             _itemInformation.Add(item, 1);
-            Debug.Log($"I added a new {item.name}");
+            Debug.Log($"I added a new {item.Name}");
         }
     }
 }

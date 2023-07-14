@@ -1,4 +1,3 @@
-using Cinemachine;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -112,8 +111,7 @@ public class Player_Controller : MonoBehaviour
 
 
         v_mouse = Mathf.Clamp(v_mouse, minRotation, maxRotation);
-
-        // cam.transform.localEulerAngles = new Vector3(-v_mouse, 0, 0);
+        
         cam.localEulerAngles = new Vector3(-v_mouse, 0, 0);
 
         transform.Rotate(0, h_mouse, 0);

@@ -17,6 +17,5 @@ namespace Objects
             _isActive = false;
 
         }
-
     }
 }
