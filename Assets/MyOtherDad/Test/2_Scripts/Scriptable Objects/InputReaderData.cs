@@ -8,7 +8,7 @@ using UnityEngine.InputSystem;
 public class InputReaderData : ScriptableObject, GameControls.IPlayerActions
 {
     public event UnityAction Interacted = delegate { };
-    public event UnityAction GotUp = delegate { };
+    public event UnityAction GettingUp = delegate { };
     
     private GameControls _playerInputActions;
     private InputAction _interact;
@@ -23,7 +23,7 @@ public class InputReaderData : ScriptableObject, GameControls.IPlayerActions
         _getUp = _playerInputActions.Player.GetUp;
         
         _interact.performed += OnInteract;
-        _getUp.performed += OnGetUp;
+        _getUp.performed += OnGetingUp;
     }
 
     private void OnDisable()
@@ -40,11 +40,11 @@ public class InputReaderData : ScriptableObject, GameControls.IPlayerActions
         }
     }
 
-    public void OnGetUp(InputAction.CallbackContext context)
+    public void OnGetingUp(InputAction.CallbackContext context)
     {
         if (_getUp.WasPerformedThisFrame())
         {
-            GotUp?.Invoke();
+            GettingUp?.Invoke();
         }
     }
 }

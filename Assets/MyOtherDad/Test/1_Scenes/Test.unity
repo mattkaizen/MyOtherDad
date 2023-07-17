@@ -7728,6 +7728,7 @@ MonoBehaviour:
     m_Bits: 1
   rayDistance: 3
   inputReader: {fileID: 11400000, guid: a1918f9e9c68f0d47a13815a88d883a5, type: 2}
+  ChangingPosture: {fileID: 11400000, guid: 116231076d511fc4abf8e542abc9c16c, type: 2}
 --- !u!1 &1212774041
 GameObject:
   m_ObjectHideFlags: 0
@@ -13722,7 +13723,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh29622
+  m_Name: pb_Mesh29708
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
@@ -19333,7 +19334,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ea59f3fa3514c958e4763d6732fffb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  camera: {fileID: 1856351482352592509}
+  currentCamera: {fileID: 1856351482352592509}
 --- !u!33 &5316187765331483601
 MeshFilter:
   m_ObjectHideFlags: 10

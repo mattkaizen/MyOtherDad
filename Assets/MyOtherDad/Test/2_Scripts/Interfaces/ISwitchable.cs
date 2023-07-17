@@ -1,5 +1,4 @@
-﻿
-namespace Interfaces
+﻿namespace Interfaces
 {
     public interface ISwitchable
     {

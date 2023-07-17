@@ -159,9 +159,9 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
             @Interact.started += instance.OnInteract;
             @Interact.performed += instance.OnInteract;
             @Interact.canceled += instance.OnInteract;
-            @GetUp.started += instance.OnGetUp;
-            @GetUp.performed += instance.OnGetUp;
-            @GetUp.canceled += instance.OnGetUp;
+            @GetUp.started += instance.OnGetingUp;
+            @GetUp.performed += instance.OnGetingUp;
+            @GetUp.canceled += instance.OnGetingUp;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -169,9 +169,9 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
             @Interact.started -= instance.OnInteract;
             @Interact.performed -= instance.OnInteract;
             @Interact.canceled -= instance.OnInteract;
-            @GetUp.started -= instance.OnGetUp;
-            @GetUp.performed -= instance.OnGetUp;
-            @GetUp.canceled -= instance.OnGetUp;
+            @GetUp.started -= instance.OnGetingUp;
+            @GetUp.performed -= instance.OnGetingUp;
+            @GetUp.canceled -= instance.OnGetingUp;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -192,6 +192,6 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
     public interface IPlayerActions
     {
         void OnInteract(InputAction.CallbackContext context);
-        void OnGetUp(InputAction.CallbackContext context);
+        void OnGetingUp(InputAction.CallbackContext context);
     }
 }

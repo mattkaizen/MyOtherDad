@@ -1,4 +1,7 @@
-﻿public interface IPickable
+﻿namespace Interfaces
 {
-    public ItemData Pickup();
+    public interface IPickable
+    {
+        public ItemData Pickup();
+    }
 }

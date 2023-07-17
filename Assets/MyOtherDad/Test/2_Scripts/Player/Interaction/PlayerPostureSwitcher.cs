@@ -1,26 +1,31 @@
 ﻿using Cinemachine;
 using Interfaces;
+using Scriptable_Objects;
 using UnityEngine;
 
 namespace Player
 {
     public class PlayerPostureSwitcher : MonoBehaviour
     {
-        [Header("Camera")] [SerializeField] private CinemachineVirtualCamera playerCamera;
+        [Header("Camera")]  
+        [SerializeField] private CinemachineVirtualCamera playerCamera;
 
-        [Space] [Header("Raycast")] [SerializeField]
-        private LayerMask layerMask;
+        [Space] 
+        [Header("Raycast")] 
+        [SerializeField] private LayerMask layerMask;
 
         [SerializeField] private float rayDistance;
         [SerializeField] private InputReaderData inputReader;
+        [Header("Events")]
+        [SerializeField] private VoidEventChannelData ChangingPosture;
 
-        private int _defaultCameraPriority;
         private ICameraChanger _currentCameraChanger;
+        private int _defaultCameraPriority;
 
         private void Awake()
         {
             inputReader.Interacted += OnInteract;
-            inputReader.GotUp += OnGetUp;
+            inputReader.GettingUp += OnGetUp;
 
             if (playerCamera != null)
                 _defaultCameraPriority = playerCamera.Priority;

@@ -1,3 +1,4 @@
+using Interfaces;
 using Objects;
 
 public class KeyObject : InteractiveItem, IPickable
