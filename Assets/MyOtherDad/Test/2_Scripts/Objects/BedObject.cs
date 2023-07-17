@@ -1,5 +1,4 @@
-﻿using System;
-using Cinemachine;
+﻿using Cinemachine;
 using Interfaces;
 using UnityEngine;
 
@@ -13,7 +12,7 @@ namespace Objects
             set => _isUse = value;
         }
 
-        [SerializeField] private CinemachineVirtualCamera camera;
+        [SerializeField] private CinemachineVirtualCamera currentCamera;
 
         private int _defaultCameraPriority;
         private bool _isUse;
@@ -21,22 +20,31 @@ namespace Objects
 
         private void Awake()
         {
-            if (camera != null)
-                _defaultCameraPriority = camera.Priority;
+            if (currentCamera != null)
+                _defaultCameraPriority = currentCamera.Priority;
         }
 
         public void EnableCamera(int cameraPriority)
         {
-            Quaternion rotation = Quaternion.Euler(Vector3.up);
-            camera.enabled = true;
-            camera.Priority = cameraPriority;
-            Debug.Log($"New camera priority {camera.Priority}");
+            if (currentCamera == null)
+            {
+                Debug.LogWarning($"Empty {currentCamera}");
+                return;
+            }
+            currentCamera.enabled = true;
+            currentCamera.Priority = cameraPriority;
+            Debug.Log($"New camera priority {currentCamera.Priority}");
         }
 
         public void DisableCamera()
         {
-            camera.Priority = _defaultCameraPriority;
-            camera.enabled = false;
+            if (currentCamera == null)
+            {
+                Debug.LogWarning($"Empty {currentCamera}");
+                return;
+            }
+            currentCamera.Priority = _defaultCameraPriority;
+            currentCamera.enabled = false;
         }
     }
 }

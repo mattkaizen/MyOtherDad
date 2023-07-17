@@ -1,5 +1,4 @@
-﻿using System;
-using Cinemachine;
+﻿using Cinemachine;
 using Interfaces;
 using UnityEngine;
 
@@ -16,14 +15,20 @@ namespace Player
         [SerializeField] private InputReaderData inputReader;
 
         private int _defaultCameraPriority;
-        private ICameraChanger _cameraChanger;
+        private ICameraChanger _currentCameraChanger;
 
         private void Awake()
         {
             inputReader.Interacted += OnInteract;
+            inputReader.GotUp += OnGetUp;
 
             if (playerCamera != null)
                 _defaultCameraPriority = playerCamera.Priority;
+        }
+
+        private void OnGetUp()
+        {
+            TryResetPosture();
         }
 
         private void OnInteract()
@@ -33,11 +38,26 @@ namespace Player
 
         private void TrySwitchPosture(ICameraChanger cameraChanger)
         {
-            if (!cameraChanger.IsUse)
+            if (_currentCameraChanger?.IsUse == true)
+                return;
+
+            if (cameraChanger.IsUse)
+                return;
+
+            cameraChanger.IsUse = true;
+            
+            int newPriority = _defaultCameraPriority + 1;
+            cameraChanger.EnableCamera(newPriority);
+            
+            _currentCameraChanger = cameraChanger;
+        }
+
+        private void TryResetPosture()
+        {
+            if (_currentCameraChanger?.IsUse == true)
             {
-                cameraChanger.IsUse = true;
-                int newPriority = _defaultCameraPriority + 1;
-                cameraChanger.EnableCamera(newPriority);
+                _currentCameraChanger.IsUse = false;
+                _currentCameraChanger.DisableCamera();
             }
         }
 

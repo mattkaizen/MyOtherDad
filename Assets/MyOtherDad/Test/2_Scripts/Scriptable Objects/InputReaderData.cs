@@ -7,9 +7,12 @@ using UnityEngine.InputSystem;
 [CreateAssetMenu(fileName = "InputReaderData")]
 public class InputReaderData : ScriptableObject, GameControls.IPlayerActions
 {
+    public event UnityAction Interacted = delegate { };
+    public event UnityAction GotUp = delegate { };
+    
     private GameControls _playerInputActions;
     private InputAction _interact;
-    public event UnityAction Interacted = delegate { };
+    private InputAction _getUp;
 
     private void OnEnable()
     {
@@ -17,7 +20,10 @@ public class InputReaderData : ScriptableObject, GameControls.IPlayerActions
         _playerInputActions.Player.Enable();
 
         _interact = _playerInputActions.Player.Interact;
+        _getUp = _playerInputActions.Player.GetUp;
+        
         _interact.performed += OnInteract;
+        _getUp.performed += OnGetUp;
     }
 
     private void OnDisable()
@@ -25,11 +31,20 @@ public class InputReaderData : ScriptableObject, GameControls.IPlayerActions
         _interact.performed -= OnInteract;
         _playerInputActions.Player.Disable();
     }
+
     public void OnInteract(InputAction.CallbackContext context)
     {
         if (_interact.WasPerformedThisFrame())
         {
             Interacted?.Invoke();
+        }
+    }
+
+    public void OnGetUp(InputAction.CallbackContext context)
+    {
+        if (_getUp.WasPerformedThisFrame())
+        {
+            GotUp?.Invoke();
         }
     }
 }

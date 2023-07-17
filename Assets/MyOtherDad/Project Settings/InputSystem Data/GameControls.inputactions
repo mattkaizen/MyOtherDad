@@ -1,5 +1,5 @@
 {
-    "name": "PlayerInputActions",
+    "name": "GameControls",
     "maps": [
         {
             "name": "Player",
@@ -9,6 +9,15 @@
                     "name": "Interact",
                     "type": "Button",
                     "id": "4af2dd1b-68dd-4d70-a942-d00818d6f203",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "GetUp",
+                    "type": "Button",
+                    "id": "c9eb9238-ceea-4724-b2c6-1ab0a1efd920",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -24,6 +33,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Interact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3fad02dd-2c3d-4bb9-b6c8-a09b39da697b",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "GetUp",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
