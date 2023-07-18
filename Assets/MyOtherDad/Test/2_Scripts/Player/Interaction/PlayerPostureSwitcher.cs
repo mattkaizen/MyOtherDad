@@ -17,7 +17,8 @@ namespace Player
         [SerializeField] private float rayDistance;
         [SerializeField] private InputReaderData inputReader;
         [Header("Events")]
-        [SerializeField] private VoidEventChannelData ChangingPosture;
+        [SerializeField] private VoidEventChannelData changingPosture;
+        [SerializeField] private VoidEventChannelData resetPosture;
 
         private ICameraChanger _currentCameraChanger;
         private int _defaultCameraPriority;
@@ -44,10 +45,14 @@ namespace Player
         private void TrySwitchPosture(ICameraChanger cameraChanger)
         {
             if (_currentCameraChanger?.IsUse == true)
+            {
                 return;
+            }
 
             if (cameraChanger.IsUse)
+            {
                 return;
+            }
 
             cameraChanger.IsUse = true;
             
@@ -55,6 +60,8 @@ namespace Player
             cameraChanger.EnableCamera(newPriority);
             
             _currentCameraChanger = cameraChanger;
+            
+            changingPosture.RaiseEvent();
         }
 
         private void TryResetPosture()
@@ -63,6 +70,8 @@ namespace Player
             {
                 _currentCameraChanger.IsUse = false;
                 _currentCameraChanger.DisableCamera();
+                
+                resetPosture.RaiseEvent();
             }
         }
 

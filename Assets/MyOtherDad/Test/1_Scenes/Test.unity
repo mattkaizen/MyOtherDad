@@ -7728,7 +7728,8 @@ MonoBehaviour:
     m_Bits: 1
   rayDistance: 3
   inputReader: {fileID: 11400000, guid: a1918f9e9c68f0d47a13815a88d883a5, type: 2}
-  ChangingPosture: {fileID: 11400000, guid: 116231076d511fc4abf8e542abc9c16c, type: 2}
+  changingPosture: {fileID: 0}
+  resetPosture: {fileID: 0}
 --- !u!1 &1212774041
 GameObject:
   m_ObjectHideFlags: 0
@@ -15455,7 +15456,7 @@ GameObject:
   - component: {fileID: 1903002351}
   - component: {fileID: 1903002352}
   m_Layer: 0
-  m_Name: PlayerVCamera
+  m_Name: PlayerVirtualCamera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -18916,6 +18917,14 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 1903002351}
+    - target: {fileID: 2072635315446771366, guid: 4133b9a6b163228478de6c0db064d776, type: 3}
+      propertyPath: playerVcam
+      value: 
+      objectReference: {fileID: 1903002351}
+    - target: {fileID: 2072635315446771366, guid: 4133b9a6b163228478de6c0db064d776, type: 3}
+      propertyPath: staminaMax
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 2455146974118441334, guid: 4133b9a6b163228478de6c0db064d776, type: 3}
       propertyPath: m_Name
       value: Player
