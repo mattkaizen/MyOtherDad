@@ -6,11 +6,11 @@ namespace Scriptable_Objects
     [CreateAssetMenu(menuName = "Events/Void Event Channel")]
     public class VoidEventChannelData : ScriptableObject
     {
-        public event UnityAction OnEventRaised = delegate { };
+        public event UnityAction EventRaised = delegate { };
 
         public void RaiseEvent()
         {
-            OnEventRaised?.Invoke();
+            EventRaised?.Invoke();
         }
     }
 }

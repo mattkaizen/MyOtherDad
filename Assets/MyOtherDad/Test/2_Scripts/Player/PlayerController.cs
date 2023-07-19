@@ -1,31 +1,41 @@
+using Scriptable_Objects;
 using UnityEngine;
 
-public class Player_Controller : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     [Header("CharacterController")] 
     [Space] 
     [SerializeField] private CharacterController player;
-
-    [Header("Movimientos")] 
+    
+    [Header("Input")] 
     [Space] 
-    [SerializeField] private float horizontalMove;
-    [SerializeField] private float verticalMove;
+    [SerializeField] private InputReaderData inputReader;
+
+    [Header("Movements")] 
+    [Space] 
+    [SerializeField] private float horizontalInput;
+    [SerializeField] private float verticalInput;
     [SerializeField] private float playerSpeed = 12f;
     [SerializeField] private float runSpeed = 30f;
     [SerializeField] private float stamina = 10f;
     [SerializeField] private float timeToRecover = 5.0f;
     [SerializeField] private float staminaMax;
 
-    [Header("Gravedad")] 
+    [Header("Gravity")] 
     [Space] 
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundMask;
     [SerializeField] private float groundDistance = 0.3f;
 
-    [Header("Camara")] 
+    [Header("Camera")] 
     [Space] 
     [SerializeField] private Transform playerCam;
-
+    
+    [Header("Events")] 
+    [Space] 
+    [SerializeField] private VoidEventChannelData changingPosture;
+    [SerializeField] private VoidEventChannelData resetPosture;
+    
     private Vector3 _playerInput;
     private Vector3 _gravityVelocity;
     
@@ -40,23 +50,25 @@ public class Player_Controller : MonoBehaviour
     private bool _isGrounded;
     private bool _enableMovement;
 
-    Vector3 xyz;
-
-    void Awake()
+    private void Awake()
     {
         player = GetComponent<CharacterController>();
 
         staminaMax = stamina;
         _enableMovement = true;
+
+        changingPosture.EventRaised += OnChangingPosture;
+        resetPosture.EventRaised += OnResetPosture;
+        inputReader.Moved += OnPlayerMove;
     }
 
-    void Update()
+
+    private void Update()
     {
         SetGravity();
         Moverse();
         Mirar();
     }
-
     private void Moverse()
     {
         if (!_enableMovement)
@@ -64,18 +76,14 @@ public class Player_Controller : MonoBehaviour
             return;
         }
 
-        horizontalMove = Input.GetAxis("Horizontal");
-        verticalMove = Input.GetAxis("Vertical");
+        // horizontalInput = Input.GetAxis("Horizontal");
+        // verticalInput = Input.GetAxis("Vertical");
 
-        _playerInput = new Vector3(horizontalMove, 0, verticalMove);
+        _playerInput = new Vector3(horizontalInput, 0, verticalInput);
         _playerInput = Vector3.ClampMagnitude(_playerInput, 1);
 
         if (Input.GetKey(KeyCode.LeftShift) && stamina >= 0f)
         {
-            xyz = new Vector3(25, 0, 0);
-            if (Flashlight != null)
-                Flashlight.localEulerAngles = Vector3.Lerp(Flashlight.localEulerAngles, xyz, Time.deltaTime * 2.5f);
-
             _playerInput = transform.TransformDirection(_playerInput) * runSpeed;
 
             stamina -= Time.deltaTime;
@@ -87,10 +95,6 @@ public class Player_Controller : MonoBehaviour
         }
         else
         {
-            xyz = new Vector3(0, 0, 0);
-            if (Flashlight != null)
-                Flashlight.localEulerAngles = Vector3.Lerp(Flashlight.localEulerAngles, xyz, Time.deltaTime * 2.5f);
-
             _playerInput = transform.TransformDirection(_playerInput) * playerSpeed;
 
             if (stamina < staminaMax)
@@ -112,7 +116,6 @@ public class Player_Controller : MonoBehaviour
         _mouseHorizontalInput = _mouseHorizontalSensibility * Input.GetAxis("Mouse X");
         _mouseVerticaInput += _mouseVerticalSensibility * Input.GetAxis("Mouse Y");
 
-
         _mouseVerticaInput = Mathf.Clamp(_mouseVerticaInput, _minVerticalMouseRotation, _maxVerticalMouseRotation);
 
         playerCam.localEulerAngles = new Vector3(-_mouseVerticaInput, 0, 0);
@@ -130,5 +133,21 @@ public class Player_Controller : MonoBehaviour
 
         _gravityVelocity.y += _gravity * Time.deltaTime;
         player.Move(_gravityVelocity * Time.deltaTime);
+    }
+    
+    private void OnPlayerMove(Vector2 inputVector2)
+    {
+        horizontalInput = inputVector2.x;
+        verticalInput = inputVector2.y;
+    }
+    
+    private void OnChangingPosture()
+    {
+        _enableMovement = false;
+    }
+
+    private void OnResetPosture()
+    {
+        _enableMovement = true;
     }
 }
