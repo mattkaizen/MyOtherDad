@@ -1407,7 +1407,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh29460
+  m_Name: pb_Mesh29462
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
@@ -2113,7 +2113,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh29432
+  m_Name: pb_Mesh29434
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
@@ -3617,7 +3617,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh29510
+  m_Name: pb_Mesh29512
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
@@ -6425,7 +6425,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh29494
+  m_Name: pb_Mesh29496
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
@@ -10497,7 +10497,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh29412
+  m_Name: pb_Mesh29414
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
@@ -12314,7 +12314,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh29524
+  m_Name: pb_Mesh29526
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
@@ -12831,7 +12831,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh29478
+  m_Name: pb_Mesh29480
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
@@ -13724,7 +13724,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh29446
+  m_Name: pb_Mesh29448
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
@@ -18718,7 +18718,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_RecenterTarget: 0
   m_VerticalAxis:
-    Value: 0
+    Value: -65.3
     m_SpeedMode: 0
     m_MaxSpeed: 300
     m_AccelTime: 0.1
@@ -18941,6 +18941,10 @@ PrefabInstance:
       propertyPath: changingPosture
       value: 
       objectReference: {fileID: 11400000, guid: 116231076d511fc4abf8e542abc9c16c, type: 2}
+    - target: {fileID: 2072635315446771366, guid: 4133b9a6b163228478de6c0db064d776, type: 3}
+      propertyPath: smoothInputSpeed
+      value: 0.15
+      objectReference: {fileID: 0}
     - target: {fileID: 2455146974118441334, guid: 4133b9a6b163228478de6c0db064d776, type: 3}
       propertyPath: m_Name
       value: Player
@@ -19397,7 +19401,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3246051866321799408}
-  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071067}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 5.6171875, y: 1.2342691, z: 0.8610018}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -19405,7 +19409,7 @@ Transform:
   - {fileID: 843793902987238731}
   m_Father: {fileID: 0}
   m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 0, y: 0.28, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!114 &7191373565008466774
 MonoBehaviour:
   m_ObjectHideFlags: 0

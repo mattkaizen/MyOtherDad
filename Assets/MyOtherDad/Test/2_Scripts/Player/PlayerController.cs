@@ -10,11 +10,11 @@ public class PlayerController : MonoBehaviour
     [Header("Input")] 
     [Space] 
     [SerializeField] private InputReaderData inputReader;
+    [SerializeField] private float smoothInputSpeed;
 
     [Header("Movements")] 
     [Space] 
-    [SerializeField] private float horizontalInput;
-    [SerializeField] private float verticalInput;
+    [SerializeField] private Vector2 playerInput;
     [SerializeField] private float playerSpeed = 12f;
     [SerializeField] private float runSpeed = 30f;
     [SerializeField] private float stamina = 10f;
@@ -36,8 +36,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private VoidEventChannelData changingPosture;
     [SerializeField] private VoidEventChannelData resetPosture;
     
-    private Vector3 _playerInput;
+    private Vector3 _moveVector;
     private Vector3 _gravityVelocity;
+    private Vector2 _smoothInput;
+    private Vector2 _smoothCurrentVelocity;
     
     private readonly float _gravity = -9.8f;
     private readonly float _mouseHorizontalSensibility = 3f;
@@ -61,8 +63,7 @@ public class PlayerController : MonoBehaviour
         resetPosture.EventRaised += OnResetPosture;
         inputReader.Moved += OnPlayerMove;
     }
-
-
+    
     private void Update()
     {
         SetGravity();
@@ -76,15 +77,13 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
-        // horizontalInput = Input.GetAxis("Horizontal");
-        // verticalInput = Input.GetAxis("Vertical");
-
-        _playerInput = new Vector3(horizontalInput, 0, verticalInput);
-        _playerInput = Vector3.ClampMagnitude(_playerInput, 1);
+        _smoothInput = Vector2.SmoothDamp(_smoothInput, playerInput, ref _smoothCurrentVelocity, smoothInputSpeed);
+        _moveVector = new Vector3(_smoothInput.x, 0, _smoothInput.y);
+        _moveVector = Vector3.ClampMagnitude(_moveVector, 1);
 
         if (Input.GetKey(KeyCode.LeftShift) && stamina >= 0f)
         {
-            _playerInput = transform.TransformDirection(_playerInput) * runSpeed;
+            _moveVector = transform.TransformDirection(_moveVector) * runSpeed;
 
             stamina -= Time.deltaTime;
 
@@ -95,7 +94,8 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            _playerInput = transform.TransformDirection(_playerInput) * playerSpeed;
+            // _playerInput = transform.TransformDirection(_playerInput) * playerSpeed;
+            _moveVector = transform.TransformDirection(_moveVector) * playerSpeed;
 
             if (stamina < staminaMax)
             {
@@ -103,7 +103,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        player.Move(_playerInput * Time.deltaTime);
+        player.Move(_moveVector * Time.deltaTime);
     }
 
     private void Mirar()
@@ -137,8 +137,7 @@ public class PlayerController : MonoBehaviour
     
     private void OnPlayerMove(Vector2 inputVector2)
     {
-        horizontalInput = inputVector2.x;
-        verticalInput = inputVector2.y;
+        playerInput = inputVector2;
     }
     
     private void OnChangingPosture()
