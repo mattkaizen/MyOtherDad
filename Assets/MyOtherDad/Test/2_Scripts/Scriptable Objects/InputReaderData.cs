@@ -58,15 +58,17 @@ public class InputReaderData : ScriptableObject, GameControls.IPlayerActions
 
     public void OnMove(InputAction.CallbackContext context)
     {
-        Debug.Log($"before {context.ReadValue<Vector2>()}");
         if (_move.WasPerformedThisFrame())
         {
             Moved?.Invoke(context.ReadValue<Vector2>());
-        Debug.Log($"after {context.ReadValue<Vector2>()}");
         }
         else
         {
             Moved?.Invoke(Vector2.zero);
         }
+    }
+
+    public void OnLook(InputAction.CallbackContext context)
+    {
     }
 }

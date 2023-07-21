@@ -12,7 +12,6 @@ namespace Camera
         private void Awake()
         {
             ChangeRotation();
-            
             currentCamera.m_Transitions.m_OnCameraLive.AddListener(OnCameraLive);
         }
 
@@ -21,8 +20,7 @@ namespace Camera
             ChangeRotation();
         }
 
-        [UsedImplicitly]
-        public void ChangeRotation()
+        private void ChangeRotation()
         {
             Quaternion rotation = Quaternion.Euler(newRotation);
             currentCamera.ForceCameraPosition(currentCamera.transform.position, rotation);
