@@ -15999,6 +15999,27 @@ MonoBehaviour:
   m_SelectedFaces: 
   m_SelectedEdges: []
   m_SelectedVertices: 
+--- !u!1 &1933515001 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 461108519761475072, guid: 4133b9a6b163228478de6c0db064d776, type: 3}
+  m_PrefabInstance: {fileID: 2193491649802929596}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1933515009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1933515001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80154794916b40f7b85cb62b62a3dd9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data: {fileID: 11400000, guid: 4dcc316245bcbab418c73e17523a7be7, type: 2}
+  transitionStarted: {fileID: 11400000, guid: fa10b2c5cec0c7543accb55c424e4c3a, type: 2}
+  transitionEnded: {fileID: 11400000, guid: 2d3e5fc4b6d33764da77ebef9bd1c97a, type: 2}
+  changingCamera: {fileID: 11400000, guid: 116231076d511fc4abf8e542abc9c16c, type: 2}
 --- !u!1 &1949261951
 GameObject:
   m_ObjectHideFlags: 0
@@ -18870,6 +18891,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 4556436379567884556, guid: 4133b9a6b163228478de6c0db064d776, type: 3}
+      propertyPath: m_CustomBlends
+      value: 
+      objectReference: {fileID: 11400000, guid: 474bb583d19103f47a400f6a45b00cbd, type: 2}
     - target: {fileID: 5075993376410916227, guid: 4133b9a6b163228478de6c0db064d776, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -18952,7 +18977,10 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5370283800507754456, guid: 4133b9a6b163228478de6c0db064d776, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1903002351}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 461108519761475072, guid: 4133b9a6b163228478de6c0db064d776, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1933515009}
   m_SourcePrefab: {fileID: 100100000, guid: 4133b9a6b163228478de6c0db064d776, type: 3}
 --- !u!1 &3246051866321799408
 GameObject:

@@ -1,5 +1,4 @@
 ﻿using Cinemachine;
-using JetBrains.Annotations;
 using UnityEngine;
 
 namespace Camera

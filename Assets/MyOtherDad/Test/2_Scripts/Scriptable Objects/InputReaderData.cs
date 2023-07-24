@@ -1,9 +1,6 @@
-using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
-
-//TODO: Modificar PlayerObjectPicker para que utilice esta clase para suscribirse 
 
 [CreateAssetMenu(fileName = "InputReaderData")]
 public class InputReaderData : ScriptableObject, GameControls.IPlayerActions

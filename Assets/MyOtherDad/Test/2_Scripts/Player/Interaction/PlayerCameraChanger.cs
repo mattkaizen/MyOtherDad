@@ -1,11 +1,11 @@
 ﻿using Cinemachine;
 using Interfaces;
-using Scriptable_Objects;
+using Data;
 using UnityEngine;
 
 namespace Player
 {
-    public class PlayerPostureSwitcher : MonoBehaviour
+    public class PlayerCameraChanger : MonoBehaviour
     {
         [Header("Camera")]  
         [SerializeField] private CinemachineVirtualCamera playerCamera;
@@ -16,9 +16,9 @@ namespace Player
 
         [SerializeField] private float rayDistance;
         [SerializeField] private InputReaderData inputReader;
-        [Header("Events")]
-        [SerializeField] private VoidEventChannelData changingPosture;
-        [SerializeField] private VoidEventChannelData resetPosture;
+        [Header("Broadcast on Event Channels")]
+        [SerializeField] private VoidEventChannelData changingCamera;
+        [SerializeField] private VoidEventChannelData resetCamera;
 
         private ICameraChanger _currentCameraChanger;
         private int _defaultCameraPriority;
@@ -30,19 +30,20 @@ namespace Player
 
             if (playerCamera != null)
                 _defaultCameraPriority = playerCamera.Priority;
+            
         }
 
         private void OnGetUp()
         {
-            TryResetPosture();
+            TryResetCamera();
         }
 
         private void OnInteract()
         {
-            RaycastToPostureSwitcherObject();
+            RaycastToCameraChangerObject();
         }
 
-        private void TrySwitchPosture(ICameraChanger cameraChanger)
+        private void TrySwitchCamera(ICameraChanger cameraChanger)
         {
             if (_currentCameraChanger?.IsUse == true)
             {
@@ -61,28 +62,31 @@ namespace Player
             
             _currentCameraChanger = cameraChanger;
             
-            changingPosture.RaiseEvent();
+            changingCamera.RaiseEvent(); 
+            
+            /*TODO: Crear un script que maneje las transiciones del jugador (Evento: InicioTransicion y TerminoTransicion)
+            Activar Input del jugador al terminar la transicion*/
         }
 
-        private void TryResetPosture()
+        private void TryResetCamera()
         {
             if (_currentCameraChanger?.IsUse == true)
             {
                 _currentCameraChanger.IsUse = false;
                 _currentCameraChanger.DisableCamera();
                 
-                resetPosture.RaiseEvent();
+                resetCamera.RaiseEvent();
             }
         }
 
-        private void RaycastToPostureSwitcherObject()
+        private void RaycastToCameraChangerObject()
         {
             if (Physics.Raycast(transform.position, transform.forward, out var hitInfo,
                     rayDistance, layerMask, QueryTriggerInteraction.Ignore))
             {
                 if (hitInfo.transform.TryGetComponent<ICameraChanger>(out var postureSwitcher))
                 {
-                    TrySwitchPosture(postureSwitcher);
+                    TrySwitchCamera(postureSwitcher);
                 }
             }
         }

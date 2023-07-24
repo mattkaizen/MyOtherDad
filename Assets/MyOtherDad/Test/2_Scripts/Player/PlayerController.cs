@@ -1,4 +1,4 @@
-using Scriptable_Objects;
+using Data;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -31,7 +31,7 @@ public class PlayerController : MonoBehaviour
     [Space] 
     [SerializeField] private Transform playerCam;
     
-    [Header("Events")] 
+    [Header("Listen to Event Channels")] 
     [Space] 
     [SerializeField] private VoidEventChannelData changingPosture;
     [SerializeField] private VoidEventChannelData resetPosture;
