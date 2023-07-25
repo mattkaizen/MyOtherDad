@@ -62,10 +62,7 @@ namespace Player
             
             _currentCameraChanger = cameraChanger;
             
-            changingCamera.RaiseEvent(); 
-            
-            /*TODO: Crear un script que maneje las transiciones del jugador (Evento: InicioTransicion y TerminoTransicion)
-            Activar Input del jugador al terminar la transicion*/
+            changingCamera.RaiseEvent();
         }
 
         private void TryResetCamera()

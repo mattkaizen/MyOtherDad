@@ -9,10 +9,19 @@ public class InputReaderData : ScriptableObject, GameControls.IPlayerActions
     public event UnityAction GettingUp = delegate { };
     public event UnityAction<Vector2> Moved = delegate { };
 
+    public InputAction Look
+    {
+        get => _look;
+        set => _look = value;
+    }
+
+    [SerializeField] private InputActionReference moveAsset;
+
     private GameControls _playerInputActions;
     private InputAction _interact;
     private InputAction _getUp;
     private InputAction _move;
+    private InputAction _look;
 
     private void OnEnable()
     {
@@ -23,6 +32,7 @@ public class InputReaderData : ScriptableObject, GameControls.IPlayerActions
         _interact = _playerInputActions.Player.Interact;
         _getUp = _playerInputActions.Player.GetUp;
         _move = _playerInputActions.Player.Move;
+        _look = _playerInputActions.Player.LookAt;
 
         _interact.performed += OnInteract;
         _getUp.performed += OnGetUp;
@@ -65,7 +75,7 @@ public class InputReaderData : ScriptableObject, GameControls.IPlayerActions
         }
     }
 
-    public void OnLook(InputAction.CallbackContext context)
+    public void OnLookAt(InputAction.CallbackContext context)
     {
     }
 }

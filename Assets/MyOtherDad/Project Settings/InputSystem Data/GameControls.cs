@@ -55,7 +55,7 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""Look"",
+                    ""name"": ""LookAt"",
                     ""type"": ""Value"",
                     ""id"": ""593cf607-0a55-47e5-be2d-40c6e729ee67"",
                     ""expectedControlType"": ""Vector2"",
@@ -149,7 +149,7 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Look"",
+                    ""action"": ""LookAt"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -163,7 +163,7 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
         m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
         m_Player_GetUp = m_Player.FindAction("GetUp", throwIfNotFound: true);
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
-        m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
+        m_Player_LookAt = m_Player.FindAction("LookAt", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -228,7 +228,7 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Interact;
     private readonly InputAction m_Player_GetUp;
     private readonly InputAction m_Player_Move;
-    private readonly InputAction m_Player_Look;
+    private readonly InputAction m_Player_LookAt;
     public struct PlayerActions
     {
         private @GameControls m_Wrapper;
@@ -236,7 +236,7 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
         public InputAction @Interact => m_Wrapper.m_Player_Interact;
         public InputAction @GetUp => m_Wrapper.m_Player_GetUp;
         public InputAction @Move => m_Wrapper.m_Player_Move;
-        public InputAction @Look => m_Wrapper.m_Player_Look;
+        public InputAction @LookAt => m_Wrapper.m_Player_LookAt;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -255,9 +255,9 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
             @Move.started += instance.OnMove;
             @Move.performed += instance.OnMove;
             @Move.canceled += instance.OnMove;
-            @Look.started += instance.OnLook;
-            @Look.performed += instance.OnLook;
-            @Look.canceled += instance.OnLook;
+            @LookAt.started += instance.OnLookAt;
+            @LookAt.performed += instance.OnLookAt;
+            @LookAt.canceled += instance.OnLookAt;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -271,9 +271,9 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
             @Move.started -= instance.OnMove;
             @Move.performed -= instance.OnMove;
             @Move.canceled -= instance.OnMove;
-            @Look.started -= instance.OnLook;
-            @Look.performed -= instance.OnLook;
-            @Look.canceled -= instance.OnLook;
+            @LookAt.started -= instance.OnLookAt;
+            @LookAt.performed -= instance.OnLookAt;
+            @LookAt.canceled -= instance.OnLookAt;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -296,6 +296,6 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
         void OnInteract(InputAction.CallbackContext context);
         void OnGetUp(InputAction.CallbackContext context);
         void OnMove(InputAction.CallbackContext context);
-        void OnLook(InputAction.CallbackContext context);
+        void OnLookAt(InputAction.CallbackContext context);
     }
 }

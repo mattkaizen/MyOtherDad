@@ -59,8 +59,8 @@ public class PlayerController : MonoBehaviour
         staminaMax = stamina;
         _enableMovement = true;
 
-        changingPosture.EventRaised += OnChangingPosture;
-        resetPosture.EventRaised += OnResetPosture;
+        changingPosture.EventRaised += OnChangingCamera;
+        resetPosture.EventRaised += OnResetCamera;
         inputReader.Moved += OnPlayerMove;
     }
     
@@ -140,12 +140,12 @@ public class PlayerController : MonoBehaviour
         playerInput = inputVector2;
     }
     
-    private void OnChangingPosture()
+    private void OnChangingCamera()
     {
         _enableMovement = false;
     }
 
-    private void OnResetPosture()
+    private void OnResetCamera()
     {
         _enableMovement = true;
     }
