@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using Data;
 using UnityEngine;
 
@@ -33,8 +34,8 @@ public class PlayerController : MonoBehaviour
     
     [Header("Listen to Event Channels")] 
     [Space] 
-    [SerializeField] private VoidEventChannelData changingPosture;
-    [SerializeField] private VoidEventChannelData resetPosture;
+    [SerializeField] private VoidEventChannelData changingCamera;
+    [SerializeField] private VoidEventChannelData resetTransitionEnded;
     
     private Vector3 _moveVector;
     private Vector3 _gravityVelocity;
@@ -49,18 +50,18 @@ public class PlayerController : MonoBehaviour
     private float _mouseHorizontalInput;
     private float _mouseVerticaInput;
 
+    private bool _enableMovement = true;
+    private bool _enableLook = true;
     private bool _isGrounded;
-    private bool _enableMovement;
 
     private void Awake()
     {
         player = GetComponent<CharacterController>();
 
         staminaMax = stamina;
-        _enableMovement = true;
-
-        changingPosture.EventRaised += OnChangingCamera;
-        resetPosture.EventRaised += OnResetCamera;
+        
+        changingCamera.EventRaised += OnChangingCamera;
+        resetTransitionEnded.EventRaised += OnResetTransitionEnded;
         inputReader.Moved += OnPlayerMove;
     }
     
@@ -94,7 +95,6 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            // _playerInput = transform.TransformDirection(_playerInput) * playerSpeed;
             _moveVector = transform.TransformDirection(_moveVector) * playerSpeed;
 
             if (stamina < staminaMax)
@@ -108,7 +108,7 @@ public class PlayerController : MonoBehaviour
 
     private void Mirar()
     {
-        if (!_enableMovement)
+        if (!_enableLook)
         {
             return;
         }
@@ -130,11 +130,10 @@ public class PlayerController : MonoBehaviour
         {
             _gravityVelocity.y = -2f;
         }
-
+        
         _gravityVelocity.y += _gravity * Time.deltaTime;
         player.Move(_gravityVelocity * Time.deltaTime);
     }
-    
     private void OnPlayerMove(Vector2 inputVector2)
     {
         playerInput = inputVector2;
@@ -143,10 +142,19 @@ public class PlayerController : MonoBehaviour
     private void OnChangingCamera()
     {
         _enableMovement = false;
+        _enableLook = false;
     }
 
-    private void OnResetCamera()
+    private void OnResetTransitionEnded()
     {
+        ResetInputValues();
         _enableMovement = true;
+        _enableLook = true;
+    }
+    
+    private void ResetInputValues()
+    {
+        smoothInputSpeed = 0;
+        _moveVector = Vector3.zero;
     }
 }

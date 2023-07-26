@@ -33,7 +33,6 @@ namespace Objects
             }
             currentCamera.enabled = true;
             currentCamera.Priority = cameraPriority;
-            Debug.Log($"New camera priority {currentCamera.Priority}");
         }
 
         public void DisableCamera()

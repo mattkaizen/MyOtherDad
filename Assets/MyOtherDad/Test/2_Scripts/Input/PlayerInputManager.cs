@@ -7,6 +7,7 @@ public class PlayerInputManager : MonoBehaviour
 {
     [Header("Player Input actions")] [SerializeField]
     private InputActionReference lookAsset;
+    [SerializeField] private InputActionReference moveAsset;
 
     [Space] [Header("Listen to Event Channels")] [SerializeField]
     private VoidEventChannelData normalTransitionStarted;
@@ -34,15 +35,19 @@ public class PlayerInputManager : MonoBehaviour
 
     private void OnResetTransitionStarted()
     {
+        DisableInput(lookAsset.action);
     }
 
     private void OnResetTransitionEnded()
     {
+        EnableInput(lookAsset.action);
+        EnableInput(moveAsset.action);
     }
 
     private void OnNormalTransitionStarted()
     {
         DisableInput(lookAsset.action);
+        DisableInput(moveAsset.action);
     }
 
     private void OnNormalTransitionEnded()

@@ -8,14 +8,10 @@ public class InputReaderData : ScriptableObject, GameControls.IPlayerActions
     public event UnityAction Interacted = delegate { };
     public event UnityAction GettingUp = delegate { };
     public event UnityAction<Vector2> Moved = delegate { };
+    
+    public InputAction Look => lookAsset.action;
 
-    public InputAction Look
-    {
-        get => _look;
-        set => _look = value;
-    }
-
-    [SerializeField] private InputActionReference moveAsset;
+    [SerializeField] private InputActionReference lookAsset;
 
     private GameControls _playerInputActions;
     private InputAction _interact;
@@ -77,5 +73,8 @@ public class InputReaderData : ScriptableObject, GameControls.IPlayerActions
 
     public void OnLookAt(InputAction.CallbackContext context)
     {
+        if (_look.WasPerformedThisFrame())
+        {
+        }
     }
 }
