@@ -8,6 +8,7 @@ public class InputReaderData : ScriptableObject, GameControls.IPlayerActions
     public event UnityAction Interacted = delegate { };
     public event UnityAction GettingUp = delegate { };
     public event UnityAction<Vector2> Moved = delegate { };
+    public event UnityAction<bool> Ran = delegate { };
     
     public InputAction Look => lookAsset.action;
 
@@ -18,6 +19,7 @@ public class InputReaderData : ScriptableObject, GameControls.IPlayerActions
     private InputAction _getUp;
     private InputAction _move;
     private InputAction _look;
+    private InputAction _run;
 
     private void OnEnable()
     {
@@ -29,10 +31,12 @@ public class InputReaderData : ScriptableObject, GameControls.IPlayerActions
         _getUp = _playerInputActions.Player.GetUp;
         _move = _playerInputActions.Player.Move;
         _look = _playerInputActions.Player.LookAt;
+        _run = _playerInputActions.Player.Run;
 
         _interact.performed += OnInteract;
         _getUp.performed += OnGetUp;
         _move.performed += OnMove;
+        _run.performed += OnRun;
     }
 
     private void OnDisable()
@@ -40,6 +44,7 @@ public class InputReaderData : ScriptableObject, GameControls.IPlayerActions
         _interact.performed -= OnInteract;
         _getUp.performed -= OnGetUp;
         _move.performed -= OnMove;
+        _run.performed -= OnRun;
         _playerInputActions.Player.Disable();
     }
 
@@ -75,6 +80,18 @@ public class InputReaderData : ScriptableObject, GameControls.IPlayerActions
     {
         if (_look.WasPerformedThisFrame())
         {
+        }
+    }
+
+    public void OnRun(InputAction.CallbackContext context)
+    {
+        if(_run.WasPerformedThisFrame())
+        {
+            Ran?.Invoke(true);
+        }
+        else
+        {
+            Ran?.Invoke(false);
         }
     }
 }

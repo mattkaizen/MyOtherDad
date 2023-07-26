@@ -53,6 +53,7 @@ public class PlayerController : MonoBehaviour
     private bool _enableMovement = true;
     private bool _enableLook = true;
     private bool _isGrounded;
+    private bool _isRunning;
 
     private void Awake()
     {
@@ -63,8 +64,9 @@ public class PlayerController : MonoBehaviour
         changingCamera.EventRaised += OnChangingCamera;
         resetTransitionEnded.EventRaised += OnResetTransitionEnded;
         inputReader.Moved += OnPlayerMove;
+        inputReader.Ran += OnPlayerRun;
     }
-    
+
     private void Update()
     {
         SetGravity();
@@ -82,7 +84,7 @@ public class PlayerController : MonoBehaviour
         _moveVector = new Vector3(_smoothInput.x, 0, _smoothInput.y);
         _moveVector = Vector3.ClampMagnitude(_moveVector, 1);
 
-        if (Input.GetKey(KeyCode.LeftShift) && stamina >= 0f)
+        if (_isRunning && stamina >= 0f)
         {
             _moveVector = transform.TransformDirection(_moveVector) * runSpeed;
 
@@ -138,7 +140,10 @@ public class PlayerController : MonoBehaviour
     {
         playerInput = inputVector2;
     }
-    
+    private void OnPlayerRun(bool runInputState)
+    {
+        _isRunning = runInputState;
+    }
     private void OnChangingCamera()
     {
         _enableMovement = false;
