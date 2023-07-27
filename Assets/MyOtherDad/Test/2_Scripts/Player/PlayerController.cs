@@ -1,4 +1,3 @@
-using System.Runtime.CompilerServices;
 using Data;
 using UnityEngine;
 
@@ -11,11 +10,11 @@ public class PlayerController : MonoBehaviour
     [Header("Input")] 
     [Space] 
     [SerializeField] private InputReaderData inputReader;
-    [SerializeField] private float smoothInputSpeed;
+    [SerializeField] private float smoothMoveInputSpeed;
+    [SerializeField] private float smoothLookInputSpeed;
 
     [Header("Movements")] 
     [Space] 
-    [SerializeField] private Vector2 playerInput;
     [SerializeField] private float playerSpeed = 12f;
     [SerializeField] private float runSpeed = 30f;
     [SerializeField] private float stamina = 10f;
@@ -37,14 +36,18 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private VoidEventChannelData changingCamera;
     [SerializeField] private VoidEventChannelData resetTransitionEnded;
     
+    private Vector2 _playerLookInput;
+    private Vector2 _smoothLookInput;
+    private Vector2 _smoothLookCurrentVelocity;
+    private Vector2 _playerMoveInput;
+    private Vector2 _smoothMoveInput;
+    private Vector2 _smoothMoveCurrentVelocity;
     private Vector3 _moveVector;
     private Vector3 _gravityVelocity;
-    private Vector2 _smoothInput;
-    private Vector2 _smoothCurrentVelocity;
     
     private readonly float _gravity = -9.8f;
-    private readonly float _mouseHorizontalSensibility = 3f;
-    private readonly float _mouseVerticalSensibility = 2f;
+    private readonly float _mouseHorizontalSensibility = 0.5f;
+    private readonly float _mouseVerticalSensibility = 0.25f;
     private readonly float _minVerticalMouseRotation = -65f;
     private readonly float _maxVerticalMouseRotation = 60f;
     private float _mouseHorizontalInput;
@@ -64,8 +67,10 @@ public class PlayerController : MonoBehaviour
         changingCamera.EventRaised += OnChangingCamera;
         resetTransitionEnded.EventRaised += OnResetTransitionEnded;
         inputReader.Moved += OnPlayerMove;
+        inputReader.Looked += OnPlayerLook;
         inputReader.Ran += OnPlayerRun;
     }
+
 
     private void Update()
     {
@@ -80,8 +85,8 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
-        _smoothInput = Vector2.SmoothDamp(_smoothInput, playerInput, ref _smoothCurrentVelocity, smoothInputSpeed);
-        _moveVector = new Vector3(_smoothInput.x, 0, _smoothInput.y);
+        _smoothMoveInput = Vector2.SmoothDamp(_smoothMoveInput, _playerMoveInput, ref _smoothMoveCurrentVelocity, smoothMoveInputSpeed);
+        _moveVector = new Vector3(_smoothMoveInput.x, 0, _smoothMoveInput.y);
         _moveVector = Vector3.ClampMagnitude(_moveVector, 1);
 
         if (_isRunning && stamina >= 0f)
@@ -115,8 +120,10 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
-        _mouseHorizontalInput = _mouseHorizontalSensibility * Input.GetAxis("Mouse X");
-        _mouseVerticaInput += _mouseVerticalSensibility * Input.GetAxis("Mouse Y");
+        _smoothLookInput = Vector2.SmoothDamp(_smoothLookInput, _playerLookInput, ref _smoothLookCurrentVelocity, smoothLookInputSpeed);
+        
+        _mouseHorizontalInput = _mouseHorizontalSensibility * _smoothLookInput.x;
+        _mouseVerticaInput += _mouseVerticalSensibility * _smoothLookInput.y;
 
         _mouseVerticaInput = Mathf.Clamp(_mouseVerticaInput, _minVerticalMouseRotation, _maxVerticalMouseRotation);
 
@@ -138,7 +145,12 @@ public class PlayerController : MonoBehaviour
     }
     private void OnPlayerMove(Vector2 inputVector2)
     {
-        playerInput = inputVector2;
+        _playerMoveInput = inputVector2;
+    }
+    
+    private void OnPlayerLook(Vector2 lookInput)
+    {
+        _playerLookInput = lookInput;
     }
     private void OnPlayerRun(bool runInputState)
     {
@@ -159,7 +171,7 @@ public class PlayerController : MonoBehaviour
     
     private void ResetInputValues()
     {
-        smoothInputSpeed = 0;
+        smoothMoveInputSpeed = 0;
         _moveVector = Vector3.zero;
     }
 }

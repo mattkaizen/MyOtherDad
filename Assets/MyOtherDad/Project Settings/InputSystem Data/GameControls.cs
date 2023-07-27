@@ -56,7 +56,7 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""LookAt"",
-                    ""type"": ""Value"",
+                    ""type"": ""PassThrough"",
                     ""id"": ""593cf607-0a55-47e5-be2d-40c6e729ee67"",
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
@@ -154,7 +154,7 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""4bde2718-be3c-4e99-8b53-660433d89384"",
-                    ""path"": ""<Pointer>/delta"",
+                    ""path"": ""<Mouse>/delta"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
