@@ -46,8 +46,8 @@ public class PlayerController : MonoBehaviour
     private Vector3 _gravityVelocity;
     
     private readonly float _gravity = -9.8f;
-    private readonly float _mouseHorizontalSensibility = 0.5f;
-    private readonly float _mouseVerticalSensibility = 0.25f;
+    private readonly float _mouseHorizontalSensibility = 0.25f;
+    private readonly float _mouseVerticalSensibility = 0.2f;
     private readonly float _minVerticalMouseRotation = -65f;
     private readonly float _maxVerticalMouseRotation = 60f;
     private float _mouseHorizontalInput;
@@ -70,7 +70,6 @@ public class PlayerController : MonoBehaviour
         inputReader.Looked += OnPlayerLook;
         inputReader.Ran += OnPlayerRun;
     }
-
 
     private void Update()
     {
@@ -124,7 +123,7 @@ public class PlayerController : MonoBehaviour
         
         _mouseHorizontalInput = _mouseHorizontalSensibility * _smoothLookInput.x;
         _mouseVerticaInput += _mouseVerticalSensibility * _smoothLookInput.y;
-
+        
         _mouseVerticaInput = Mathf.Clamp(_mouseVerticaInput, _minVerticalMouseRotation, _maxVerticalMouseRotation);
 
         playerCam.localEulerAngles = new Vector3(-_mouseVerticaInput, 0, 0);

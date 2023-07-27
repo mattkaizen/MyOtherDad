@@ -6,7 +6,7 @@ namespace Data
     [CreateAssetMenu(menuName = "Events/Void Event Channel")]
     public class VoidEventChannelData : ScriptableObject
     {
-        public event UnityAction EventRaised = delegate { };
+        public UnityAction EventRaised = delegate { };
 
         public void RaiseEvent()
         {
