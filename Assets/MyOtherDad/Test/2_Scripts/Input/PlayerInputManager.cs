@@ -26,7 +26,6 @@ public class PlayerInputManager : MonoBehaviour
 
     private void OnDisable()
     {
-        
         normalTransitionStarted.EventRaised -= OnNormalTransitionStarted;
         normalTransitionEnded.EventRaised -= OnNormalTransitionEnded;
         resetTransitionStarted.EventRaised -= OnResetTransitionStarted;

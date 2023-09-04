@@ -24,7 +24,5 @@ namespace Camera
             Quaternion rotation = Quaternion.Euler(newRotation);
             currentCamera.ForceCameraPosition(currentCamera.transform.position, rotation);
         }
-        
-        //TODO: 
     }
 }
