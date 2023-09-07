@@ -10,8 +10,6 @@ namespace Player
         [SerializeField] private InputReaderData inputReader;
         [SerializeField] private PlayerInventory playerInventory;
 
-        private GameControls _playerInputActions;
-
         private void Awake()
         {
             if (inputReader != null)

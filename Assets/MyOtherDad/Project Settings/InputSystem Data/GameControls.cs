@@ -71,6 +71,15 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Paint"",
+                    ""type"": ""Button"",
+                    ""id"": ""de919de7-c39b-4cc5-add8-04d69371b89a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -172,6 +181,17 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
                     ""action"": ""Run"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""43de3319-4ea3-45bb-a969-028067683cca"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Paint"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -185,6 +205,7 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
         m_Player_LookAt = m_Player.FindAction("LookAt", throwIfNotFound: true);
         m_Player_Run = m_Player.FindAction("Run", throwIfNotFound: true);
+        m_Player_Paint = m_Player.FindAction("Paint", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -251,6 +272,7 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Move;
     private readonly InputAction m_Player_LookAt;
     private readonly InputAction m_Player_Run;
+    private readonly InputAction m_Player_Paint;
     public struct PlayerActions
     {
         private @GameControls m_Wrapper;
@@ -260,6 +282,7 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
         public InputAction @Move => m_Wrapper.m_Player_Move;
         public InputAction @LookAt => m_Wrapper.m_Player_LookAt;
         public InputAction @Run => m_Wrapper.m_Player_Run;
+        public InputAction @Paint => m_Wrapper.m_Player_Paint;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -284,6 +307,9 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
             @Run.started += instance.OnRun;
             @Run.performed += instance.OnRun;
             @Run.canceled += instance.OnRun;
+            @Paint.started += instance.OnPainting;
+            @Paint.performed += instance.OnPainting;
+            @Paint.canceled += instance.OnPainting;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -303,6 +329,9 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
             @Run.started -= instance.OnRun;
             @Run.performed -= instance.OnRun;
             @Run.canceled -= instance.OnRun;
+            @Paint.started -= instance.OnPainting;
+            @Paint.performed -= instance.OnPainting;
+            @Paint.canceled -= instance.OnPainting;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -327,5 +356,6 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
         void OnMove(InputAction.CallbackContext context);
         void OnLookAt(InputAction.CallbackContext context);
         void OnRun(InputAction.CallbackContext context);
+        void OnPainting(InputAction.CallbackContext context);
     }
 }

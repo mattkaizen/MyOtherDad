@@ -9,6 +9,8 @@ public class InputReaderData : ScriptableObject, GameControls.IPlayerActions
     public event UnityAction GettingUp = delegate { };
     public event UnityAction<Vector2> Moved = delegate { };
     public event UnityAction<Vector2> Looked = delegate { };
+    public event UnityAction Painting = delegate { };
+    public event UnityAction Painted = delegate { };
     public event UnityAction<bool> Ran = delegate { };
     
     private GameControls _playerInputActions;
@@ -17,6 +19,7 @@ public class InputReaderData : ScriptableObject, GameControls.IPlayerActions
     private InputAction _move;
     private InputAction _look;
     private InputAction _run;
+    private InputAction _paint;
 
     private void OnEnable()
     {
@@ -29,12 +32,16 @@ public class InputReaderData : ScriptableObject, GameControls.IPlayerActions
         _move = _playerInputActions.Player.Move;
         _look = _playerInputActions.Player.LookAt;
         _run = _playerInputActions.Player.Run;
+        _paint = _playerInputActions.Player.Paint;
 
         _interact.performed += OnInteract;
         _getUp.performed += OnGetUp;
         _move.performed += OnMove;
         _run.performed += OnRun;
+        _paint.performed += OnPainting;
     }
+
+
 
     private void OnDisable()
     {
@@ -42,6 +49,8 @@ public class InputReaderData : ScriptableObject, GameControls.IPlayerActions
         _getUp.performed -= OnGetUp;
         _move.performed -= OnMove;
         _run.performed -= OnRun;
+        _paint.performed -= OnPainting;
+
         _playerInputActions.Player.Disable();
     }
 
@@ -94,6 +103,18 @@ public class InputReaderData : ScriptableObject, GameControls.IPlayerActions
         else
         {
             Ran?.Invoke(false);
+        }
+    }
+
+    public void OnPainting(InputAction.CallbackContext context)
+    {
+        if (_paint.WasPerformedThisFrame())
+        {
+            Painting?.Invoke();
+        }
+        if (_paint.WasReleasedThisFrame())
+        {
+            Painted?.Invoke();
         }
     }
 }
