@@ -9,14 +9,14 @@ using UnityEngine.UI;
 
 namespace Player
 {
-    public class PlayerUIObjectExecutor : MonoBehaviour //Activador de UI
+    public class PlayerUIObjectClicker : MonoBehaviour //Activador de UI
     {
         //TODO: Si el esta apretando el click izquierdo y el objeto es activable, se activa.
         //TODO: En otro script, si se activa un punto (el primero o no), empieza a ver si los puntos estan activos en orden
         [SerializeField] private InputReaderData inputReaderData;
         [SerializeField] private GraphicRaycaster rayCaster;
         [SerializeField] private EventSystem eventSystem;
-        
+
         private PointerEventData _pointerEventData;
         private bool _isPainting;
 
@@ -25,13 +25,13 @@ namespace Player
             inputReaderData.Painting += InputReader_Painting;
             inputReaderData.Painted += InputReader_Painted;
         }
-        
+
         private void OnDisable()
         {
             inputReaderData.Painting -= InputReader_Painting;
             inputReaderData.Painted -= InputReader_Painted;
         }
-        
+
         private void InputReader_Painting()
         {
             _isPainting = true;
@@ -40,7 +40,6 @@ namespace Player
 
         private void InputReader_Painted()
         {
-            Debug.Log($"Clicked");
             _isPainting = false;
         }
 
@@ -48,30 +47,32 @@ namespace Player
         {
             while (_isPainting)
             {
-                GraphicRayCastToExecutables();
+                GraphicRayCastToClickable();
                 yield return null;
             }
         }
-        private void GraphicRayCastToExecutables()
+
+        private void GraphicRayCastToClickable()
         {
             _pointerEventData = new PointerEventData(eventSystem);
             _pointerEventData.position = Input.mousePosition;
-            
+
             List<RaycastResult> results = new List<RaycastResult>();
-            
+
             rayCaster.Raycast(_pointerEventData, results);
-            
+
             foreach (RaycastResult result in results)
             {
-                TryExecute(result.gameObject);
+                TryClick(result.gameObject);
             }
         }
 
-        private void TryExecute(GameObject uiGameObject)
+        private void TryClick(GameObject uiGameObject)
         {
-            if (uiGameObject.TryGetComponent<IExecutable>(out var executable))
+            if (uiGameObject.TryGetComponent<IClickable>(out var executable))
             {
-                executable.Execute();
+                if (!executable.WasClicked)
+                    executable.Click();
             }
         }
     }

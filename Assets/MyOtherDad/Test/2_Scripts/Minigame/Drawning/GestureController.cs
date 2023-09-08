@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GestureController : MonoBehaviour
 {
-    [SerializeField] private List<Gesture> gestures;
+    [SerializeField] private List<GestureSystem> gestures;
 
     private bool AreGesturesComplete()
     {
