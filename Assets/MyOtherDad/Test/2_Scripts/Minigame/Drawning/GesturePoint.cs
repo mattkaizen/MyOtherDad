@@ -17,15 +17,15 @@ namespace Minigame
 
         public void Click()
         {
-            CompleteGesture();
+            CompletePoint();
         }
 
-        private void CompleteGesture()
+        private void CompletePoint()
         {
             _wasClicked = true;
             wasClicked?.Invoke();
         }
-        public void ResetGesture()
+        public void ResetPoint()
         {
             _wasClicked = false;
         }
