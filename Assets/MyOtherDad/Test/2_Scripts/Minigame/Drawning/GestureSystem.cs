@@ -1,12 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Data;
 using Minigame;
 using UnityEngine;
 
 public class GestureSystem : MonoBehaviour
 {
     [SerializeField] private List<GesturePoint> gesturePoints;
+    [SerializeField] private VoidEventChannelData onGestureCompleted;
+    [SerializeField] private VoidEventChannelData OnGestureFailed;
+
+    private List<GesturePoint> _incompletedGesturePoints;
 
     private IEnumerator _checkGesturesRoutine;
     private IEnumerator _flashingCheckRoutine;
@@ -33,28 +38,78 @@ public class GestureSystem : MonoBehaviour
         {
             gesturePoint.wasClicked += GesturePoint_WasClicked;
         }
+
+        _incompletedGesturePoints = CloneGesturePointList();
     }
 
     private void GesturePoint_WasClicked()
     {
-        StartFlashingCheckRoutine();
+        if (_areCheckingGestures) return;
+
+        StartFlashingCheck();
     }
 
-    private void StartFlashingCheckRoutine()
+    private IEnumerator FlashingCheckRoutine()
     {
-        _flashingCheckRoutine ??= FlashingCheckRoutine();
+        Debug.Log($"Flashing Check has Started {_areCheckingGestures}");
+        StartCheckClickedGestures();
+        yield return new WaitForSeconds(3.0f);
+        StopCheckClickedGestures();
+    }
 
-        if (_areCheckingGestures) return;
-        Debug.Log("Check has Started");
+    private IEnumerator CheckGesturePointsInOrder()
+    {
+        Debug.Log($"Check has Started {_areCheckingGestures}");
 
+        int index = 0;
+
+        while (_areCheckingGestures)
+        {
+            if (index >= gesturePoints.Count)
+                break;
+
+            if (gesturePoints[index].WasClicked)
+            {
+                Debug.Log($"Gesture point correct {index}");
+                _incompletedGesturePoints.Remove(gesturePoints[index]);
+
+                if (AreAllGesturesPointClicked())
+                {
+                    Debug.Log("Gesture points Completed in order");
+                    //Se Completo el gesto
+                    StopFlashingCheckRoutine();
+                    _isGestureComplete = true;
+                    onGestureCompleted.RaiseEvent();
+                    break;
+                }
+
+                index++;
+            }
+            else
+            {
+                Debug.Log("Gesture point Incorrect");
+
+                OnGestureFailed.RaiseEvent();
+                ResetSystem();
+                break;
+            }
+
+            yield return new WaitUntil(HaveAnyRemainingPointBeenCompleted);
+            Debug.Log("Cicle");
+        }
+    }
+
+    private void StartFlashingCheck()
+    {
+        _flashingCheckRoutine = FlashingCheckRoutine();
         StartCoroutine(_flashingCheckRoutine);
     }
 
     private void StartCheckClickedGestures()
     {
-        _checkGesturesRoutine ??= CheckGesturePointsInOrder();
-
+        _checkGesturesRoutine = CheckGesturePointsInOrder();
         _areCheckingGestures = true;
+
         StartCoroutine(_checkGesturesRoutine);
     }
 
@@ -67,96 +122,45 @@ public class GestureSystem : MonoBehaviour
         _areCheckingGestures = false;
     }
 
-    private IEnumerator FlashingCheckRoutine()
+    private void StopFlashingCheckRoutine()
     {
-        StartCheckClickedGestures();
-        yield return new WaitForSeconds(3.0f);
+        if (_flashingCheckRoutine == null) return;
+
+        StopCoroutine(_flashingCheckRoutine);
+        Debug.Log("Stop flashing Checking");
+    }
+
+    private void ResetSystem()
+    {
+        ResetGesturesPoint();
+        _incompletedGesturePoints = CloneGesturePointList();
+        _areCheckingGestures = false;
         StopCheckClickedGestures();
+        StopFlashingCheckRoutine();
+
+        Debug.Log($"System rested {_areCheckingGestures}");
     }
 
-    private IEnumerator CheckClickedGesturesRoutine()
+    private void ResetGesturesPoint()
     {
-        while (_areCheckingGestures)
-        {
-            if (AreGesturesPointClickedInOrder())
-            {
-                //Se completo en orden
-                _isGestureComplete = true;
-                _areCheckingGestures = false;
-                break;
-            }
-
-            yield return null;
-        }
-    }
-
-    private void TryResetGestures()
-    {
-        if (AreAllGesturesPointClicked()) return;
-
         foreach (var gesture in gesturePoints)
         {
             gesture.ResetPoint();
         }
     }
 
-    private bool AreAllGesturesPointClicked()
+    private List<GesturePoint> CloneGesturePointList()
     {
-        return gesturePoints.All(x => x.WasClicked);
-    }
-
-    private bool AreGesturesPointClickedInOrder()
-    {
-        for (int i = 0; i < gesturePoints.Count; i++)
-        {
-            if (!gesturePoints[i].WasClicked)
-            {
-                return false;
-            }
-        }
-
-        return true;
-    }
-
-    private IEnumerator CheckGesturePointsInOrder()
-    {
-        int index = 0;
-
-        while (_areCheckingGestures)
-        {
-            if (index >= gesturePoints.Count)
-                break;
-
-            if (gesturePoints[index].WasClicked)
-            {
-                Debug.Log($"Gesture point correct {index}");
-
-                if (AreAllGesturesPointClicked())
-                {
-                    Debug.Log("Gesture points Completed in order");
-                    //Se Completo el gesto
-                    break;
-                }
-                index++;
-            }
-            else
-            {
-                Debug.Log("Gesture point Incorrect");
-
-                //Se clickeo el incorrecto
-                //Resetear
-                break;
-            }
-
-            yield return new WaitUntil(HaveAnyRemainingPointBeenCompleted);
-            Debug.Log("Cicle");
-        }
+        return new List<GesturePoint>(gesturePoints);
     }
 
     private bool HaveAnyRemainingPointBeenCompleted()
     {
-        var remainingGesturePoints = gesturePoints.Where(x => !x.WasClicked).ToList();
+        return _incompletedGesturePoints.Any(x => x.WasClicked);
+    }
 
-        return remainingGesturePoints.Any(x => x.WasClicked); //es un clon
+    private bool AreAllGesturesPointClicked()
+    {
+        return gesturePoints.All(x => x.WasClicked);
     }
 }
