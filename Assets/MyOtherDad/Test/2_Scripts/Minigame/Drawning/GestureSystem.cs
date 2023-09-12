@@ -9,9 +9,8 @@ public class GestureSystem : MonoBehaviour
 {
     [SerializeField] private List<GesturePoint> gesturePoints;
     [SerializeField] private VoidEventChannelData onGestureCompleted;
-    [SerializeField] private VoidEventChannelData OnGestureFailed;
 
-    private List<GesturePoint> _incompletedGesturePoints;
+    private List<GesturePoint> _incompleteGesturePoints;
 
     private IEnumerator _checkGesturesRoutine;
     private IEnumerator _flashingCheckRoutine;
@@ -39,7 +38,7 @@ public class GestureSystem : MonoBehaviour
             gesturePoint.wasClicked += GesturePoint_WasClicked;
         }
 
-        _incompletedGesturePoints = CloneGesturePointList();
+        _incompleteGesturePoints = CloneGesturePointList();
     }
 
     private void GesturePoint_WasClicked()
@@ -54,7 +53,7 @@ public class GestureSystem : MonoBehaviour
         Debug.Log($"Flashing Check has Started {_areCheckingGestures}");
         StartCheckClickedGestures();
         yield return new WaitForSeconds(3.0f);
-        StopCheckClickedGestures();
+        ResetCheckingSystem();
     }
 
     private IEnumerator CheckGesturePointsInOrder()
@@ -71,7 +70,7 @@ public class GestureSystem : MonoBehaviour
             if (gesturePoints[index].WasClicked)
             {
                 Debug.Log($"Gesture point correct {index}");
-                _incompletedGesturePoints.Remove(gesturePoints[index]);
+                _incompleteGesturePoints.Remove(gesturePoints[index]);
 
                 if (AreAllGesturesPointClicked())
                 {
@@ -88,9 +87,7 @@ public class GestureSystem : MonoBehaviour
             else
             {
                 Debug.Log("Gesture point Incorrect");
-
-                OnGestureFailed.RaiseEvent();
-                ResetSystem();
+                ResetCheckingSystem();
                 break;
             }
 
@@ -130,11 +127,10 @@ public class GestureSystem : MonoBehaviour
         Debug.Log("Stop flashing Checking");
     }
 
-    private void ResetSystem()
+    private void ResetCheckingSystem()
     {
         ResetGesturesPoint();
-        _incompletedGesturePoints = CloneGesturePointList();
-        _areCheckingGestures = false;
+        _incompleteGesturePoints = CloneGesturePointList();
         StopCheckClickedGestures();
         StopFlashingCheckRoutine();
 
@@ -156,7 +152,7 @@ public class GestureSystem : MonoBehaviour
 
     private bool HaveAnyRemainingPointBeenCompleted()
     {
-        return _incompletedGesturePoints.Any(x => x.WasClicked);
+        return _incompleteGesturePoints.Any(x => x.WasClicked);
     }
 
     private bool AreAllGesturesPointClicked()
