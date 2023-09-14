@@ -2,9 +2,9 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace Minigame
+namespace PointerGesture
 {
-    public class GesturePoint : MonoBehaviour, IClickable
+    public class PointerGesturePoint : MonoBehaviour, IClickable
     {
         public bool WasClicked
         {
@@ -17,17 +17,8 @@ namespace Minigame
 
         public void Click()
         {
-            CompletePoint();
-        }
-
-        private void CompletePoint()
-        {
             _wasClicked = true;
             wasClicked?.Invoke();
-        }
-        public void ResetPoint()
-        {
-            _wasClicked = false;
         }
     }
 }

@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Interfaces;
-using Minigame;
+using PointerGesture;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
