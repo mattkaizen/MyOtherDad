@@ -2,11 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace PointerGesture
 {
     public class PointerGestureChecker : MonoBehaviour
     {
+        public event UnityAction GestureCompleted = delegate {  };
+        public event UnityAction GestureInitialized = delegate {  };
+        public bool IsGestureCompleted => _isGestureCompleted;
+            
         [SerializeField] private List<PointerGesturePoint> gesturePointsToCheck;
         [SerializeField] private float timeToTryCompletingGesture;
 
@@ -17,6 +22,7 @@ namespace PointerGesture
 
         private bool _areCheckingGesturePoints;
         private bool _isGestureCompleted;
+
 
         private void Awake()
         {
@@ -51,6 +57,8 @@ namespace PointerGesture
             }
 
             _remainingGesturePoints = CloneGesturePointList();
+
+            OnGestureInitialized();
         }
 
         private void GesturePoint_WasClicked()
@@ -82,9 +90,10 @@ namespace PointerGesture
 
                     if (AreAllGesturesPointClicked())
                     {
-                        Debug.Log("Gesture Completed");
                         TryStopFlashingCheckRoutine();
                         _isGestureCompleted = true;
+                        OnGestureCompleted();
+                        Debug.Log("Gesture Completed");
                         break;
                     }
 
@@ -143,6 +152,16 @@ namespace PointerGesture
             {
                 gesture.WasClicked = false;
             }
+        }
+
+        private void OnGestureCompleted()
+        {
+            GestureCompleted?.Invoke();;
+        }
+        
+        private void OnGestureInitialized()
+        {
+            GestureInitialized?.Invoke();;
         }
 
         private List<PointerGesturePoint> CloneGesturePointList()
