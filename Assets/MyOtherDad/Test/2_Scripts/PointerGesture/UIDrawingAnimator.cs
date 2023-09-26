@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace PointerGesture
 {
-    public class UIDrawningAnimator : MonoBehaviour
+    public class UIDrawingAnimator : MonoBehaviour
     {
         [SerializeField] private List<PointerGestureChecker> pointerGestureCheckers;
         [SerializeField] private Image imageToDraw;

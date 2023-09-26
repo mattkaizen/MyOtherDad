@@ -1,27 +1,29 @@
 using System.Collections;
 using System.Collections.Generic;
-using PointerGesture;
 using UnityEngine;
 
-public class PointerGestureActivator : MonoBehaviour
+namespace PointerGesture
 {
-    [SerializeField] private List<PointerGestureChecker> gestures;
-    private void Awake()
+    public class PointerGestureActivator : MonoBehaviour
     {
-        StartCoroutine(GestureActivatorRoutine());
-    }
-
-    private IEnumerator GestureActivatorRoutine()
-    {
-        foreach (var gesture in gestures)
+        [SerializeField] private List<PointerGestureChecker> gestures;
+        private void Awake()
         {
-            gesture.gameObject.SetActive(true);
-            yield return new WaitUntil(() => IsCurrentPointerGestureComplete(gesture));
+            StartCoroutine(GestureActivatorRoutine());
         }
-    }
 
-    private bool IsCurrentPointerGestureComplete(PointerGestureChecker gesture)
-    {
-        return gesture.IsGestureCompleted;
+        private IEnumerator GestureActivatorRoutine()
+        {
+            foreach (var gesture in gestures)
+            {
+                gesture.gameObject.SetActive(true);
+                yield return new WaitUntil(() => IsCurrentPointerGestureComplete(gesture));
+            }
+        }
+
+        private bool IsCurrentPointerGestureComplete(PointerGestureChecker gesture)
+        {
+            return gesture.IsGestureCompleted;
+        }
     }
 }
