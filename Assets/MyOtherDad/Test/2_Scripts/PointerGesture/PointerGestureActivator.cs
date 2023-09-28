@@ -9,19 +9,19 @@ namespace PointerGesture
         [SerializeField] private List<PointerGestureChecker> gestures;
         private void Awake()
         {
-            StartCoroutine(GestureActivatorRoutine());
+            StartCoroutine(EnableGesturesRoutine());
         }
 
-        private IEnumerator GestureActivatorRoutine()
+        private IEnumerator EnableGesturesRoutine()
         {
             foreach (var gesture in gestures)
             {
                 gesture.gameObject.SetActive(true);
-                yield return new WaitUntil(() => IsCurrentPointerGestureComplete(gesture));
+                yield return new WaitUntil(() => IsPointerGestureComplete(gesture));
             }
         }
 
-        private bool IsCurrentPointerGestureComplete(PointerGestureChecker gesture)
+        private bool IsPointerGestureComplete(PointerGestureChecker gesture)
         {
             return gesture.IsGestureCompleted;
         }

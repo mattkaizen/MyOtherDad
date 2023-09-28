@@ -5,11 +5,11 @@ using UnityEngine;
 
 namespace Objects
 {
-    public class BedObject : MonoBehaviour, IInteractive
+    public class DrawingTableObject : MonoBehaviour, IInteractive
     {
+        [SerializeField] private CinemachineVirtualCamera currentCamera;
         public bool IsInteracting { get; set; }
 
-        [SerializeField] private CinemachineVirtualCamera currentCamera;
         public void Interact()
         {
             PlayerCameraChanger.SetLiveNewCamera(currentCamera);

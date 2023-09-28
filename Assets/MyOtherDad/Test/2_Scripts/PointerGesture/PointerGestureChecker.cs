@@ -23,7 +23,6 @@ namespace PointerGesture
         private bool _areCheckingGesturePoints;
         private bool _isGestureCompleted;
 
-
         private void Awake()
         {
             Initialize();
@@ -56,7 +55,7 @@ namespace PointerGesture
                 gesturePoint.wasClicked += GesturePoint_WasClicked;
             }
 
-            _remainingGesturePoints = CloneGesturePointList();
+            _remainingGesturePoints = GetClonedGesturePointList();
 
             OnGestureInitialized();
         }
@@ -83,17 +82,18 @@ namespace PointerGesture
             {
                 if (index >= gesturePointsToCheck.Count)
                     break;
+
+                PointerGesturePoint currentGesturePoint = gesturePointsToCheck[index];
                 
-                if (gesturePointsToCheck[index].WasClicked)
+                if (currentGesturePoint.WasClicked)
                 {
-                    _remainingGesturePoints.Remove(gesturePointsToCheck[index]);
+                    _remainingGesturePoints.Remove(currentGesturePoint);
 
                     if (AreAllGesturesPointClicked())
                     {
                         TryStopFlashingCheckRoutine();
                         _isGestureCompleted = true;
                         OnGestureCompleted();
-                        Debug.Log("Gesture Completed");
                         break;
                     }
 
@@ -141,7 +141,7 @@ namespace PointerGesture
         private void ResetCheckingSystem()
         {
             ResetGesturesPoint();
-            _remainingGesturePoints = CloneGesturePointList();
+            _remainingGesturePoints = GetClonedGesturePointList();
             TryStopCheckClickedGestures();
             TryStopFlashingCheckRoutine();
         }
@@ -164,7 +164,7 @@ namespace PointerGesture
             GestureInitialized?.Invoke();;
         }
 
-        private List<PointerGesturePoint> CloneGesturePointList()
+        private List<PointerGesturePoint> GetClonedGesturePointList()
         {
             return new List<PointerGesturePoint>(gesturePointsToCheck);
         }

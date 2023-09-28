@@ -9,10 +9,8 @@ using UnityEngine.UI;
 
 namespace Player
 {
-    public class PlayerUIObjectClicker : MonoBehaviour //Activador de UI
+    public class PlayerUIObjectClicker : MonoBehaviour
     {
-        //TODO: Si el esta apretando el click izquierdo y el objeto es activable, se activa.
-        //TODO: En otro script, si se activa un punto (el primero o no), empieza a ver si los puntos estan activos en orden
         [SerializeField] private InputReaderData inputReaderData;
         [SerializeField] private GraphicRaycaster rayCaster;
         [SerializeField] private EventSystem eventSystem;

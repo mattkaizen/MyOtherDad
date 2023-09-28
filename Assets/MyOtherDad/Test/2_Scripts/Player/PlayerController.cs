@@ -74,10 +74,10 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         SetGravity();
-        Moverse();
-        Mirar();
+        Move();
+        Look();
     }
-    private void Moverse()
+    private void Move()
     {
         if (!_enableMovement)
         {
@@ -112,7 +112,7 @@ public class PlayerController : MonoBehaviour
         player.Move(_moveVector * Time.deltaTime);
     }
 
-    private void Mirar()
+    private void Look()
     {
         if (!_enableLook)
         {
