@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Data;
 using UnityEngine;
 
 namespace PointerGesture
@@ -7,12 +9,19 @@ namespace PointerGesture
     public class PointerGestureActivator : MonoBehaviour
     {
         [SerializeField] private List<PointerGestureChecker> gestures;
+        [SerializeField] private VoidEventChannelData eventToActivatePointerGesture;
+        
         private void Awake()
         {
-            StartCoroutine(EnableGesturesRoutine());
+            eventToActivatePointerGesture.EventRaised += VoidEventChannelData_EventRaised;
         }
 
-        private IEnumerator EnableGesturesRoutine()
+        private void VoidEventChannelData_EventRaised()
+        {
+            StartCoroutine(EnablePointerGestureCheckerGameObjectsRoutine());
+        }
+
+        private IEnumerator EnablePointerGestureCheckerGameObjectsRoutine()
         {
             foreach (var gesture in gestures)
             {
@@ -25,5 +34,6 @@ namespace PointerGesture
         {
             return gesture.IsGestureCompleted;
         }
+
     }
 }

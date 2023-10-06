@@ -3,23 +3,23 @@ using UnityEngine;
 
 namespace Camera
 {
-    public class CameraController : MonoBehaviour
+    public class CameraRotationModifier : MonoBehaviour
     {
         [SerializeField] private CinemachineVirtualCamera currentCamera;
         [SerializeField] private Vector3 newRotation;
 
         private void Awake()
         {
-            ChangeRotation();
+            SetInitialCameraPosition();
             currentCamera.m_Transitions.m_OnCameraLive.AddListener(OnCameraLive);
         }
 
         private void OnCameraLive(ICinemachineCamera arg0, ICinemachineCamera arg1)
         {
-            ChangeRotation();
+            SetInitialCameraPosition();
         }
 
-        private void ChangeRotation()
+        private void SetInitialCameraPosition()
         {
             Quaternion rotation = Quaternion.Euler(newRotation);
             currentCamera.ForceCameraPosition(currentCamera.transform.position, rotation);

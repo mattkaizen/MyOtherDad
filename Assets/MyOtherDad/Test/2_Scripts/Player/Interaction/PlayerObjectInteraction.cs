@@ -9,9 +9,18 @@ namespace Player
         [SerializeField] private float rayDistance;
         [SerializeField] private LayerMask layerMask;
 
+        private IContinuousInteractable currentContinuousInteractableObject;
+
         private void Awake()
         {
             inputReader.Interacted += InputReaderData_Interacted;
+            inputReader.GettingUp += InputReaderData_GettingUp;
+        }
+
+        private void InputReaderData_GettingUp()
+        {
+            if (currentContinuousInteractableObject != null)
+                currentContinuousInteractableObject.IsBeingUsed = false;
         }
 
         private void InputReaderData_Interacted()
@@ -21,10 +30,11 @@ namespace Player
 
         private void TryInteract(Transform transformToTryInteract)
         {
-            if (!transformToTryInteract.TryGetComponent<IInteractive>(out var interactiveObject)) return;
-            if (interactiveObject.IsInteracting) return;
+            if (!transformToTryInteract.TryGetComponent<IContinuousInteractable>(out var newContinuousInteractableObject)) return;
+            if (newContinuousInteractableObject.IsBeingUsed) return;
 
-            interactiveObject.Interact();
+            currentContinuousInteractableObject = newContinuousInteractableObject;
+            newContinuousInteractableObject.Interact();
         }
 
         private void RayCastToInteractiveObject()

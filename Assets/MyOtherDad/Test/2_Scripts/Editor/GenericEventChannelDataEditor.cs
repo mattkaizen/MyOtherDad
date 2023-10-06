@@ -1,28 +1,32 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Data;
 using UnityEditor;
-using UnityEngine;
 using UnityEditor.UIElements;
+using UnityEngine;
 using UnityEngine.UIElements;
-
 
 namespace EditorData
 {
-    [CustomEditor(typeof(VoidEventChannelData))]
-    public class VoidEventChannelDataEditor : Editor
+    /// <summary>
+    /// This Editor class creates a custom Inspector for event channels that carry a payload
+    /// (e.g., BoolEventChannelSO, FloatEventChannelSO, etc.). A ListView shows the subscribed
+    /// listeners in the scene. Click each item to ping it in the Hierarchy.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    [CustomEditor(typeof(GenericEventChannelData<>), true)]
+    public abstract class GenericEventChannelDataEditor<T> : Editor
     {
-        // Reference to the original event channel (to set up button callback)
-        private VoidEventChannelData _eventChannel;
+        private GenericEventChannelData<T> m_EventChannel;
 
         // Label and counter for items in the list
-        private Label _listenersLabel;
-        private ListView _listenersListView;
-        private Button _raiseEventButton;
+        private Label m_ListenersLabel;
+        private ListView m_ListenersListView;
+        private Button m_RaiseEventButton;
 
         private void OnEnable()
         {
-            if (_eventChannel == null)
-                _eventChannel = target as VoidEventChannelData;
+            if (m_EventChannel == null)
+                m_EventChannel = target as GenericEventChannelData<T>;
         }
 
         public override VisualElement CreateInspectorGUI()
@@ -37,24 +41,24 @@ namespace EditorData
             root.Add(spaceElement);
 
             // Add a label
-            _listenersLabel = new Label();
-            _listenersLabel.text = "Listeners:";
-            _listenersLabel.style.borderBottomWidth = 1;
-            _listenersLabel.style.borderBottomColor = Color.grey;
-            _listenersLabel.style.marginBottom = 2;
-            root.Add(_listenersLabel);
+            m_ListenersLabel = new Label();
+            m_ListenersLabel.text = "Listeners:";
+            m_ListenersLabel.style.borderBottomWidth = 1;
+            m_ListenersLabel.style.borderBottomColor = Color.grey;
+            m_ListenersLabel.style.marginBottom = 2;
+            root.Add(m_ListenersLabel);
 
             // Add a ListView to show Listeners
-            _listenersListView = new ListView(GetListeners(), 20, MakeItem, BindItem);
-            root.Add(_listenersListView);
+            m_ListenersListView = new ListView(GetListeners(), 20, MakeItem, BindItem);
+            root.Add(m_ListenersListView);
 
             // Button to test event
-            _raiseEventButton = new Button();
-            _raiseEventButton.text = "Raise Event";
-            _raiseEventButton.RegisterCallback<ClickEvent>(evt => _eventChannel.RaiseEvent());
-            _raiseEventButton.style.marginBottom = 20;
-            _raiseEventButton.style.marginTop = 20;
-            root.Add(_raiseEventButton);
+            m_RaiseEventButton = new Button();
+            m_RaiseEventButton.text = "Raise Event";
+            m_RaiseEventButton.RegisterCallback<ClickEvent>(evt => m_EventChannel.RaiseEvent(default(T)));
+            m_RaiseEventButton.style.marginBottom = 20;
+            m_RaiseEventButton.style.marginTop = 20;
+            root.Add(m_RaiseEventButton);
 
             return root;
         }
@@ -100,11 +104,11 @@ namespace EditorData
         {
             List<MonoBehaviour> listeners = new List<MonoBehaviour>();
 
-            if (_eventChannel == null || _eventChannel.EventRaised == null)
+            if (m_EventChannel == null || m_EventChannel.EventRaised == null)
                 return listeners;
 
             // Get all delegates subscribed to the OnEventRaised action
-            var delegateSubscribers = _eventChannel.EventRaised.GetInvocationList();
+            var delegateSubscribers = m_EventChannel.EventRaised.GetInvocationList();
 
             foreach (var subscriber in delegateSubscribers)
             {
@@ -112,12 +116,10 @@ namespace EditorData
                 var componentListener = subscriber.Target as MonoBehaviour;
 
                 // Append to the list and return
-
-                if (componentListener != null)
-                    if (!listeners.Contains(componentListener))
-                    {
-                        listeners.Add(componentListener);
-                    }
+                if (!listeners.Contains(componentListener))
+                {
+                    listeners.Add(componentListener);
+                }
             }
 
             return listeners;
