@@ -21,27 +21,38 @@ namespace Camera
         [Space]
         [SerializeField] private VoidEventChannelData cameraChangingToNewCamera;
         [SerializeField] private VoidEventChannelData cameraChangedToNewCamera;
+        [Space]
+        [SerializeField] private VoidEventChannelData cameraChangingToPlayerCamera;
+        [SerializeField] private VoidEventChannelData cameraChangedToPlayerCamera;
 
         private void Awake()
         {
             cameraChangingToNewCamera.EventRaised += FadeScreenIn;
             cameraChangedToNewCamera.EventRaised += FadeScreenOut;
+            cameraChangingToPlayerCamera.EventRaised += FadeScreenIn;
+            cameraChangedToPlayerCamera.EventRaised += FadeScreenOut;
         }
 
         private void OnDisable()
         {
             cameraChangingToNewCamera.EventRaised -= FadeScreenIn;
             cameraChangedToNewCamera.EventRaised -= FadeScreenOut;
+            cameraChangingToPlayerCamera.EventRaised -= FadeScreenIn;
+            cameraChangedToPlayerCamera.EventRaised -= FadeScreenOut;
+            
             screenFade.SetFloat(_edge1, minShaderValue);
         }
 
         private void FadeScreenIn()
         {
-            screenFade.DOFloat(maxShaderValue, _edge1, fadeOutDuration).SetEase(fadeInEase);
+            Debug.Log("FadeIn");
 
+            screenFade.DOFloat(maxShaderValue, _edge1, fadeOutDuration).SetEase(fadeInEase);
         }
         private void FadeScreenOut()
         {
+            Debug.Log("FadeOut");
+
             screenFade.DOFloat(minShaderValue, _edge1, fadeInDuration).SetEase(fadeOutEase);
         }
     }

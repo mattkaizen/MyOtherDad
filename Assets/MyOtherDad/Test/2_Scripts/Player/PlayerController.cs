@@ -31,11 +31,6 @@ public class PlayerController : MonoBehaviour
     [Space] 
     [SerializeField] private Transform playerCam;
     
-    [Header("Listen to Event Channels")] 
-    [Space] 
-    [SerializeField] private VoidEventChannelData changingCamera;
-    [SerializeField] private VoidEventChannelData resetTransitionEnded;
-    
     private Vector2 _playerLookInput;
     private Vector2 _smoothLookInput;
     private Vector2 _smoothLookCurrentVelocity;
@@ -64,8 +59,6 @@ public class PlayerController : MonoBehaviour
 
         staminaMax = stamina;
         
-        changingCamera.EventRaised += OnChangingCamera;
-        resetTransitionEnded.EventRaised += OnResetTransitionEnded;
         inputReader.Moved += OnPlayerMove;
         inputReader.Looked += OnPlayerLook;
         inputReader.Ran += OnPlayerRun;

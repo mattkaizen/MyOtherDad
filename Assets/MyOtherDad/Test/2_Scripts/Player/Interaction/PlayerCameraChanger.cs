@@ -18,8 +18,9 @@ namespace Player
         [Header("Event Channels to Listen"), SerializeField]
         private List<ChangeableCameraEventChannelData> changeableCameraEvents;
 
-        [Header("Broadcast on Event Channels"), SerializeField]
-        private VoidEventChannelData cameraChangingToPlayerCamera;
+        [Header("Broadcast on Event Channels")]
+        [SerializeField] private VoidEventChannelData cameraChangingToPlayerCamera;
+        [SerializeField] private VoidEventChannelData cameraChangedToPlayerCamera;
         [SerializeField] private VoidEventChannelData cameraChangingToNewCamera;
         [SerializeField] private VoidEventChannelData cameraChangedToNewCamera;
 
@@ -51,7 +52,7 @@ namespace Player
 
         private void OnGetUp()
         {
-            SetLivePlayerCamera();
+            StartCoroutine(TransitionToPlayerCamera());
         }
         
 
@@ -69,18 +70,22 @@ namespace Player
             cameraChangedToNewCamera.RaiseEvent();
         }
         
+        private IEnumerator TransitionToPlayerCamera()
+        {
+            Debug.Log("TransitionIn");
+            cameraChangingToPlayerCamera.RaiseEvent();
+            yield return new WaitForSeconds(cameraTransitionDuration);
+            Debug.Log("TransitionOUt");
+            SetStandbyCurrentCamera();
+            cameraChangedToPlayerCamera.RaiseEvent();
+        }
+        
         private void SetLiveNewCamera(IChangeableCamera changeableCamera)
         {
             changeableCamera.Camera.enabled = true;
             changeableCamera.Camera.Priority = LiveCameraPriority;
             changeableCamera.CameraChanged.RaiseEvent();
             _currentChangeableCamera = changeableCamera;
-        }
-
-        private void SetLivePlayerCamera() //TODO: Falta efecto de transicion a la camara del jugador, que invoque los eventos correspondientes
-        {
-            SetStandbyCurrentCamera();
-            cameraChangingToPlayerCamera.RaiseEvent();
         }
 
         private void SetStandbyCurrentCamera()
