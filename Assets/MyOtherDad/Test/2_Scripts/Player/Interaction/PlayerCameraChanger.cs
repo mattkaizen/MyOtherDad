@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
-using Camera;
 using Data;
 using Interfaces;
 using UnityEngine;
@@ -32,7 +30,7 @@ namespace Player
 
         private void Awake()
         {
-            inputReader.GettingUp += OnGetUp;
+            inputReader.GettingUp += OnGettingUp;
 
             foreach (var changeableCameraEvent in changeableCameraEvents)
             {
@@ -42,7 +40,7 @@ namespace Player
 
         private void OnDisable()
         {
-            inputReader.GettingUp -= OnGetUp;
+            inputReader.GettingUp -= OnGettingUp;
 
             foreach (var changeableCameraEvent in changeableCameraEvents)
             {
@@ -50,12 +48,10 @@ namespace Player
             }
         }
 
-        private void OnGetUp()
+        private void OnGettingUp()
         {
             StartCoroutine(TransitionToPlayerCamera());
         }
-        
-
         private void StartTransitionToNewCamera(IChangeableCamera changeableCamera)
         {
             StartCoroutine(TransitionToNewCameraRoutine(changeableCamera));
@@ -72,10 +68,8 @@ namespace Player
         
         private IEnumerator TransitionToPlayerCamera()
         {
-            Debug.Log("TransitionIn");
             cameraChangingToPlayerCamera.RaiseEvent();
             yield return new WaitForSeconds(cameraTransitionDuration);
-            Debug.Log("TransitionOUt");
             SetStandbyCurrentCamera();
             cameraChangedToPlayerCamera.RaiseEvent();
         }

@@ -23159,6 +23159,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1511178561071859809, guid: 4133b9a6b163228478de6c0db064d776, type: 3}
+      propertyPath: fadeInDuration
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1511178561071859809, guid: 4133b9a6b163228478de6c0db064d776, type: 3}
+      propertyPath: fadeOutDuration
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1511178561071859809, guid: 4133b9a6b163228478de6c0db064d776, type: 3}
       propertyPath: cameraChangedToNewCamera
       value: 
       objectReference: {fileID: 11400000, guid: ea688287b9a8c474fa2e3805b6ec9a67, type: 2}
@@ -23179,6 +23187,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: ea688287b9a8c474fa2e3805b6ec9a67, type: 2}
     - target: {fileID: 2215373736164510170, guid: 4133b9a6b163228478de6c0db064d776, type: 3}
+      propertyPath: cameraTransitionDuration
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2215373736164510170, guid: 4133b9a6b163228478de6c0db064d776, type: 3}
       propertyPath: cameraChangingToNewCamera
       value: 
       objectReference: {fileID: 11400000, guid: 32147a13225c35b4faa5c0e2d719eafc, type: 2}
@@ -23190,6 +23202,14 @@ PrefabInstance:
       propertyPath: cameraChangingToPlayerCamera
       value: 
       objectReference: {fileID: 11400000, guid: 7edd951dc780e9d408da49fb82ed0076, type: 2}
+    - target: {fileID: 2215373736164510170, guid: 4133b9a6b163228478de6c0db064d776, type: 3}
+      propertyPath: changeableCameraEvents.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2215373736164510170, guid: 4133b9a6b163228478de6c0db064d776, type: 3}
+      propertyPath: changeableCameraEvents.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: b47d74ac3eab68f43a379053c90967c5, type: 2}
     - target: {fileID: 2455146974118441334, guid: 4133b9a6b163228478de6c0db064d776, type: 3}
       propertyPath: m_Name
       value: Player
@@ -23238,6 +23258,34 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7140911826330701875, guid: 4133b9a6b163228478de6c0db064d776, type: 3}
+      propertyPath: inputReader
+      value: 
+      objectReference: {fileID: 11400000, guid: a1918f9e9c68f0d47a13815a88d883a5, type: 2}
+    - target: {fileID: 7140911826330701875, guid: 4133b9a6b163228478de6c0db064d776, type: 3}
+      propertyPath: lookInputAsset
+      value: 
+      objectReference: {fileID: 1370666342906086428, guid: 02df793359317864b99b2d9d2e13b46a, type: 3}
+    - target: {fileID: 7140911826330701875, guid: 4133b9a6b163228478de6c0db064d776, type: 3}
+      propertyPath: moveInputAsset
+      value: 
+      objectReference: {fileID: -5937181173782789414, guid: 02df793359317864b99b2d9d2e13b46a, type: 3}
+    - target: {fileID: 7140911826330701875, guid: 4133b9a6b163228478de6c0db064d776, type: 3}
+      propertyPath: cameraChangedToBedCamera
+      value: 
+      objectReference: {fileID: 11400000, guid: 6d7b83d6140dcda4394c9906736a2ff0, type: 2}
+    - target: {fileID: 7140911826330701875, guid: 4133b9a6b163228478de6c0db064d776, type: 3}
+      propertyPath: cameraChangingToNewCamera
+      value: 
+      objectReference: {fileID: 11400000, guid: 32147a13225c35b4faa5c0e2d719eafc, type: 2}
+    - target: {fileID: 7140911826330701875, guid: 4133b9a6b163228478de6c0db064d776, type: 3}
+      propertyPath: cameraChangedToPlayerCamera
+      value: 
+      objectReference: {fileID: 11400000, guid: 8e815fda46b744d4ca4ab29ee4f716b7, type: 2}
+    - target: {fileID: 7140911826330701875, guid: 4133b9a6b163228478de6c0db064d776, type: 3}
+      propertyPath: cameraChangingToPlayerCamera
+      value: 
+      objectReference: {fileID: 11400000, guid: 7edd951dc780e9d408da49fb82ed0076, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -23255,34 +23303,6 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1249950932}
-    - target: {fileID: 4353507903080274937, guid: a8663594ea9a3d442acddcd0f0b5bb7b, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0.84999955
-      objectReference: {fileID: 0}
-    - target: {fileID: 4353507903080274937, guid: a8663594ea9a3d442acddcd0f0b5bb7b, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.59537107
-      objectReference: {fileID: 0}
-    - target: {fileID: 4353507903080274937, guid: a8663594ea9a3d442acddcd0f0b5bb7b, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0.38148814
-      objectReference: {fileID: 0}
-    - target: {fileID: 4353507903080274937, guid: a8663594ea9a3d442acddcd0f0b5bb7b, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0.5953711
-      objectReference: {fileID: 0}
-    - target: {fileID: 4353507903080274937, guid: a8663594ea9a3d442acddcd0f0b5bb7b, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0.38148823
-      objectReference: {fileID: 0}
-    - target: {fileID: 4353507903080274937, guid: a8663594ea9a3d442acddcd0f0b5bb7b, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4353507903080274937, guid: a8663594ea9a3d442acddcd0f0b5bb7b, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 90
-      objectReference: {fileID: 0}
     - target: {fileID: 5139297414287403455, guid: a8663594ea9a3d442acddcd0f0b5bb7b, type: 3}
       propertyPath: m_RootOrder
       value: -1
@@ -23333,11 +23353,7 @@ PrefabInstance:
       objectReference: {fileID: 1249950932}
     - target: {fileID: 6493910354171961156, guid: a8663594ea9a3d442acddcd0f0b5bb7b, type: 3}
       propertyPath: m_VersionIndex
-      value: 1141
-      objectReference: {fileID: 0}
-    - target: {fileID: 7030224035155032475, guid: a8663594ea9a3d442acddcd0f0b5bb7b, type: 3}
-      propertyPath: m_HorizontalAxis.m_MaxValue
-      value: 180
+      value: 1150
       objectReference: {fileID: 0}
     - target: {fileID: 7288227501745518475, guid: a8663594ea9a3d442acddcd0f0b5bb7b, type: 3}
       propertyPath: m_Name
@@ -23347,10 +23363,6 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1249950932}
-    - target: {fileID: 9023787501019385454, guid: a8663594ea9a3d442acddcd0f0b5bb7b, type: 3}
-      propertyPath: m_LookAt
-      value: 
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

@@ -5,7 +5,7 @@ namespace Interfaces
 {
     public interface IChangeableCamera
     {
-        CinemachineVirtualCamera Camera { get; set; }
+        CinemachineVirtualCamera Camera { get; }
         VoidEventChannelData CameraChanged { get; }
         VoidEventChannelData ChangingCamera { get; }
     }

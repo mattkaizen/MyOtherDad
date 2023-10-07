@@ -13,17 +13,17 @@ namespace Player
 
         private void Awake()
         {
-            inputReader.Interacted += InputReaderData_Interacted;
-            inputReader.GettingUp += InputReaderData_GettingUp;
+            inputReader.Interacted += OnInteracted;
+            inputReader.GettingUp += OnGettingUp;
         }
 
-        private void InputReaderData_GettingUp()
+        private void OnGettingUp()
         {
             if (currentContinuousInteractableObject != null)
                 currentContinuousInteractableObject.IsBeingUsed = false;
         }
 
-        private void InputReaderData_Interacted()
+        private void OnInteracted()
         {
             RayCastToInteractiveObject();
         }

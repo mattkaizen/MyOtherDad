@@ -2,7 +2,7 @@
 {
     public interface IClickable
     {
-        bool WasClicked { get; set; }
+        bool WasClicked { get; }
         void Click();
     }
 }

@@ -13,18 +13,23 @@ namespace Player
         private void Awake()
         {
             if (inputReader != null)
-                inputReader.Interacted += RaycastToPickupObject;
+                inputReader.Interacted += OnInteracted;
         }
 
         private void OnDisable()
         {
             if (inputReader != null)
-                inputReader.Interacted -= RaycastToPickupObject;
+                inputReader.Interacted -= OnInteracted;
         }
 
         private void OnDrawGizmos()
         {
-            Debug.DrawRay(transform.position, transform.forward * rayDistance, Color.green, 0.5f);
+            Debug.DrawRay(transform.position,  rayDistance * transform.forward, Color.green, 0.5f);
+        }
+        
+        private void OnInteracted()
+        {
+            RaycastToPickupObject();
         }
 
         private void TryPickup(IPickable item)
@@ -36,6 +41,8 @@ namespace Player
             
             playerInventory.Add(item.Pickup());
         }
+
+
 
         private void RaycastToPickupObject()
         {

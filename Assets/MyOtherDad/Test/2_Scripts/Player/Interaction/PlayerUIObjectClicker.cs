@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using Interfaces;
-using PointerGesture;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -20,23 +18,23 @@ namespace Player
 
         private void Awake()
         {
-            inputReaderData.Painting += InputReader_Painting;
-            inputReaderData.Painted += InputReader_Painted;
+            inputReaderData.Painting += OnPainting;
+            inputReaderData.Painted += OnPainted;
         }
 
         private void OnDisable()
         {
-            inputReaderData.Painting -= InputReader_Painting;
-            inputReaderData.Painted -= InputReader_Painted;
+            inputReaderData.Painting -= OnPainting;
+            inputReaderData.Painted -= OnPainted;
         }
 
-        private void InputReader_Painting()
+        private void OnPainting()
         {
             _isPainting = true;
             StartCoroutine(ExecuteRoutine());
         }
 
-        private void InputReader_Painted()
+        private void OnPainted()
         {
             _isPainting = false;
         }
@@ -67,11 +65,9 @@ namespace Player
 
         private void TryClick(GameObject uiGameObject)
         {
-            if (uiGameObject.TryGetComponent<IClickable>(out var executable))
-            {
-                if (!executable.WasClicked)
-                    executable.Click();
-            }
+            if (!uiGameObject.TryGetComponent<IClickable>(out var executable)) return;
+            if (!executable.WasClicked)
+                executable.Click();
         }
     }
 }

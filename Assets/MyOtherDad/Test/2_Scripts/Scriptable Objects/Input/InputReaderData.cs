@@ -13,6 +13,9 @@ public class InputReaderData : ScriptableObject, GameControls.IPlayerActions
     public event UnityAction Painted = delegate { };
     public event UnityAction<bool> Ran = delegate { };
     
+    public InputAction Move => _move;
+    public InputAction Look => _look;
+    
     private GameControls _playerInputActions;
     private InputAction _interact;
     private InputAction _getUp;
@@ -40,8 +43,6 @@ public class InputReaderData : ScriptableObject, GameControls.IPlayerActions
         _run.performed += OnRun;
         _paint.performed += OnPainting;
     }
-
-
 
     private void OnDisable()
     {
@@ -74,6 +75,7 @@ public class InputReaderData : ScriptableObject, GameControls.IPlayerActions
     {
         if (_move.WasPerformedThisFrame())
         {
+            Debug.Log("Move event");
             Moved?.Invoke(context.ReadValue<Vector2>());
         }
         else

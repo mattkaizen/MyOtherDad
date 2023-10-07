@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections;
-using Cinemachine;
+﻿using Cinemachine;
 using Data;
 using Interfaces;
-using Player;
 using UnityEngine;
 
 namespace Objects

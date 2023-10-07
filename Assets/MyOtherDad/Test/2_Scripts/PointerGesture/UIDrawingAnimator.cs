@@ -19,7 +19,7 @@ namespace PointerGesture
 
             foreach (var pointerGestureChecker in pointerGestureCheckers)
             {
-                pointerGestureChecker.GestureCompleted += PointerGestureChecker_GestureCompleted;
+                pointerGestureChecker.GestureCompleted += OnGestureCompleted;
             }
         }
 
@@ -29,11 +29,11 @@ namespace PointerGesture
 
             foreach (var pointerGestureChecker in pointerGestureCheckers)
             {
-                pointerGestureChecker.GestureCompleted += PointerGestureChecker_GestureCompleted;
+                pointerGestureChecker.GestureCompleted += OnGestureCompleted;
             }
         }
 
-        private void PointerGestureChecker_GestureCompleted()
+        private void OnGestureCompleted()
         {
             SetAlphaImage();
         }

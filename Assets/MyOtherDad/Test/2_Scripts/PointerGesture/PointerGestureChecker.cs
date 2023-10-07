@@ -38,7 +38,7 @@ namespace PointerGesture
             
             foreach (var gesturePoint in gesturePointsToCheck)
             {
-                gesturePoint.wasClicked -= GesturePoint_WasClicked;
+                gesturePoint.clicked -= OnClicked;
             }
         }
 
@@ -52,7 +52,7 @@ namespace PointerGesture
             
             foreach (var gesturePoint in gesturePointsToCheck)
             {
-                gesturePoint.wasClicked += GesturePoint_WasClicked;
+                gesturePoint.clicked += OnClicked;
             }
 
             _remainingGesturePoints = GetClonedGesturePointList();
@@ -60,7 +60,7 @@ namespace PointerGesture
             OnGestureInitialized();
         }
 
-        private void GesturePoint_WasClicked()
+        private void OnClicked()
         {
             if (_areCheckingGesturePoints) return;
 

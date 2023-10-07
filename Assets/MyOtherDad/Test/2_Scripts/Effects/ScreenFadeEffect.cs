@@ -1,9 +1,8 @@
-﻿using System;
-using Data;
+﻿using Data;
 using DG.Tweening;
 using UnityEngine;
 
-namespace Camera
+namespace Effects
 {
     public class ScreenFadeEffect : MonoBehaviour
     {
@@ -45,14 +44,10 @@ namespace Camera
 
         private void FadeScreenIn()
         {
-            Debug.Log("FadeIn");
-
             screenFade.DOFloat(maxShaderValue, _edge1, fadeOutDuration).SetEase(fadeInEase);
         }
         private void FadeScreenOut()
         {
-            Debug.Log("FadeOut");
-
             screenFade.DOFloat(minShaderValue, _edge1, fadeInDuration).SetEase(fadeOutEase);
         }
     }

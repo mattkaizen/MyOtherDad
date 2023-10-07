@@ -1,11 +1,13 @@
 using Interfaces;
-using Objects;
 
-public class KeyObject : InteractiveItem, IPickable
+namespace Objects
 {
-    public ItemData Pickup()
+    public class KeyObject : InteractiveItem, IPickable
     {
-        gameObject.SetActive(false);
-        return Data;
+        public ItemData Pickup()
+        {
+            gameObject.SetActive(false);
+            return Data;
+        }
     }
 }

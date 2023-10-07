@@ -5,7 +5,7 @@ namespace Objects
 {
     public class LightSwitch : MonoBehaviour, ISwitchable
     {
-        public bool IsActive { get => _isActive; }
+        public bool IsActive => _isActive;
         private bool _isActive;
         public void Activate()
         {

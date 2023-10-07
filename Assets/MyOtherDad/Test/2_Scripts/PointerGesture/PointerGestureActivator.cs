@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using Data;
@@ -13,10 +12,10 @@ namespace PointerGesture
         
         private void Awake()
         {
-            eventToActivatePointerGesture.EventRaised += VoidEventChannelData_EventRaised;
+            eventToActivatePointerGesture.EventRaised += OnEventRaised;
         }
 
-        private void VoidEventChannelData_EventRaised()
+        private void OnEventRaised()
         {
             StartCoroutine(EnablePointerGestureCheckerGameObjectsRoutine());
         }

@@ -12,13 +12,13 @@ namespace PointerGesture
             set => _wasClicked = value;
         }
 
-        public UnityAction wasClicked = delegate {  };
+        public UnityAction clicked = delegate {  };
         private bool _wasClicked;
 
         public void Click()
         {
             _wasClicked = true;
-            wasClicked?.Invoke();
+            clicked?.Invoke();
         }
     }
 }
