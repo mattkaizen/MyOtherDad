@@ -6,30 +6,35 @@ namespace Player
 {
     public class PlayerInputToggle : MonoBehaviour
     {
-        [Header("Player Controller"), SerializeField]
+        [Header("Inputs"), SerializeField]
         private InputReaderData inputReader;
+        [SerializeField] private InputActionReference lookAsset;
 
         [Header("Listen to Event Channels"), Space, SerializeField]
-        private VoidEventChannelData cameraChangedToPlayerCamera;
+        private VoidEventChannelData enablingPlayerCamera;
+        [SerializeField] private VoidEventChannelData playerCameraLive;
 
-        [Space, SerializeField] private VoidEventChannelData cameraChangingToNewCamera;
-        [SerializeField] private VoidEventChannelData cameraChangedToBedCamera;
+        [Space, SerializeField] private VoidEventChannelData enablingToNewCamera;
+        [SerializeField] private VoidEventChannelData bedCameraLive;
+        [SerializeField] private VoidEventChannelData disablingBedCamera;
 
 
         private void Awake()
         {
-            cameraChangingToNewCamera.EventRaised += OnCameraChangingToNewCamera;
-            cameraChangedToBedCamera.EventRaised += OnCameraChangedToBedCamera;
+            enablingToNewCamera.EventRaised += OnEnablingNewCamera;
+            bedCameraLive.EventRaised += OnBedCameraLive;
+            disablingBedCamera.EventRaised += OnDisablingBedCamera;
 
-            cameraChangedToPlayerCamera.EventRaised += OnCameraChangedToPlayerCamera;
+            playerCameraLive.EventRaised += OnPlayerCameraLive;
+            enablingPlayerCamera.EventRaised += OnEnablingPlayerCamera;
         }
 
         private void OnDisable()
         {
-            cameraChangingToNewCamera.EventRaised -= OnCameraChangingToNewCamera;
-            cameraChangedToBedCamera.EventRaised -= OnCameraChangedToBedCamera;
+            enablingToNewCamera.EventRaised -= OnEnablingNewCamera;
+            bedCameraLive.EventRaised -= OnBedCameraLive;
 
-            cameraChangedToPlayerCamera.EventRaised -= OnCameraChangedToPlayerCamera;
+            playerCameraLive.EventRaised -= OnPlayerCameraLive;
         }
 
         private void EnableInput(InputAction input)
@@ -42,21 +47,31 @@ namespace Player
             input?.Disable();
         }
 
-        private void OnCameraChangedToBedCamera()
+        private void OnBedCameraLive()
         {
-            EnableInput(inputReader.Look);
+            EnableInput(lookAsset.action);
         }
 
-        private void OnCameraChangedToPlayerCamera()
+        private void OnPlayerCameraLive()
         {
             EnableInput(inputReader.Move);
             EnableInput(inputReader.Look);
         }
+        
+        private void OnEnablingPlayerCamera()
+        {
+            DisableInput(inputReader.Look);
+        }
 
-        private void OnCameraChangingToNewCamera()
+        private void OnEnablingNewCamera()
         {
             DisableInput(inputReader.Move);
             DisableInput(inputReader.Look);
+        }
+        
+        private void OnDisablingBedCamera()
+        {
+            DisableInput(lookAsset.action);
         }
     }
 }

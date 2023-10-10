@@ -381,7 +381,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 1147
+  m_VersionIndex: 1159
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -498,9 +498,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentCamera: {fileID: 9023787501019385454}
-  cameraChangingToBedCamera: {fileID: 11400000, guid: 08287eaca5f7f0f41b306e4390da64a0, type: 2}
-  cameraChangedToBedCamera: {fileID: 11400000, guid: 6d7b83d6140dcda4394c9906736a2ff0, type: 2}
-  interactingWithDrawingTable: {fileID: 11400000, guid: b47d74ac3eab68f43a379053c90967c5, type: 2}
+  enablingBedCamera: {fileID: 11400000, guid: 08287eaca5f7f0f41b306e4390da64a0, type: 2}
+  bedCameraLive: {fileID: 11400000, guid: 6d7b83d6140dcda4394c9906736a2ff0, type: 2}
+  disablingBedCamera: {fileID: 11400000, guid: 36839d3c9ae1dda45a5161df2be01d0d, type: 2}
+  interactingWithBed: {fileID: 11400000, guid: b47d74ac3eab68f43a379053c90967c5, type: 2}
 --- !u!1 &8887895859986836506
 GameObject:
   m_ObjectHideFlags: 0

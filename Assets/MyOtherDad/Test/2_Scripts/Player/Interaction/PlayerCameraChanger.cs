@@ -50,8 +50,16 @@ namespace Player
 
         private void OnGettingUp()
         {
-            StartCoroutine(TransitionToPlayerCamera());
+            TryToTransitionToPlayerCamera();
         }
+
+        private void TryToTransitionToPlayerCamera()
+        {
+            if (_currentChangeableCamera == null) return;
+            
+            StartCoroutine(TransitionToPlayerCamera(_currentChangeableCamera));
+        }
+
         private void StartTransitionToNewCamera(IChangeableCamera changeableCamera)
         {
             StartCoroutine(TransitionToNewCameraRoutine(changeableCamera));
@@ -59,15 +67,16 @@ namespace Player
         
         private IEnumerator TransitionToNewCameraRoutine(IChangeableCamera changeableCamera)
         {
-            changeableCamera.ChangingCamera.RaiseEvent();
+            changeableCamera.EnablingCamera.RaiseEvent();
             cameraChangingToNewCamera.RaiseEvent();
             yield return new WaitForSeconds(cameraTransitionDuration);
             SetLiveNewCamera(changeableCamera);
             cameraChangedToNewCamera.RaiseEvent();
         }
         
-        private IEnumerator TransitionToPlayerCamera()
+        private IEnumerator TransitionToPlayerCamera(IChangeableCamera currentChangeableCamera)
         {
+            currentChangeableCamera.DisablingCamera.RaiseEvent();
             cameraChangingToPlayerCamera.RaiseEvent();
             yield return new WaitForSeconds(cameraTransitionDuration);
             SetStandbyCurrentCamera();
@@ -78,7 +87,7 @@ namespace Player
         {
             changeableCamera.Camera.enabled = true;
             changeableCamera.Camera.Priority = LiveCameraPriority;
-            changeableCamera.CameraChanged.RaiseEvent();
+            changeableCamera.CameraLive.RaiseEvent();
             _currentChangeableCamera = changeableCamera;
         }
 

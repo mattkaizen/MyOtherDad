@@ -9,19 +9,21 @@ namespace Objects
     {
         public bool IsBeingUsed { get; set; }
         public CinemachineVirtualCamera Camera {  get => currentCamera; set => currentCamera = value; }
-        public VoidEventChannelData ChangingCamera => cameraChangingToBedCamera;
-        public VoidEventChannelData CameraChanged => cameraChangedToBedCamera;
+        public VoidEventChannelData EnablingCamera => enablingBedCamera;
+        public VoidEventChannelData DisablingCamera => disablingBedCamera;
+        public VoidEventChannelData CameraLive => bedCameraLive;
 
         [SerializeField] private CinemachineVirtualCamera currentCamera;
         
-        [SerializeField] private VoidEventChannelData cameraChangingToBedCamera;
-        [SerializeField] private VoidEventChannelData cameraChangedToBedCamera;
+        [SerializeField] private VoidEventChannelData enablingBedCamera;
+        [SerializeField] private VoidEventChannelData bedCameraLive;
+        [SerializeField] private VoidEventChannelData disablingBedCamera;
         [Header("Broadcast to Event Channels")]
-        [SerializeField] private ChangeableCameraEventChannelData interactingWithDrawingTable;
+        [SerializeField] private ChangeableCameraEventChannelData interactingWithBed;
         public void Interact()
         {
             Debug.Log("Beds");
-            interactingWithDrawingTable.RaiseEvent(this);
+            interactingWithBed.RaiseEvent(this);
         }
 
 

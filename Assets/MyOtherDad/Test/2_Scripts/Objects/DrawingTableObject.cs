@@ -8,13 +8,15 @@ namespace Objects
     public class DrawingTableObject : MonoBehaviour, IContinuousInteractable, IChangeableCamera
     {
         public CinemachineVirtualCamera Camera { get => currentCamera; set => currentCamera = value; }
-        public VoidEventChannelData ChangingCamera => cameraChangingToDrawingTableCamera;
-        public VoidEventChannelData CameraChanged => cameraChangedToDrawingTableCamera;
+        public VoidEventChannelData EnablingCamera => enablingDrawingTableCamera;
+        public VoidEventChannelData CameraLive => drawingTableCameraLive;
+        public VoidEventChannelData DisablingCamera => disablingDrawingTableCamera;
         public bool IsBeingUsed { get => _isBeingUsed; set => _isBeingUsed = value; }
         
         [SerializeField] private CinemachineVirtualCamera currentCamera;
-        [SerializeField] private VoidEventChannelData cameraChangingToDrawingTableCamera;
-        [SerializeField] private VoidEventChannelData cameraChangedToDrawingTableCamera;
+        [SerializeField] private VoidEventChannelData enablingDrawingTableCamera;
+        [SerializeField] private VoidEventChannelData drawingTableCameraLive;
+        [SerializeField] private VoidEventChannelData disablingDrawingTableCamera;
         [Header("Broadcast to Event Channels")]
         [SerializeField] private ChangeableCameraEventChannelData interactingWithDrawingTable;
         
