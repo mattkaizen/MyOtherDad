@@ -18,26 +18,26 @@ namespace Effects
         [SerializeField] private Ease fadeInEase;
         [SerializeField] private Ease fadeOutEase;
         [Space]
-        [SerializeField] private VoidEventChannelData cameraChangingToNewCamera;
-        [SerializeField] private VoidEventChannelData cameraChangedToNewCamera;
+        [SerializeField] private VoidEventChannelData enablingNewCamera;
+        [SerializeField] private VoidEventChannelData newCameraLive;
         [Space]
-        [SerializeField] private VoidEventChannelData cameraChangingToPlayerCamera;
-        [SerializeField] private VoidEventChannelData cameraChangedToPlayerCamera;
+        [SerializeField] private VoidEventChannelData enablingPlayerCamera;
+        [SerializeField] private VoidEventChannelData playerCameraLive;
 
         private void Awake()
         {
-            cameraChangingToNewCamera.EventRaised += FadeScreenIn;
-            cameraChangedToNewCamera.EventRaised += FadeScreenOut;
-            cameraChangingToPlayerCamera.EventRaised += FadeScreenIn;
-            cameraChangedToPlayerCamera.EventRaised += FadeScreenOut;
+            enablingNewCamera.EventRaised += FadeScreenIn;
+            newCameraLive.EventRaised += FadeScreenOut;
+            enablingPlayerCamera.EventRaised += FadeScreenIn;
+            playerCameraLive.EventRaised += FadeScreenOut;
         }
 
         private void OnDisable()
         {
-            cameraChangingToNewCamera.EventRaised -= FadeScreenIn;
-            cameraChangedToNewCamera.EventRaised -= FadeScreenOut;
-            cameraChangingToPlayerCamera.EventRaised -= FadeScreenIn;
-            cameraChangedToPlayerCamera.EventRaised -= FadeScreenOut;
+            enablingNewCamera.EventRaised -= FadeScreenIn;
+            newCameraLive.EventRaised -= FadeScreenOut;
+            enablingPlayerCamera.EventRaised -= FadeScreenIn;
+            playerCameraLive.EventRaised -= FadeScreenOut;
             
             screenFade.SetFloat(_edge1, minShaderValue);
         }

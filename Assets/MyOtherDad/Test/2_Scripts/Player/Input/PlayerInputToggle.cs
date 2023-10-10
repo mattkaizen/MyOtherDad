@@ -6,12 +6,12 @@ namespace Player
 {
     public class PlayerInputToggle : MonoBehaviour
     {
-        [Header("Inputs"), SerializeField]
-        private InputReaderData inputReader;
+        [Header("Inputs"), SerializeField] private InputReaderData inputReader;
         [SerializeField] private InputActionReference lookAsset;
 
         [Header("Listen to Event Channels"), Space, SerializeField]
         private VoidEventChannelData enablingPlayerCamera;
+
         [SerializeField] private VoidEventChannelData playerCameraLive;
 
         [Space, SerializeField] private VoidEventChannelData enablingToNewCamera;
@@ -47,17 +47,35 @@ namespace Player
             input?.Disable();
         }
 
+        private void EnablePlayerInput()
+        {
+            EnableInput(inputReader.Look);
+            EnableInput(inputReader.Move);
+            EnableInput(inputReader.Run);
+            EnableInput(inputReader.Interact);
+            EnableInput(inputReader.GetUp);
+        }
+
+        private void DisablePlayerInput()
+        {
+            DisableInput(inputReader.Look);
+            DisableInput(inputReader.Move);
+            DisableInput(inputReader.Run);
+            DisableInput(inputReader.Interact);
+            DisableInput(inputReader.GetUp);
+        }
+
         private void OnBedCameraLive()
         {
             EnableInput(lookAsset.action);
+            EnableInput(inputReader.GetUp);
         }
 
         private void OnPlayerCameraLive()
         {
-            EnableInput(inputReader.Move);
-            EnableInput(inputReader.Look);
+            EnablePlayerInput();
         }
-        
+
         private void OnEnablingPlayerCamera()
         {
             DisableInput(inputReader.Look);
@@ -65,10 +83,9 @@ namespace Player
 
         private void OnEnablingNewCamera()
         {
-            DisableInput(inputReader.Move);
-            DisableInput(inputReader.Look);
+            DisablePlayerInput();
         }
-        
+
         private void OnDisablingBedCamera()
         {
             DisableInput(lookAsset.action);

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using Data;
+using Effects;
 using Interfaces;
 using UnityEngine;
 
@@ -17,10 +18,10 @@ namespace Player
         private List<ChangeableCameraEventChannelData> changeableCameraEvents;
 
         [Header("Broadcast on Event Channels")]
-        [SerializeField] private VoidEventChannelData cameraChangingToPlayerCamera;
-        [SerializeField] private VoidEventChannelData cameraChangedToPlayerCamera;
-        [SerializeField] private VoidEventChannelData cameraChangingToNewCamera;
-        [SerializeField] private VoidEventChannelData cameraChangedToNewCamera;
+        [SerializeField] private VoidEventChannelData enablingPlayerCamera;
+        [SerializeField] private VoidEventChannelData playerCameraLive;
+        [SerializeField] private VoidEventChannelData enablingNewCamera;
+        [SerializeField] private VoidEventChannelData newCameraLive;
 
         private static IChangeableCamera _currentChangeableCamera;
         private IEnumerator _transitionRoutine;
@@ -68,19 +69,19 @@ namespace Player
         private IEnumerator TransitionToNewCameraRoutine(IChangeableCamera changeableCamera)
         {
             changeableCamera.EnablingCamera.RaiseEvent();
-            cameraChangingToNewCamera.RaiseEvent();
+            enablingNewCamera.RaiseEvent();
             yield return new WaitForSeconds(cameraTransitionDuration);
             SetLiveNewCamera(changeableCamera);
-            cameraChangedToNewCamera.RaiseEvent();
+            newCameraLive.RaiseEvent();
         }
         
         private IEnumerator TransitionToPlayerCamera(IChangeableCamera currentChangeableCamera)
         {
             currentChangeableCamera.DisablingCamera.RaiseEvent();
-            cameraChangingToPlayerCamera.RaiseEvent();
+            enablingPlayerCamera.RaiseEvent();
             yield return new WaitForSeconds(cameraTransitionDuration);
             SetStandbyCurrentCamera();
-            cameraChangedToPlayerCamera.RaiseEvent();
+            playerCameraLive.RaiseEvent();
         }
         
         private void SetLiveNewCamera(IChangeableCamera changeableCamera)
@@ -97,6 +98,7 @@ namespace Player
 
             _currentChangeableCamera.Camera.Priority = StandByCameraPriority;
             _currentChangeableCamera.Camera.enabled = false;
+            _currentChangeableCamera = null;
         }
 
     }

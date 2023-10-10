@@ -15,6 +15,9 @@ public class InputReaderData : ScriptableObject, GameControls.IPlayerActions
     
     public InputAction Move => _move;
     public InputAction Look => _look;
+    public InputAction Run => _run;
+    public InputAction Interact => _interact;
+    public InputAction GetUp => _getUp;
     
     private GameControls _playerInputActions;
     private InputAction _interact;
@@ -75,7 +78,6 @@ public class InputReaderData : ScriptableObject, GameControls.IPlayerActions
     {
         if (_move.WasPerformedThisFrame())
         {
-            Debug.Log("Move event");
             Moved?.Invoke(context.ReadValue<Vector2>());
         }
         else

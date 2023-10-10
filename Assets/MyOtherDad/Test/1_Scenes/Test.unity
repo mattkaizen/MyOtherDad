@@ -23160,6 +23160,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1511178561071859809, guid: 4133b9a6b163228478de6c0db064d776, type: 3}
+      propertyPath: newCameraLive
+      value: 
+      objectReference: {fileID: 11400000, guid: ea688287b9a8c474fa2e3805b6ec9a67, type: 2}
+    - target: {fileID: 1511178561071859809, guid: 4133b9a6b163228478de6c0db064d776, type: 3}
       propertyPath: fadeInDuration
       value: 0.5
       objectReference: {fileID: 0}
@@ -23167,6 +23171,18 @@ PrefabInstance:
       propertyPath: fadeOutDuration
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 1511178561071859809, guid: 4133b9a6b163228478de6c0db064d776, type: 3}
+      propertyPath: playerCameraLive
+      value: 
+      objectReference: {fileID: 11400000, guid: 8e815fda46b744d4ca4ab29ee4f716b7, type: 2}
+    - target: {fileID: 1511178561071859809, guid: 4133b9a6b163228478de6c0db064d776, type: 3}
+      propertyPath: enablingNewCamera
+      value: 
+      objectReference: {fileID: 11400000, guid: 32147a13225c35b4faa5c0e2d719eafc, type: 2}
+    - target: {fileID: 1511178561071859809, guid: 4133b9a6b163228478de6c0db064d776, type: 3}
+      propertyPath: enablingPlayerCamera
+      value: 
+      objectReference: {fileID: 11400000, guid: 7edd951dc780e9d408da49fb82ed0076, type: 2}
     - target: {fileID: 1511178561071859809, guid: 4133b9a6b163228478de6c0db064d776, type: 3}
       propertyPath: cameraChangedToNewCamera
       value: 
@@ -23188,12 +23204,28 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 32147a13225c35b4faa5c0e2d719eafc, type: 2}
     - target: {fileID: 2215373736164510170, guid: 4133b9a6b163228478de6c0db064d776, type: 3}
+      propertyPath: newCameraLive
+      value: 
+      objectReference: {fileID: 11400000, guid: ea688287b9a8c474fa2e3805b6ec9a67, type: 2}
+    - target: {fileID: 2215373736164510170, guid: 4133b9a6b163228478de6c0db064d776, type: 3}
+      propertyPath: playerCameraLive
+      value: 
+      objectReference: {fileID: 11400000, guid: 8e815fda46b744d4ca4ab29ee4f716b7, type: 2}
+    - target: {fileID: 2215373736164510170, guid: 4133b9a6b163228478de6c0db064d776, type: 3}
+      propertyPath: enablingNewCamera
+      value: 
+      objectReference: {fileID: 11400000, guid: 32147a13225c35b4faa5c0e2d719eafc, type: 2}
+    - target: {fileID: 2215373736164510170, guid: 4133b9a6b163228478de6c0db064d776, type: 3}
+      propertyPath: enablingPlayerCamera
+      value: 
+      objectReference: {fileID: 11400000, guid: 7edd951dc780e9d408da49fb82ed0076, type: 2}
+    - target: {fileID: 2215373736164510170, guid: 4133b9a6b163228478de6c0db064d776, type: 3}
       propertyPath: cameraChangedToNewCamera
       value: 
       objectReference: {fileID: 11400000, guid: ea688287b9a8c474fa2e3805b6ec9a67, type: 2}
     - target: {fileID: 2215373736164510170, guid: 4133b9a6b163228478de6c0db064d776, type: 3}
       propertyPath: cameraTransitionDuration
-      value: 1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 2215373736164510170, guid: 4133b9a6b163228478de6c0db064d776, type: 3}
       propertyPath: cameraChangingToNewCamera
