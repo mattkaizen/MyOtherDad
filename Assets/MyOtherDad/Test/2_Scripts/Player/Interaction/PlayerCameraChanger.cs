@@ -58,7 +58,7 @@ namespace Player
         {
             if (_currentChangeableCamera == null) return;
             
-            StartCoroutine(TransitionToPlayerCamera(_currentChangeableCamera));
+            StartCoroutine(TransitionToPlayerCameraRoutine(_currentChangeableCamera));
         }
 
         private void StartTransitionToNewCamera(IChangeableCamera changeableCamera)
@@ -75,7 +75,7 @@ namespace Player
             newCameraLive.RaiseEvent();
         }
         
-        private IEnumerator TransitionToPlayerCamera(IChangeableCamera currentChangeableCamera)
+        private IEnumerator TransitionToPlayerCameraRoutine(IChangeableCamera currentChangeableCamera)
         {
             currentChangeableCamera.DisablingCamera.RaiseEvent();
             enablingPlayerCamera.RaiseEvent();

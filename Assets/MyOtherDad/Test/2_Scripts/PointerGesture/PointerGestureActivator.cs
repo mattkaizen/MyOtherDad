@@ -9,6 +9,8 @@ namespace PointerGesture
     {
         [SerializeField] private List<PointerGestureChecker> gestures;
         [SerializeField] private VoidEventChannelData eventToActivatePointerGesture;
+
+        private IEnumerator _enablePointerGestureCheckerGameObjects;
         
         private void Awake()
         {
@@ -17,6 +19,7 @@ namespace PointerGesture
 
         private void OnEventRaised()
         {
+            //TODO: Si no se activo la corrutina, iniciar.
             StartCoroutine(EnablePointerGestureCheckerGameObjectsRoutine());
         }
 
