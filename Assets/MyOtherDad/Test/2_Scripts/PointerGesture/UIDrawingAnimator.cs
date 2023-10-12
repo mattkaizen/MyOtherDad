@@ -7,7 +7,7 @@ namespace PointerGesture
 {
     public class UIDrawingAnimator : MonoBehaviour
     {
-        [SerializeField] private List<PointerGestureChecker> pointerGestureCheckers;
+        [SerializeField] private List<PointerGesturePointChecker> pointerGestureCheckers;
         [SerializeField] private Image imageToDraw;
 
         [Space] [SerializeField] private float alphaTweenDuration;

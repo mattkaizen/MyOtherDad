@@ -6,7 +6,7 @@ using UnityEngine.Events;
 
 namespace PointerGesture
 {
-    public class PointerGestureChecker : MonoBehaviour
+    public class PointerGesturePointChecker : MonoBehaviour
     {
         public event UnityAction GestureCompleted = delegate {  };
         public event UnityAction GestureInitialized = delegate {  };
@@ -57,7 +57,7 @@ namespace PointerGesture
 
             _remainingGesturePoints = GetClonedGesturePointList();
 
-            OnGestureInitialized();
+            GestureInitialized?.Invoke();;
         }
 
         private void OnClicked()
@@ -93,7 +93,7 @@ namespace PointerGesture
                     {
                         TryStopFlashingCheckRoutine();
                         _isGestureCompleted = true;
-                        OnGestureCompleted();
+                        GestureCompleted?.Invoke();;
                         break;
                     }
 
@@ -153,17 +153,6 @@ namespace PointerGesture
                 gesture.WasClicked = false;
             }
         }
-
-        private void OnGestureCompleted()
-        {
-            GestureCompleted?.Invoke();;
-        }
-        
-        private void OnGestureInitialized()
-        {
-            GestureInitialized?.Invoke();;
-        }
-
         private List<PointerGesturePoint> GetClonedGesturePointList()
         {
             return new List<PointerGesturePoint>(gesturePointsToCheck);
