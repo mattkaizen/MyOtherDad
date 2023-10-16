@@ -23,7 +23,7 @@ namespace PointerGesture
         private bool _areCheckingGesturePoints;
         private bool _isGestureCompleted;
 
-        private void Awake()
+        private void OnEnable()
         {
             Initialize();
         }

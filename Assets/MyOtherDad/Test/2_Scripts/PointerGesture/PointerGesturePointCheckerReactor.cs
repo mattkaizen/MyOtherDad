@@ -6,7 +6,7 @@ namespace PointerGesture
     public class PointerGesturePointCheckerReactor : MonoBehaviour
     {
         [SerializeField] private PointerGesturePointChecker pointerGesturePointCheckerToReact;
-        [SerializeField] private VoidEventChannelData eventToRaised;
+        [SerializeField] private VoidEventChannelData eventToRaise;
 
         private void OnEnable()
         {
@@ -19,8 +19,7 @@ namespace PointerGesture
         }
         private void OnGestureCompleted()
         {
-            eventToRaised.RaiseEvent();
+            eventToRaise.RaiseEvent();
         }
-
     }
 }

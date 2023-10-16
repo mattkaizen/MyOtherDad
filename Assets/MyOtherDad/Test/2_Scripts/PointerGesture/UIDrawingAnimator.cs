@@ -29,7 +29,7 @@ namespace PointerGesture
 
             foreach (var pointerGestureChecker in pointerGestureCheckers)
             {
-                pointerGestureChecker.GestureCompleted += OnGestureCompleted;
+                pointerGestureChecker.GestureCompleted -= OnGestureCompleted;
             }
         }
 
