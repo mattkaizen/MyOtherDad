@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Player
 {
-    public class PlayerObjectInteraction : MonoBehaviour
+    public class PlayerContinuousObjectInteraction : MonoBehaviour
     {
         [SerializeField] private InputReaderData inputReader;
         [SerializeField] private float rayDistance;
