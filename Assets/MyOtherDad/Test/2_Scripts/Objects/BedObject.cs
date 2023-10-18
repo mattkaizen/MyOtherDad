@@ -36,7 +36,6 @@ namespace Objects
 
         public void Interact()
         {
-            Debug.Log("Beds");
             _isBeingUsed = true;
             interactingWithBed.RaiseEvent(this);
         }

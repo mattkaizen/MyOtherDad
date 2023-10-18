@@ -1,4 +1,5 @@
-﻿using Data;
+﻿using System;
+using Data;
 using UnityEngine;
 
 namespace Tasks
@@ -18,6 +19,13 @@ namespace Tasks
             eventToCompleteBreakfastTask.EventRaised += OnEventToCompleteBreakfastTaskRaised;
             eventToStartBreakfastTask.EventRaised += OnEventToStartBreakfastTaskRaised;
             eventToStopBreakfastTask.EventRaised += OnEventToStopBreakfastTaskRaised;
+        }
+
+        private void OnDisable()
+        {
+            eventToCompleteBreakfastTask.EventRaised -= OnEventToCompleteBreakfastTaskRaised;
+            eventToStartBreakfastTask.EventRaised -= OnEventToStartBreakfastTaskRaised;
+            eventToStopBreakfastTask.EventRaised -= OnEventToStopBreakfastTaskRaised;
         }
 
         private void OnEventToStopBreakfastTaskRaised()

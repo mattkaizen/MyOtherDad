@@ -16,7 +16,7 @@ namespace Tasks
             return tasksToCheck.All(task => task.IsCompleted);
         }
 
-        private IEnumerator WaitForAllTaskCompleted()
+        private IEnumerator WaitForAllTaskCompletedRoutine()
         {
             yield return new WaitUntil(AreAllTaskCompleted);
             allTaskAreCompleted.RaiseEvent();
