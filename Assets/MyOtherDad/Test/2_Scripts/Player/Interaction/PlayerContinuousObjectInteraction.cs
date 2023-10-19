@@ -28,7 +28,7 @@ namespace Player
             RayCastToInteractiveObject();
         }
 
-        private void TryInteract(Transform transformToTryInteract)
+        private void TryInteract(Transform transformToTryInteract) //TODO: En vez de interactuar, tal vez deba intentar cambiar la camara
         {
             if (!transformToTryInteract.TryGetComponent<IContinuousInteractable>(out var newContinuousInteractableObject)) return;
             if (newContinuousInteractableObject.IsBeingUsed) return;

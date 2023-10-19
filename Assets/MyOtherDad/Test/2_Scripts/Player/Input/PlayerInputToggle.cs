@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 
 namespace Player
 {
-    public class PlayerInputToggle : MonoBehaviour
+    public class PlayerInputToggle : MonoBehaviour //TODO: tal vez deba reaccionar a unos enum y desactivar x cosas del player
     {
         [Header("Inputs"), SerializeField] private InputReaderData inputReader;
         [SerializeField] private InputActionReference lookAsset;
@@ -17,6 +17,8 @@ namespace Player
         [Space, SerializeField] private VoidEventChannelData enablingToNewCamera;
         [SerializeField] private VoidEventChannelData bedCameraLive;
         [SerializeField] private VoidEventChannelData disablingBedCamera;
+        [Space, SerializeField] private VoidEventChannelData workingDeskCameraLive;
+        [SerializeField] private VoidEventChannelData disablingWorkingDeskCamera;
         [Space, SerializeField] private VoidEventChannelData drawingTableCameraLive;
 
 
@@ -30,6 +32,8 @@ namespace Player
             drawingTableCameraLive.EventRaised += OnDrawingTableCameraLive;
 
             bedCameraLive.EventRaised += OnBedCameraLive;
+            workingDeskCameraLive.EventRaised += OnWorkingDeskCameraLive;
+            disablingWorkingDeskCamera.EventRaised += OnDisablingWorkingDeskCamera;
             disablingBedCamera.EventRaised += OnDisablingBedCamera;
         }
 
@@ -99,6 +103,17 @@ namespace Player
         private void OnDisablingBedCamera()
         {
             DisableInput(lookAsset.action);
+        }
+
+        private void OnDisablingWorkingDeskCamera()
+        {
+            DisableInput(lookAsset.action);
+        }
+
+        private void OnWorkingDeskCameraLive()
+        {
+            EnableInput(lookAsset.action);
+            EnableInput(inputReader.GetUp);
         }
 
         private void OnDrawingTableCameraLive()

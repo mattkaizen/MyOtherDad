@@ -3,13 +3,11 @@ using UnityEngine;
 
 namespace Player
 {
-    public class PlayerCinematicObjectInteraction : MonoBehaviour
+    public class PlayerObjectInteraction : MonoBehaviour
     {
         [SerializeField] private InputReaderData inputReader;
         [SerializeField] private float rayDistance;
         [SerializeField] private LayerMask layerMask;
-
-        private IContinuousInteractable currentContinuousInteractableObject;
 
         private void Awake()
         {

@@ -1,7 +1,8 @@
 ﻿namespace Interfaces
 {
-    public interface IContinuousInteractable : IInteractable
+    public interface IContinuousInteractable
     {
         bool IsBeingUsed { get; set; }
+        void Interact();
     }
 }
