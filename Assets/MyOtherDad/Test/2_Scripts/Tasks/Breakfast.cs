@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Tasks
 {
-    public class Breakfast : Task
+    public class Breakfast : MonoBehaviour, ITask
     {
         [SerializeField] private VoidEventChannelData eventToCompleteBreakfastTask;
         [SerializeField] private VoidEventChannelData eventToStartBreakfastTask;
@@ -54,6 +54,18 @@ namespace Tasks
 
             IsStarted = false;
             breakfastTaskStopped.RaiseEvent();
+        }
+
+        public bool IsCompleted { get; set; }
+        public bool IsStarted { get; set; }
+        public void StartTask()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void CompleteTask()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

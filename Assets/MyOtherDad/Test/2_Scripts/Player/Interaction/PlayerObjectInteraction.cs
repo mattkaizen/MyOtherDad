@@ -31,6 +31,7 @@ namespace Player
             if (Physics.Raycast(transform.position, transform.forward, out var hitInfo,
                     rayDistance, layerMask, QueryTriggerInteraction.Ignore))
             {
+                Debug.Log($"Interaction with {transform.name}");
                 TryInteract(hitInfo.transform);
             }
         }

@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Tasks
 {
-    public class Drawing : Task
+    public class Drawing : MonoBehaviour, ITask
     {
         [SerializeField] private VoidEventChannelData eventToCompleteDrawingTask;
         [SerializeField] private VoidEventChannelData eventToStartDrawingTask;
@@ -18,6 +18,18 @@ namespace Tasks
             eventToCompleteDrawingTask.EventRaised += OnEventToCompleteDrawingTaskRaised;
             eventToStartDrawingTask.EventRaised += OnEventToStartDrawingTaskRaised;
             eventToStopDrawingTask.EventRaised += OnEventToStopDrawingTaskRaised;
+        }
+        
+        public bool IsCompleted { get; set; }
+        public bool IsStarted { get; set; }
+        public void StartTask()
+        {
+            IsStarted = true;
+        }
+
+        public void CompleteTask()
+        {
+            IsCompleted = true;
         }
 
         private void OnEventToStopDrawingTaskRaised()
@@ -48,5 +60,7 @@ namespace Tasks
             IsStarted = false;
             drawingTaskStopped.RaiseEvent();
         }
+
+
     }
 }

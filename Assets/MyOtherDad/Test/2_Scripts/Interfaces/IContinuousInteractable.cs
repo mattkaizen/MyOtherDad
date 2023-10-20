@@ -4,5 +4,6 @@
     {
         bool IsBeingUsed { get; set; }
         void Interact();
+        // void SwitchCollider();
     }
 }

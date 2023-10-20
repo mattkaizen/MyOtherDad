@@ -22,6 +22,9 @@ namespace Objects
         private void OnTimelineStopped(PlayableDirector obj)
         {
             timelineStoppedEvent.RaiseEvent();
+            
+            if(!canBeReUsed)
+                gameObject.SetActive(false);
         }
 
         private void OnTimelineStarted(PlayableDirector obj)
@@ -31,10 +34,8 @@ namespace Objects
 
         public void Interact()
         {
-            if (!canBeReUsed) return;
-            
-            canBeReUsed = false;
             playableDirector.Play();
+            Debug.Log("Interact with CinematicObject");
         }
     }
 }
