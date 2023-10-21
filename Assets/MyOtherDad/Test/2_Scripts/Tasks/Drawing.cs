@@ -5,13 +5,27 @@ namespace Tasks
 {
     public class Drawing : MonoBehaviour, ITask
     {
+        public bool IsCompleted
+        {
+            get => _isCompleted;
+            set => _isCompleted = value;
+        }
+
+        public bool IsStarted
+        {
+            get => _isStarted;
+            set => _isStarted = value;
+        }
+
         [SerializeField] private VoidEventChannelData eventToCompleteDrawingTask;
         [SerializeField] private VoidEventChannelData eventToStartDrawingTask;
         [SerializeField] private VoidEventChannelData eventToStopDrawingTask;
-        [Space]
-        [SerializeField] private VoidEventChannelData drawingTaskCompleted;
+        [Space] [SerializeField] private VoidEventChannelData drawingTaskCompleted;
         [SerializeField] private VoidEventChannelData drawingTaskStarted;
         [SerializeField] private VoidEventChannelData drawingTaskStopped;
+
+        private bool _isCompleted;
+        private bool _isStarted;
 
         private void OnEnable()
         {
@@ -19,9 +33,7 @@ namespace Tasks
             eventToStartDrawingTask.EventRaised += OnEventToStartDrawingTaskRaised;
             eventToStopDrawingTask.EventRaised += OnEventToStopDrawingTaskRaised;
         }
-        
-        public bool IsCompleted { get; set; }
-        public bool IsStarted { get; set; }
+
         public void StartTask()
         {
             IsStarted = true;
@@ -60,7 +72,5 @@ namespace Tasks
             IsStarted = false;
             drawingTaskStopped.RaiseEvent();
         }
-
-
     }
 }

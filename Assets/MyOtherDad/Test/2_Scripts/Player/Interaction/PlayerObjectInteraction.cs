@@ -22,7 +22,8 @@ namespace Player
         private void TryInteract(Transform transformToTryInteract)
         {
             if (!transformToTryInteract.TryGetComponent<IInteractable>(out var interactableObject)) return;
-            
+            Debug.Log($"Interaction with {transformToTryInteract.name}");
+
             interactableObject.Interact();
         }
 
@@ -31,7 +32,6 @@ namespace Player
             if (Physics.Raycast(transform.position, transform.forward, out var hitInfo,
                     rayDistance, layerMask, QueryTriggerInteraction.Ignore))
             {
-                Debug.Log($"Interaction with {transform.name}");
                 TryInteract(hitInfo.transform);
             }
         }

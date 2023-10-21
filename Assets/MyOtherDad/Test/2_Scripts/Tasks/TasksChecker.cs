@@ -13,13 +13,16 @@ namespace Tasks
         [SerializeField] private List<GameObject> tasksPrefabToCheck;
 
         private List<ITask> _tasksToCheck = new List<ITask>();
+
         private void Start()
         {
-            GetTasks();
-            StartCoroutine(WaitForAllTaskCompletedRoutine());
+            if (TryGetTasks())
+            {
+                StartCoroutine(WaitForAllTaskCompletedRoutine());
+            }
         }
 
-        private void GetTasks()
+        private bool TryGetTasks()
         {
             foreach (var taskPrefab in tasksPrefabToCheck)
             {
@@ -28,6 +31,10 @@ namespace Tasks
                     _tasksToCheck.Add(task);
                 }
             }
+            
+            bool hasTaskToCheck = _tasksToCheck.Count != 0;
+
+            return hasTaskToCheck;
         }
 
         private bool AreAllTaskCompleted()
@@ -38,7 +45,6 @@ namespace Tasks
         private IEnumerator WaitForAllTaskCompletedRoutine()
         {
             yield return new WaitUntil(AreAllTaskCompleted);
-            Debug.Log("All tasks completed");
             allTaskAreCompleted.RaiseEvent();
         }
     }
