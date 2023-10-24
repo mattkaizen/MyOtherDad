@@ -1,5 +1,6 @@
 ﻿using Data;
 using DG.Tweening;
+using JetBrains.Annotations;
 using UnityEngine;
 
 namespace Effects
@@ -62,11 +63,14 @@ namespace Effects
             FadeScreenOut();
         }
 
-        private void FadeScreenIn()
+        [UsedImplicitly]
+        public void FadeScreenIn()
         {
             screenFade.DOFloat(maxShaderValue, _edge1, fadeOutDuration).SetEase(fadeInEase);
         }
-        private void FadeScreenOut()
+        
+        [UsedImplicitly]
+        public void FadeScreenOut()
         {
             screenFade.DOFloat(minShaderValue, _edge1, fadeInDuration).SetEase(fadeOutEase);
         }
