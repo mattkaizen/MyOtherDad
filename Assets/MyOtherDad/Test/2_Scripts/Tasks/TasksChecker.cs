@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Data;
@@ -13,16 +12,20 @@ namespace Tasks
         [SerializeField] private List<GameObject> tasksPrefabToCheck;
 
         private List<ITask> _tasksToCheck = new List<ITask>();
+        private void Awake()
+        {
+            TryGetTasks();
+        }
 
         private void Start()
         {
-            if (TryGetTasks())
+            if(HaveTasksToCheck())
             {
                 StartCoroutine(WaitForAllTaskCompletedRoutine());
             }
         }
 
-        private bool TryGetTasks()
+        private void TryGetTasks()
         {
             foreach (var taskPrefab in tasksPrefabToCheck)
             {
@@ -31,10 +34,11 @@ namespace Tasks
                     _tasksToCheck.Add(task);
                 }
             }
-            
-            bool hasTaskToCheck = _tasksToCheck.Count != 0;
+        }
 
-            return hasTaskToCheck;
+        private bool HaveTasksToCheck()
+        {
+            return _tasksToCheck.Count != 0;
         }
 
         private bool AreAllTaskCompleted()

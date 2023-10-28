@@ -1,4 +1,5 @@
-﻿using Data;
+﻿using System;
+using Data;
 using UnityEngine;
 
 namespace Objects
@@ -15,6 +16,12 @@ namespace Objects
         {
             eventToEnableGameObject.EventRaised += OnEventToEnableGameObjectRaised;
             eventToDisableGameObject.EventRaised += OnEventToDisableGameObjectRaised;
+        }
+
+        private void OnDisable()
+        {
+            eventToEnableGameObject.EventRaised -= OnEventToEnableGameObjectRaised;
+            eventToDisableGameObject.EventRaised -= OnEventToDisableGameObjectRaised;
         }
 
         private void OnEventToDisableGameObjectRaised()

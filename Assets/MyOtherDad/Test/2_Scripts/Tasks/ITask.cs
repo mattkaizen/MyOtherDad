@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-namespace Tasks
+﻿namespace Tasks
 {
     public interface ITask
     {
