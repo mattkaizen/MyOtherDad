@@ -11,6 +11,7 @@ namespace Player
 
         private IContinuousInteractable currentContinuousInteractableObject;
 
+
         private void Awake()
         {
             inputReader.Interacted += OnInteracted;
@@ -28,14 +29,14 @@ namespace Player
             RayCastToInteractiveObject();
         }
 
-        private bool TryInteract(Transform transformToTryInteract) //TODO: En vez de interactuar, tal vez deba intentar cambiar la camara
+        private bool TryInteract(Transform transformToTryInteract)
         {
-            if (!transformToTryInteract.TryGetComponent<IContinuousInteractable>(out var newContinuousInteractableObject)) return false;
+            if (!transformToTryInteract.TryGetComponent<IContinuousInteractable>(
+                    out var newContinuousInteractableObject)) return false;
             if (newContinuousInteractableObject.IsBeingUsed) return false;
 
-            currentContinuousInteractableObject = newContinuousInteractableObject;
+            SetCurrentContinuousInteractable(newContinuousInteractableObject);
             newContinuousInteractableObject.Interact();
-            Debug.Log($"Interacted {transformToTryInteract.name}");
             return true;
         }
 
@@ -52,6 +53,7 @@ namespace Player
                 TryInteract(hitInfo.transform);
             }
         }
+
         private void RaycastAll()
         {
             RaycastHit[] hits;
@@ -59,9 +61,13 @@ namespace Player
 
             foreach (var hit in hits)
             {
-                if(TryInteract(hit.transform)) return;
+                if (TryInteract(hit.transform)) return;
             }
+        }
 
+        public void SetCurrentContinuousInteractable(IContinuousInteractable newContinuousInteractable)
+        {
+            currentContinuousInteractableObject = newContinuousInteractable;
         }
     }
 }

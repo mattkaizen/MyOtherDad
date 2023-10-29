@@ -70,7 +70,7 @@ namespace Player
             EnableInput(inputReader.GetUp);
         }
 
-        private void DisablePlayerInput()
+        public void DisablePlayerInput()
         {
             DisableInput(inputReader.Look);
             DisableInput(inputReader.Move);

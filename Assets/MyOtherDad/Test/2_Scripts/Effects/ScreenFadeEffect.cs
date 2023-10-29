@@ -31,6 +31,9 @@ namespace Effects
             newCameraLive.EventRaised += OnNewCameraLive;
             enablingPlayerCamera.EventRaised += OnEnablingPlayerCamera;
             playerCameraLive.EventRaised += OnPlayerCameraLive;
+            
+            screenFade.SetFloat(_edge1, maxShaderValue);
+
         }
 
         private void OnDisable()

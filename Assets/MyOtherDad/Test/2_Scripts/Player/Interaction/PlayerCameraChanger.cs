@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿    using System.Collections;
 using System.Collections.Generic;
 using Data;
 using Interfaces;
@@ -22,7 +22,7 @@ namespace Player
         [SerializeField] private VoidEventChannelData enablingNewCamera;
         [SerializeField] private VoidEventChannelData newCameraLive;
 
-        private static IChangeableCamera _currentChangeableCamera;
+        private IChangeableCamera _currentChangeableCamera;
         private IEnumerator _transitionRoutine;
         private const int LiveCameraPriority = 11;
         private const int StandByCameraPriority = 9;
@@ -83,7 +83,7 @@ namespace Player
             playerCameraLive.RaiseEvent();
         }
         
-        private void SetLiveNewCamera(IChangeableCamera changeableCamera)
+        public void SetLiveNewCamera(IChangeableCamera changeableCamera)
         {
             changeableCamera.Camera.enabled = true;
             changeableCamera.Camera.Priority = LiveCameraPriority;

@@ -5,31 +5,22 @@ namespace Tasks
 {
     public class Breakfast : MonoBehaviour, ITask
     {
-        [SerializeField] private VoidEventChannelData eventToCompleteBreakfastTask;
         [SerializeField] private VoidEventChannelData eventToStartBreakfastTask;
-        [SerializeField] private VoidEventChannelData eventToStopBreakfastTask;
+        [SerializeField] private VoidEventChannelData eventToCompleteBreakfastTask;
         [Space]
-        [SerializeField] private VoidEventChannelData breakfastTaskCompleted;
         [SerializeField] private VoidEventChannelData breakfastTaskStarted;
-        [SerializeField] private VoidEventChannelData breakfastTaskStopped;
+        [SerializeField] private VoidEventChannelData breakfastTaskCompleted;
 
         private void OnEnable()
         {
             eventToCompleteBreakfastTask.EventRaised += OnEventToCompleteBreakfastTaskRaised;
             eventToStartBreakfastTask.EventRaised += OnEventToStartBreakfastTaskRaised;
-            eventToStopBreakfastTask.EventRaised += OnEventToStopBreakfastTaskRaised;
         }
 
         private void OnDisable()
         {
             eventToCompleteBreakfastTask.EventRaised -= OnEventToCompleteBreakfastTaskRaised;
             eventToStartBreakfastTask.EventRaised -= OnEventToStartBreakfastTaskRaised;
-            eventToStopBreakfastTask.EventRaised -= OnEventToStopBreakfastTaskRaised;
-        }
-
-        private void OnEventToStopBreakfastTaskRaised()
-        {
-            TryStopTask();
         }
 
         private void OnEventToStartBreakfastTaskRaised()
@@ -46,14 +37,6 @@ namespace Tasks
 
             CompleteTask();
             breakfastTaskCompleted.RaiseEvent();
-        }
-
-        private void TryStopTask()
-        {
-            if (IsCompleted) return;
-
-            IsStarted = false;
-            breakfastTaskStopped.RaiseEvent();
         }
 
         public bool IsCompleted { get; set; }
