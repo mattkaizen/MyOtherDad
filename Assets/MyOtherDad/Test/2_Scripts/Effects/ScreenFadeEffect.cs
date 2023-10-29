@@ -9,20 +9,15 @@ namespace Effects
     {
         private readonly int _edge1 = Shader.PropertyToID("_Edge1");
         [SerializeField] private Material screenFade;
-        [Space]
-        [SerializeField] private float maxShaderValue;
+        [Space] [SerializeField] private float maxShaderValue;
         [SerializeField] private float minShaderValue;
-        [Space]
-        [SerializeField] private float fadeInDuration;
+        [Space] [SerializeField] private float fadeInDuration;
         [SerializeField] private float fadeOutDuration;
-        [Space]
-        [SerializeField] private Ease fadeInEase;
+        [Space] [SerializeField] private Ease fadeInEase;
         [SerializeField] private Ease fadeOutEase;
-        [Space]
-        [SerializeField] private VoidEventChannelData enablingNewCamera;
+        [Space] [SerializeField] private VoidEventChannelData enablingNewCamera;
         [SerializeField] private VoidEventChannelData newCameraLive;
-        [Space]
-        [SerializeField] private VoidEventChannelData enablingPlayerCamera;
+        [Space] [SerializeField] private VoidEventChannelData enablingPlayerCamera;
         [SerializeField] private VoidEventChannelData playerCameraLive;
 
         private void OnEnable()
@@ -31,9 +26,8 @@ namespace Effects
             newCameraLive.EventRaised += OnNewCameraLive;
             enablingPlayerCamera.EventRaised += OnEnablingPlayerCamera;
             playerCameraLive.EventRaised += OnPlayerCameraLive;
-            
-            screenFade.SetFloat(_edge1, maxShaderValue);
 
+            screenFade.SetFloat(_edge1, maxShaderValue);
         }
 
         private void OnDisable()
@@ -42,7 +36,7 @@ namespace Effects
             newCameraLive.EventRaised -= OnNewCameraLive;
             enablingPlayerCamera.EventRaised -= OnEnablingPlayerCamera;
             playerCameraLive.EventRaised -= OnPlayerCameraLive;
-            
+
             screenFade.SetFloat(_edge1, minShaderValue);
         }
 
@@ -71,11 +65,12 @@ namespace Effects
         {
             screenFade.DOFloat(maxShaderValue, _edge1, fadeOutDuration).SetEase(fadeInEase);
         }
-        
+
         [UsedImplicitly]
-        public void FadeScreenOut()
+        public Tween FadeScreenOut()
         {
-            screenFade.DOFloat(minShaderValue, _edge1, fadeInDuration).SetEase(fadeOutEase);
+            Tween fadeOut = screenFade.DOFloat(minShaderValue, _edge1, fadeInDuration).SetEase(fadeOutEase);
+            return fadeOut;
         }
     }
 }

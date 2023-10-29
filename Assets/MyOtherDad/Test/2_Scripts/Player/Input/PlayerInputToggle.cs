@@ -21,7 +21,6 @@ namespace Player
         [SerializeField] private VoidEventChannelData disablingWorkingDeskCamera;
         [Space, SerializeField] private VoidEventChannelData drawingTableCameraLive;
 
-
         private void Awake()
         {
             playerCameraLive.EventRaised += OnPlayerCameraLive;
@@ -35,6 +34,7 @@ namespace Player
             workingDeskCameraLive.EventRaised += OnWorkingDeskCameraLive;
             disablingWorkingDeskCamera.EventRaised += OnDisablingWorkingDeskCamera;
             disablingBedCamera.EventRaised += OnDisablingBedCamera;
+            
         }
 
 
@@ -63,20 +63,18 @@ namespace Player
 
         private void EnablePlayerInput()
         {
-            EnableInput(inputReader.Look);
-            EnableInput(inputReader.Move);
-            EnableInput(inputReader.Run);
-            EnableInput(inputReader.Interact);
-            EnableInput(inputReader.GetUp);
+            foreach (var inputAction in inputReader.playerInputActions)
+            {
+                EnableInput(inputAction);
+            }
         }
 
         public void DisablePlayerInput()
         {
-            DisableInput(inputReader.Look);
-            DisableInput(inputReader.Move);
-            DisableInput(inputReader.Run);
-            DisableInput(inputReader.Interact);
-            DisableInput(inputReader.GetUp);
+            foreach (var inputAction in inputReader.playerInputActions)
+            {
+                DisableInput(inputAction);
+            }
         }
 
         private void OnPlayerCameraLive()

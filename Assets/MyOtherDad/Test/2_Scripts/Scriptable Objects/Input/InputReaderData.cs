@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
@@ -27,6 +28,8 @@ public class InputReaderData : ScriptableObject, GameControls.IPlayerActions
     private InputAction _run;
     private InputAction _paint;
 
+    public List<InputAction> playerInputActions = new List<InputAction>();
+
     private void OnEnable()
     {
         _playerInputActions = new GameControls();
@@ -45,6 +48,14 @@ public class InputReaderData : ScriptableObject, GameControls.IPlayerActions
         _move.performed += OnMove;
         _run.performed += OnRun;
         _paint.performed += OnPainting;
+        
+        playerInputActions.Add(_interact);
+        playerInputActions.Add(_getUp);
+        playerInputActions.Add(_move);
+        playerInputActions.Add(_look);
+        playerInputActions.Add(_run);
+        playerInputActions.Add(_paint);
+
     }
 
     private void OnDisable()

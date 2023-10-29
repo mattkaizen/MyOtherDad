@@ -1,4 +1,5 @@
-﻿using Effects;
+﻿using DG.Tweening;
+using Effects;
 using Interfaces;
 using Objects;
 using UnityEngine;
@@ -32,7 +33,10 @@ namespace Player
             playerInputToggle.DisablePlayerInput();
             playerContinuousObjectInteraction.SetCurrentContinuousInteractable(newContinuousInteractable);
             playerCameraChanger.SetLiveNewCamera(newChangeableCamera);
-            screenFadeEffect.FadeScreenOut();
+            screenFadeEffect.FadeScreenOut().OnComplete(() =>
+            {
+                
+            });
         }
     }
 }

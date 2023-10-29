@@ -47,7 +47,7 @@ namespace Player
         private readonly float _minVerticalMouseRotation = -65f;
         private readonly float _maxVerticalMouseRotation = 60f;
         private float _mouseHorizontalInput;
-        private float _mouseVerticaInput;
+        private float _mouseVerticalInput;
 
         private bool _enableMovement = true;
         private bool _enableLook = true;
@@ -63,6 +63,8 @@ namespace Player
             inputReader.Moved += OnPlayerMove;
             inputReader.Looked += OnPlayerLook;
             inputReader.Ran += OnPlayerRun;
+
+            _mouseVerticalInput = -playerCam.localEulerAngles.x;
         }
 
         private void Update()
@@ -116,11 +118,10 @@ namespace Player
             _smoothLookInput = Vector2.SmoothDamp(_smoothLookInput, _playerLookInput, ref _smoothLookCurrentVelocity, smoothLookInputSpeed);
         
             _mouseHorizontalInput = _mouseHorizontalSensibility * _smoothLookInput.x;
-            _mouseVerticaInput += _mouseVerticalSensibility * _smoothLookInput.y;
+            _mouseVerticalInput += _mouseVerticalSensibility * _smoothLookInput.y;
         
-            _mouseVerticaInput = Mathf.Clamp(_mouseVerticaInput, _minVerticalMouseRotation, _maxVerticalMouseRotation);
-
-            playerCam.localEulerAngles = new Vector3(-_mouseVerticaInput, 0, 0);
+            _mouseVerticalInput = Mathf.Clamp(_mouseVerticalInput, _minVerticalMouseRotation, _maxVerticalMouseRotation);
+            playerCam.localEulerAngles = new Vector3(-_mouseVerticalInput, 0, 0);
 
             transform.Rotate(0, _mouseHorizontalInput, 0);
         }
