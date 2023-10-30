@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using Data;
-using DG.Tweening;
 using Domain;
 using Effects;
 using UnityEngine;
@@ -61,7 +60,6 @@ namespace Player
             SetStandbyCurrentCamera();
             screenFadeEffect.FadeScreenOut();
             playerInputToggle.EnablePlayerInput(delayToEnablePlayerInput);
-
             playerCameraLive.RaiseEvent();
         }
 
