@@ -707,8 +707,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3037693369047066443}
-  - component: {fileID: 4764540583999614574}
   - component: {fileID: 7961398288311801630}
+  - component: {fileID: 3392076143737142181}
   m_Layer: 0
   m_Name: Tablero De Dibujo
   m_TagString: Untagged
@@ -735,25 +735,8 @@ Transform:
   - {fileID: 5976851707386457553}
   - {fileID: 846208261628423709}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 25
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4764540583999614574
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3984949035304689383}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a8c2553f39e4267a08bc1e0c485f6a7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentCamera: {fileID: 134662995707569091}
-  enablingDrawingTableCamera: {fileID: 11400000, guid: c8def7186b545bd4b8656f151fcc6385, type: 2}
-  drawingTableCameraLive: {fileID: 11400000, guid: 8079b512e3a6047418be8d59a6c17261, type: 2}
-  disablingDrawingTableCamera: {fileID: 11400000, guid: e62735c2b79b9224c80b825296dd7905, type: 2}
-  interactingWithDrawingTable: {fileID: 11400000, guid: 2b2e64de169551840a693e77b8391453, type: 2}
 --- !u!65 &7961398288311801630
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -775,6 +758,24 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.9880558, y: 0.53453904, z: 0.5227621}
   m_Center: {x: 0.0059720874, y: 0.23273048, z: 0.046384245}
+--- !u!114 &3392076143737142181
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3984949035304689383}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 168468ddbc074341a3422d4856647f23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentCamera: {fileID: 134662995707569091}
+  cameraMovementMode: 1
+  enablingObjectCamera: {fileID: 11400000, guid: c8def7186b545bd4b8656f151fcc6385, type: 2}
+  objectCameraLive: {fileID: 11400000, guid: 8079b512e3a6047418be8d59a6c17261, type: 2}
+  disablingObjectCamera: {fileID: 11400000, guid: e62735c2b79b9224c80b825296dd7905, type: 2}
+  interactingWithObject: {fileID: 11400000, guid: 3bb087c290e94c545921d7b2a3a6d596, type: 2}
 --- !u!1 &5135439001803278989
 GameObject:
   m_ObjectHideFlags: 0

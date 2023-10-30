@@ -248,7 +248,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 2973
+  m_VersionIndex: 2982
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -600,7 +600,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 2973
+  m_VersionIndex: 2979
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -820,6 +820,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7041091715316884407}
+  - component: {fileID: 8014898193742112893}
+  - component: {fileID: 6500967547456248836}
   m_Layer: 0
   m_Name: WorkingDesk
   m_TagString: Untagged
@@ -844,8 +846,46 @@ Transform:
   - {fileID: 5029805439719580760}
   - {fileID: 1291289393371022867}
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &8014898193742112893
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2648045253399855103}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1.1714841}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &6500967547456248836
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2648045253399855103}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 168468ddbc074341a3422d4856647f23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentCamera: {fileID: 2537832184781600111}
+  enablingObjectCamera: {fileID: 11400000, guid: 2431c7d569b16624a882a6afafd4a3a1, type: 2}
+  objectCameraLive: {fileID: 11400000, guid: 149e26d6f197e4047843109050c16436, type: 2}
+  disablingObjectCamera: {fileID: 11400000, guid: ee94d641bb312bf4897284c37192eb71, type: 2}
+  interactingWithObject: {fileID: 11400000, guid: 3f89751872b34434ebc540e14e6d8edd, type: 2}
 --- !u!1 &3904075494390701496
 GameObject:
   m_ObjectHideFlags: 0
@@ -1093,7 +1133,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 2170
+  m_VersionIndex: 2176
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []

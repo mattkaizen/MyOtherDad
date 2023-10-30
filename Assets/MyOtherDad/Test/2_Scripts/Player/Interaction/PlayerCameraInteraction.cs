@@ -6,7 +6,7 @@ namespace Player
     public class PlayerCameraInteraction : MonoBehaviour
     {
         [SerializeField] private InputReaderData inputReader;
-        [SerializeField] private PlayerCameraChanger playerCameraChanger;
+        [SerializeField] private PlayerCameraTransition playerCameraTransition;
         [SerializeField] private float rayDistance;
         [SerializeField] private LayerMask layerMask;
 
@@ -24,7 +24,7 @@ namespace Player
             if (currentInteractableCamera == null) return;
 
             currentInteractableCamera.IsBeingUsed = false;
-            playerCameraChanger.TryToTransitionToPlayerCamera();
+            playerCameraTransition.TryToTransitionToPlayerCamera();
         }
 
         private void OnInteracted()
@@ -40,7 +40,7 @@ namespace Player
 
             SetCurrentContinuousInteractable(newInteractableCamera);
             newInteractableCamera.Interact();
-            playerCameraChanger.StartTransitionToNewCamera(newInteractableCamera);
+            playerCameraTransition.StartTransitionToNewCamera(newInteractableCamera);
             return true;
         }
 

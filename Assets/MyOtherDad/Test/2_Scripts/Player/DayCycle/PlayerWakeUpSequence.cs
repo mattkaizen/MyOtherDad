@@ -9,18 +9,16 @@ namespace Player
     public class PlayerWakeUpSequence : MonoBehaviour
     {
         [SerializeField] private ScreenFadeEffect screenFadeEffect;
-        [SerializeField] private PlayerCameraChanger playerCameraChanger;
+        [SerializeField] private PlayerCameraTransition playerCameraTransition;
         [SerializeField] private PlayerCameraInteraction playerCameraInteraction;
         [SerializeField] private PlayerInputToggle playerInputToggle;
-        [SerializeField] private BedObject cameraChangeableObject;
+        [SerializeField] private CameraInteractableObject cameraChangeableObject;
 
         private IInteractableCamera newInteractableCamera;
-        private IInteractableCamera newContinuousInteractable;
 
         private void Awake()
         {
             newInteractableCamera = cameraChangeableObject.GetComponent<IInteractableCamera>();
-            newContinuousInteractable = cameraChangeableObject.GetComponent<IInteractableCamera>();
         }
 
         private void Start()
@@ -30,10 +28,14 @@ namespace Player
 
         private void WakeUp()
         {
-            playerInputToggle.DisablePlayerInput();
-            playerCameraInteraction.SetCurrentContinuousInteractable(newContinuousInteractable);
-            playerCameraChanger.SetLiveNewCamera(newInteractableCamera);
-            screenFadeEffect.FadeScreenOut();
+            playerInputToggle.DisablePlayerInput(0.0f);
+            playerCameraInteraction.SetCurrentContinuousInteractable(newInteractableCamera);
+            playerCameraTransition.SetLiveNewCamera(newInteractableCamera);
+            screenFadeEffect.FadeScreenOut().OnComplete((() =>
+            {
+                playerInputToggle.EnableCameraObjectInput(newInteractableCamera.CameraInteraction);
+                Debug.Log("Termino");
+            }));
         }
     }
 }

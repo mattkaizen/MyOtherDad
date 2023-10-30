@@ -5,7 +5,7 @@ namespace Domain
 {
     public interface IInteractableCamera : IContinuousInteractable
     {
-        CameraState CameraState { get; }
+        CameraMovementMode CameraInteraction { get; }
         CinemachineVirtualCamera Camera { get; }
         VoidEventChannelData CameraLive { get; }
         VoidEventChannelData EnablingCamera { get; }

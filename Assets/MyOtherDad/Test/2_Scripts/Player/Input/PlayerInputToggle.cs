@@ -1,55 +1,14 @@
-﻿using Data;
+﻿using System.Collections;
+using System.Collections.Generic;
+using Domain;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace Player
 {
-    public class PlayerInputToggle : MonoBehaviour //TODO: tal vez deba reaccionar a unos enum y desactivar x cosas del player
+    public class PlayerInputToggle : MonoBehaviour
     {
         [Header("Inputs"), SerializeField] private InputReaderData inputReader;
-        [SerializeField] private InputActionReference lookAsset;
-
-        [Header("Listen to Event Channels"), Space, SerializeField]
-        private VoidEventChannelData enablingPlayerCamera;
-
-        [SerializeField] private VoidEventChannelData playerCameraLive;
-
-        [Space, SerializeField] private VoidEventChannelData enablingToNewCamera;
-        [SerializeField] private VoidEventChannelData bedCameraLive;
-        [SerializeField] private VoidEventChannelData disablingBedCamera;
-        [Space, SerializeField] private VoidEventChannelData workingDeskCameraLive;
-        [SerializeField] private VoidEventChannelData disablingWorkingDeskCamera;
-        [Space, SerializeField] private VoidEventChannelData drawingTableCameraLive;
-
-        private void Awake()
-        {
-            playerCameraLive.EventRaised += OnPlayerCameraLive;
-            enablingPlayerCamera.EventRaised += OnEnablingPlayerCamera;
-
-            enablingToNewCamera.EventRaised += OnEnablingNewCamera;
-
-            drawingTableCameraLive.EventRaised += OnDrawingTableCameraLive;
-
-            bedCameraLive.EventRaised += OnBedCameraLive;
-            workingDeskCameraLive.EventRaised += OnWorkingDeskCameraLive;
-            disablingWorkingDeskCamera.EventRaised += OnDisablingWorkingDeskCamera;
-            disablingBedCamera.EventRaised += OnDisablingBedCamera;
-            
-        }
-
-
-        private void OnDisable()
-        {
-            playerCameraLive.EventRaised -= OnPlayerCameraLive;
-            enablingPlayerCamera.EventRaised -= OnEnablingPlayerCamera;
-
-            enablingToNewCamera.EventRaised -= OnEnablingNewCamera;
-
-            drawingTableCameraLive.EventRaised -= OnDrawingTableCameraLive;
-
-            bedCameraLive.EventRaised -= OnBedCameraLive;
-            disablingBedCamera.EventRaised -= OnDisablingBedCamera;
-        }
 
         private void EnableInput(InputAction input)
         {
@@ -61,7 +20,16 @@ namespace Player
             input?.Disable();
         }
 
-        private void EnablePlayerInput()
+        public void EnableCameraObjectInput(CameraMovementMode cameraMovementMode)
+        {
+            EnableInput(inputReader.GetUp);
+
+            if (cameraMovementMode == CameraMovementMode.FreeLook)
+            {
+                EnableInput(inputReader.LookAsset);
+            }
+        }
+        public void EnablePlayerInput()
         {
             foreach (var inputAction in inputReader.playerInputActions)
             {
@@ -77,46 +45,37 @@ namespace Player
             }
         }
 
-        private void OnPlayerCameraLive()
+        public void EnablePlayerInput(float delay)
         {
+            StartCoroutine(EnablePlayerInputRoutine(delay));
+        }
+
+        public void DisablePlayerInput(float delay)
+        {
+            StartCoroutine(DisablePlayerInputRoutine(delay));
+        }
+        
+        public void EnableCameraObjectInput(CameraMovementMode cameraMovementMode, float delay)
+        {
+            StartCoroutine(EnableCameraObjectInputRoutine(cameraMovementMode, delay));
+        }
+        
+        private IEnumerator EnableCameraObjectInputRoutine(CameraMovementMode cameraMovementMode, float delay)
+        {
+            yield return new WaitForSeconds(delay);
+            EnableCameraObjectInput(cameraMovementMode);
+        }
+
+        private IEnumerator EnablePlayerInputRoutine(float delay)
+        {
+            yield return new WaitForSeconds(delay);
             EnablePlayerInput();
         }
 
-        private void OnEnablingNewCamera()
+        private IEnumerator DisablePlayerInputRoutine(float delay)
         {
+            yield return new WaitForSeconds(delay);
             DisablePlayerInput();
-        }
-
-        private void OnEnablingPlayerCamera()
-        {
-            DisableInput(inputReader.Look);
-        }
-
-        private void OnBedCameraLive()
-        {
-            EnableInput(lookAsset.action);
-            EnableInput(inputReader.GetUp);
-        }
-
-        private void OnDisablingBedCamera()
-        {
-            DisableInput(lookAsset.action);
-        }
-
-        private void OnDisablingWorkingDeskCamera()
-        {
-            DisableInput(lookAsset.action);
-        }
-
-        private void OnWorkingDeskCameraLive()
-        {
-            EnableInput(lookAsset.action);
-            EnableInput(inputReader.GetUp);
-        }
-
-        private void OnDrawingTableCameraLive()
-        {
-            EnableInput(inputReader.GetUp);
         }
     }
 }

@@ -16,9 +16,12 @@ public class InputReaderData : ScriptableObject, GameControls.IPlayerActions
     
     public InputAction Move => _move;
     public InputAction Look => _look;
+    public InputAction LookAsset => lookAsset.action;
     public InputAction Run => _run;
     public InputAction Interact => _interact;
     public InputAction GetUp => _getUp;
+    
+    [SerializeField] private InputActionReference lookAsset;
     
     private GameControls _playerInputActions;
     private InputAction _interact;
@@ -49,12 +52,15 @@ public class InputReaderData : ScriptableObject, GameControls.IPlayerActions
         _run.performed += OnRun;
         _paint.performed += OnPainting;
         
+        playerInputActions.Clear();
+        
         playerInputActions.Add(_interact);
         playerInputActions.Add(_getUp);
         playerInputActions.Add(_move);
         playerInputActions.Add(_look);
         playerInputActions.Add(_run);
         playerInputActions.Add(_paint);
+        playerInputActions.Add(lookAsset.action);
 
     }
 
@@ -66,6 +72,7 @@ public class InputReaderData : ScriptableObject, GameControls.IPlayerActions
         _run.performed -= OnRun;
         _paint.performed -= OnPainting;
 
+        playerInputActions.Clear();
         _playerInputActions.Player.Disable();
     }
 

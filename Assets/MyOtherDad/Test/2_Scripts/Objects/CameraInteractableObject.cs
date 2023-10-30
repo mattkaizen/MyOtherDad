@@ -2,7 +2,6 @@
 using Data;
 using Domain;
 using UnityEngine;
-using CameraState = Domain.CameraState;
 
 namespace Objects
 {
@@ -14,26 +13,27 @@ namespace Objects
             set => _isBeingUsed = value;
         }
 
-        public CameraState CameraState { get; }
-
         public CinemachineVirtualCamera Camera
         {
             get => currentCamera;
             set => currentCamera = value;
         }
 
+        public CameraMovementMode CameraInteraction => cameraMovementMode;
         public VoidEventChannelData EnablingCamera => enablingObjectCamera;
         public VoidEventChannelData DisablingCamera => disablingObjectCamera;
         public VoidEventChannelData CameraLive => objectCameraLive;
 
         [SerializeField] private CinemachineVirtualCamera currentCamera;
+        [SerializeField] private CameraMovementMode cameraMovementMode;
 
+        [Header("Broadcast to Event Channels")]
+        
         [SerializeField] private VoidEventChannelData enablingObjectCamera;
         [SerializeField] private VoidEventChannelData objectCameraLive;
         [SerializeField] private VoidEventChannelData disablingObjectCamera;
+        [SerializeField] private VoidEventChannelData interactingWithObject;
 
-        [Header("Broadcast to Event Channels")] [SerializeField]
-        private VoidEventChannelData interactingWithObject;
 
         private bool _isBeingUsed;
 
