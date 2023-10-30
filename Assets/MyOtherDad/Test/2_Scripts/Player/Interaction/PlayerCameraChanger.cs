@@ -1,7 +1,7 @@
-﻿    using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using Data;
-using Interfaces;
+using Domain;
 using UnityEngine;
 
 namespace Player
@@ -9,96 +9,71 @@ namespace Player
     public class PlayerCameraChanger : MonoBehaviour
     {
         [SerializeField] private InputReaderData inputReader;
-        
-        [Header("Transition settings")]
-        [SerializeField] private float cameraTransitionDuration;
+
+        [Header("Transition settings")] [SerializeField]
+        private float cameraTransitionDuration;
 
         [Header("Event Channels to Listen"), SerializeField]
         private List<ChangeableCameraEventChannelData> changeableCameraEvents;
 
-        [Header("Broadcast on Event Channels")]
-        [SerializeField] private VoidEventChannelData enablingPlayerCamera;
+        [Header("Broadcast on Event Channels")] [SerializeField]
+        private VoidEventChannelData enablingPlayerCamera;
+
         [SerializeField] private VoidEventChannelData playerCameraLive;
         [SerializeField] private VoidEventChannelData enablingNewCamera;
         [SerializeField] private VoidEventChannelData newCameraLive;
 
-        private IChangeableCamera _currentChangeableCamera;
+        private IInteractableCamera currentInteractableCamera;
         private IEnumerator _transitionRoutine;
         private const int LiveCameraPriority = 11;
         private const int StandByCameraPriority = 9;
-
-
-        private void Awake()
-        {
-            inputReader.GettingUp += OnGettingUp;
-
-            foreach (var changeableCameraEvent in changeableCameraEvents)
-            {
-                changeableCameraEvent.EventRaised += StartTransitionToNewCamera;
-            }
-        }
-
-        private void OnDisable()
-        {
-            inputReader.GettingUp -= OnGettingUp;
-
-            foreach (var changeableCameraEvent in changeableCameraEvents)
-            {
-                changeableCameraEvent.EventRaised -= StartTransitionToNewCamera;
-            }
-        }
-
-        private void OnGettingUp()
-        {
-            TryToTransitionToPlayerCamera();
-        }
-
-        private void TryToTransitionToPlayerCamera()
-        {
-            if (_currentChangeableCamera == null) return;
-            
-            StartCoroutine(TransitionToPlayerCameraRoutine(_currentChangeableCamera));
-        }
-
-        private void StartTransitionToNewCamera(IChangeableCamera changeableCamera)
-        {
-            StartCoroutine(TransitionToNewCameraRoutine(changeableCamera));
-        }
         
-        private IEnumerator TransitionToNewCameraRoutine(IChangeableCamera changeableCamera)
+
+        public void TryToTransitionToPlayerCamera()
         {
-            changeableCamera.EnablingCamera.RaiseEvent();
+            if (currentInteractableCamera == null) return;
+
+            StartCoroutine(TransitionToPlayerCameraRoutine(currentInteractableCamera));
+        }
+
+        public void StartTransitionToNewCamera(IInteractableCamera interactableCamera)
+        {
+            StartCoroutine(TransitionToNewCameraRoutine(interactableCamera));
+        }
+
+        private IEnumerator TransitionToNewCameraRoutine(IInteractableCamera interactableCamera)
+        {
+            interactableCamera.EnablingCamera.RaiseEvent();
             enablingNewCamera.RaiseEvent();
             yield return new WaitForSeconds(cameraTransitionDuration);
-            SetLiveNewCamera(changeableCamera);
+            SetLiveNewCamera(interactableCamera);
             newCameraLive.RaiseEvent();
         }
-        
-        private IEnumerator TransitionToPlayerCameraRoutine(IChangeableCamera currentChangeableCamera)
+
+        private IEnumerator TransitionToPlayerCameraRoutine(IInteractableCamera currentInteractableCamera)
         {
-            currentChangeableCamera.DisablingCamera.RaiseEvent();
+            currentInteractableCamera.DisablingCamera.RaiseEvent();
             enablingPlayerCamera.RaiseEvent();
             yield return new WaitForSeconds(cameraTransitionDuration);
             SetStandbyCurrentCamera();
             playerCameraLive.RaiseEvent();
         }
-        
-        public void SetLiveNewCamera(IChangeableCamera changeableCamera)
+
+        public void SetLiveNewCamera(IInteractableCamera interactableCamera)
         {
-            changeableCamera.Camera.enabled = true;
-            changeableCamera.Camera.Priority = LiveCameraPriority;
-            changeableCamera.CameraLive.RaiseEvent();
-            _currentChangeableCamera = changeableCamera;
+            interactableCamera.Camera.enabled = true;
+            interactableCamera.Camera.Priority = LiveCameraPriority;
+            interactableCamera.CameraLive.RaiseEvent();
+            currentInteractableCamera = interactableCamera;
         }
 
         private void SetStandbyCurrentCamera()
         {
-            if (_currentChangeableCamera == null) return;
+            if (currentInteractableCamera == null) return;
 
-            _currentChangeableCamera.Camera.Priority = StandByCameraPriority;
-            _currentChangeableCamera.Camera.enabled = false;
-            _currentChangeableCamera = null;
+            currentInteractableCamera.Camera.Priority = StandByCameraPriority;
+            currentInteractableCamera.Camera.enabled = false;
+            currentInteractableCamera = null;
         }
-
     }
 }

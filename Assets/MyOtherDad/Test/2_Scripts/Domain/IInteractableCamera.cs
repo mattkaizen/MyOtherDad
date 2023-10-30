@@ -1,10 +1,11 @@
 ﻿using Cinemachine;
 using Data;
 
-namespace Interfaces
+namespace Domain
 {
-    public interface IChangeableCamera
+    public interface IInteractableCamera : IContinuousInteractable
     {
+        CameraState CameraState { get; }
         CinemachineVirtualCamera Camera { get; }
         VoidEventChannelData CameraLive { get; }
         VoidEventChannelData EnablingCamera { get; }

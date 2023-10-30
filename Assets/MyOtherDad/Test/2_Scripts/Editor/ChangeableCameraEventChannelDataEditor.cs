@@ -1,11 +1,11 @@
 ﻿using Data;
-using Interfaces;
+using Domain;
 using UnityEditor;
 
 namespace EditorData
 {
     [CustomEditor(typeof(ChangeableCameraEventChannelData))]
-    public class ChangeableCameraEventChannelDataEditor : GenericEventChannelDataEditor<IChangeableCamera>
+    public class ChangeableCameraEventChannelDataEditor : GenericEventChannelDataEditor<IInteractableCamera>
     {
     }
 }

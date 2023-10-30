@@ -1,15 +1,16 @@
-﻿using Interfaces;
+﻿using Domain;
 using UnityEngine;
 
 namespace Player
 {
-    public class PlayerContinuousObjectInteraction : MonoBehaviour
+    public class PlayerCameraInteraction : MonoBehaviour
     {
         [SerializeField] private InputReaderData inputReader;
+        [SerializeField] private PlayerCameraChanger playerCameraChanger;
         [SerializeField] private float rayDistance;
         [SerializeField] private LayerMask layerMask;
 
-        private IContinuousInteractable currentContinuousInteractableObject;
+        private IInteractableCamera currentInteractableCamera;
 
 
         private void Awake()
@@ -20,8 +21,10 @@ namespace Player
 
         private void OnGettingUp()
         {
-            if (currentContinuousInteractableObject != null)
-                currentContinuousInteractableObject.IsBeingUsed = false;
+            if (currentInteractableCamera == null) return;
+
+            currentInteractableCamera.IsBeingUsed = false;
+            playerCameraChanger.TryToTransitionToPlayerCamera();
         }
 
         private void OnInteracted()
@@ -31,12 +34,13 @@ namespace Player
 
         private bool TryInteract(Transform transformToTryInteract)
         {
-            if (!transformToTryInteract.TryGetComponent<IContinuousInteractable>(
-                    out var newContinuousInteractableObject)) return false;
-            if (newContinuousInteractableObject.IsBeingUsed) return false;
+            if (!transformToTryInteract.TryGetComponent<IInteractableCamera>(
+                    out var newInteractableCamera)) return false;
+            if (newInteractableCamera.IsBeingUsed) return false;
 
-            SetCurrentContinuousInteractable(newContinuousInteractableObject);
-            newContinuousInteractableObject.Interact();
+            SetCurrentContinuousInteractable(newInteractableCamera);
+            newInteractableCamera.Interact();
+            playerCameraChanger.StartTransitionToNewCamera(newInteractableCamera);
             return true;
         }
 
@@ -65,9 +69,9 @@ namespace Player
             }
         }
 
-        public void SetCurrentContinuousInteractable(IContinuousInteractable newContinuousInteractable)
+        public void SetCurrentContinuousInteractable(IInteractableCamera newContinuousInteractable)
         {
-            currentContinuousInteractableObject = newContinuousInteractable;
+            currentInteractableCamera = newContinuousInteractable;
         }
     }
 }

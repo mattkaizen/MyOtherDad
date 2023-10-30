@@ -1,12 +1,14 @@
 ﻿using Cinemachine;
 using Data;
-using Interfaces;
+using Domain;
 using UnityEngine;
+using CameraState = Domain.CameraState;
 
 namespace Objects
 {
-    public class DrawingTableObject : MonoBehaviour, IContinuousInteractable, IChangeableCamera
+    public class DrawingTableObject : MonoBehaviour, IContinuousInteractable, IInteractableCamera
     {
+        public CameraState CameraState { get; }
         public CinemachineVirtualCamera Camera { get => currentCamera; set => currentCamera = value; }
         public VoidEventChannelData EnablingCamera => enablingDrawingTableCamera;
         public VoidEventChannelData CameraLive => drawingTableCameraLive;

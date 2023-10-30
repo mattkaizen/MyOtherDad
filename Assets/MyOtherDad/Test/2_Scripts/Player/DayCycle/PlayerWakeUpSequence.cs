@@ -1,6 +1,6 @@
 ﻿using DG.Tweening;
 using Effects;
-using Interfaces;
+using Domain;
 using Objects;
 using UnityEngine;
 
@@ -10,17 +10,17 @@ namespace Player
     {
         [SerializeField] private ScreenFadeEffect screenFadeEffect;
         [SerializeField] private PlayerCameraChanger playerCameraChanger;
-        [SerializeField] private PlayerContinuousObjectInteraction playerContinuousObjectInteraction;
+        [SerializeField] private PlayerCameraInteraction playerCameraInteraction;
         [SerializeField] private PlayerInputToggle playerInputToggle;
         [SerializeField] private BedObject cameraChangeableObject;
 
-        private IChangeableCamera newChangeableCamera;
-        private IContinuousInteractable newContinuousInteractable;
+        private IInteractableCamera newInteractableCamera;
+        private IInteractableCamera newContinuousInteractable;
 
         private void Awake()
         {
-            newChangeableCamera = cameraChangeableObject.GetComponent<IChangeableCamera>();
-            newContinuousInteractable = cameraChangeableObject.GetComponent<IContinuousInteractable>();
+            newInteractableCamera = cameraChangeableObject.GetComponent<IInteractableCamera>();
+            newContinuousInteractable = cameraChangeableObject.GetComponent<IInteractableCamera>();
         }
 
         private void Start()
@@ -31,12 +31,9 @@ namespace Player
         private void WakeUp()
         {
             playerInputToggle.DisablePlayerInput();
-            playerContinuousObjectInteraction.SetCurrentContinuousInteractable(newContinuousInteractable);
-            playerCameraChanger.SetLiveNewCamera(newChangeableCamera);
-            screenFadeEffect.FadeScreenOut().OnComplete(() =>
-            {
-                
-            });
+            playerCameraInteraction.SetCurrentContinuousInteractable(newContinuousInteractable);
+            playerCameraChanger.SetLiveNewCamera(newInteractableCamera);
+            screenFadeEffect.FadeScreenOut();
         }
     }
 }

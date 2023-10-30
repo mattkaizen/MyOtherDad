@@ -1,17 +1,20 @@
 ﻿using Cinemachine;
 using Data;
-using Interfaces;
+using Domain;
 using UnityEngine;
+using CameraState = Domain.CameraState;
 
 namespace Objects
 {
-    public class BedObject : MonoBehaviour, IContinuousInteractable, IChangeableCamera //TODO: Crear clase generica (algo como "CameraChangeableObject"
+    public class BedObject : MonoBehaviour, IContinuousInteractable, IInteractableCamera //TODO: Crear clase generica (algo como "CameraChangeableObject"
     {
         public bool IsBeingUsed
         {
             get => _isBeingUsed;
             set => _isBeingUsed = value;
         }
+
+        public CameraState CameraState { get; }
 
         public CinemachineVirtualCamera Camera
         {
@@ -31,7 +34,6 @@ namespace Objects
 
         [Header("Broadcast to Event Channels")] [SerializeField]
         private ChangeableCameraEventChannelData interactingWithBed;
-        [SerializeField] private Collider bedCollider;
 
         private bool _isBeingUsed;
 
@@ -39,16 +41,6 @@ namespace Objects
         {
             _isBeingUsed = true;
             interactingWithBed.RaiseEvent(this);
-        }
-
-        public void SwitchCollider()
-        {
-            if (bedCollider == null) return;
-
-            if (bedCollider.enabled)
-            {
-                bedCollider.enabled = false;
-            }
         }
     }
 }

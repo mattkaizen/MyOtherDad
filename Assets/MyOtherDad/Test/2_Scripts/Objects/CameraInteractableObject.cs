@@ -6,7 +6,7 @@ using CameraState = Domain.CameraState;
 
 namespace Objects
 {
-    public class WorkingDeskObject : MonoBehaviour, IContinuousInteractable, IInteractableCamera
+    public class CameraInteractableObject : MonoBehaviour, IInteractableCamera
     {
         public bool IsBeingUsed
         {
@@ -21,23 +21,26 @@ namespace Objects
             get => currentCamera;
             set => currentCamera = value;
         }
-        public VoidEventChannelData EnablingCamera => enablingWorkingDeskCamera;
-        public VoidEventChannelData CameraLive => workingDeskCameraLive;
-        public VoidEventChannelData DisablingCamera => disablingWorkingDeskCamera;
+
+        public VoidEventChannelData EnablingCamera => enablingObjectCamera;
+        public VoidEventChannelData DisablingCamera => disablingObjectCamera;
+        public VoidEventChannelData CameraLive => objectCameraLive;
 
         [SerializeField] private CinemachineVirtualCamera currentCamera;
-        [SerializeField] private VoidEventChannelData enablingWorkingDeskCamera;
-        [SerializeField] private VoidEventChannelData workingDeskCameraLive;
-        [SerializeField] private VoidEventChannelData disablingWorkingDeskCamera;
+
+        [SerializeField] private VoidEventChannelData enablingObjectCamera;
+        [SerializeField] private VoidEventChannelData objectCameraLive;
+        [SerializeField] private VoidEventChannelData disablingObjectCamera;
 
         [Header("Broadcast to Event Channels")] [SerializeField]
-        private ChangeableCameraEventChannelData interactingWithWorkingDesk;
+        private VoidEventChannelData interactingWithObject;
 
         private bool _isBeingUsed;
+
         public void Interact()
         {
             _isBeingUsed = true;
-            interactingWithWorkingDesk.RaiseEvent(this);
+            interactingWithObject.RaiseEvent();
         }
     }
 }
