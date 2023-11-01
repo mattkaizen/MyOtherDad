@@ -23,6 +23,7 @@ namespace Player
         public void EnableCameraObjectInput(CameraMovementMode cameraMovementMode)
         {
             EnableInput(inputReader.GetUp);
+            EnableInput(inputReader.Paint); //TODO: repensar
 
             if (cameraMovementMode == CameraMovementMode.FreeLook)
             {

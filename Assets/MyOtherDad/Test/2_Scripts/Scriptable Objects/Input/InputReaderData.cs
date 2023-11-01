@@ -19,6 +19,7 @@ public class InputReaderData : ScriptableObject, GameControls.IPlayerActions
     public InputAction LookAsset => lookAsset.action;
     public InputAction Run => _run;
     public InputAction Interact => _interact;
+    public InputAction Paint => _paint;
     public InputAction GetUp => _getUp;
     
     [SerializeField] private InputActionReference lookAsset;

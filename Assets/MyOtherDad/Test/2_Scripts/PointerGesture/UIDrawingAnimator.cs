@@ -13,7 +13,7 @@ namespace PointerGesture
         [Space] [SerializeField] private float alphaTweenDuration;
         [SerializeField] private Ease alphaEase;
 
-        private void Awake()
+        private void OnEnable()
         {
             if (pointerGestureCheckers.Count == 0) return;
 
