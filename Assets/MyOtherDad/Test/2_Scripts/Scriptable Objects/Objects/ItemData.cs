@@ -4,9 +4,7 @@ using UnityEngine;
 public class ItemData : ScriptableObject
 {
     public string Name => currentName;
-    public GameObject Prefab => currentPrefab;
         
     [SerializeField] private string currentName;
-    [SerializeField] private GameObject currentPrefab;
 
 }

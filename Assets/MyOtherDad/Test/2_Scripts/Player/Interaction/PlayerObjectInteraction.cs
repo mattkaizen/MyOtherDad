@@ -22,7 +22,6 @@ namespace Player
         private void TryInteract(Transform transformToTryInteract)
         {
             if (!transformToTryInteract.TryGetComponent<IInteractable>(out var interactableObject)) return;
-            Debug.Log($"Interaction with {transformToTryInteract.name}");
 
             interactableObject.Interact();
         }

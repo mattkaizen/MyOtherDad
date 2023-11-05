@@ -3,9 +3,8 @@ using UnityEngine;
 
 namespace Tasks
 {
-    public class Breakfast : MonoBehaviour, ITask
+    public class TakePills : MonoBehaviour, ITask
     {
-        
         public bool IsCompleted
         {
             get => _isCompleted;
@@ -18,38 +17,39 @@ namespace Tasks
             set => _isStarted = value;
         }
         
-        [SerializeField] private VoidEventChannelData eventToCompleteBreakfastTask;
+        [SerializeField] private VoidEventChannelData eventToCompleteTakePill;
         [Space]
-        [SerializeField] private VoidEventChannelData breakfastTaskCompleted;
-
-        private bool _isStarted;
+        [SerializeField] private VoidEventChannelData takePillTaskCompleted;
+        
         private bool _isCompleted;
+        private bool _isStarted;
 
         private void OnEnable()
         {
-            eventToCompleteBreakfastTask.EventRaised += OnEventToCompleteBreakfastTaskRaised;
+            eventToCompleteTakePill.EventRaised += OnEventToCompleteSleepingTaskRaised;
         }
 
         private void OnDisable()
         {
-            eventToCompleteBreakfastTask.EventRaised -= OnEventToCompleteBreakfastTaskRaised;
+            eventToCompleteTakePill.EventRaised -= OnEventToCompleteSleepingTaskRaised;
         }
-
-        private void OnEventToCompleteBreakfastTaskRaised()
+        private void OnEventToCompleteSleepingTaskRaised()
         {
             if (IsCompleted) return;
 
             CompleteTask();
-            breakfastTaskCompleted.RaiseEvent();
+            takePillTaskCompleted.RaiseEvent();
         }
+        
+
         public void StartTask()
         {
-            IsStarted = true;
+            _isStarted = true;
         }
 
         public void CompleteTask()
         {
-            IsCompleted = true;
+            _isCompleted = true;
         }
     }
 }

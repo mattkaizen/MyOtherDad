@@ -51,6 +51,7 @@ namespace Player
             {
                 if (hitInfo.transform.TryGetComponent<IPickable>(out var pickable))
                 {
+                    Debug.Log($"Pickable {pickable}");
                     TryPickup(pickable);
                 }
             }

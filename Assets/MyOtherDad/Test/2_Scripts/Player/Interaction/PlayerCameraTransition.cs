@@ -45,7 +45,7 @@ namespace Player
             screenFadeEffect.FadeScreenIn();
             yield return new WaitForSeconds(cameraTransitionDuration);
             SetLiveNewCamera(interactableCamera);
-            screenFadeEffect.FadeScreenOut();
+            screenFadeEffect.GetFadeScreenOutTween();
             playerInputToggle.EnableCameraObjectInput(interactableCamera.CameraInteraction, delayToEnablePlayerInput);
 
         }
@@ -58,7 +58,7 @@ namespace Player
             screenFadeEffect.FadeScreenIn();
             yield return new WaitForSeconds(cameraTransitionDuration);
             SetStandbyCurrentCamera();
-            screenFadeEffect.FadeScreenOut();
+            screenFadeEffect.GetFadeScreenOutTween();
             playerInputToggle.EnablePlayerInput(delayToEnablePlayerInput);
             playerCameraLive.RaiseEvent();
         }

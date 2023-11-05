@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Player
 {
-    public class PlayerWakeUpSequence : MonoBehaviour
+    public class PlayerWakeUpSequence : MonoBehaviour //Tal vez sea un IAction con un metodo Enable
     {
         [SerializeField] private ScreenFadeEffect screenFadeEffect;
         [SerializeField] private PlayerCameraTransition playerCameraTransition;
@@ -26,15 +26,19 @@ namespace Player
             WakeUp();
         }
 
+        private void SetPlayerOnCamera()
+        {
+            playerCameraInteraction.SetCurrentContinuousInteractable(newInteractableCamera);
+            playerCameraTransition.SetLiveNewCamera(newInteractableCamera);
+        }
+
         private void WakeUp()
         {
             playerInputToggle.DisablePlayerInput(0.0f);
-            playerCameraInteraction.SetCurrentContinuousInteractable(newInteractableCamera);
-            playerCameraTransition.SetLiveNewCamera(newInteractableCamera);
-            screenFadeEffect.FadeScreenOut().OnComplete((() =>
+            SetPlayerOnCamera();
+            screenFadeEffect.GetFadeScreenOutTween().OnComplete((() =>
             {
                 playerInputToggle.EnableCameraObjectInput(newInteractableCamera.CameraInteraction);
-                Debug.Log("Termino");
             }));
         }
     }

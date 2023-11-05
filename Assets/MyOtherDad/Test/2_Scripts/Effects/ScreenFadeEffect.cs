@@ -33,7 +33,11 @@ namespace Effects
         }
 
         [UsedImplicitly]
-        public Tween FadeScreenOut()
+        public void FadeScreenOut()
+        {
+            screenFade.DOFloat(minShaderValue, _edge1, fadeInDuration).SetEase(fadeOutEase);
+        }
+        public Tween GetFadeScreenOutTween()
         {
             Tween fadeOut = screenFade.DOFloat(minShaderValue, _edge1, fadeInDuration).SetEase(fadeOutEase);
             return fadeOut;

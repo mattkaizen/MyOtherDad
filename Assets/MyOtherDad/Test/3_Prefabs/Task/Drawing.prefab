@@ -30,7 +30,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 19
+  m_RootOrder: 25
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4976381945012804941
 MonoBehaviour:
@@ -44,9 +44,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00a522d7a04547d0bda88c03cceeaf31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eventToCompleteDrawingTask: {fileID: 0}
-  eventToStartDrawingTask: {fileID: 0}
-  eventToStopDrawingTask: {fileID: 0}
-  drawingTaskCompleted: {fileID: 0}
-  drawingTaskStarted: {fileID: 0}
-  drawingTaskStopped: {fileID: 0}
+  eventToCompleteDrawingTask: {fileID: 11400000, guid: 7b9f2c8aeaeb53f41a3bebeda83185c2, type: 2}
+  eventToStartDrawingTask: {fileID: 11400000, guid: 8079b512e3a6047418be8d59a6c17261, type: 2}
+  eventToStopDrawingTask: {fileID: 11400000, guid: e62735c2b79b9224c80b825296dd7905, type: 2}
+  drawingTaskCompleted: {fileID: 11400000, guid: 0699d1c2dce0218469990e7ce0a4171a, type: 2}
+  drawingTaskStarted: {fileID: 11400000, guid: d29ed3cc85e3fc449b3ef4a65863e9ce, type: 2}
+  drawingTaskStopped: {fileID: 11400000, guid: 093f78b30b39d1c4e8fb21e457685e37, type: 2}

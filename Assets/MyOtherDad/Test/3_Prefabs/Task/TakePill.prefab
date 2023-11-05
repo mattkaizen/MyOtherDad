@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &2495597488078197573
+--- !u!1 &4980341765949626902
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,41 +8,41 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 7383401519385266492}
-  - component: {fileID: 928870822323114663}
+  - component: {fileID: 7746466017301702678}
+  - component: {fileID: 6816461721984220594}
   m_Layer: 0
-  m_Name: Breakfast
+  m_Name: TakePill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &7383401519385266492
+--- !u!4 &7746466017301702678
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2495597488078197573}
+  m_GameObject: {fileID: 4980341765949626902}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 27
+  m_RootOrder: 28
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &928870822323114663
+--- !u!114 &6816461721984220594
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2495597488078197573}
+  m_GameObject: {fileID: 4980341765949626902}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a81f356a6b21457e8accf6693205690e, type: 3}
+  m_Script: {fileID: 11500000, guid: 19cecb84e007414ba7979889650dcf45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eventToCompleteBreakfastTask: {fileID: 11400000, guid: d7b2b20e2d061d849bd08adadba9f5b4, type: 2}
-  breakfastTaskCompleted: {fileID: 11400000, guid: 455ea16fdf61cf64ca91cb2db29b6672, type: 2}
+  eventToCompleteTakePill: {fileID: 11400000, guid: acf5a0fb10e0b7e45bde87dbbcc34e49, type: 2}
+  takePillTaskCompleted: {fileID: 11400000, guid: 3b3f8bdc228b17246b25b70aa951b2dd, type: 2}

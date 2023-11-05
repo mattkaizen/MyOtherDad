@@ -825,14 +825,13 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 6699637119711959632}
   - {fileID: 7648982503807818567}
   - {fileID: 2867575006091971137}
   - {fileID: 7079111287320189722}
   - {fileID: 5976851707386457553}
   - {fileID: 846208261628423709}
   m_Father: {fileID: 0}
-  m_RootOrder: 25
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &7961398288311801630
 BoxCollider:
@@ -1082,56 +1081,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6988cfcaee6f418485b3fe23c9ac0a25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &6988579947220826048
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6699637119711959632}
-  - component: {fileID: 6300337576261421951}
-  m_Layer: 0
-  m_Name: DrawingTask
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &6699637119711959632
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6988579947220826048}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 3037693369047066443}
-  m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6300337576261421951
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6988579947220826048}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 00a522d7a04547d0bda88c03cceeaf31, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  eventToCompleteDrawingTask: {fileID: 11400000, guid: 7b9f2c8aeaeb53f41a3bebeda83185c2, type: 2}
-  eventToStartDrawingTask: {fileID: 11400000, guid: 8079b512e3a6047418be8d59a6c17261, type: 2}
-  eventToStopDrawingTask: {fileID: 11400000, guid: e62735c2b79b9224c80b825296dd7905, type: 2}
-  drawingTaskCompleted: {fileID: 11400000, guid: 0699d1c2dce0218469990e7ce0a4171a, type: 2}
-  drawingTaskStarted: {fileID: 11400000, guid: d29ed3cc85e3fc449b3ef4a65863e9ce, type: 2}
-  drawingTaskStopped: {fileID: 11400000, guid: 093f78b30b39d1c4e8fb21e457685e37, type: 2}
 --- !u!1 &7124140737661028862
 GameObject:
   m_ObjectHideFlags: 0
