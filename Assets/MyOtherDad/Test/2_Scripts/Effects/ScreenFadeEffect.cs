@@ -26,17 +26,28 @@ namespace Effects
             screenFade.SetFloat(_edge1, minShaderValue);
         }
 
-        [UsedImplicitly]
         public void FadeScreenIn()
         {
-            screenFade.DOFloat(maxShaderValue, _edge1, fadeOutDuration).SetEase(fadeInEase);
+            screenFade.DOFloat(maxShaderValue, _edge1, fadeInDuration).SetEase(fadeInEase);
         }
 
         [UsedImplicitly]
+        public void FadeScreenIn(float fadeDuration)
+        {
+            screenFade.DOFloat(maxShaderValue, _edge1, fadeDuration).SetEase(fadeInEase);
+        }
+        
         public void FadeScreenOut()
         {
-            screenFade.DOFloat(minShaderValue, _edge1, fadeInDuration).SetEase(fadeOutEase);
+            screenFade.DOFloat(minShaderValue, _edge1, fadeOutDuration).SetEase(fadeOutEase);
         }
+
+        [UsedImplicitly]
+        public void FadeScreenOut(float fadeDuration)
+        {
+            screenFade.DOFloat(minShaderValue, _edge1, fadeDuration).SetEase(fadeOutEase);
+        }
+
         public Tween GetFadeScreenOutTween()
         {
             Tween fadeOut = screenFade.DOFloat(minShaderValue, _edge1, fadeInDuration).SetEase(fadeOutEase);
