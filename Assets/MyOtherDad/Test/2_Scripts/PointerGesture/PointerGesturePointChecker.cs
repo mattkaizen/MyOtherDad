@@ -167,5 +167,10 @@ namespace PointerGesture
         {
             return gesturePointsToCheck.All(x => x.WasClicked);
         }
+        
+        public bool IsPointerGestureComplete()
+        {
+            return IsGestureCompleted;
+        }
     }
 }
