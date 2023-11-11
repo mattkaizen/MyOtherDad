@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Data;
@@ -15,6 +16,11 @@ namespace PointerGesture
         private void OnEnable()
         {
             eventToActivatePointerGesture.EventRaised += OnEventToActivatePointerGestureRaised;
+        }
+
+        private void OnDisable()
+        {
+            eventToActivatePointerGesture.EventRaised -= OnEventToActivatePointerGestureRaised;
         }
 
         private void OnEventToActivatePointerGestureRaised()

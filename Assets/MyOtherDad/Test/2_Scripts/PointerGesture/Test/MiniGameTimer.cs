@@ -6,56 +6,37 @@ namespace PointerGesture
 {
     public class MiniGameTimer : MonoBehaviour
     {
-        [Header("Listen to Events Channels")]
-        [SerializeField] private VoidEventChannelData miniGameStarted;
-        [SerializeField] private VoidEventChannelData miniGameStopped;
-        
         [Header("Broadcast on Events Channels")]
         [SerializeField] private IntEventChannelData currentTimeChanged;
         [SerializeField] private VoidEventChannelData timerFinished;
-        [SerializeField] private PointerGestureMiniGamePhaseData miniGameData;
 
         private IEnumerator _timerRoutine;
 
-        private void OnEnable()
-        {
-            miniGameStarted.EventRaised += OnMiniGameStarted;
-            miniGameStopped.EventRaised += OnMiniGameStopped;
-        }
-
-        private void OnMiniGameStarted()
-        {
-            StartTimer();
-        }
-        
-        private void OnMiniGameStopped()
-        {
-            StopTimer();
-        }
-        
-        private IEnumerator RunTimerRoutine()
+        private IEnumerator RunTimerRoutine(int totalTime)
         {
             int secondsPassed = 0;
-            int currentTime = miniGameData.Time;
+            int timeToWait = 1;
+            int currentTime = totalTime;
             
-            while (secondsPassed < miniGameData.Time)
+            while (secondsPassed < totalTime)
             {
-                yield return new WaitForSeconds(1);
+                yield return new WaitForSeconds(timeToWait);
                 secondsPassed++;
-                currentTime -= secondsPassed;
+                currentTime -= timeToWait;
+                Debug.Log($"Seconds passed {secondsPassed} + currentTime {currentTime}");
                 currentTimeChanged.RaiseEvent(currentTime);
             }
             timerFinished.RaiseEvent();
         }
 
-        private void StartTimer()
+        public void StartTimer(int totalTime)
         {
-            _timerRoutine = RunTimerRoutine();
+            _timerRoutine = RunTimerRoutine(totalTime);
 
             StartCoroutine(_timerRoutine);
         }
         
-        private void StopTimer()
+        public void StopTimer()
         {
             StopCoroutine(_timerRoutine);
         }

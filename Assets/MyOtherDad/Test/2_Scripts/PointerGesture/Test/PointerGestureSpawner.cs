@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Data;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -7,17 +8,21 @@ namespace PointerGesture
 {
     public class PointerGestureSpawner : MonoBehaviour
     {
+        [Header("Broadcast on Events Channels")]
+        [SerializeField] private VoidEventChannelData allGesturesCompleted;
+        [SerializeField] private Transform spawnContainer;
+
         private List<PointerGesture> _pointerGestures = new List<PointerGesture>();
-        private List<PointerGesturePointChecker> _pointerGesturePointCheckers = new List<PointerGesturePointChecker>();
 
         private IEnumerator _spawnCoroutine;
+
 
         private GameObject SpawnPointerGesture()
         {
             PointerGesture selectedPointerGesture = GetRandomPointerGesture();
             Vector2 spawnPosition = selectedPointerGesture.GetRandomSpawnPosition();
 
-            var newPointerGesture = Instantiate(selectedPointerGesture, gameObject.transform);
+            var newPointerGesture = Instantiate(selectedPointerGesture, spawnContainer);
 
             newPointerGesture.RectTransform.anchoredPosition = spawnPosition;
 
@@ -27,9 +32,6 @@ namespace PointerGesture
 
         private IEnumerator SpawnPointerGestureRoutine(PointerGestureMiniGamePhaseData pointerGestureMiniGamePhase)
         {
-            InitializePointerGesturePool(pointerGestureMiniGamePhase.GesturePrefabs);
-            // InitializePointerGesturePointChecker(pointerGestureMiniGamePhase.GesturePrefabs);
-
             for (int i = 0; i < pointerGestureMiniGamePhase.AmountPointerGestureToSpawn; i++)
             {
                 GameObject pointerGesture = SpawnPointerGesture();
@@ -39,12 +41,15 @@ namespace PointerGesture
                     yield return new WaitUntil(() => checker.IsPointerGestureComplete());
                 }
             }
+
+            allGesturesCompleted.RaiseEvent();
         }
 
         public void StartSpawnPointerGestures(PointerGestureMiniGamePhaseData pointerGestureMiniGamePhase)
         {
-            _spawnCoroutine = SpawnPointerGestureRoutine(pointerGestureMiniGamePhase);
+            InitializePointerGesturePool(pointerGestureMiniGamePhase.GesturePrefabs);
 
+            _spawnCoroutine = SpawnPointerGestureRoutine(pointerGestureMiniGamePhase);
             StartCoroutine(_spawnCoroutine);
         }
 
@@ -59,28 +64,15 @@ namespace PointerGesture
         {
             _pointerGestures.Clear();
 
-            foreach (var gesturePoint in prefabs)
+            foreach (var prefab in prefabs)
             {
-                if (gesturePoint.TryGetComponent<PointerGesture>(out var pointerGesture))
+                if (prefab.TryGetComponent<PointerGesture>(out var pointerGesture))
                 {
                     _pointerGestures.Add(pointerGesture);
                 }
             }
         }
 
-        private void InitializePointerGesturePointChecker(List<GameObject> prefabs)
-        {
-            _pointerGesturePointCheckers.Clear();
-
-            foreach (var gesturePoint in prefabs)
-            {
-                if (gesturePoint.TryGetComponent<PointerGesturePointChecker>(out var pointerGesturePointChecker))
-                {
-                    _pointerGesturePointCheckers.Add(pointerGesturePointChecker);
-                }
-            }
-        }
-        
         private PointerGesture GetRandomPointerGesture()
         {
             int randomIndex = Random.Range(0, _pointerGestures.Count);

@@ -1,38 +1,35 @@
-﻿using System;
-using System.Collections;
-using Data;
+﻿using Data;
 using UnityEngine;
 
 namespace PointerGesture
 {
-    public class PointerGestureMiniGameController : MonoBehaviour //TODO: Falta MiniGameTimer, el tiempo puede estar ubicado en PointerGesturePhaseData
+    public class PointerGestureMiniGameController : MonoBehaviour
     {
-
         [Header("Broadcast on Events Channels")]
         [SerializeField] private VoidEventChannelData miniGameStarted;
-        [SerializeField] private VoidEventChannelData miniGameStopped;
+        [SerializeField] private VoidEventChannelData miniGameCompleted;
         
         [Header("Listen to Events Channels")]
         [SerializeField] private VoidEventChannelData eventToStartMiniGame;
         [SerializeField] private VoidEventChannelData eventToCompleteMiniGame;
         
-        // [SerializeField] private PointerGestureSpawner pointerGestureSpawner;
-
+        [Space]
+        [SerializeField] private PointerGestureMiniGamePhaseData miniGameData;
+        [SerializeField] private MiniGameTimer miniGameTimer;
+        [SerializeField] private PointerGestureSpawner pointerGestureSpawner;
+        
         private bool hasMiniGameStarted;
         private bool hasMiniGameCompleted;
-
-
-
         private void OnEnable()
         {
             eventToStartMiniGame.EventRaised += OnEventToStartMiniGameRaised;
-            eventToCompleteMiniGame.EventRaised += OnEventToStopMiniGameRaised;
+            eventToCompleteMiniGame.EventRaised += OnEventToCompleteMiniGameRaised;
         }
 
         private void OnDisable()
         {
             eventToStartMiniGame.EventRaised -= OnEventToStartMiniGameRaised;
-            eventToCompleteMiniGame.EventRaised -= OnEventToStopMiniGameRaised;
+            eventToCompleteMiniGame.EventRaised -= OnEventToCompleteMiniGameRaised;
         }
 
         private void OnEventToStartMiniGameRaised()
@@ -40,27 +37,37 @@ namespace PointerGesture
             StartMiniGame();
         }
         
-        private void OnEventToStopMiniGameRaised()
+        private void OnEventToCompleteMiniGameRaised()
         {
-            StopMiniGame();
+            CompleteMiniGame();
         }
 
         private void StartMiniGame()
         {
             if (hasMiniGameStarted) return;
             if (hasMiniGameCompleted) return;
+
+            Debug.Log("MiniGameStarted");
+            hasMiniGameStarted = true;
+            
+            miniGameTimer.StartTimer(miniGameData.TotalTime);
+            pointerGestureSpawner.StartSpawnPointerGestures(miniGameData);
             
             miniGameStarted.RaiseEvent();
-            
-            // pointerGestureSpawner.StartSpawnPointerGestures(pointerGestureMiniGamePhase);
         }
         
-        private void StopMiniGame()
+        private void CompleteMiniGame()
         {
             if(!hasMiniGameStarted) return;
+
+            Debug.Log("MiniGameCompleted");
+
+            hasMiniGameCompleted = true;
             
-            miniGameStopped.RaiseEvent();
-            // pointerGestureSpawner.StopSpawnPointerGestures();
+            miniGameTimer.StopTimer();
+
+            pointerGestureSpawner.StopSpawnPointerGestures();
+            miniGameCompleted.RaiseEvent();
 
         }
 
