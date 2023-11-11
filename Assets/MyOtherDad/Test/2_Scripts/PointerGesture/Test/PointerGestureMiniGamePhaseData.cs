@@ -10,6 +10,9 @@ namespace PointerGesture
 
         public int AmountPointerGestureToSpawn => amountPointerGestureToSpawn;
 
+        public int Time => time;
+
+        [SerializeField] private int time;
         [SerializeField] private int amountPointerGestureToSpawn;
         [SerializeField] private List<GameObject> gesturePrefabs = new List<GameObject>();
     }

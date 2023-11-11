@@ -28,7 +28,7 @@ namespace PointerGesture
         private IEnumerator SpawnPointerGestureRoutine(PointerGestureMiniGamePhaseData pointerGestureMiniGamePhase)
         {
             InitializePointerGesturePool(pointerGestureMiniGamePhase.GesturePrefabs);
-            InitializePointerGesturePointChecker(pointerGestureMiniGamePhase.GesturePrefabs);
+            // InitializePointerGesturePointChecker(pointerGestureMiniGamePhase.GesturePrefabs);
 
             for (int i = 0; i < pointerGestureMiniGamePhase.AmountPointerGestureToSpawn; i++)
             {
