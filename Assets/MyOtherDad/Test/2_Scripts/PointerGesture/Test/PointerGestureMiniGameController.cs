@@ -17,6 +17,7 @@ namespace PointerGesture
         [SerializeField] private PointerGestureMiniGamePhaseData miniGameData;
         [SerializeField] private MiniGameTimer miniGameTimer;
         [SerializeField] private PointerGestureSpawner pointerGestureSpawner;
+        [SerializeField] private UIDrawingAnimator uiDrawingAnimator;
         
         private bool hasMiniGameStarted;
         private bool hasMiniGameCompleted;
@@ -52,6 +53,7 @@ namespace PointerGesture
             
             miniGameTimer.StartTimer(miniGameData.TotalTime);
             pointerGestureSpawner.StartSpawnPointerGestures(miniGameData);
+            uiDrawingAnimator.InitializeSystem(pointerGestureSpawner.SpawnedPointerGestures, pointerGestureSpawner.SpawnedPointerGestures.Count);
             
             miniGameStarted.RaiseEvent();
         }
@@ -67,8 +69,9 @@ namespace PointerGesture
             miniGameTimer.StopTimer();
 
             pointerGestureSpawner.StopSpawnPointerGestures();
-            miniGameCompleted.RaiseEvent();
+            uiDrawingAnimator.StopSystem(pointerGestureSpawner.SpawnedPointerGestures);
 
+            miniGameCompleted.RaiseEvent();
         }
 
     }

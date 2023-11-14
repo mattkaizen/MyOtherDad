@@ -8,14 +8,16 @@ namespace PointerGesture
 {
     public class PointerGestureSpawner : MonoBehaviour
     {
+        public List<GameObject> SpawnedPointerGestures => _spawnedPointerGestures;
+        
         [Header("Broadcast on Events Channels")]
         [SerializeField] private VoidEventChannelData allGesturesCompleted;
         [SerializeField] private Transform spawnContainer;
 
         private List<PointerGesture> _pointerGestures = new List<PointerGesture>();
+        private List<GameObject> _spawnedPointerGestures = new List<GameObject>();
 
         private IEnumerator _spawnCoroutine;
-
 
         private GameObject SpawnPointerGesture()
         {
@@ -28,27 +30,58 @@ namespace PointerGesture
 
             return newPointerGesture.gameObject;
         }
-
-
+        
         private IEnumerator SpawnPointerGestureRoutine(PointerGestureMiniGamePhaseData pointerGestureMiniGamePhase)
         {
-            for (int i = 0; i < pointerGestureMiniGamePhase.AmountPointerGestureToSpawn; i++)
-            {
-                GameObject pointerGesture = SpawnPointerGesture();
+            Debug.Log($"Cantidad de Gestos {_spawnedPointerGestures.Count}");
 
-                if (pointerGesture.TryGetComponent<PointerGesturePointChecker>(out var checker))
+            foreach (var spawnedPointerGesture in _spawnedPointerGestures)
+            {
+                if (spawnedPointerGesture.TryGetComponent<PointerGesturePointChecker>(out var checker))
                 {
+                    spawnedPointerGesture.gameObject.SetActive(true);
                     yield return new WaitUntil(() => checker.IsPointerGestureComplete());
                 }
             }
-
+            Debug.Log("Gestos completados");
             allGesturesCompleted.RaiseEvent();
         }
+        
+        private void GenerateSpawnedPointerGesturePool(PointerGestureMiniGamePhaseData pointerGestureMiniGamePhase)
+        {
+            _spawnedPointerGestures.Clear();
+
+            for (int i = 0; i < pointerGestureMiniGamePhase.AmountPointerGestureToSpawn; i++)
+            {
+                GameObject pointerGesture = SpawnPointerGesture();
+                pointerGesture.SetActive(false);
+                _spawnedPointerGestures.Add(pointerGesture);
+            }
+        }
+
+
+        // private IEnumerator SpawnPointerGestureRoutine(PointerGestureMiniGamePhaseData pointerGestureMiniGamePhase)
+        // {
+        //     for (int i = 0; i < pointerGestureMiniGamePhase.AmountPointerGestureToSpawn; i++)
+        //     {
+        //         GameObject pointerGesture = SpawnPointerGesture();
+        //
+        //         if (pointerGesture.TryGetComponent<PointerGesturePointChecker>(out var checker))
+        //         {
+        //             yield return new WaitUntil(() => checker.IsPointerGestureComplete());
+        //         }
+        //     }
+        //
+        //     allGesturesCompleted.RaiseEvent();
+        // }
+        
+
 
         public void StartSpawnPointerGestures(PointerGestureMiniGamePhaseData pointerGestureMiniGamePhase)
         {
             InitializePointerGesturePool(pointerGestureMiniGamePhase.GesturePrefabs);
-
+            GenerateSpawnedPointerGesturePool(pointerGestureMiniGamePhase);
+            
             _spawnCoroutine = SpawnPointerGestureRoutine(pointerGestureMiniGamePhase);
             StartCoroutine(_spawnCoroutine);
         }
