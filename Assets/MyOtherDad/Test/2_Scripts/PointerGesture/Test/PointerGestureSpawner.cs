@@ -31,11 +31,9 @@ namespace PointerGesture
             return newPointerGesture.gameObject;
         }
         
-        private IEnumerator SpawnPointerGestureRoutine(PointerGestureMiniGamePhaseData pointerGestureMiniGamePhase)
+        private IEnumerator SpawnPointerGestureRoutine(List<GameObject> spawnedPointerGestures)
         {
-            Debug.Log($"Cantidad de Gestos {_spawnedPointerGestures.Count}");
-
-            foreach (var spawnedPointerGesture in _spawnedPointerGestures)
+            foreach (var spawnedPointerGesture in spawnedPointerGestures)
             {
                 if (spawnedPointerGesture.TryGetComponent<PointerGesturePointChecker>(out var checker))
                 {
@@ -43,46 +41,39 @@ namespace PointerGesture
                     yield return new WaitUntil(() => checker.IsPointerGestureComplete());
                 }
             }
-            Debug.Log("Gestos completados");
+            
             allGesturesCompleted.RaiseEvent();
         }
         
-        private void GenerateSpawnedPointerGesturePool(PointerGestureMiniGamePhaseData pointerGestureMiniGamePhase)
+        private void GenerateSpawnedPointerGesturePool(int amountToSpawn)
         {
             _spawnedPointerGestures.Clear();
 
-            for (int i = 0; i < pointerGestureMiniGamePhase.AmountPointerGestureToSpawn; i++)
+            for (int i = 0; i < amountToSpawn; i++)
             {
                 GameObject pointerGesture = SpawnPointerGesture();
                 pointerGesture.SetActive(false);
                 _spawnedPointerGestures.Add(pointerGesture);
             }
         }
-
-
-        // private IEnumerator SpawnPointerGestureRoutine(PointerGestureMiniGamePhaseData pointerGestureMiniGamePhase)
-        // {
-        //     for (int i = 0; i < pointerGestureMiniGamePhase.AmountPointerGestureToSpawn; i++)
-        //     {
-        //         GameObject pointerGesture = SpawnPointerGesture();
-        //
-        //         if (pointerGesture.TryGetComponent<PointerGesturePointChecker>(out var checker))
-        //         {
-        //             yield return new WaitUntil(() => checker.IsPointerGestureComplete());
-        //         }
-        //     }
-        //
-        //     allGesturesCompleted.RaiseEvent();
-        // }
         
-
-
         public void StartSpawnPointerGestures(PointerGestureMiniGamePhaseData pointerGestureMiniGamePhase)
         {
             InitializePointerGesturePool(pointerGestureMiniGamePhase.GesturePrefabs);
-            GenerateSpawnedPointerGesturePool(pointerGestureMiniGamePhase);
+            GenerateSpawnedPointerGesturePool(pointerGestureMiniGamePhase.AmountPointerGestureToSpawn);
             
-            _spawnCoroutine = SpawnPointerGestureRoutine(pointerGestureMiniGamePhase);
+            _spawnCoroutine = SpawnPointerGestureRoutine(_spawnedPointerGestures);
+            StartCoroutine(_spawnCoroutine);
+        }
+        
+        public void StartSpawnPointerGestures(PointerGestureMiniGamePhaseData pointerGestureMiniGamePhase, int additionalAmountToSpawn)
+        {
+            int newAmountToSpawn = pointerGestureMiniGamePhase.AmountPointerGestureToSpawn + additionalAmountToSpawn;
+            
+            InitializePointerGesturePool(pointerGestureMiniGamePhase.GesturePrefabs);
+            GenerateSpawnedPointerGesturePool(newAmountToSpawn);
+            //TODO: Usar la lista de gestos spawneados para comprobar si se completa x cantidad, activar el timer
+            _spawnCoroutine = SpawnPointerGestureRoutine(_spawnedPointerGestures);
             StartCoroutine(_spawnCoroutine);
         }
 
