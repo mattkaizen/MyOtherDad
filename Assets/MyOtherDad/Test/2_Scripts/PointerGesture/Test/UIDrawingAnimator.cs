@@ -11,6 +11,8 @@ namespace PointerGesture
 
         [Space] [SerializeField] private float alphaTweenDuration;
         [SerializeField] private Ease alphaEase;
+        [Space] [SerializeField] private float resetAlphaTweenDuration;
+        [SerializeField] private Ease resetAlphaEase;
 
         private int _fadeAmount;
 
@@ -63,6 +65,11 @@ namespace PointerGesture
             newAlphaValue += imageToDraw.color.a;
 
             imageToDraw.DOFade(newAlphaValue, alphaTweenDuration).SetEase(alphaEase);
+        }
+
+        public void ResetAlphaImage()
+        {
+            imageToDraw.DOFade(0, resetAlphaTweenDuration).SetEase(resetAlphaEase);
         }
     }
 }

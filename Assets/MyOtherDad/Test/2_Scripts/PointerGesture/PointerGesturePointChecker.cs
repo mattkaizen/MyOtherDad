@@ -10,8 +10,12 @@ namespace PointerGesture
     {
         public event UnityAction GestureCompleted = delegate {  };
         public event UnityAction GestureInitialized = delegate {  };
-        public bool IsGestureCompleted => _isGestureCompleted;
-            
+        public bool IsGestureCompleted
+        {
+            get => _isGestureCompleted;
+            set => _isGestureCompleted = value;
+        }
+
         [SerializeField] private List<PointerGesturePoint> gesturePointsToCheck;
         [SerializeField] private float timeToTryCompletingGesture;
 
@@ -84,7 +88,7 @@ namespace PointerGesture
                     break;
 
                 PointerGesturePoint currentGesturePoint = gesturePointsToCheck[index];
-                
+
                 if (currentGesturePoint.WasClicked)
                 {
                     _remainingGesturePoints.Remove(currentGesturePoint);
@@ -138,8 +142,9 @@ namespace PointerGesture
             StopCoroutine(_flashingCheckRoutine);
         }
 
-        private void ResetCheckingSystem()
+        public void ResetCheckingSystem()
         {
+            _isGestureCompleted = false;
             ResetGesturesPoint();
             _remainingGesturePoints = GetClonedGesturePointList();
             TryStopCheckClickedGestures();
@@ -166,11 +171,6 @@ namespace PointerGesture
         private bool AreAllGesturesPointClicked()
         {
             return gesturePointsToCheck.All(x => x.WasClicked);
-        }
-        
-        public bool IsPointerGestureComplete()
-        {
-            return IsGestureCompleted;
         }
     }
 }

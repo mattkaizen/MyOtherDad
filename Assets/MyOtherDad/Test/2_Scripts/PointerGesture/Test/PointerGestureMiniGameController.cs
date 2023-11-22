@@ -12,11 +12,14 @@ namespace PointerGesture
         private VoidEventChannelData miniGameStarted;
 
         [SerializeField] private VoidEventChannelData miniGameCompleted;
+        [SerializeField] private VoidEventChannelData miniGameRestarted;
         [SerializeField] private VoidEventChannelData tutorialStarted;
         [SerializeField] private VoidEventChannelData tutorialCompleted;
 
         [Header("Listen to Events Channels")] [SerializeField]
         private VoidEventChannelData eventToStartMiniGame;
+
+        [SerializeField] private VoidEventChannelData timerFinished;
 
         [SerializeField] private VoidEventChannelData eventToCompleteMiniGame;
 
@@ -24,22 +27,23 @@ namespace PointerGesture
         [SerializeField] private MiniGameTimer miniGameTimer;
         [SerializeField] private PointerGestureSpawner pointerGestureSpawner;
         [SerializeField] private UIDrawingAnimator uiDrawingAnimator;
-        [SerializeField] private bool displayTutorial;
+        [Header("Tutorial")] [SerializeField] private bool displayTutorial;
         [SerializeField] private int additionalGestureToSpawn;
-        private bool hasMiniGameStarted;
+        private bool isMiniGameStarted;
         private bool hasMiniGameCompleted;
 
         private void OnEnable()
         {
             eventToStartMiniGame.EventRaised += OnEventToStartMiniGameRaised;
             eventToCompleteMiniGame.EventRaised += OnEventToCompleteMiniGameRaised;
+            timerFinished.EventRaised += OnTimerFinishedRaised;
         }
-
 
         private void OnDisable()
         {
             eventToStartMiniGame.EventRaised -= OnEventToStartMiniGameRaised;
             eventToCompleteMiniGame.EventRaised -= OnEventToCompleteMiniGameRaised;
+            timerFinished.EventRaised -= OnTimerFinishedRaised;
         }
 
         private void OnEventToStartMiniGameRaised()
@@ -55,15 +59,20 @@ namespace PointerGesture
             CompleteMiniGame();
         }
 
-
+        private void OnTimerFinishedRaised()
+        {
+            if (displayTutorial)
+                ResetTutorial();
+            else
+                ResetMiniGame();
+        }
 
         private void StartMiniGame()
         {
-            if (hasMiniGameStarted) return;
+            if (isMiniGameStarted) return;
             if (hasMiniGameCompleted) return;
 
-            Debug.Log("MiniGameStarted");
-            hasMiniGameStarted = true;
+            isMiniGameStarted = true;
 
             miniGameTimer.StartTimer(miniGameData.TotalTime);
             pointerGestureSpawner.StartSpawnPointerGestures(miniGameData);
@@ -75,7 +84,7 @@ namespace PointerGesture
 
         private void CompleteMiniGame()
         {
-            if (!hasMiniGameStarted) return;
+            if (!isMiniGameStarted) return;
 
             Debug.Log("MiniGameCompleted");
 
@@ -84,17 +93,28 @@ namespace PointerGesture
             miniGameTimer.StopTimer();
 
             pointerGestureSpawner.StopSpawnPointerGestures();
+            pointerGestureSpawner.ClearPools();
             uiDrawingAnimator.StopSystem(pointerGestureSpawner.SpawnedPointerGestures);
 
             miniGameCompleted.RaiseEvent();
         }
 
+        private void ResetMiniGame()
+        {
+            uiDrawingAnimator.ResetAlphaImage();
+            pointerGestureSpawner.StopSpawnPointerGestures();
+            pointerGestureSpawner.ResetSpawnedPointerGesturesPool();
+            miniGameTimer.StartTimer(miniGameData.TotalTime);
+            pointerGestureSpawner.StartSpawnPointerGestures(miniGameData);
+            miniGameRestarted.RaiseEvent();
+        }
+
         private void StartTutorial()
         {
-            if (hasMiniGameStarted) return;
+            if (isMiniGameStarted) return;
             if (hasMiniGameCompleted) return;
 
-            hasMiniGameStarted = true;
+            isMiniGameStarted = true;
 
             pointerGestureSpawner.StartSpawnPointerGestures(miniGameData, additionalGestureToSpawn);
             uiDrawingAnimator.InitializeSystem(pointerGestureSpawner.SpawnedPointerGestures,
@@ -104,7 +124,16 @@ namespace PointerGesture
 
             StartCoroutine(TryCompleteTutorialRoutine(additionalGestureToSpawn));
         }
-        
+
+        private void ResetTutorial()
+        {
+            uiDrawingAnimator.ResetAlphaImage();
+            pointerGestureSpawner.StopSpawnPointerGestures();
+            pointerGestureSpawner.ResetSpawnedPointerGesturesPool();
+            pointerGestureSpawner.StartSpawnPointerGestures(miniGameData);
+            StartCoroutine(TryCompleteTutorialRoutine(additionalGestureToSpawn));
+        }
+
         private void CompleteTutorial()
         {
             miniGameTimer.StartTimer(miniGameData.TotalTime);
@@ -128,7 +157,7 @@ namespace PointerGesture
             {
                 yield return new WaitUntil(() => checker.IsGestureCompleted);
                 completedGestureAmount++;
-                
+
                 if (completedGestureAmount == amountToCompleteTutorial)
                 {
                     break;

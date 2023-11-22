@@ -9,11 +9,14 @@ namespace PointerGesture
         [Header("Broadcast on Events Channels")]
         [SerializeField] private IntEventChannelData currentTimeChanged;
         [SerializeField] private VoidEventChannelData timerFinished;
+        [SerializeField] private VoidEventChannelData timerStarted;
 
         private IEnumerator _timerRoutine;
 
         private IEnumerator RunTimerRoutine(int totalTime)
         {
+            timerStarted.RaiseEvent();
+            
             int secondsPassed = 0;
             int timeToWait = 1;
             int currentTime = totalTime;
@@ -23,7 +26,6 @@ namespace PointerGesture
                 yield return new WaitForSeconds(timeToWait);
                 secondsPassed++;
                 currentTime -= timeToWait;
-                Debug.Log($"Seconds passed {secondsPassed} + currentTime {currentTime}");
                 currentTimeChanged.RaiseEvent(currentTime);
             }
             timerFinished.RaiseEvent();
