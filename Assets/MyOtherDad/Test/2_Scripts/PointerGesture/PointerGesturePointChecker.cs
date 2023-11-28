@@ -10,6 +10,7 @@ namespace PointerGesture
     {
         public event UnityAction GestureCompleted = delegate {  };
         public event UnityAction GestureInitialized = delegate {  };
+        public event UnityAction GestureReset = delegate {  };
         public bool IsGestureCompleted
         {
             get => _isGestureCompleted;
@@ -25,13 +26,7 @@ namespace PointerGesture
         private IEnumerator _flashingCheckRoutine;
 
         private bool _areCheckingGesturePoints;
-        private bool _isGestureCompleted;
-
-        private void OnEnable()
-        {
-            Initialize();
-        }
-
+        [SerializeField] private bool _isGestureCompleted;
         private void OnDisable()
         {
             if (gesturePointsToCheck.Count == 0)
@@ -46,7 +41,7 @@ namespace PointerGesture
             }
         }
 
-        private void Initialize()
+        public void Initialize()
         {
             if (gesturePointsToCheck.Count == 0)
             {
@@ -145,13 +140,14 @@ namespace PointerGesture
         public void ResetCheckingSystem()
         {
             _isGestureCompleted = false;
-            ResetGesturesPoint();
+            ResetGesturePoints();
             _remainingGesturePoints = GetClonedGesturePointList();
             TryStopCheckClickedGestures();
             TryStopFlashingCheckRoutine();
+            GestureReset?.Invoke();
         }
 
-        private void ResetGesturesPoint()
+        private void ResetGesturePoints()
         {
             foreach (var gesture in gesturePointsToCheck)
             {

@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace PointerGesture
 {
@@ -10,9 +12,23 @@ namespace PointerGesture
             get => rectTransform;
             set => rectTransform = value;
         }
-        
+
+        public PointerGesturePointChecker Checker
+        {
+            get => checker;
+            set => checker = value;
+        }
+
         [SerializeField] private RectTransform rectTransform;
         [SerializeField] private List<RectTransform> pointsToSpawnGesture = new List<RectTransform>();
+        [SerializeField] private PointerGesturePointChecker checker;
+        [SerializeField] private PointerGesturePointAnimator animator;
+
+        private void OnEnable()
+        {
+            animator.Initialize();
+            checker.Initialize();
+        }
 
         public Vector2 GetRandomSpawnPosition()
         {

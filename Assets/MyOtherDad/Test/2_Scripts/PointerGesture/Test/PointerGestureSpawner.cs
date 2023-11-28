@@ -40,16 +40,13 @@ namespace PointerGesture
         {
             foreach (var spawnedPointerGesture in spawnedPointerGestures)
             {
-                if (spawnedPointerGesture.TryGetComponent<PointerGesturePointChecker>(out var checker))
+                if (spawnedPointerGesture.TryGetComponent<PointerGesture>(out var pointerGesture))
                 {
-                    if (spawnedPointerGesture.TryGetComponent<PointerGesture>(out var pointerGesture))
-                    {
-                        Vector2 spawnPosition = pointerGesture.GetRandomSpawnPosition();
-                        pointerGesture.RectTransform.anchoredPosition = spawnPosition;
-                    }
-                    
+                    Vector2 spawnPosition = pointerGesture.GetRandomSpawnPosition();
+                    pointerGesture.RectTransform.anchoredPosition = spawnPosition;
+
                     spawnedPointerGesture.gameObject.SetActive(true);
-                    yield return new WaitUntil(() => checker.IsGestureCompleted);
+                    yield return new WaitUntil(() => pointerGesture.Checker.IsGestureCompleted);
                 }
             }
 
@@ -59,7 +56,7 @@ namespace PointerGesture
         private void TryGenerateSpawnedPointerGesturePool(int amountToSpawn)
         {
             if (_isPoolInitialize) return;
-            
+
             for (int i = 0; i < amountToSpawn; i++)
             {
                 GameObject pointerGesture = SpawnPointerGesture();
@@ -112,7 +109,7 @@ namespace PointerGesture
         private void TryInitializePointerGesturePool(List<GameObject> prefabs)
         {
             if (_isPoolInitialize) return;
-            
+
             foreach (var prefab in prefabs)
             {
                 if (prefab.TryGetComponent<PointerGesture>(out var pointerGesture))

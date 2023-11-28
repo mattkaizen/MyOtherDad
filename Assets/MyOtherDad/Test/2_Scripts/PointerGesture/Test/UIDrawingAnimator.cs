@@ -16,6 +16,8 @@ namespace PointerGesture
 
         private int _fadeAmount;
 
+        private List<Tween> _fades = new List<Tween>();
+
         public void InitializeSystem(List<GameObject> spawnedPointerGestures, int fadeAmount)
         {
             _fadeAmount = fadeAmount;
@@ -38,7 +40,7 @@ namespace PointerGesture
                 }
             }
         }
-        
+
         private void TryToUnSubscribeOnGestureCompleted(List<GameObject> spawnedPointerGestures)
         {
             foreach (var spawnedPointerGesture in spawnedPointerGestures)
@@ -53,22 +55,26 @@ namespace PointerGesture
 
         private void OnGestureCompleted()
         {
-            FadeAlphaImage();
+            _fades.Add(FadeAlphaImage());
         }
 
-        private void FadeAlphaImage()
+        private Tween FadeAlphaImage()
         {
             float newAlphaValue = 0;
 
             newAlphaValue = 1.0f / _fadeAmount;
-            
+
             newAlphaValue += imageToDraw.color.a;
 
-            imageToDraw.DOFade(newAlphaValue, alphaTweenDuration).SetEase(alphaEase);
+            return imageToDraw.DOFade(newAlphaValue, alphaTweenDuration).SetEase(alphaEase);
         }
 
         public void ResetAlphaImage()
         {
+            foreach (var fade in _fades)
+            {
+                fade.Kill();
+            }
             imageToDraw.DOFade(0, resetAlphaTweenDuration).SetEase(resetAlphaEase);
         }
     }
