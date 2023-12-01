@@ -26,7 +26,7 @@ namespace PointerGesture
         [Space] [SerializeField] private PointerGestureMiniGamePhaseData miniGameData;
         [SerializeField] private MiniGameTimer miniGameTimer;
         [SerializeField] private PointerGestureSpawner pointerGestureSpawner;
-        [SerializeField] private UIDrawingAnimator uiDrawingAnimator;
+        [SerializeField] private DecalDrawingAnimator decalDrawingAnimator;
         [Header("Tutorial")] [SerializeField] private bool displayTutorial;
         [SerializeField] private int additionalGestureToSpawn;
         private bool isMiniGameStarted;
@@ -76,7 +76,7 @@ namespace PointerGesture
 
             miniGameTimer.StartTimer(miniGameData.TotalTime);
             pointerGestureSpawner.StartSpawnPointerGestures(miniGameData);
-            uiDrawingAnimator.InitializeSystem(pointerGestureSpawner.SpawnedPointerGestures,
+            decalDrawingAnimator.InitializeSystem(pointerGestureSpawner.SpawnedPointerGestures,
                 pointerGestureSpawner.SpawnedPointerGestures.Count);
 
             miniGameStarted.RaiseEvent();
@@ -94,14 +94,14 @@ namespace PointerGesture
 
             pointerGestureSpawner.StopSpawnPointerGestures();
             pointerGestureSpawner.ClearPools();
-            uiDrawingAnimator.StopSystem(pointerGestureSpawner.SpawnedPointerGestures);
+            decalDrawingAnimator.StopSystem(pointerGestureSpawner.SpawnedPointerGestures);
 
             miniGameCompleted.RaiseEvent();
         }
 
         private void ResetMiniGame()
         {
-            uiDrawingAnimator.ResetAlphaImage();
+            decalDrawingAnimator.ResetAlphaDecal();
             pointerGestureSpawner.StopSpawnPointerGestures();
             pointerGestureSpawner.ResetSpawnedPointerGesturesPool();
             miniGameTimer.StartTimer(miniGameData.TotalTime);
@@ -117,7 +117,7 @@ namespace PointerGesture
             isMiniGameStarted = true;
 
             pointerGestureSpawner.StartSpawnPointerGestures(miniGameData, additionalGestureToSpawn);
-            uiDrawingAnimator.InitializeSystem(pointerGestureSpawner.SpawnedPointerGestures,
+            decalDrawingAnimator.InitializeSystem(pointerGestureSpawner.SpawnedPointerGestures,
                 pointerGestureSpawner.SpawnedPointerGestures.Count);
 
             tutorialStarted.RaiseEvent();
@@ -127,7 +127,7 @@ namespace PointerGesture
 
         private void ResetTutorial()
         {
-            uiDrawingAnimator.ResetAlphaImage();
+            decalDrawingAnimator.ResetAlphaDecal();
             pointerGestureSpawner.StopSpawnPointerGestures();
             pointerGestureSpawner.ResetSpawnedPointerGesturesPool();
             pointerGestureSpawner.StartSpawnPointerGestures(miniGameData);
