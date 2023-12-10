@@ -1,4 +1,5 @@
-﻿using Data;
+﻿using System;
+using Data;
 using UnityEngine;
 
 namespace Tasks
@@ -32,6 +33,13 @@ namespace Tasks
             eventToCompleteDrawingTask.EventRaised += OnEventToCompleteDrawingTaskRaised;
             eventToStartDrawingTask.EventRaised += OnEventToStartDrawingTaskRaised;
             eventToStopDrawingTask.EventRaised += OnEventToStopDrawingTaskRaised;
+        }
+
+        private void OnDisable()
+        {
+            eventToCompleteDrawingTask.EventRaised -= OnEventToCompleteDrawingTaskRaised;
+            eventToStartDrawingTask.EventRaised -= OnEventToStartDrawingTaskRaised;
+            eventToStopDrawingTask.EventRaised -= OnEventToStopDrawingTaskRaised;
         }
 
         public void StartTask()

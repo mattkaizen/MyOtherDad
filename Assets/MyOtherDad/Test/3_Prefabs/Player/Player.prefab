@@ -78,7 +78,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 461108519761475072}
   m_LocalRotation: {x: 0.44622126, y: -0.000000029802319, z: -0.000000014901159, w: 0.89492273}
-  m_LocalPosition: {x: 0, y: 0.65, z: 0}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -253,15 +253,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputReader: {fileID: 11400000, guid: a1918f9e9c68f0d47a13815a88d883a5, type: 2}
-  lookAsset: {fileID: 1370666342906086428, guid: 02df793359317864b99b2d9d2e13b46a, type: 3}
-  enablingPlayerCamera: {fileID: 11400000, guid: 7edd951dc780e9d408da49fb82ed0076, type: 2}
-  playerCameraLive: {fileID: 11400000, guid: 8e815fda46b744d4ca4ab29ee4f716b7, type: 2}
-  enablingToNewCamera: {fileID: 11400000, guid: 32147a13225c35b4faa5c0e2d719eafc, type: 2}
-  bedCameraLive: {fileID: 11400000, guid: 6d7b83d6140dcda4394c9906736a2ff0, type: 2}
-  disablingBedCamera: {fileID: 11400000, guid: 36839d3c9ae1dda45a5161df2be01d0d, type: 2}
-  workingDeskCameraLive: {fileID: 11400000, guid: 149e26d6f197e4047843109050c16436, type: 2}
-  disablingWorkingDeskCamera: {fileID: 11400000, guid: ee94d641bb312bf4897284c37192eb71, type: 2}
-  drawingTableCameraLive: {fileID: 11400000, guid: 8079b512e3a6047418be8d59a6c17261, type: 2}
 --- !u!114 &2215373736164510170
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -274,16 +265,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88a97cd0b8b445fc89761eb3c0d0c096, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputReader: {fileID: 11400000, guid: a1918f9e9c68f0d47a13815a88d883a5, type: 2}
+  playerInputToggle: {fileID: 7140911826330701875}
+  screenFadeEffect: {fileID: 7180706509707321227}
   cameraTransitionDuration: 0.5
-  changeableCameraEvents:
-  - {fileID: 11400000, guid: 2b2e64de169551840a693e77b8391453, type: 2}
-  - {fileID: 11400000, guid: b47d74ac3eab68f43a379053c90967c5, type: 2}
-  - {fileID: 11400000, guid: 98ca141c49d94fb43a5bd27d007cf8f8, type: 2}
+  delayToEnablePlayerInput: 0.3
   enablingPlayerCamera: {fileID: 11400000, guid: 7edd951dc780e9d408da49fb82ed0076, type: 2}
   playerCameraLive: {fileID: 11400000, guid: 8e815fda46b744d4ca4ab29ee4f716b7, type: 2}
-  enablingNewCamera: {fileID: 11400000, guid: 32147a13225c35b4faa5c0e2d719eafc, type: 2}
-  newCameraLive: {fileID: 11400000, guid: ea688287b9a8c474fa2e3805b6ec9a67, type: 2}
 --- !u!114 &5310514992884658380
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -297,6 +284,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputReader: {fileID: 11400000, guid: a1918f9e9c68f0d47a13815a88d883a5, type: 2}
+  inventory: {fileID: 6511276740866236373}
   rayDistance: 3
   layerMask:
     serializedVersion: 2
@@ -314,7 +302,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   screenFadeEffect: {fileID: 7180706509707321227}
-  playerCameraChanger: {fileID: 2215373736164510170}
+  playerCameraTransition: {fileID: 2215373736164510170}
   playerCameraInteraction: {fileID: 6868523115188644409}
   playerInputToggle: {fileID: 7140911826330701875}
   cameraChangeableObject: {fileID: 0}
@@ -331,7 +319,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputReader: {fileID: 11400000, guid: a1918f9e9c68f0d47a13815a88d883a5, type: 2}
-  playerCameraChanger: {fileID: 2215373736164510170}
+  playerCameraTransition: {fileID: 2215373736164510170}
   rayDistance: 3
   layerMask:
     serializedVersion: 2
@@ -373,7 +361,7 @@ Transform:
   - {fileID: 18255674878112765}
   - {fileID: 4136162285814729085}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!143 &7268399249202014126
 CharacterController:
@@ -603,7 +591,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8929677105379679930}
   m_LocalRotation: {x: 0.44622126, y: 0, z: 0, w: 0.89492273}
-  m_LocalPosition: {x: 0, y: 0.65, z: 0}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

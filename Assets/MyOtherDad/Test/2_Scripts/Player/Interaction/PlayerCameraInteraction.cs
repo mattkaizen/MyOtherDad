@@ -1,4 +1,5 @@
-﻿using Domain;
+﻿using System;
+using Domain;
 using UnityEngine;
 
 namespace Player
@@ -11,12 +12,16 @@ namespace Player
         [SerializeField] private LayerMask layerMask;
 
         private IInteractableCamera currentInteractableCamera;
-
-
         private void Awake()
         {
             inputReader.Interacted += OnInteracted;
             inputReader.GettingUp += OnGettingUp;
+        }
+
+        private void OnDisable()
+        {
+            inputReader.Interacted -= OnInteracted;
+            inputReader.GettingUp -= OnGettingUp; 
         }
 
         private void OnGettingUp()

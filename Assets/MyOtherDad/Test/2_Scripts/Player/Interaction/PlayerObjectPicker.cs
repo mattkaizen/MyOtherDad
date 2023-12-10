@@ -42,8 +42,6 @@ namespace Player
             playerInventory.Add(item.Pickup());
         }
 
-
-
         private void RaycastToPickupObject()
         {
             if (Physics.Raycast(transform.position, transform.forward, out var hitInfo,
@@ -51,7 +49,6 @@ namespace Player
             {
                 if (hitInfo.transform.TryGetComponent<IPickable>(out var pickable))
                 {
-                    Debug.Log($"Pickable {pickable}");
                     TryPickup(pickable);
                 }
             }

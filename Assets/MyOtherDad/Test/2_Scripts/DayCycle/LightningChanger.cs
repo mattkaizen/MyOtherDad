@@ -1,5 +1,4 @@
-﻿using System;
-using Lightning;
+﻿using Lightning;
 using UnityEngine;
 
 namespace DayCycle
@@ -40,7 +39,6 @@ namespace DayCycle
             float rotatedDegrees = minAngle + (timePercent * (maxAngle - minAngle));
             Vector3 newRotation = new Vector3(rotatedDegrees, 170f, 0);
 
-            // Vector3 newRotation = new Vector3((timePercent * 360) - 90f, 170f, 0);
             directionalLight.transform.localRotation = Quaternion.Euler(newRotation);
         }
 
