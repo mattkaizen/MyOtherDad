@@ -1,15 +1,15 @@
-﻿using System;
-using Domain;
+﻿using Domain;
 using UnityEngine;
 
 namespace Player
 {
     public class PlayerCameraInteraction : MonoBehaviour
     {
+        [SerializeField] private LayerMask layerMask;
+        [SerializeField] private float rayDistance;
+        [SerializeField] private Transform mainCamera;
         [SerializeField] private InputReaderData inputReader;
         [SerializeField] private PlayerCameraTransition playerCameraTransition;
-        [SerializeField] private float rayDistance;
-        [SerializeField] private LayerMask layerMask;
 
         private IInteractableCamera currentInteractableCamera;
         private void Awake()
@@ -56,7 +56,7 @@ namespace Player
 
         private void Raycast()
         {
-            if (Physics.Raycast(transform.position, transform.forward, out var hitInfo,
+            if (Physics.Raycast(mainCamera.position, mainCamera.forward, out var hitInfo,
                     rayDistance, layerMask, QueryTriggerInteraction.Collide))
             {
                 TryInteract(hitInfo.transform);
@@ -66,7 +66,7 @@ namespace Player
         private void RaycastAll()
         {
             RaycastHit[] hits;
-            hits = Physics.RaycastAll(transform.position, transform.forward, rayDistance, layerMask);
+            hits = Physics.RaycastAll(mainCamera.position, mainCamera.forward, rayDistance, layerMask);
 
             foreach (var hit in hits)
             {

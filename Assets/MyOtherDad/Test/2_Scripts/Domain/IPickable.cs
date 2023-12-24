@@ -1,4 +1,6 @@
-﻿namespace Domain
+﻿using UnityEngine;
+
+namespace Domain
 {
     public interface IPickable
     {

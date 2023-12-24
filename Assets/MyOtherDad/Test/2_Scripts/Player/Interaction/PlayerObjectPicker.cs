@@ -1,4 +1,5 @@
 ﻿using Domain;
+using Objects;
 using UnityEngine;
 
 namespace Player
@@ -7,8 +8,10 @@ namespace Player
     {
         [SerializeField] private LayerMask layerMask;
         [SerializeField] private float rayDistance;
+        [SerializeField] private Transform mainCamera;
         [SerializeField] private InputReaderData inputReader;
         [SerializeField] private PlayerInventory playerInventory;
+        [SerializeField] private HandController handController;
 
         private void Awake()
         {
@@ -24,7 +27,7 @@ namespace Player
 
         private void OnDrawGizmos()
         {
-            Debug.DrawRay(transform.position,  rayDistance * transform.forward, Color.green, 0.5f);
+            Debug.DrawRay(mainCamera.position,  rayDistance * mainCamera.forward, Color.green, 0.5f);
         }
         
         private void OnInteracted()
@@ -32,25 +35,35 @@ namespace Player
             RaycastToPickupObject();
         }
 
-        private void TryPickup(IPickable item)
+        private void TryPickup(GameObject item)
         {
             if (playerInventory == null)
             {
                 Debug.LogWarning($"Empty {typeof(PlayerInventory)}");
             }
             
-            playerInventory.Add(item.Pickup());
+            if (item.transform.TryGetComponent<IPickable>(out var pickable)) 
+            {
+                if (item.transform.TryGetComponent<IHoldable>(out var holdable))
+                {
+                    if (handController.HasMaxItemOnTheHand) return;
+                    
+                    pickable.Pickup();
+                    handController.AddItemOnHand(holdable);
+                }
+                else
+                {
+                    playerInventory.Add(pickable.Pickup());
+                }
+            }
         }
 
         private void RaycastToPickupObject()
         {
-            if (Physics.Raycast(transform.position, transform.forward, out var hitInfo,
+            if (Physics.Raycast(mainCamera.position, mainCamera.forward, out var hitInfo,
                     rayDistance, layerMask, QueryTriggerInteraction.Ignore))
             {
-                if (hitInfo.transform.TryGetComponent<IPickable>(out var pickable))
-                {
-                    TryPickup(pickable);
-                }
+                TryPickup(hitInfo.transform.gameObject);
             }
         }
     }

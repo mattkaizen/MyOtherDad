@@ -80,6 +80,33 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SwitchNextItem"",
+                    ""type"": ""Button"",
+                    ""id"": ""3f7d1cfd-31de-4d95-906a-ba06241af180"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SwitchPreviousItem"",
+                    ""type"": ""Button"",
+                    ""id"": ""ff71fc30-6861-4332-b839-8b1c7c10f7dc"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ThrowItem"",
+                    ""type"": ""Button"",
+                    ""id"": ""7bce215b-c863-4502-84fd-13ee4a28f2b6"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -192,6 +219,39 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
                     ""action"": ""Paint"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""933af108-4bce-4c82-97ee-485506583ebd"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SwitchNextItem"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9b29c9a5-8566-43a1-a051-3d9fec22f7a2"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SwitchPreviousItem"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6440c4dd-04e0-4551-bf64-35e27186d1f4"",
+                    ""path"": ""<Keyboard>/g"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ThrowItem"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -206,6 +266,9 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
         m_Player_LookAt = m_Player.FindAction("LookAt", throwIfNotFound: true);
         m_Player_Run = m_Player.FindAction("Run", throwIfNotFound: true);
         m_Player_Paint = m_Player.FindAction("Paint", throwIfNotFound: true);
+        m_Player_SwitchNextItem = m_Player.FindAction("SwitchNextItem", throwIfNotFound: true);
+        m_Player_SwitchPreviousItem = m_Player.FindAction("SwitchPreviousItem", throwIfNotFound: true);
+        m_Player_ThrowItem = m_Player.FindAction("ThrowItem", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -273,6 +336,9 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_LookAt;
     private readonly InputAction m_Player_Run;
     private readonly InputAction m_Player_Paint;
+    private readonly InputAction m_Player_SwitchNextItem;
+    private readonly InputAction m_Player_SwitchPreviousItem;
+    private readonly InputAction m_Player_ThrowItem;
     public struct PlayerActions
     {
         private @GameControls m_Wrapper;
@@ -283,6 +349,9 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
         public InputAction @LookAt => m_Wrapper.m_Player_LookAt;
         public InputAction @Run => m_Wrapper.m_Player_Run;
         public InputAction @Paint => m_Wrapper.m_Player_Paint;
+        public InputAction @SwitchNextItem => m_Wrapper.m_Player_SwitchNextItem;
+        public InputAction @SwitchPreviousItem => m_Wrapper.m_Player_SwitchPreviousItem;
+        public InputAction @ThrowItem => m_Wrapper.m_Player_ThrowItem;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -307,9 +376,18 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
             @Run.started += instance.OnRun;
             @Run.performed += instance.OnRun;
             @Run.canceled += instance.OnRun;
-            @Paint.started += instance.OnPainting;
-            @Paint.performed += instance.OnPainting;
-            @Paint.canceled += instance.OnPainting;
+            @Paint.started += instance.OnPaint;
+            @Paint.performed += instance.OnPaint;
+            @Paint.canceled += instance.OnPaint;
+            @SwitchNextItem.started += instance.OnSwitchNextItem;
+            @SwitchNextItem.performed += instance.OnSwitchNextItem;
+            @SwitchNextItem.canceled += instance.OnSwitchNextItem;
+            @SwitchPreviousItem.started += instance.OnSwitchPreviousItem;
+            @SwitchPreviousItem.performed += instance.OnSwitchPreviousItem;
+            @SwitchPreviousItem.canceled += instance.OnSwitchPreviousItem;
+            @ThrowItem.started += instance.OnThrowItem;
+            @ThrowItem.performed += instance.OnThrowItem;
+            @ThrowItem.canceled += instance.OnThrowItem;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -329,9 +407,18 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
             @Run.started -= instance.OnRun;
             @Run.performed -= instance.OnRun;
             @Run.canceled -= instance.OnRun;
-            @Paint.started -= instance.OnPainting;
-            @Paint.performed -= instance.OnPainting;
-            @Paint.canceled -= instance.OnPainting;
+            @Paint.started -= instance.OnPaint;
+            @Paint.performed -= instance.OnPaint;
+            @Paint.canceled -= instance.OnPaint;
+            @SwitchNextItem.started -= instance.OnSwitchNextItem;
+            @SwitchNextItem.performed -= instance.OnSwitchNextItem;
+            @SwitchNextItem.canceled -= instance.OnSwitchNextItem;
+            @SwitchPreviousItem.started -= instance.OnSwitchPreviousItem;
+            @SwitchPreviousItem.performed -= instance.OnSwitchPreviousItem;
+            @SwitchPreviousItem.canceled -= instance.OnSwitchPreviousItem;
+            @ThrowItem.started -= instance.OnThrowItem;
+            @ThrowItem.performed -= instance.OnThrowItem;
+            @ThrowItem.canceled -= instance.OnThrowItem;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -356,6 +443,9 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
         void OnMove(InputAction.CallbackContext context);
         void OnLookAt(InputAction.CallbackContext context);
         void OnRun(InputAction.CallbackContext context);
-        void OnPainting(InputAction.CallbackContext context);
+        void OnPaint(InputAction.CallbackContext context);
+        void OnSwitchNextItem(InputAction.CallbackContext context);
+        void OnSwitchPreviousItem(InputAction.CallbackContext context);
+        void OnThrowItem(InputAction.CallbackContext context);
     }
 }

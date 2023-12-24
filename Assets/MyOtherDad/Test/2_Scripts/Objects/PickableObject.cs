@@ -11,6 +11,7 @@ namespace Objects
         [SerializeField] private ItemData itemData;
         [SerializeField] private VoidEventChannelData objectPicked;
 
+
         public ItemData Pickup()
         {
             objectPicked.RaiseEvent();

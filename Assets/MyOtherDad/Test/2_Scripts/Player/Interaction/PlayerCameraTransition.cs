@@ -7,7 +7,7 @@ using UnityEngine;
 namespace Player
 {
     public class PlayerCameraTransition : MonoBehaviour
-    {
+    { 
         [SerializeField] private PlayerInputToggle playerInputToggle;
         [SerializeField] private ScreenFadeEffect screenFadeEffect;
 

@@ -6,13 +6,16 @@ using UnityEngine.InputSystem;
 [CreateAssetMenu(fileName = "InputReaderData")]
 public class InputReaderData : ScriptableObject, GameControls.IPlayerActions
 {
-    public event UnityAction Interacted = delegate { };
-    public event UnityAction GettingUp = delegate { };
     public event UnityAction<Vector2> Moved = delegate { };
     public event UnityAction<Vector2> Looked = delegate { };
+    public event UnityAction<bool> Ran = delegate { };
+    public event UnityAction Interacted = delegate { };
+    public event UnityAction GettingUp = delegate { };
     public event UnityAction Painting = delegate { };
     public event UnityAction Painted = delegate { };
-    public event UnityAction<bool> Ran = delegate { };
+    public event UnityAction ThrowItem = delegate { };
+    public event UnityAction SwitchedNextItem = delegate { };
+    public event UnityAction SwitchedPreviousItem = delegate { };
     
     public InputAction Move => _move;
     public InputAction Look => _look;
@@ -31,6 +34,9 @@ public class InputReaderData : ScriptableObject, GameControls.IPlayerActions
     private InputAction _look;
     private InputAction _run;
     private InputAction _paint;
+    private InputAction _throwItem;
+    private InputAction _switchNextItem;
+    private InputAction _switchPreviousItem;
 
     public List<InputAction> playerInputActions = new List<InputAction>();
 
@@ -46,12 +52,18 @@ public class InputReaderData : ScriptableObject, GameControls.IPlayerActions
         _look = _playerInputActions.Player.LookAt;
         _run = _playerInputActions.Player.Run;
         _paint = _playerInputActions.Player.Paint;
+        _switchNextItem = _playerInputActions.Player.SwitchNextItem;
+        _switchPreviousItem = _playerInputActions.Player.SwitchPreviousItem;
+        _throwItem = _playerInputActions.Player.ThrowItem;
 
         _interact.performed += OnInteract;
         _getUp.performed += OnGetUp;
         _move.performed += OnMove;
         _run.performed += OnRun;
-        _paint.performed += OnPainting;
+        _paint.performed += OnPaint;
+        _throwItem.performed += OnThrowItem;
+        _switchNextItem.performed += OnSwitchNextItem;
+        _switchPreviousItem.performed += OnSwitchPreviousItem;
         
         playerInputActions.Clear();
         
@@ -61,6 +73,8 @@ public class InputReaderData : ScriptableObject, GameControls.IPlayerActions
         playerInputActions.Add(_look);
         playerInputActions.Add(_run);
         playerInputActions.Add(_paint);
+        playerInputActions.Add(_switchNextItem);
+        playerInputActions.Add(_switchPreviousItem);
         playerInputActions.Add(lookAsset.action);
 
     }
@@ -71,7 +85,9 @@ public class InputReaderData : ScriptableObject, GameControls.IPlayerActions
         _getUp.performed -= OnGetUp;
         _move.performed -= OnMove;
         _run.performed -= OnRun;
-        _paint.performed -= OnPainting;
+        _paint.performed -= OnPaint;
+        _switchNextItem.performed -= OnSwitchNextItem;
+        _switchPreviousItem.performed -= OnSwitchPreviousItem;
 
         playerInputActions.Clear();
         _playerInputActions.Player.Disable();
@@ -90,6 +106,42 @@ public class InputReaderData : ScriptableObject, GameControls.IPlayerActions
         if (_getUp.WasPerformedThisFrame())
         {
             GettingUp?.Invoke();
+        }
+    }
+
+    public void OnPaint(InputAction.CallbackContext context)
+    {
+        if (_paint.WasPerformedThisFrame())
+        {
+            Painting?.Invoke();
+        }
+        if (_paint.WasReleasedThisFrame())
+        {
+            Painted?.Invoke();
+        }
+    }
+
+    public void OnSwitchNextItem(InputAction.CallbackContext context)
+    {
+        if (_switchNextItem.WasPerformedThisFrame())
+        {
+            SwitchedNextItem?.Invoke();
+        }
+    }
+    
+    public void OnSwitchPreviousItem(InputAction.CallbackContext context)
+    {
+        if (_switchPreviousItem.WasPerformedThisFrame())
+        {
+            SwitchedPreviousItem?.Invoke();
+        }
+    }
+
+    public void OnThrowItem(InputAction.CallbackContext context)
+    {
+        if (_throwItem.WasPerformedThisFrame())
+        {
+            ThrowItem?.Invoke();
         }
     }
 
@@ -126,18 +178,6 @@ public class InputReaderData : ScriptableObject, GameControls.IPlayerActions
         else
         {
             Ran?.Invoke(false);
-        }
-    }
-
-    public void OnPainting(InputAction.CallbackContext context)
-    {
-        if (_paint.WasPerformedThisFrame())
-        {
-            Painting?.Invoke();
-        }
-        if (_paint.WasReleasedThisFrame())
-        {
-            Painted?.Invoke();
         }
     }
 }
