@@ -1,15 +1,24 @@
 ﻿using System.Collections.Generic;
 using Objects;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Player
 {
     public class HandController : MonoBehaviour
     {
+        public event UnityAction<GameObject> ItemAdded = delegate {  };
+        public event UnityAction<GameObject> ItemRemoved = delegate {  };
         public GameObject CurrentItemOnHand
         {
             get => _currentItemOnHand;
             set => _currentItemOnHand = value;
+        }
+        
+        public List<GameObject> ItemsOnHand
+        {
+            get => _itemsOnHand;
+            set => _itemsOnHand = value;
         }
 
         public bool HasItemOnHand => CurrentItemOnHand;
@@ -87,7 +96,7 @@ namespace Player
             CurrentItemOnHand = _itemsOnHand[0];
             _currentItemOnHandIndex = 0;
             
-            Debug.Log($"added Index {_currentItemOnHandIndex}");
+            ItemAdded?.Invoke(item.WorldRepresentation);
         }
 
         public void TurnOnCurrentItemHandDisplay()
@@ -126,8 +135,7 @@ namespace Player
             if (_itemsOnHand.Count == 0)
                 return;
             
-            Debug.Log("objetos en mano" + _itemsOnHand.Count + " index: " + _currentItemOnHandIndex);
-            
+            ItemRemoved?.Invoke(_currentItemOnHand);
             _itemsOnHand.RemoveAt(_currentItemOnHandIndex);
 
             if (AmountOfItemsOnTheHand == 0)
@@ -143,6 +151,7 @@ namespace Player
             {
                 CurrentItemOnHand = _itemsOnHand[_currentItemOnHandIndex % _itemsOnHand.Count];
             }
+            
         }
     }
 }

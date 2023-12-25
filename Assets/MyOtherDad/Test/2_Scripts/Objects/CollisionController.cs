@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using Domain;
 using Player;
 using UnityEngine;
@@ -11,7 +12,7 @@ namespace Objects
         [SerializeField] private LayerMask overLapSphereLayer;
         [SerializeField] private LayerMask defaultLayer;
         [SerializeField] private LayerMask ignorePlayerLayer;
-        
+
         public void EnableCollisionWithPlayer()
         {
             StartCoroutine(EnableCollisionRoutine());

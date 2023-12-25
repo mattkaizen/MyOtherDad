@@ -1,49 +1,32 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
+using CustomInput;
 using Domain;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 namespace Player
 {
     public class PlayerInputToggle : MonoBehaviour
     {
-        [Header("Inputs"), SerializeField] private InputReaderData inputReader;
-
-        private void EnableInput(InputAction input)
-        {
-            input?.Enable();
-        }
-
-        private void DisableInput(InputAction input)
-        {
-            input?.Disable();
-        }
-
+        [Header("Inputs"), SerializeField] private InputActionControlManagerData inputActionControlManager;
         public void EnableCameraObjectInput(CameraMovementMode cameraMovementMode)
         {
-            EnableInput(inputReader.GetUp);
-            EnableInput(inputReader.Paint); //TODO: repensar
+            inputActionControlManager.GetUpActionControl.EnableInput();
+            inputActionControlManager.PaintActionControl.EnableInput();
 
             if (cameraMovementMode == CameraMovementMode.FreeLook)
             {
-                EnableInput(inputReader.LookAsset);
+                inputActionControlManager.LookAtAssetActionControl.EnableInput();
             }
         }
+
         public void EnablePlayerInput()
         {
-            foreach (var inputAction in inputReader.playerInputActions)
-            {
-                EnableInput(inputAction);
-            }
+            inputActionControlManager.EnableAllInputs();
         }
 
         public void DisablePlayerInput()
         {
-            foreach (var inputAction in inputReader.playerInputActions)
-            {
-                DisableInput(inputAction);
-            }
+            inputActionControlManager.DisableAllInputs();
         }
 
         public void EnablePlayerInput(float delay)
@@ -55,12 +38,12 @@ namespace Player
         {
             StartCoroutine(DisablePlayerInputRoutine(delay));
         }
-        
+
         public void EnableCameraObjectInput(CameraMovementMode cameraMovementMode, float delay)
         {
             StartCoroutine(EnableCameraObjectInputRoutine(cameraMovementMode, delay));
         }
-        
+
         private IEnumerator EnableCameraObjectInputRoutine(CameraMovementMode cameraMovementMode, float delay)
         {
             yield return new WaitForSeconds(delay);

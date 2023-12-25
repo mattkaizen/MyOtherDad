@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 408aad6383cc4d12b46725e538a0a089, type: 3}
+  m_Name: InputControlManager
+  m_EditorClassIdentifier: 
+  moveActionControl: {fileID: 11400000, guid: 30230a2e939c9444ea6d8287014c618d, type: 2}
+  runActionControl: {fileID: 11400000, guid: cc447e1d36ea9dd46a1581105dcd99b5, type: 2}
+  lookAtActionControl: {fileID: 11400000, guid: 8f244c301daf6dd4da5d509dc0e57702, type: 2}
+  lookAtAssetActionControl: {fileID: 11400000, guid: 69cce268e3155734eb2ab646c4c9b35f, type: 2}
+  interactActionControl: {fileID: 11400000, guid: 14f1e1cc72fa1b249a6a59ad61bf7262, type: 2}
+  getUpActionControl: {fileID: 11400000, guid: afd333e07b6bfb940b9f789e989c2a41, type: 2}
+  throwItemActionControl: {fileID: 11400000, guid: 74ba20afbbfa8e14c94de64eb25d0984, type: 2}
+  switchNextItemActionControl: {fileID: 11400000, guid: f0bd6428075492345b057b6b8537ff2f, type: 2}
+  switchPreviousItemActionControl: {fileID: 11400000, guid: 293540459fe23fa4d93374c70bd4b95f, type: 2}
+  paintActionControl: {fileID: 11400000, guid: 13fccae33439ff045bd5b8565cc7b2fe, type: 2}

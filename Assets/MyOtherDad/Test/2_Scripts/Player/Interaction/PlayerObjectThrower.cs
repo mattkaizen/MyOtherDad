@@ -52,7 +52,7 @@ namespace Player
                 throwable.Throw(throwDirection, defaultThrowForce);
                 handController.RemoveCurrentItemOnHand();
                 handController.TurnOnCurrentItemHandDisplay();
-
+                
             }
             
         }

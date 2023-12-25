@@ -8,7 +8,8 @@ public class ThrowableObject : MonoBehaviour, IThrowable
         get => objectRigidbody;
         set => objectRigidbody = value;
     }
-    
+
+
     [SerializeField] private Rigidbody objectRigidbody;
 
     public void Throw(Vector3 direction, float force)

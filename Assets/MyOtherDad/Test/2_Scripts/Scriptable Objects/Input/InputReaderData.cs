@@ -1,9 +1,9 @@
-using System.Collections.Generic;
+using CustomInput;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
-[CreateAssetMenu(fileName = "InputReaderData")]
+[CreateAssetMenu(fileName = "InputReaderData", menuName = "Input/Reader")]
 public class InputReaderData : ScriptableObject, GameControls.IPlayerActions
 {
     public event UnityAction<Vector2> Moved = delegate { };
@@ -17,85 +17,54 @@ public class InputReaderData : ScriptableObject, GameControls.IPlayerActions
     public event UnityAction SwitchedNextItem = delegate { };
     public event UnityAction SwitchedPreviousItem = delegate { };
     
-    public InputAction Move => _move;
-    public InputAction Look => _look;
-    public InputAction LookAsset => lookAsset.action;
-    public InputAction Run => _run;
-    public InputAction Interact => _interact;
-    public InputAction Paint => _paint;
-    public InputAction GetUp => _getUp;
-    
+    [SerializeField] private InputActionControlManagerData inputActionControlManager;
     [SerializeField] private InputActionReference lookAsset;
     
     private GameControls _playerInputActions;
-    private InputAction _interact;
-    private InputAction _getUp;
-    private InputAction _move;
-    private InputAction _look;
-    private InputAction _run;
-    private InputAction _paint;
-    private InputAction _throwItem;
-    private InputAction _switchNextItem;
-    private InputAction _switchPreviousItem;
-
-    public List<InputAction> playerInputActions = new List<InputAction>();
-
     private void OnEnable()
     {
         _playerInputActions = new GameControls();
         _playerInputActions.Player.Enable();
         _playerInputActions.Player.SetCallbacks(this);
-
-        _interact = _playerInputActions.Player.Interact;
-        _getUp = _playerInputActions.Player.GetUp;
-        _move = _playerInputActions.Player.Move;
-        _look = _playerInputActions.Player.LookAt;
-        _run = _playerInputActions.Player.Run;
-        _paint = _playerInputActions.Player.Paint;
-        _switchNextItem = _playerInputActions.Player.SwitchNextItem;
-        _switchPreviousItem = _playerInputActions.Player.SwitchPreviousItem;
-        _throwItem = _playerInputActions.Player.ThrowItem;
-
-        _interact.performed += OnInteract;
-        _getUp.performed += OnGetUp;
-        _move.performed += OnMove;
-        _run.performed += OnRun;
-        _paint.performed += OnPaint;
-        _throwItem.performed += OnThrowItem;
-        _switchNextItem.performed += OnSwitchNextItem;
-        _switchPreviousItem.performed += OnSwitchPreviousItem;
         
-        playerInputActions.Clear();
+        inputActionControlManager.MoveActionControl.Input = _playerInputActions.Player.Move;
+        inputActionControlManager.RunActionControl.Input = _playerInputActions.Player.Run;
+        inputActionControlManager.LookAtActionControl.Input = _playerInputActions.Player.LookAt;
+        inputActionControlManager.LookAtAssetActionControl.Input = lookAsset.action;
+        inputActionControlManager.InteractActionControl.Input = _playerInputActions.Player.Interact;
+        inputActionControlManager.GetUpActionControl.Input = _playerInputActions.Player.GetUp;
+        inputActionControlManager.ThrowItemActionControl.Input = _playerInputActions.Player.ThrowItem;
+        inputActionControlManager.SwitchNextItemActionControl.Input = _playerInputActions.Player.SwitchNextItem;
+        inputActionControlManager.SwitchPreviousItemActionControl.Input = _playerInputActions.Player.SwitchPreviousItem;
+        inputActionControlManager.PaintActionControl.Input = _playerInputActions.Player.Paint;
         
-        playerInputActions.Add(_interact);
-        playerInputActions.Add(_getUp);
-        playerInputActions.Add(_move);
-        playerInputActions.Add(_look);
-        playerInputActions.Add(_run);
-        playerInputActions.Add(_paint);
-        playerInputActions.Add(_switchNextItem);
-        playerInputActions.Add(_switchPreviousItem);
-        playerInputActions.Add(lookAsset.action);
-
+        inputActionControlManager.MoveActionControl.Input.performed += OnMove;
+        inputActionControlManager.RunActionControl.Input.performed += OnRun;
+        inputActionControlManager.LookAtActionControl.Input.performed += OnLookAt;
+        inputActionControlManager.InteractActionControl.Input.performed += OnInteract;
+        inputActionControlManager.GetUpActionControl.Input.performed += OnGetUp;
+        inputActionControlManager.ThrowItemActionControl.Input.performed += OnThrowItem;
+        inputActionControlManager.SwitchNextItemActionControl.Input.performed += OnSwitchNextItem;
+        inputActionControlManager.SwitchPreviousItemActionControl.Input.performed += OnSwitchPreviousItem;
+        inputActionControlManager.PaintActionControl.Input.performed += OnPaint;
     }
 
     private void OnDisable()
     {
-        _interact.performed -= OnInteract;
-        _getUp.performed -= OnGetUp;
-        _move.performed -= OnMove;
-        _run.performed -= OnRun;
-        _paint.performed -= OnPaint;
-        _switchNextItem.performed -= OnSwitchNextItem;
-        _switchPreviousItem.performed -= OnSwitchPreviousItem;
-
-        playerInputActions.Clear();
-        _playerInputActions.Player.Disable();
+        inputActionControlManager.MoveActionControl.Input.performed -= OnMove;
+        inputActionControlManager.RunActionControl.Input.performed -= OnRun;
+        inputActionControlManager.LookAtActionControl.Input.performed -= OnLookAt;
+        inputActionControlManager.InteractActionControl.Input.performed -= OnInteract;
+        inputActionControlManager.GetUpActionControl.Input.performed -= OnGetUp;
+        inputActionControlManager.ThrowItemActionControl.Input.performed -= OnThrowItem;
+        inputActionControlManager.SwitchNextItemActionControl.Input.performed -= OnSwitchNextItem;
+        inputActionControlManager.SwitchPreviousItemActionControl.Input.performed -= OnSwitchPreviousItem;
+        inputActionControlManager.PaintActionControl.Input.performed -= OnPaint;
     }
 
     public void OnInteract(InputAction.CallbackContext context)
     {
-        if (_interact.WasPerformedThisFrame())
+        if (inputActionControlManager.InteractActionControl.Input.WasPerformedThisFrame())
         {
             Interacted?.Invoke();
         }
@@ -103,7 +72,7 @@ public class InputReaderData : ScriptableObject, GameControls.IPlayerActions
 
     public void OnGetUp(InputAction.CallbackContext context)
     {
-        if (_getUp.WasPerformedThisFrame())
+        if (inputActionControlManager.GetUpActionControl.Input.WasPerformedThisFrame())
         {
             GettingUp?.Invoke();
         }
@@ -111,11 +80,11 @@ public class InputReaderData : ScriptableObject, GameControls.IPlayerActions
 
     public void OnPaint(InputAction.CallbackContext context)
     {
-        if (_paint.WasPerformedThisFrame())
+        if (inputActionControlManager.PaintActionControl.Input.WasPerformedThisFrame())
         {
             Painting?.Invoke();
         }
-        if (_paint.WasReleasedThisFrame())
+        if (inputActionControlManager.PaintActionControl.Input.WasReleasedThisFrame())
         {
             Painted?.Invoke();
         }
@@ -123,7 +92,7 @@ public class InputReaderData : ScriptableObject, GameControls.IPlayerActions
 
     public void OnSwitchNextItem(InputAction.CallbackContext context)
     {
-        if (_switchNextItem.WasPerformedThisFrame())
+        if (inputActionControlManager.SwitchNextItemActionControl.Input.WasPerformedThisFrame())
         {
             SwitchedNextItem?.Invoke();
         }
@@ -131,7 +100,7 @@ public class InputReaderData : ScriptableObject, GameControls.IPlayerActions
     
     public void OnSwitchPreviousItem(InputAction.CallbackContext context)
     {
-        if (_switchPreviousItem.WasPerformedThisFrame())
+        if (inputActionControlManager.SwitchPreviousItemActionControl.Input.WasPerformedThisFrame())
         {
             SwitchedPreviousItem?.Invoke();
         }
@@ -139,7 +108,7 @@ public class InputReaderData : ScriptableObject, GameControls.IPlayerActions
 
     public void OnThrowItem(InputAction.CallbackContext context)
     {
-        if (_throwItem.WasPerformedThisFrame())
+        if (inputActionControlManager.ThrowItemActionControl.Input.WasPerformedThisFrame())
         {
             ThrowItem?.Invoke();
         }
@@ -147,7 +116,7 @@ public class InputReaderData : ScriptableObject, GameControls.IPlayerActions
 
     public void OnMove(InputAction.CallbackContext context)
     {
-        if (_move.WasPerformedThisFrame())
+        if (inputActionControlManager.MoveActionControl.Input.WasPerformedThisFrame())
         {
             Moved?.Invoke(context.ReadValue<Vector2>());
         }
@@ -159,7 +128,7 @@ public class InputReaderData : ScriptableObject, GameControls.IPlayerActions
 
     public void OnLookAt(InputAction.CallbackContext context)
     {
-        if (_look.WasPerformedThisFrame())
+        if (inputActionControlManager.LookAtActionControl.Input.WasPerformedThisFrame())
         {
             Looked?.Invoke(context.ReadValue<Vector2>());
         }
@@ -171,7 +140,7 @@ public class InputReaderData : ScriptableObject, GameControls.IPlayerActions
 
     public void OnRun(InputAction.CallbackContext context)
     {
-        if(_run.WasPerformedThisFrame())
+        if(inputActionControlManager.RunActionControl.Input.WasPerformedThisFrame())
         {
             Ran?.Invoke(true);
         }

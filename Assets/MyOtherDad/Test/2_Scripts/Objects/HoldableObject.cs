@@ -1,8 +1,8 @@
-﻿using UnityEngine;
+﻿    using UnityEngine;
 
 namespace Objects
 {
-    public class HoldableItem : MonoBehaviour, IHoldable
+    public class HoldableObject : MonoBehaviour, IHoldable
     {
         public GameObject WorldRepresentation => gameObject;
         
