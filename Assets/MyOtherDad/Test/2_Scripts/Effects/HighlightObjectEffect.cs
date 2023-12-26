@@ -1,34 +1,146 @@
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 public class HighlightObjectEffect : MonoBehaviour
 {
-    private Dictionary<Material, Color> materialsToSetColor = new Dictionary<Material, Color>();
+    [ColorUsage(true, true)] [SerializeField]
+    private Color newEmissionColor;
 
-    private Material _material;
-    private static readonly int BaseColor = Shader.PropertyToID("Color");
+    [ColorUsage(true, true)] [SerializeField]
+    private Color blackEmissionColor;
+
+    [SerializeField] private float lerpEmissiveColorToBaseColorTweenDuration;
+    [SerializeField] private float lerpEmissiveColorToNewColorTweenDuration;
+
+    private readonly int baseColor = Shader.PropertyToID("_BaseColor");
+    private readonly int emisionColor = Shader.PropertyToID("_EmissionColor");
+
+    private Dictionary<Material, Color> _materialsToSetColor = new Dictionary<Material, Color>();
+    private List<Tweener> lerpEmissionColorToBaseColorTweeners = new List<Tweener>();
+    private List<Tweener> lerpEmissionColorToNewColorTweeners = new List<Tweener>();
+    private IEnumerator _highLightRoutine;
+
+    private bool _isHighlighting;
 
     private void Awake()
     {
-        _material = GetComponent<Renderer>().material;
+        Material[] materials = GetComponent<Renderer>().materials;
+
+        foreach (var material in materials)
+        {
+            Color emissiveColor = material.GetColor(emisionColor);
+            _materialsToSetColor.Add(material, emissiveColor);
+        }
     }
 
-    private void Update()
+    public void EnableHighLight()
     {
-        ChangeColorOverTime();
+        if (!_isHighlighting)
+        {
+            Debug.Log("activar hightlight");
+            KillLerpCurrenColorToBase();
+            StartContinuousEmissiveColorChange();
+            _isHighlighting = true;
+            // _highLightRoutine = ContinuousColorChangeRoutine();
+            // StartCoroutine(_highLightRoutine);
+        }
     }
 
-    private void ChangeColorOverTime()
+    public void DisableHighLight()
     {
-        Color color = _material.GetColor(BaseColor);
+        if (!_isHighlighting) return;
+        //
+        // if (_highLightRoutine != null)
+        //     StopCoroutine(_highLightRoutine);
 
-        float hue, sat, val;
-        Color.RGBToHSV(color, out hue, out sat, out val);
-        hue = (Time.time * 0.25f) % 1.0f;
-        Debug.Log($"Hue {hue} Tiempo {Time.time}");
+        KillEmissionColorToNewColorTweener();
+        LerpCurrentEmissionColorToBase();
+        _isHighlighting = false;
+    }
 
-        color = Color.HSVToRGB(hue, sat, val);
-        _material.SetColor(BaseColor, color);
+    private void StartContinuousEmissiveColorChange()
+    {
+        lerpEmissionColorToNewColorTweeners.Clear();
+
+        foreach (var materialToSetColor in _materialsToSetColor)
+        {
+            EnableEmission(materialToSetColor.Key);
+
+            Tweener tweener = materialToSetColor.Key
+                .DOColor(newEmissionColor, emisionColor, lerpEmissiveColorToNewColorTweenDuration)
+                .SetEase(Ease.Linear)
+                .SetLoops(-1, LoopType.Yoyo);
+
+            lerpEmissionColorToNewColorTweeners.Add(tweener);
+        }
+    }
+
+    // private IEnumerator ContinuousColorChangeRoutine()
+    // {
+    //     _isHighlighting = true;
+    //
+    //     while (_isHighlighting)
+    //     {
+    //         foreach (var materialToSetColor in _materialsToSetColor)
+    //         {
+    //             Color color = materialToSetColor.Key.GetColor(baseColor);
+    //
+    //             float hue, sat, val;
+    //             Color.RGBToHSV(color, out hue, out sat, out val);
+    //             hue = (Time.time * 0.25f) % 1.0f;
+    //
+    //             color = Color.HSVToRGB(hue, sat, val);
+    //
+    //
+    //             materialToSetColor.Key.color = color;
+    //         }
+    //         yield return null;
+    //     }
+    // }
+
+
+    private void LerpCurrentEmissionColorToBase()
+    {
+        foreach (var materialToSetColor in _materialsToSetColor)
+        {
+            Tweener tweener = materialToSetColor.Key.DOColor(blackEmissionColor, emisionColor,
+                    lerpEmissiveColorToBaseColorTweenDuration)
+                .OnComplete((() => { DisableEmission(materialToSetColor.Key); }));
+            lerpEmissionColorToBaseColorTweeners.Add(tweener);
+        }
+    }
+
+    private void KillEmissionColorToNewColorTweener()
+    {
+        foreach (var lerpEmissionColorToNewColorTweener in lerpEmissionColorToNewColorTweeners)
+        {
+            lerpEmissionColorToNewColorTweener.Kill();
+        }
+
+        lerpEmissionColorToNewColorTweeners.Clear();
+    }
+
+    private void KillLerpCurrenColorToBase()
+    {
+        foreach (var lerpToCurrentColorTweener in lerpEmissionColorToBaseColorTweeners)
+        {
+            lerpToCurrentColorTweener.Kill();
+        }
+
+        lerpEmissionColorToBaseColorTweeners.Clear();
+    }
+
+    private void EnableEmission(Material material)
+    {
+        material.EnableKeyword("_EMISSION");
+        material.globalIlluminationFlags |= MaterialGlobalIlluminationFlags.RealtimeEmissive;
+    }
+
+    private void DisableEmission(Material material)
+    {
+        material.DisableKeyword("_EMISSION");
+        material.globalIlluminationFlags &= ~MaterialGlobalIlluminationFlags.RealtimeEmissive;
     }
 }

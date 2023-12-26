@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 2008690356304743915}
   - component: {fileID: 2413291819494957371}
   - component: {fileID: 799669627547629846}
+  - component: {fileID: 6608587790571369749}
   m_Layer: 0
   m_Name: Pickable Trash Paper
   m_TagString: Untagged
@@ -149,6 +150,19 @@ MonoBehaviour:
   ignorePlayerLayer:
     serializedVersion: 2
     m_Bits: 128
+--- !u!114 &6608587790571369749
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2234031790852482415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5c9435c67ee4ab684b91e1764ca8220, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemData: {fileID: 11400000, guid: 0f923f5e7a0edd34eb52425da6e66171, type: 2}
 --- !u!1 &6833943233787164093
 GameObject:
   m_ObjectHideFlags: 0

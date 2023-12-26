@@ -31,10 +31,11 @@ namespace Tasks
         [SerializeField] private int amountOfTrashToPick;
         [SerializeField] private List<ItemData> trashDataToCheck;
         [SerializeField] private InputActionControlData getUpInput;
+        [SerializeField] private HighlightObjectEffect highLightBed;
 
         private GameObject _lastItemThrown;
 
-        private int _amountOfTrashPicked;
+        [SerializeField] private int _amountOfTrashPicked;
         private bool _isCompleted;
         private bool _isStarted;
 
@@ -67,10 +68,13 @@ namespace Tasks
         {
             if (PlayerHasTargetAmountOfTrashOnHand())
             {
+                Debug.Log("Activar shader");
+                highLightBed.EnableHighLight();
                 IsStarted = true;
             }
             else
             {
+                highLightBed.DisableHighLight();
                 IsStarted = false;
             }
         }
@@ -139,8 +143,16 @@ namespace Tasks
 
             yield return new WaitUntil((() =>
             {
-                _lastItemThrown.TryGetComponent<IThrowable>(out var throwable);
-                return throwable.Rigidbody.velocity == Vector3.zero; //TODO: Tal vez con la velociddad vertical es suficiente
+                if (_lastItemThrown != null)
+                {
+                    _lastItemThrown.TryGetComponent<IThrowable>(out var throwable);
+                    return throwable.Rigidbody.velocity == Vector3.zero; //TODO: Tal vez con la velociddad vertical es suficiente
+                }
+                else
+                {
+                    return false;
+                }
+
             }));
             CompleteTask();
         }
