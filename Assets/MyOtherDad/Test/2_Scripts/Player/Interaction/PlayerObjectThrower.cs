@@ -5,15 +5,26 @@ namespace Player
 {
     public class PlayerObjectThrower : MonoBehaviour
     {
+        public Vector3 ThrowDirection => _throwDirection;
+
+        public float CurrentThrowForce => _currentThrowForce;
+
+        public Transform ShootPoint => shootPoint;
+
         [SerializeField] private float defaultThrowForce = 10.0f;
         [SerializeField] private Transform mainCamera;
         [SerializeField] private Transform shootPoint;
         [SerializeField] private InputReaderData inputReader;
         [SerializeField] private HandController handController;
 
+        private Vector3 _throwDirection;
+
+        private float _currentThrowForce;
+
         private void OnEnable()
         {
             inputReader.ThrowItem += TryThrowObject;
+            SetDefaultThrowForce();
         }
 
         private void OnDisable()
@@ -27,21 +38,20 @@ namespace Player
         }
         private void TryThrowObject()
         {
-            if (!handController.HasItemOnHand) return;
+            if (!handController.HasItemOnHand)
+            {
+                Debug.Log("Hasn't item on hand");
+                return;
+            }
 
             if (handController.CurrentItemOnHand.TryGetComponent<IThrowable>(out var throwable))
-            { //TODO: tal vez haya que poner en kinematic el rigidbody antes de activar el game object y desactivar lo kinematic al lanzarlo.
-
+            {
                 handController.CurrentItemOnHand.TryGetComponent<IPlayerCollision>(out var collision);
-
-                // Vector3 throwDirection = handController.CurrentItemOnHand.transform.position + mainCamera.forward;
-                // Vector3 throwDirection = shootPoint.localPosition + shootPoint.forward;
-                Vector3 throwDirection = shootPoint.forward - shootPoint.localPosition;
-                Debug.Log($"throw direction {throwDirection}");
                 
                 Debug.DrawRay(shootPoint.localPosition,  5 * mainCamera.forward, Color.magenta, 0.5f);
+                
+                _throwDirection = shootPoint.forward;
 
-                // Debug.DrawLine(shootPoint.position, shootPoint.forward * 5, Color.magenta, 5);
                 handController.TurnOffCurrentItemHandDisplay();
                 handController.ResetParentCurrenItemHandRepresentation();
                 handController.CurrentItemOnHand.transform.SetParent(null);
@@ -49,12 +59,22 @@ namespace Player
                 collision?.DisableCollisionWithPlayer();
                 handController.CurrentItemOnHand.SetActive(true);
                 collision?.EnableCollisionWithPlayer();
-                throwable.Throw(throwDirection, defaultThrowForce);
+                throwable.Throw(_throwDirection, _currentThrowForce);
                 handController.RemoveCurrentItemOnHand();
                 handController.TurnOnCurrentItemHandDisplay();
                 
             }
             
+        }
+
+        public void SetDefaultThrowForce()
+        {
+            _currentThrowForce = defaultThrowForce;
+        }
+
+        public void SetNewThrowForce(float newForce)
+        {
+            _currentThrowForce = newForce;
         }
     }
 }

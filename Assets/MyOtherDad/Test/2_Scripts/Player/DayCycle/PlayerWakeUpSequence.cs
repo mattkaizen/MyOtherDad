@@ -1,4 +1,5 @@
-﻿using DG.Tweening;
+﻿using Data;
+using DG.Tweening;
 using Effects;
 using Domain;
 using Objects;
@@ -13,6 +14,7 @@ namespace Player
         [SerializeField] private PlayerCameraInteraction playerCameraInteraction;
         [SerializeField] private PlayerInputToggle playerInputToggle;
         [SerializeField] private CameraInteractableObject cameraChangeableObject;
+        [SerializeField] private VoidEventChannelData wakeUpSequenceCompleted;
 
         private IInteractableCamera newInteractableCamera;
 
@@ -39,6 +41,7 @@ namespace Player
             screenFadeEffect.GetFadeScreenOutTween().OnComplete((() =>
             {
                 playerInputToggle.EnableCameraObjectInput(newInteractableCamera.CameraInteraction);
+                wakeUpSequenceCompleted.RaiseEvent();
             }));
         }
     }

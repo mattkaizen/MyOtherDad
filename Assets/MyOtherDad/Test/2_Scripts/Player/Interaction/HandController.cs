@@ -61,6 +61,9 @@ namespace Player
             CurrentItemOnHand = _itemsOnHand[_currentItemOnHandIndex];
 
             TurnOnCurrentItemHandDisplay();
+            
+            Debug.Log($"Switch Next Item, current index {_currentItemOnHandIndex}");
+
         }
         
         private void TrySwitchPreviousItem()
@@ -90,13 +93,19 @@ namespace Player
             item.HandRepresentation.transform.localPosition = Vector3.zero;
 
             
-            _itemsOnHand.Add(item.WorldRepresentation);
+            TurnOffCurrentItemHandDisplay();
+            // _itemsOnHand.Add(item.WorldRepresentation);
+            _currentItemOnHandIndex = 0;
+
+            _itemsOnHand.Insert(_currentItemOnHandIndex,item.WorldRepresentation );
+            
             item.TurnOnHandRepresentation();
             
-            CurrentItemOnHand = _itemsOnHand[0];
-            _currentItemOnHandIndex = 0;
+            CurrentItemOnHand = _itemsOnHand[_currentItemOnHandIndex];
             
             ItemAdded?.Invoke(item.WorldRepresentation);
+            
+            Debug.Log($"Add item on hand index {_currentItemOnHandIndex} { item.WorldRepresentation.gameObject.name}");
         }
 
         public void TurnOnCurrentItemHandDisplay()
@@ -115,7 +124,14 @@ namespace Player
 
             if (CurrentItemOnHand.TryGetComponent<IHoldable>(out var holdable))
             {
+                
+                Debug.Log($"Turn off {holdable.HandRepresentation.gameObject.name} in {holdable.WorldRepresentation.gameObject.name}");
                 holdable.TurnOffHandRepresentation();
+            }
+            else
+            {
+                Debug.Log($"it doesn't have holdable component {_currentItemOnHand.name}");
+
             }
         }
 
@@ -132,8 +148,10 @@ namespace Player
 
         public void RemoveCurrentItemOnHand()
         {
-            if (_itemsOnHand.Count == 0)
+            if (AmountOfItemsOnTheHand == 0)
+            {
                 return;
+            }
             
             ItemRemoved?.Invoke(_currentItemOnHand);
             _itemsOnHand.RemoveAt(_currentItemOnHandIndex);
@@ -149,9 +167,20 @@ namespace Player
             }
             else
             {
-                CurrentItemOnHand = _itemsOnHand[_currentItemOnHandIndex % _itemsOnHand.Count];
+                int lastIndex = _itemsOnHand.Count - 1;
+                bool isMinorThanLastIndex = _currentItemOnHandIndex < lastIndex;
+                
+                if (_currentItemOnHandIndex > 0 && isMinorThanLastIndex)
+                {
+                    _currentItemOnHandIndex += 1;
+                }
+                else if (_currentItemOnHandIndex == _itemsOnHand.Count)
+                {
+                    _currentItemOnHandIndex -= 1;
+                }
+                
+                CurrentItemOnHand = _itemsOnHand[_currentItemOnHandIndex];
             }
-            
         }
     }
 }

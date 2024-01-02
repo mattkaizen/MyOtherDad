@@ -7,14 +7,30 @@ namespace Objects
 {
     public class TrashDetectorTrigger : MonoBehaviour
     {
+        public int AmountObjectAdded
+        {
+            get => amountObjectAdded;
+            set => amountObjectAdded = value;
+        }
+
+        public bool IsTrashDetectionEnabled
+        {
+            get => _isTrashDetectionEnabled;
+            set => _isTrashDetectionEnabled = value;
+        }
+
         [SerializeField] private List<ItemData> trashDataToCheck;
         [SerializeField] private Vector3 velocityThreshold;
         [SerializeField] private int amountObjectAdded;
 
         private Dictionary<GameObject, IEnumerator> _currentObjects = new Dictionary<GameObject, IEnumerator>();
 
+        private bool _isTrashDetectionEnabled;
+
         private void OnTriggerStay(Collider other)
         {
+            if (!_isTrashDetectionEnabled) return;
+            
             if (other.TryGetComponent<IThrowable>(out var throwableObject))
             {
                 if (other.TryGetComponent<IObjectData>(out var objectData))
@@ -37,6 +53,8 @@ namespace Objects
 
         private void OnTriggerExit(Collider other)
         {
+            if (!_isTrashDetectionEnabled) return;
+
             if (_currentObjects.ContainsKey(other.gameObject))
             {
                 _currentObjects.Remove(other.gameObject);
@@ -58,6 +76,7 @@ namespace Objects
 
         private void AddObject()
         {
+            Debug.Log("TrashDetector: Object added");
             amountObjectAdded++;
         }
     }

@@ -25,6 +25,7 @@ namespace CustomInput
         public void EnableInput()
         {
             _input?.Enable();
+            
             if (inputEnabled != null)
                 inputEnabled.RaiseEvent();
             else

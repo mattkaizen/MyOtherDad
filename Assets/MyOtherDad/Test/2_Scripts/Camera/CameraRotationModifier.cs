@@ -1,7 +1,7 @@
 ﻿using Cinemachine;
 using UnityEngine;
 
-namespace Camera
+namespace CameraSettings
 {
     public class CameraRotationModifier : MonoBehaviour
     {

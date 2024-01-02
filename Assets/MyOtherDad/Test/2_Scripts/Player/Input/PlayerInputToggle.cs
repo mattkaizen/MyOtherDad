@@ -1,5 +1,7 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using CustomInput;
+using Data;
 using Domain;
 using UnityEngine;
 
@@ -8,6 +10,25 @@ namespace Player
     public class PlayerInputToggle : MonoBehaviour
     {
         [Header("Inputs"), SerializeField] private InputActionControlManagerData inputActionControlManager;
+        [Header("Inputs"), SerializeField] private VoidEventChannelData enableCameraObjectInputInterrupted;
+
+        private IEnumerator _enableCameraObjectInputRoutine;
+
+        private void OnEnable()
+        {
+            enableCameraObjectInputInterrupted.EventRaised += OnEnableCameraObjectInputInterrupted;
+        }
+
+        private void OnDisable()
+        {
+            enableCameraObjectInputInterrupted.EventRaised -= OnEnableCameraObjectInputInterrupted;
+        }
+
+        private void OnEnableCameraObjectInputInterrupted()
+        {
+            StopEnableCameraObjectInputRoutine();
+        }
+
         public void EnableCameraObjectInput(CameraMovementMode cameraMovementMode)
         {
             inputActionControlManager.GetUpActionControl.EnableInput();
@@ -41,7 +62,8 @@ namespace Player
 
         public void EnableCameraObjectInput(CameraMovementMode cameraMovementMode, float delay)
         {
-            StartCoroutine(EnableCameraObjectInputRoutine(cameraMovementMode, delay));
+            _enableCameraObjectInputRoutine = EnableCameraObjectInputRoutine(cameraMovementMode, delay);
+            StartCoroutine(_enableCameraObjectInputRoutine);
         }
 
         private IEnumerator EnableCameraObjectInputRoutine(CameraMovementMode cameraMovementMode, float delay)
@@ -60,6 +82,15 @@ namespace Player
         {
             yield return new WaitForSeconds(delay);
             DisablePlayerInput();
+        }
+
+        private void StopEnableCameraObjectInputRoutine()
+        {
+            if (_enableCameraObjectInputRoutine != null)
+            {
+                StopCoroutine(_enableCameraObjectInputRoutine);
+                Debug.Log("---StopCoroutine EnableCameraObjectInputRoutine");
+            }
         }
     }
 }

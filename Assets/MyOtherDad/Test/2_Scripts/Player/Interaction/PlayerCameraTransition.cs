@@ -44,9 +44,9 @@ namespace Player
             playerInputToggle.DisablePlayerInput();
             screenFadeEffect.FadeScreenIn();
             yield return new WaitForSeconds(cameraTransitionDuration);
-            SetLiveNewCamera(interactableCamera);
             screenFadeEffect.GetFadeScreenOutTween();
             playerInputToggle.EnableCameraObjectInput(interactableCamera.CameraInteraction, delayToEnablePlayerInput);
+            SetLiveNewCamera(interactableCamera);
 
         }
 

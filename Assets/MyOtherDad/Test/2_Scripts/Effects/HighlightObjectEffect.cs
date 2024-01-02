@@ -15,7 +15,7 @@ public class HighlightObjectEffect : MonoBehaviour
     [SerializeField] private float lerpEmissiveColorToNewColorTweenDuration;
 
     private readonly int baseColor = Shader.PropertyToID("_BaseColor");
-    private readonly int emisionColor = Shader.PropertyToID("_EmissionColor");
+    private readonly int emissionColor = Shader.PropertyToID("_EmissionColor");
 
     private Dictionary<Material, Color> _materialsToSetColor = new Dictionary<Material, Color>();
     private List<Tweener> lerpEmissionColorToBaseColorTweeners = new List<Tweener>();
@@ -30,7 +30,7 @@ public class HighlightObjectEffect : MonoBehaviour
 
         foreach (var material in materials)
         {
-            Color emissiveColor = material.GetColor(emisionColor);
+            Color emissiveColor = material.GetColor(emissionColor);
             _materialsToSetColor.Add(material, emissiveColor);
         }
     }
@@ -39,7 +39,6 @@ public class HighlightObjectEffect : MonoBehaviour
     {
         if (!_isHighlighting)
         {
-            Debug.Log("activar hightlight");
             KillLerpCurrenColorToBase();
             StartContinuousEmissiveColorChange();
             _isHighlighting = true;
@@ -69,7 +68,7 @@ public class HighlightObjectEffect : MonoBehaviour
             EnableEmission(materialToSetColor.Key);
 
             Tweener tweener = materialToSetColor.Key
-                .DOColor(newEmissionColor, emisionColor, lerpEmissiveColorToNewColorTweenDuration)
+                .DOColor(newEmissionColor, emissionColor, lerpEmissiveColorToNewColorTweenDuration)
                 .SetEase(Ease.Linear)
                 .SetLoops(-1, LoopType.Yoyo);
 
@@ -105,7 +104,7 @@ public class HighlightObjectEffect : MonoBehaviour
     {
         foreach (var materialToSetColor in _materialsToSetColor)
         {
-            Tweener tweener = materialToSetColor.Key.DOColor(blackEmissionColor, emisionColor,
+            Tweener tweener = materialToSetColor.Key.DOColor(blackEmissionColor, emissionColor,
                     lerpEmissiveColorToBaseColorTweenDuration)
                 .OnComplete((() => { DisableEmission(materialToSetColor.Key); }));
             lerpEmissionColorToBaseColorTweeners.Add(tweener);

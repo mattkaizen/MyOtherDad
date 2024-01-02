@@ -1,6 +1,8 @@
-﻿    using UnityEngine;
+﻿    using System;
+    using UnityEngine;
+    using Random = UnityEngine.Random;
 
-namespace Objects
+    namespace Objects
 {
     public class HoldableObject : MonoBehaviour, IHoldable
     {
@@ -9,6 +11,11 @@ namespace Objects
         public GameObject HandRepresentation => handRepresentation;
         
         [SerializeField] private GameObject handRepresentation;
+
+        private void Awake()
+        {
+            handRepresentation.gameObject.name = $"HandRepresentation {Random.Range(1,100)}";
+        }
 
         public void TurnOnHandRepresentation()
         {
