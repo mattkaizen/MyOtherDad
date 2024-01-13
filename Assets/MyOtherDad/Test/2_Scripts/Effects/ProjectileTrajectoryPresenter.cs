@@ -1,5 +1,4 @@
-﻿using System;
-using CustomInput;
+﻿using CustomInput;
 using Data;
 using Domain;
 using Player;
@@ -70,7 +69,7 @@ namespace Effects
         private void DrawProjection()
         {
             if (!handController.HasItemOnHand ||
-                !handController.CurrentItemOnHand.TryGetComponent<IThrowable>(out var throwable))
+                !handController.CurrentItemOnHand.WorldRepresentation.TryGetComponent<IThrowable>(out var throwable))
             {
                 lineRenderer.enabled = false;
                 return;

@@ -1,5 +1,4 @@
-﻿    using System;
-    using UnityEngine;
+﻿    using UnityEngine;
     using Random = UnityEngine.Random;
 
     namespace Objects
@@ -14,7 +13,7 @@
 
         private void Awake()
         {
-            handRepresentation.gameObject.name = $"HandRepresentation {Random.Range(1,100)}";
+            handRepresentation.gameObject.name = $"Hand Representation: {WorldRepresentation.gameObject.name} {Random.Range(1,100)}";
         }
 
         public void TurnOnHandRepresentation()
@@ -26,13 +25,5 @@
         {
             handRepresentation.SetActive(false);
         }
-    }
-
-    public interface IHoldable
-    {
-        GameObject WorldRepresentation { get; }
-        GameObject HandRepresentation { get; }
-        void TurnOnHandRepresentation();
-        void TurnOffHandRepresentation();
     }
 }

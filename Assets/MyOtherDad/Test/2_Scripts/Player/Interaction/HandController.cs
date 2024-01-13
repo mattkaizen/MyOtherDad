@@ -7,21 +7,33 @@ namespace Player
 {
     public class HandController : MonoBehaviour
     {
-        public event UnityAction<GameObject> ItemAdded = delegate {  };
-        public event UnityAction<GameObject> ItemRemoved = delegate {  };
-        public GameObject CurrentItemOnHand
+        public event UnityAction<IHoldable> ItemAdded = delegate { };
+        public event UnityAction<IHoldable> ItemRemoved = delegate { };
+
+        public IHoldable CurrentItemOnHand //TODO: Remplazar por WorldRepresentation de IHoldable
         {
             get => _currentItemOnHand;
             set => _currentItemOnHand = value;
         }
-        
-        public List<GameObject> ItemsOnHand
+
+        public List<IHoldable> ItemsOnHand
         {
             get => _itemsOnHand;
             set => _itemsOnHand = value;
         }
 
-        public bool HasItemOnHand => CurrentItemOnHand;
+        // public bool HasItemOnHand => CurrentItemOnHand;
+        public bool HasItemOnHand
+        {
+            get
+            {
+                if (CurrentItemOnHand != null)
+                    return true;
+
+                return false;
+            }
+        }
+
         public bool HasMaxItemOnTheHand => maxAmountItemsOnTheHand == AmountOfItemsOnTheHand;
         public int AmountOfItemsOnTheHand => _itemsOnHand.Count;
 
@@ -29,11 +41,11 @@ namespace Player
         [SerializeField] private GameObject hand;
         [SerializeField] private InputReaderData inputReader;
 
-        private List<GameObject> _itemsOnHand = new List<GameObject>();
-        private GameObject _currentItemOnHand;
+        private List<IHoldable> _itemsOnHand = new List<IHoldable>();
+        private IHoldable _currentItemOnHand;
 
         private int _currentItemOnHandIndex;
-        
+
         private void OnEnable()
         {
             inputReader.SwitchedNextItem += TrySwitchNextItem;
@@ -50,7 +62,7 @@ namespace Player
         {
             if (!HasItemOnHand) return;
             if (AmountOfItemsOnTheHand <= 1) return;
-            
+
             int nextItemIndex = _currentItemOnHandIndex + 1;
 
             if (nextItemIndex >= _itemsOnHand.Count) return;
@@ -61,11 +73,10 @@ namespace Player
             CurrentItemOnHand = _itemsOnHand[_currentItemOnHandIndex];
 
             TurnOnCurrentItemHandDisplay();
-            
-            Debug.Log($"Switch Next Item, current index {_currentItemOnHandIndex}");
 
+            Debug.Log($"Switch Next Item, current index {_currentItemOnHandIndex}");
         }
-        
+
         private void TrySwitchPreviousItem()
         {
             if (!HasItemOnHand) return;
@@ -74,7 +85,7 @@ namespace Player
             int nextItemIndex = _currentItemOnHandIndex - 1;
 
             if (nextItemIndex < 0) return;
-            
+
             _currentItemOnHandIndex -= 1;
 
             TurnOffCurrentItemHandDisplay();
@@ -83,63 +94,67 @@ namespace Player
 
             TurnOnCurrentItemHandDisplay();
         }
+
         public void AddItemOnHand(IHoldable item)
         {
             item.WorldRepresentation.transform.SetParent(hand.transform);
             item.WorldRepresentation.transform.localPosition = Vector3.zero;
             item.WorldRepresentation.transform.localRotation = Quaternion.identity;
-            
+
             item.HandRepresentation.transform.SetParent(hand.transform);
             item.HandRepresentation.transform.localPosition = Vector3.zero;
 
-            
+
             TurnOffCurrentItemHandDisplay();
-            // _itemsOnHand.Add(item.WorldRepresentation);
             _currentItemOnHandIndex = 0;
 
-            _itemsOnHand.Insert(_currentItemOnHandIndex,item.WorldRepresentation );
-            
+            _itemsOnHand.Insert(_currentItemOnHandIndex, item);
+
             item.TurnOnHandRepresentation();
-            
+
             CurrentItemOnHand = _itemsOnHand[_currentItemOnHandIndex];
-            
-            ItemAdded?.Invoke(item.WorldRepresentation);
-            
-            Debug.Log($"Add item on hand index {_currentItemOnHandIndex} { item.WorldRepresentation.gameObject.name}");
+
+            ItemAdded?.Invoke(item);
+
+            Debug.Log($"Add item on hand index {_currentItemOnHandIndex} {item.WorldRepresentation.gameObject.name}");
         }
 
         public void TurnOnCurrentItemHandDisplay()
         {
             if (CurrentItemOnHand == null) return;
-            
-            if (CurrentItemOnHand.TryGetComponent<IHoldable>(out var newHoldable))
-            {
-                newHoldable.TurnOnHandRepresentation();
-            }
+
+            CurrentItemOnHand.TurnOnHandRepresentation();
+
+            // if (CurrentItemOnHand.TryGetComponent<IHoldable>(out var newHoldable))
+            // {
+            //     newHoldable.TurnOnHandRepresentation();
+            // }
         }
-        
+
         public void TurnOffCurrentItemHandDisplay()
         {
             if (CurrentItemOnHand == null) return;
 
-            if (CurrentItemOnHand.TryGetComponent<IHoldable>(out var holdable))
-            {
-                
-                Debug.Log($"Turn off {holdable.HandRepresentation.gameObject.name} in {holdable.WorldRepresentation.gameObject.name}");
-                holdable.TurnOffHandRepresentation();
-            }
-            else
-            {
-                Debug.Log($"it doesn't have holdable component {_currentItemOnHand.name}");
+            CurrentItemOnHand.TurnOffHandRepresentation();
 
-            }
+            // if (CurrentItemOnHand.TryGetComponent<IHoldable>(out var holdable))
+            // {
+            //     
+            //     Debug.Log($"Turn off {holdable.HandRepresentation.gameObject.name} in {holdable.WorldRepresentation.gameObject.name}");
+            //     holdable.TurnOffHandRepresentation();
+            // }
+            // else
+            // {
+            //     Debug.Log($"it doesn't have holdable component {_currentItemOnHand.name}");
+            //
+            // }
         }
 
         public void ResetParentCurrenItemHandRepresentation()
         {
             if (CurrentItemOnHand == null) return;
 
-            if (CurrentItemOnHand.TryGetComponent<IHoldable>(out var holdable))
+            if (CurrentItemOnHand.WorldRepresentation.TryGetComponent<IHoldable>(out var holdable))
             {
                 holdable.HandRepresentation.transform.SetParent(holdable.WorldRepresentation.transform);
                 holdable.HandRepresentation.transform.localPosition = Vector3.zero;
@@ -152,7 +167,7 @@ namespace Player
             {
                 return;
             }
-            
+
             ItemRemoved?.Invoke(_currentItemOnHand);
             _itemsOnHand.RemoveAt(_currentItemOnHandIndex);
 
@@ -169,7 +184,7 @@ namespace Player
             {
                 int lastIndex = _itemsOnHand.Count - 1;
                 bool isMinorThanLastIndex = _currentItemOnHandIndex < lastIndex;
-                
+
                 if (_currentItemOnHandIndex > 0 && isMinorThanLastIndex)
                 {
                     _currentItemOnHandIndex += 1;
@@ -178,7 +193,7 @@ namespace Player
                 {
                     _currentItemOnHandIndex -= 1;
                 }
-                
+
                 CurrentItemOnHand = _itemsOnHand[_currentItemOnHandIndex];
             }
         }

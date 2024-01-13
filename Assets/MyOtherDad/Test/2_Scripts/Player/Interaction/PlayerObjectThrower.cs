@@ -44,9 +44,9 @@ namespace Player
                 return;
             }
 
-            if (handController.CurrentItemOnHand.TryGetComponent<IThrowable>(out var throwable))
+            if (handController.CurrentItemOnHand.WorldRepresentation.TryGetComponent<IThrowable>(out var throwable))
             {
-                handController.CurrentItemOnHand.TryGetComponent<IPlayerCollision>(out var collision);
+                handController.CurrentItemOnHand.WorldRepresentation.TryGetComponent<IPlayerCollision>(out var collision);
                 
                 Debug.DrawRay(shootPoint.localPosition,  5 * mainCamera.forward, Color.magenta, 0.5f);
                 
@@ -54,10 +54,10 @@ namespace Player
 
                 handController.TurnOffCurrentItemHandDisplay();
                 handController.ResetParentCurrenItemHandRepresentation();
-                handController.CurrentItemOnHand.transform.SetParent(null);
-                handController.CurrentItemOnHand.transform.position = shootPoint.position;
+                handController.CurrentItemOnHand.WorldRepresentation.transform.SetParent(null);
+                handController.CurrentItemOnHand.WorldRepresentation.transform.position = shootPoint.position;
                 collision?.DisableCollisionWithPlayer();
-                handController.CurrentItemOnHand.SetActive(true);
+                handController.CurrentItemOnHand.WorldRepresentation.SetActive(true);
                 collision?.EnableCollisionWithPlayer();
                 throwable.Throw(_throwDirection, _currentThrowForce);
                 handController.RemoveCurrentItemOnHand();

@@ -54,7 +54,7 @@ namespace Tasks
         [SerializeField] private int amountOfTrashToPick;
         [SerializeField] private List<ItemData> trashDataToCheck;
 
-        private GameObject _lastItemThrown;
+        private IHoldable _lastItemThrown;
 
         private int _amountOfTrashPicked;
         private bool _isCompleted;
@@ -133,9 +133,9 @@ namespace Tasks
             throwTrashTaskCompletedWithScoreOf.RaiseEvent(score);
         }
 
-        private void OnItemRemoved(GameObject item)
+        private void OnItemRemoved(IHoldable item)
         {
-            if (item.TryGetComponent<IObjectData>(out var objectData))
+            if (item.WorldRepresentation.TryGetComponent<IObjectData>(out var objectData))
             {
                 if (trashDataToCheck.Contains(objectData.Data))
                 {
@@ -147,9 +147,9 @@ namespace Tasks
             }
         }
 
-        private void OnItemAdded(GameObject item)
+        private void OnItemAdded(IHoldable item)
         {
-            if (item.TryGetComponent<IObjectData>(out var objectData))
+            if (item.WorldRepresentation.TryGetComponent<IObjectData>(out var objectData))
             {
                 if (trashDataToCheck.Contains(objectData.Data))
                 {
@@ -173,7 +173,7 @@ namespace Tasks
             {
                 if (_lastItemThrown != null)
                 {
-                    _lastItemThrown.TryGetComponent<IThrowable>(out var throwable);
+                    _lastItemThrown.WorldRepresentation.TryGetComponent<IThrowable>(out var throwable);
                     return
                         throwable.Rigidbody.velocity ==
                         Vector3.zero; //TODO: Tal vez con la velociddad vertical es suficiente

@@ -16,23 +16,24 @@ namespace Player
         private void Awake()
         {
             if (inputReader != null)
-                inputReader.Interacted += OnInteracted;
+                inputReader.Interacting += OnInteracting;
         }
 
         private void OnDisable()
         {
             if (inputReader != null)
-                inputReader.Interacted -= OnInteracted;
+                inputReader.Interacting -= OnInteracting;
         }
 
         private void OnDrawGizmos()
         {
-            Debug.DrawRay(mainCamera.position,  rayDistance * mainCamera.forward, Color.green, 0.5f);
+            Debug.DrawRay(mainCamera.position, rayDistance * mainCamera.forward, Color.green, 0.5f);
         }
-        
-        private void OnInteracted()
+
+        private void OnInteracting(bool isInteracting)
         {
-            RaycastToPickupObject();
+            if (isInteracting)
+                RaycastToPickupObject();
         }
 
         private void TryPickup(GameObject item)
@@ -41,13 +42,13 @@ namespace Player
             {
                 Debug.LogWarning($"Empty {typeof(PlayerInventory)}");
             }
-            
-            if (item.transform.TryGetComponent<IPickable>(out var pickable)) 
+
+            if (item.transform.TryGetComponent<IPickable>(out var pickable))
             {
                 if (item.transform.TryGetComponent<IHoldable>(out var holdable))
                 {
                     if (handController.HasMaxItemOnTheHand) return;
-                    
+
                     pickable.Pickup();
                     handController.AddItemOnHand(holdable);
                 }

@@ -12,16 +12,17 @@ namespace Player
         [SerializeField] private PlayerCameraTransition playerCameraTransition;
 
         private IInteractableCamera currentInteractableCamera;
+
         private void Awake()
         {
-            inputReader.Interacted += OnInteracted;
+            inputReader.Interacting += OnInteracting;
             inputReader.GettingUp += OnGettingUp;
         }
 
         private void OnDisable()
         {
-            inputReader.Interacted -= OnInteracted;
-            inputReader.GettingUp -= OnGettingUp; 
+            inputReader.Interacting -= OnInteracting;
+            inputReader.GettingUp -= OnGettingUp;
         }
 
         private void OnGettingUp()
@@ -32,9 +33,10 @@ namespace Player
             playerCameraTransition.TryToTransitionToPlayerCamera();
         }
 
-        private void OnInteracted()
+        private void OnInteracting(bool isInteracting)
         {
-            RayCastToInteractiveObject();
+            if (isInteracting)
+                RayCastToInteractiveObject();
         }
 
         private bool TryInteract(Transform transformToTryInteract)

@@ -14,18 +14,19 @@ namespace Player
         private void Awake()
         {
             if (inputReader != null)
-                inputReader.Interacted += OnInteracted;
+                inputReader.Interacting += OnInteracting;
         }
 
         private void OnDisable()
         {
             if (inputReader != null)
-                inputReader.Interacted -= OnInteracted;
+                inputReader.Interacting -= OnInteracting;
         }
 
-        private void OnInteracted()
+        private void OnInteracting(bool isInteracting)
         {
-            RayCastToInteractiveObject();
+            if (isInteracting)  
+                RayCastToInteractiveObject();
         }
 
         private void TryInteract(Transform transformToTryInteract)
@@ -36,10 +37,11 @@ namespace Player
             }
             else if (transformToTryInteract.TryGetComponent<IInventoryInteractable>(out var inventoryInteractable))
             {
-                foreach (var item in inventory.Items)           
+                foreach (var item in inventory.Items)
                 {
-                    if(inventoryInteractable.TryInteractWith(item.Key))
-                    { //TODO: Si el item es consumible, consultar la cantidad de usos, si queda 1, entonces remover el item del inventario.
+                    if (inventoryInteractable.TryInteractWith(item.Key))
+                    {
+                        //TODO: Si el item es consumible, consultar la cantidad de usos, si queda 1, entonces remover el item del inventario.
                         inventory.RemoveItem(item.Key);
                         break;
                     }

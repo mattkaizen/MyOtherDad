@@ -42,18 +42,14 @@ public class HighlightObjectEffect : MonoBehaviour
             KillLerpCurrenColorToBase();
             StartContinuousEmissiveColorChange();
             _isHighlighting = true;
-            // _highLightRoutine = ContinuousColorChangeRoutine();
-            // StartCoroutine(_highLightRoutine);
+
         }
     }
 
     public void DisableHighLight()
     {
         if (!_isHighlighting) return;
-        //
-        // if (_highLightRoutine != null)
-        //     StopCoroutine(_highLightRoutine);
-
+        
         KillEmissionColorToNewColorTweener();
         LerpCurrentEmissionColorToBase();
         _isHighlighting = false;
@@ -75,31 +71,7 @@ public class HighlightObjectEffect : MonoBehaviour
             lerpEmissionColorToNewColorTweeners.Add(tweener);
         }
     }
-
-    // private IEnumerator ContinuousColorChangeRoutine()
-    // {
-    //     _isHighlighting = true;
-    //
-    //     while (_isHighlighting)
-    //     {
-    //         foreach (var materialToSetColor in _materialsToSetColor)
-    //         {
-    //             Color color = materialToSetColor.Key.GetColor(baseColor);
-    //
-    //             float hue, sat, val;
-    //             Color.RGBToHSV(color, out hue, out sat, out val);
-    //             hue = (Time.time * 0.25f) % 1.0f;
-    //
-    //             color = Color.HSVToRGB(hue, sat, val);
-    //
-    //
-    //             materialToSetColor.Key.color = color;
-    //         }
-    //         yield return null;
-    //     }
-    // }
-
-
+    
     private void LerpCurrentEmissionColorToBase()
     {
         foreach (var materialToSetColor in _materialsToSetColor)
