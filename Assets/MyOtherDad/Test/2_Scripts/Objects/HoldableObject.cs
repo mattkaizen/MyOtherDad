@@ -25,5 +25,5 @@
         {
             handRepresentation.SetActive(false);
         }
-    }
+    }   
 }

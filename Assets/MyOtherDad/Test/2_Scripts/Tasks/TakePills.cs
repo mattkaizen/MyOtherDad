@@ -1,4 +1,5 @@
 ﻿using Data;
+using Objects;
 using UnityEngine;
 
 namespace Tasks
@@ -20,6 +21,8 @@ namespace Tasks
         [SerializeField] private VoidEventChannelData eventToCompleteTakePill;
         [Space]
         [SerializeField] private VoidEventChannelData takePillTaskCompleted;
+
+        [SerializeField] private PickableObject pickableObject;
         
         private bool _isCompleted;
         private bool _isStarted;

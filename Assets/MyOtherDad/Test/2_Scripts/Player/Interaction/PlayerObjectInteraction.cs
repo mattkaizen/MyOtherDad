@@ -1,4 +1,5 @@
 ﻿using Domain;
+using Objects;
 using UnityEngine;
 
 namespace Player
@@ -10,6 +11,7 @@ namespace Player
         [SerializeField] private Transform mainCamera;
         [SerializeField] private InputReaderData inputReader;
         [SerializeField] private PlayerInventory inventory;
+        [SerializeField] private HandController handController;
 
         private void Awake()
         {
@@ -35,6 +37,13 @@ namespace Player
             {
                 interactableObject.Interact();
             }
+            // else if (transformToTryInteract.TryGetComponent<IHandInteractable>(out var handInteractable))
+            // {
+            //     if (handController.CurrentItemOnHand.HandRepresentation.TryGetComponent<ObjectDataProvider>(out var provider))
+            //     {
+            //         handInteractable.TryInteractWith(provider.Data);
+            //     }
+            // }
             else if (transformToTryInteract.TryGetComponent<IInventoryInteractable>(out var inventoryInteractable))
             {
                 foreach (var item in inventory.Items)

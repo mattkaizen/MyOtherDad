@@ -10,7 +10,7 @@ namespace Player
         public event UnityAction<IHoldable> ItemAdded = delegate { };
         public event UnityAction<IHoldable> ItemRemoved = delegate { };
 
-        public IHoldable CurrentItemOnHand //TODO: Remplazar por WorldRepresentation de IHoldable
+        public IHoldable CurrentItemOnHand
         {
             get => _currentItemOnHand;
             set => _currentItemOnHand = value;
@@ -22,7 +22,6 @@ namespace Player
             set => _itemsOnHand = value;
         }
 
-        // public bool HasItemOnHand => CurrentItemOnHand;
         public bool HasItemOnHand
         {
             get
@@ -124,11 +123,6 @@ namespace Player
             if (CurrentItemOnHand == null) return;
 
             CurrentItemOnHand.TurnOnHandRepresentation();
-
-            // if (CurrentItemOnHand.TryGetComponent<IHoldable>(out var newHoldable))
-            // {
-            //     newHoldable.TurnOnHandRepresentation();
-            // }
         }
 
         public void TurnOffCurrentItemHandDisplay()
@@ -136,21 +130,9 @@ namespace Player
             if (CurrentItemOnHand == null) return;
 
             CurrentItemOnHand.TurnOffHandRepresentation();
-
-            // if (CurrentItemOnHand.TryGetComponent<IHoldable>(out var holdable))
-            // {
-            //     
-            //     Debug.Log($"Turn off {holdable.HandRepresentation.gameObject.name} in {holdable.WorldRepresentation.gameObject.name}");
-            //     holdable.TurnOffHandRepresentation();
-            // }
-            // else
-            // {
-            //     Debug.Log($"it doesn't have holdable component {_currentItemOnHand.name}");
-            //
-            // }
         }
 
-        public void ResetParentCurrenItemHandRepresentation()
+        public void ResetParentCurrentItemHandRepresentation()
         {
             if (CurrentItemOnHand == null) return;
 
@@ -196,6 +178,15 @@ namespace Player
 
                 CurrentItemOnHand = _itemsOnHand[_currentItemOnHandIndex];
             }
+        }
+
+        public void ClearCurrentItemOnHandDisplay()
+        {
+            TurnOffCurrentItemHandDisplay();
+            ResetParentCurrentItemHandRepresentation();
+            CurrentItemOnHand.WorldRepresentation.transform.SetParent(null);
+            RemoveCurrentItemOnHand();
+            TurnOnCurrentItemHandDisplay();
         }
     }
 }

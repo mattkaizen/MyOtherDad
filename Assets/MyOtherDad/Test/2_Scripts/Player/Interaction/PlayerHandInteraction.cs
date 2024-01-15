@@ -9,7 +9,7 @@ namespace Player
         [SerializeField] private InputReaderData inputReader;
 
         private void OnEnable()
-        {
+        {    
             inputReader.Interacting += OnInteracting;
         }
 

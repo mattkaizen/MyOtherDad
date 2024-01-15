@@ -1,20 +1,21 @@
-using Data;
 using Domain;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Objects
 {
     public class PickableObject : MonoBehaviour, IPickable
     {
+        public event UnityAction Picked = delegate {  };
         public ItemData Data => itemData;
         
         [SerializeField] private ItemData itemData;
-        [SerializeField] private VoidEventChannelData objectPicked;
+        [SerializeField] private UnityEvent objectPicked;
 
 
         public ItemData Pickup()
         {
-            objectPicked.RaiseEvent();
+            objectPicked?.Invoke();
             gameObject.SetActive(false);
             return Data;
         }

@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Objects
 {
-    public class ItemContainerDisplay : MonoBehaviour
+    public class BookContainerDisplay : MonoBehaviour
     {
         [SerializeField] private VoidEventChannelData eventToDisplayGhostEffect;
         [SerializeField] private ItemContainer container;
@@ -22,7 +22,7 @@ namespace Objects
         {
             if (container != null)
             {
-                container.OnItemSet += DisplayItem;
+                container.OnItemSet -= DisplayItem;
                 eventToDisplayGhostEffect.EventRaised -= OnEventToDisplayGhostEffectRaised;
             }
         }

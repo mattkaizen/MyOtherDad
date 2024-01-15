@@ -53,7 +53,7 @@ namespace Player
                 _throwDirection = shootPoint.forward;
 
                 handController.TurnOffCurrentItemHandDisplay();
-                handController.ResetParentCurrenItemHandRepresentation();
+                handController.ResetParentCurrentItemHandRepresentation();
                 handController.CurrentItemOnHand.WorldRepresentation.transform.SetParent(null);
                 handController.CurrentItemOnHand.WorldRepresentation.transform.position = shootPoint.position;
                 collision?.DisableCollisionWithPlayer();
