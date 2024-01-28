@@ -1,4 +1,5 @@
 ﻿using Data;
+using JetBrains.Annotations;
 using UnityEngine;
 
 namespace Objects.Clothes
@@ -7,6 +8,8 @@ namespace Objects.Clothes
     {
         [SerializeField] private ItemContainer container;
         [SerializeField] private VoidEventChannelData closeAnimationEnded;
+        [SerializeField] private Animator animator;
+        private readonly int close = Animator.StringToHash("Close");
 
         private void OnEnable()
         {
@@ -14,7 +17,6 @@ namespace Objects.Clothes
             {
                 container.OnItemSet += PerformCloseAnimation;
             }
-
         }
 
         private void OnDisable()
@@ -29,11 +31,20 @@ namespace Objects.Clothes
         {
             Debug.Log("Task: PickUp Clothes: ClothesContainerDisplay PerformOpenAnimation");
         }
-        
+
         private void PerformCloseAnimation()
         {
-            if(closeAnimationEnded != null)
+            if (animator != null)
+                animator.SetTrigger(close);
+        }
+
+        [UsedImplicitly]
+        public void RaiseCloseAnimationEndedEvent()
+        {
+            if (closeAnimationEnded != null)
+            {
                 closeAnimationEnded.RaiseEvent();
+            }
         }
     }
 }

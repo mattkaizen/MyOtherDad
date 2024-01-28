@@ -101,8 +101,6 @@ namespace Player
             item.WorldRepresentation.transform.localRotation = Quaternion.identity;
 
             item.HandRepresentation.transform.SetParent(hand.transform);
-            item.HandRepresentation.transform.localPosition = Vector3.zero;
-
 
             TurnOffCurrentItemHandDisplay();
             _currentItemOnHandIndex = 0;
@@ -114,8 +112,6 @@ namespace Player
             CurrentItemOnHand = _itemsOnHand[_currentItemOnHandIndex];
 
             ItemAdded?.Invoke(item);
-
-            Debug.Log($"Add item on hand index {_currentItemOnHandIndex} {item.WorldRepresentation.gameObject.name}");
         }
 
         public void TurnOnCurrentItemHandDisplay()

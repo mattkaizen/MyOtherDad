@@ -1,4 +1,5 @@
-﻿using Objects.Clothes;
+﻿using System.Collections.Generic;
+using Objects.Clothes;
 using Player;
 using UnityEngine;
 
@@ -7,7 +8,7 @@ namespace Tasks
     public class PickUpClothesPresenter : MonoBehaviour
     {
         [SerializeField] private PickUpClothes task;
-        [SerializeField] private HighlightObjectEffect highLightStaticClothesContainer;
+        [SerializeField] private List<HighlightObjectEffect> highLightStaticClothesContainer;
         [SerializeField] private UsableClothesContainer usableClothesContainer;
         [SerializeField] private ClothesContainerDisplay clothesContainerDisplay;
         [SerializeField] private HandController handController;
@@ -58,12 +59,19 @@ namespace Tasks
 
         public void EnableHighLightClothesContainer()
         {
-            highLightStaticClothesContainer.EnableHighLight();
+            foreach (var highlight in highLightStaticClothesContainer)
+            {
+                highlight.EnableHighLight();
+            }
         }
 
         public void DisableHighLightClothesContainer()
         {
-            highLightStaticClothesContainer.DisableHighLight();
+            
+            foreach (var highlight in highLightStaticClothesContainer)
+            {
+                highlight.DisableHighLight();
+            }
         }
         
 
