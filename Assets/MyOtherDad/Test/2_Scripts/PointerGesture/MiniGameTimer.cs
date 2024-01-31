@@ -9,13 +9,13 @@ namespace PointerGesture
         [Header("Broadcast on Events Channels")]
         [SerializeField] private IntEventChannelData currentTimeChanged;
         [SerializeField] private VoidEventChannelData timerFinished;
-        [SerializeField] private VoidEventChannelData timerStarted;
+        [SerializeField] private IntEventChannelData timerStarted;
 
         private IEnumerator _timerRoutine;
 
         private IEnumerator RunTimerRoutine(int totalTime)
         {
-            timerStarted.RaiseEvent();
+            timerStarted.RaiseEvent(totalTime);
             
             int secondsPassed = 0;
             int timeToWait = 1;

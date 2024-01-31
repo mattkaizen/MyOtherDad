@@ -61,9 +61,7 @@ namespace Tasks
 
             if (AmountOfCleanedObjects >= AmountOfObjectsToClean)
             {
-                Debug.Log($"AmountOfCleanedObjects {AmountOfCleanedObjects}");
-                cleanUpTaskCompleted.RaiseEvent();
-                IsCompleted = true;
+                CompleteTask();
             }
         }
 
@@ -85,6 +83,8 @@ namespace Tasks
 
         public void CompleteTask()
         {
+            cleanUpTaskCompleted.RaiseEvent();
+            IsCompleted = true;
         }
 
         public void StopTask()

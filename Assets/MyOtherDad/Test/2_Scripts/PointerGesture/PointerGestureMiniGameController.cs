@@ -74,7 +74,8 @@ namespace PointerGesture
             if (hasMiniGameCompleted) return;
 
             isMiniGameStarted = true;
-
+            
+            miniGameTimerUI.Initialize();
             miniGameTimer.StartTimer(miniGameData.TotalTime);
             pointerGestureSpawner.StartSpawnPointerGestures(miniGameData);
             decalDrawingAnimator.InitializeSystem(pointerGestureSpawner.SpawnedPointerGestures,
@@ -92,7 +93,7 @@ namespace PointerGesture
             hasMiniGameCompleted = true;
 
             miniGameTimer.StopTimer();
-            miniGameTimerUI.DisableUI();
+            miniGameTimerUI.FadeOutUI();
 
             pointerGestureSpawner.StopSpawnPointerGestures();
             pointerGestureSpawner.ClearPools();
@@ -106,6 +107,7 @@ namespace PointerGesture
             decalDrawingAnimator.ResetAlphaDecal();
             pointerGestureSpawner.StopSpawnPointerGestures();
             pointerGestureSpawner.ResetSpawnedPointerGesturesPool();
+            miniGameTimerUI.Initialize();
             miniGameTimer.StartTimer(miniGameData.TotalTime);
             pointerGestureSpawner.StartSpawnPointerGestures(miniGameData);
             miniGameRestarted.RaiseEvent();
@@ -138,6 +140,7 @@ namespace PointerGesture
 
         private void CompleteTutorial()
         {
+            miniGameTimerUI.Initialize();
             miniGameTimer.StartTimer(miniGameData.TotalTime);
             tutorialCompleted.RaiseEvent();
         }

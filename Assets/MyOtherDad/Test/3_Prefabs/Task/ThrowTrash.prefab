@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8996102716452734077}
   - component: {fileID: 6118718492214307548}
+  - component: {fileID: 1130105960808969016}
   m_Layer: 0
   m_Name: ThrowTrash
   m_TagString: Untagged
@@ -30,7 +31,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6118718492214307548
 MonoBehaviour:
@@ -44,15 +45,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0478da28a7db42089040b9efc8f0b4ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  eventToPreStartTask: {fileID: 11400000, guid: 2301a5755b526814b841274fbee2635d, type: 2}
   eventToStartTask: {fileID: 11400000, guid: 6d7b83d6140dcda4394c9906736a2ff0, type: 2}
-  eventToStopTask: {fileID: 0}
-  eventToStartMiniGame: {fileID: 11400000, guid: 6d7b83d6140dcda4394c9906736a2ff0, type: 2}
+  eventToStopTask: {fileID: 11400000, guid: 4059c55415aa5bc46aab79d29c6a3cd1, type: 2}
+  throwTrashTaskPreStarted: {fileID: 11400000, guid: 8bd353ab83ee7b7429892f7ed2e21611, type: 2}
   throwTrashTaskStarted: {fileID: 11400000, guid: a686397e42c48d9469cc430e1a971404, type: 2}
   throwTrashTaskStopped: {fileID: 11400000, guid: d8cf26b95914f7345bc262242331b318, type: 2}
-  throwTrashTaskCompleted: {fileID: 11400000, guid: a308c747808a029418e37f6aa40450ad, type: 2}
-  detectorTrigger: {fileID: 0}
+  throwTrashTaskCompletedWithScoreOf: {fileID: 11400000, guid: a308c747808a029418e37f6aa40450ad, type: 2}
+  enableCameraObjectInputInterrupted: {fileID: 11400000, guid: 2a4bea7a0e6543e40931b4c63e7b6f74, type: 2}
+  trashDetectorTrigger: {fileID: 0}
   handController: {fileID: 0}
+  playerObjectThrower: {fileID: 0}
+  inputActionManager: {fileID: 11400000, guid: acabe8a265f9d8e4aabe5f84bbf14a37, type: 2}
+  newThrowForce: 15
   amountOfTrashToPick: 3
-  trashDataToCheck: []
-  getUpInput: {fileID: 11400000, guid: afd333e07b6bfb940b9f789e989c2a41, type: 2}
+  trashDataToCheck:
+  - {fileID: 11400000, guid: 0f923f5e7a0edd34eb52425da6e66171, type: 2}
+  - {fileID: 11400000, guid: 59b532573bec0a64d9dee38d3e73c34d, type: 2}
+  lastItemMaxVerticalMovementThreshold: 0.01
+  lastItemMinVerticalMovementThreshold: -0.01
+--- !u!114 &1130105960808969016
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7923863747398734727}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8f930de3c1941c7a67a8e10c581f995, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  throwTrash: {fileID: 6118718492214307548}
   highLightBed: {fileID: 0}
+  enableProjectileTrajectory: {fileID: 11400000, guid: 916994546931494439757c785f2ffa58, type: 2}
+  disableProjectileTrajectory: {fileID: 11400000, guid: d0086fd32a52c0b4da3446561f8711a7, type: 2}

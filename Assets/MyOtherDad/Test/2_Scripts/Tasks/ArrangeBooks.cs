@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Tasks
 {
-    public class ArrangeBooks : MonoBehaviour, ITask 
+    public class ArrangeBooks : MonoBehaviour, ITask
     {
         //TODO: Crear interfaz que muestre cantidad de libros colocados y los libros por colocar, crear shader parecido a colocar los objetos en phasmofobia
 
@@ -30,15 +30,17 @@ namespace Tasks
                 return 0;
             }
         }
-        
+
         private int _amountOfBookSet;
 
-        [Header("Event Channels to listen")]
-        [SerializeField] private VoidEventChannelData eventToStartArrangeBooksTask;
+        [Header("Event Channels to listen")] [SerializeField]
+        private VoidEventChannelData eventToStartArrangeBooksTask;
+
         [SerializeField] private VoidEventChannelData eventToStopArrangeBooks;
-        [Space] 
-        [Header("Broadcast on Event Channels")]
-        [SerializeField] private VoidEventChannelData arrangeBooksTaskStarted;
+
+        [Space] [Header("Broadcast on Event Channels")] [SerializeField]
+        private VoidEventChannelData arrangeBooksTaskStarted;
+
         [SerializeField] private VoidEventChannelData arrangeBooksTaskStopped;
         [SerializeField] private VoidEventChannelData arrangeBooksTaskCompleted;
         [SerializeField] private IntEventChannelData amountOfBookSetChanged;
@@ -49,8 +51,11 @@ namespace Tasks
 
         private void OnEnable()
         {
-            eventToStartArrangeBooksTask.EventRaised += OnEventToStartTaskRaised;
-            // eventToStopArrangeBooks.EventRaised += OnEventToStopTaskRaised;
+            if (eventToStartArrangeBooksTask != null)
+                eventToStartArrangeBooksTask.EventRaised += OnEventToStartTaskRaised;
+
+            if (eventToStopArrangeBooks != null)
+                eventToStopArrangeBooks.EventRaised += OnEventToStopTaskRaised;
 
             foreach (var bookContainer in bookContainers)
             {
@@ -60,8 +65,17 @@ namespace Tasks
 
         private void OnDisable()
         {
-            eventToStartArrangeBooksTask.EventRaised -= OnEventToStartTaskRaised;
-            // eventToStopArrangeBooks.EventRaised -= OnEventToStopTaskRaised;
+            if (eventToStartArrangeBooksTask != null)
+                eventToStartArrangeBooksTask.EventRaised -= OnEventToStartTaskRaised;
+            
+            if (eventToStopArrangeBooks != null)
+                eventToStopArrangeBooks.EventRaised -= OnEventToStopTaskRaised;
+            
+            foreach (var bookContainer in bookContainers)
+            {
+                bookContainer.OnItemSet -= UpdateAmountBookSet;
+            }
+            
         }
 
         public void StartTask()
@@ -70,6 +84,7 @@ namespace Tasks
             {
                 bookContainer.gameObject.SetActive(true);
             }
+
             IsStarted = true;
         }
 
@@ -78,7 +93,7 @@ namespace Tasks
             IsCompleted = true;
             arrangeBooksTaskCompleted.RaiseEvent();
         }
-        
+
         private void UpdateAmountBookSet()
         {
             _amountOfBookSet++;
@@ -102,7 +117,7 @@ namespace Tasks
             StartTask();
             arrangeBooksTaskStarted.RaiseEvent();
         }
-        
+
         private void TryStopTask()
         {
             if (IsCompleted) return;
