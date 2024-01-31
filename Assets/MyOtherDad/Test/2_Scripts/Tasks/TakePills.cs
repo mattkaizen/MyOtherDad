@@ -22,8 +22,6 @@ namespace Tasks
         [Space]
         [SerializeField] private VoidEventChannelData takePillTaskCompleted;
 
-        [SerializeField] private PickableObject pickableObject;
-        
         private bool _isCompleted;
         private bool _isStarted;
 

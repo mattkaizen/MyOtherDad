@@ -25,6 +25,7 @@ namespace PointerGesture
 
         [Space] [SerializeField] private PointerGestureMiniGamePhaseData miniGameData;
         [SerializeField] private MiniGameTimer miniGameTimer;
+        [SerializeField] private MiniGameTimerUI miniGameTimerUI;
         [SerializeField] private PointerGestureSpawner pointerGestureSpawner;
         [SerializeField] private DecalDrawingAnimator decalDrawingAnimator;
         [Header("Tutorial")] [SerializeField] private bool displayTutorial;
@@ -91,6 +92,7 @@ namespace PointerGesture
             hasMiniGameCompleted = true;
 
             miniGameTimer.StopTimer();
+            miniGameTimerUI.DisableUI();
 
             pointerGestureSpawner.StopSpawnPointerGestures();
             pointerGestureSpawner.ClearPools();

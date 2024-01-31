@@ -20,7 +20,6 @@ namespace Objects
         }
 
         [SerializeField] private List<ItemData> trashDataToCheck;
-        [SerializeField] private Vector3 velocityThreshold;
         [SerializeField] private int amountObjectAdded;
 
         private Dictionary<GameObject, IEnumerator> _currentObjects = new Dictionary<GameObject, IEnumerator>();
@@ -46,8 +45,6 @@ namespace Objects
                         }
                     }
                 }
-                //ToDo: Si el objeto no se encuentra en la lista y su velocidad es 0, entonces lo agrega en la lista.
-                
             }
         }
 
@@ -76,7 +73,6 @@ namespace Objects
 
         private void AddObject()
         {
-            Debug.Log("TrashDetector: Object added");
             amountObjectAdded++;
         }
     }

@@ -24,6 +24,12 @@ namespace Effects
         [SerializeField] private float timeBetweenPoints = 0.1f;
         [SerializeField] private LayerMask collisionLayer;
 
+        [Header("Line Settings")] [SerializeField]
+        private float horizontalThreshHoldToDrawTrajectory;
+
+        [SerializeField] private float verticalThreshHoldToDrawTrajectory;
+
+
         private bool _isDrawingTrajectory;
 
         private void OnEnable()
@@ -54,16 +60,12 @@ namespace Effects
 
         private void OnLookAtPerformed(InputAction.CallbackContext obj)
         {
-            // if (!_isDrawingTrajectory) return;
-            //
-            // DrawProjection();
-        }
-
-        private void FixedUpdate() //TODO: Si la velocidad del mouse supera un threshold, no dibujar la proyeccion
-        {
             if (!_isDrawingTrajectory) return;
-            
-            DrawProjection();
+
+            if (lookAtAsset.Input.WasPerformedThisFrame())
+            {
+                DrawProjection();
+            }
         }
 
         private void DrawProjection()

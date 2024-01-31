@@ -100,7 +100,6 @@ namespace CustomInput
             _inputControlsData.Clear();
         }
 
-
         public void EnableAllInputs()
         {
             foreach (var inputControl in _inputControlsData)

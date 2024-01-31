@@ -28,8 +28,8 @@ namespace Tasks
 
         public IntEventChannelData ThrowTrashTaskCompletedWithScoreOf => throwTrashTaskCompletedWithScoreOf;
 
-        [Header("Event Channels to listen")] 
-        [SerializeField] private VoidEventChannelData eventToPreStartTask;
+        [Header("Event Channels to listen")] [SerializeField]
+        private VoidEventChannelData eventToPreStartTask;
 
         [SerializeField] private VoidEventChannelData eventToStartTask;
 
@@ -44,15 +44,20 @@ namespace Tasks
         [SerializeField] private IntEventChannelData throwTrashTaskCompletedWithScoreOf;
         [SerializeField] private VoidEventChannelData enableCameraObjectInputInterrupted;
 
-        [Header("Dependencies")]
-        [SerializeField] private TrashDetectorTrigger trashDetectorTrigger;
+        [Header("Dependencies")] [SerializeField]
+        private TrashDetectorTrigger trashDetectorTrigger;
+
         [SerializeField] private HandController handController;
         [SerializeField] private PlayerObjectThrower playerObjectThrower;
         [SerializeField] private InputActionControlManagerData inputActionManager;
-        [Header("Task settings")]
-        [SerializeField] private float newThrowForce = 20.0f;
+
+        [Header("Task settings")] [SerializeField]
+        private float newThrowForce = 20.0f;
+
         [SerializeField] private int amountOfTrashToPick;
         [SerializeField] private List<ItemData> trashDataToCheck;
+        [SerializeField] private float lastItemMaxVerticalMovementThreshold;
+        [SerializeField] private float lastItemMinVerticalMovementThreshold;
 
         private IHoldable _lastItemThrown;
 
@@ -113,7 +118,6 @@ namespace Tasks
             playerObjectThrower.SetNewThrowForce(newThrowForce);
             trashDetectorTrigger.IsTrashDetectionEnabled = true;
             throwTrashTaskStarted.RaiseEvent();
-            Debug.Log("Throw Trash task started");
         }
 
         private void StopTask()
@@ -142,6 +146,8 @@ namespace Tasks
                     _amountOfTrashPicked--;
                     _lastItemThrown = item;
 
+                    if (IsStarted) return;
+
                     HasAllTrashOnHand?.Invoke(PlayerHasTargetAmountOfTrashOnHand());
                 }
             }
@@ -169,19 +175,23 @@ namespace Tasks
         {
             yield return new WaitUntil(() => _amountOfTrashPicked == 0);
 
+            bool waitNextFrame = true;
             yield return new WaitUntil((() =>
             {
-                if (_lastItemThrown != null)
+                if (waitNextFrame)
                 {
-                    _lastItemThrown.WorldRepresentation.TryGetComponent<IThrowable>(out var throwable);
-                    return
-                        throwable.Rigidbody.velocity ==
-                        Vector3.zero; //TODO: Tal vez con la velociddad vertical es suficiente
-                }
-                else
-                {
+                    waitNextFrame = false;
                     return false;
                 }
+
+                if (_lastItemThrown == null) return false;
+
+                _lastItemThrown.WorldRepresentation.TryGetComponent<IThrowable>(out var throwable);
+                var lastItemThrownVelocity = throwable.Rigidbody.velocity;
+
+                bool hasVerticalMovement = lastItemThrownVelocity.y > lastItemMaxVerticalMovementThreshold ||
+                                           lastItemThrownVelocity.y < lastItemMinVerticalMovementThreshold;
+                return !hasVerticalMovement;
             }));
             CompleteTask();
         }
