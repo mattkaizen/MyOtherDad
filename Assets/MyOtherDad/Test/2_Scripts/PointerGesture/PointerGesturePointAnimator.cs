@@ -44,11 +44,16 @@ namespace PointerGesture
 
         private void OnGestureCompleted()
         {
-            KillScaleTweens();
-            StartCoroutine(ScaleOutPointerGestures());
+            ScaleOutAnimation();
         }
 
-        private IEnumerator ScaleOutPointerGestures()
+        public void ScaleOutAnimation()
+        {
+            KillScaleTweens();
+            StartCoroutine(ScaleOutPointerGesturesRoutine());
+        }
+
+        private IEnumerator ScaleOutPointerGesturesRoutine()
         {
             int amountFinishedScaleOutTween = 0;
             for (int i = 0; i < gesturePointsToAnimate.Count; i++)

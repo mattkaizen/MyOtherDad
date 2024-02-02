@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using Data;
 using UnityEngine;
 
@@ -15,6 +14,7 @@ namespace PointerGesture
         [SerializeField] private VoidEventChannelData miniGameRestarted;
         [SerializeField] private VoidEventChannelData tutorialStarted;
         [SerializeField] private VoidEventChannelData tutorialCompleted;
+        [SerializeField] private VoidEventChannelData tutorialRestarted;
 
         [Header("Listen to Events Channels")] [SerializeField]
         private VoidEventChannelData eventToStartMiniGame;
@@ -136,6 +136,8 @@ namespace PointerGesture
             pointerGestureSpawner.ResetSpawnedPointerGesturesPool();
             pointerGestureSpawner.StartSpawnPointerGestures(miniGameData);
             StartCoroutine(TryCompleteTutorialRoutine(additionalGestureToSpawn));
+            
+            tutorialRestarted.RaiseEvent();
         }
 
         private void CompleteTutorial()
