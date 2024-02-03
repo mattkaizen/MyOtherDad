@@ -1,4 +1,5 @@
-﻿using Data;
+﻿using CustomInput;
+using Data;
 using UnityEngine;
 
 namespace Tasks
@@ -17,12 +18,19 @@ namespace Tasks
             set => _isStarted = value;
         }
 
+        [Header("Listen to Event Channels")]
         [SerializeField] private VoidEventChannelData eventToCompleteDrawingTask;
         [SerializeField] private VoidEventChannelData eventToStartDrawingTask;
         [SerializeField] private VoidEventChannelData eventToStopDrawingTask;
-        [Space] [SerializeField] private VoidEventChannelData drawingTaskCompleted;
+        [Space]
+        [Header("Broadcast on Event Channels")]
+        [SerializeField] private VoidEventChannelData drawingTaskCompleted;
         [SerializeField] private VoidEventChannelData drawingTaskStarted;
         [SerializeField] private VoidEventChannelData drawingTaskStopped;
+        [SerializeField] private VoidEventChannelData enableCameraObjectInputInterrupted;
+        [Space]
+        [Header("Dependencies")]
+        [SerializeField] private InputActionControlManagerData inputActionManager;
 
         private bool _isCompleted;
         private bool _isStarted;
@@ -44,11 +52,17 @@ namespace Tasks
         public void StartTask()
         {
             IsStarted = true;
+            enableCameraObjectInputInterrupted.RaiseEvent();
+            inputActionManager.GetUpActionControl.DisableInput();
+            inputActionManager.PaintActionControl.EnableInput();
         }
 
         public void CompleteTask()
         {
             IsCompleted = true;
+
+            inputActionManager.GetUpActionControl.EnableInput();
+            inputActionManager.PaintActionControl.DisableInput();
         }
 
         private void OnEventToStopDrawingTaskRaised()

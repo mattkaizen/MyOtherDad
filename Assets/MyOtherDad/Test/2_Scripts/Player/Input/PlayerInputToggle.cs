@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using CustomInput;
 using Data;
 using Domain;
@@ -32,7 +31,6 @@ namespace Player
         public void EnableCameraObjectInput(CameraMovementMode cameraMovementMode)
         {
             inputActionControlManager.GetUpActionControl.EnableInput();
-            inputActionControlManager.PaintActionControl.EnableInput();
 
             if (cameraMovementMode == CameraMovementMode.FreeLook)
             {
@@ -89,7 +87,6 @@ namespace Player
             if (_enableCameraObjectInputRoutine != null)
             {
                 StopCoroutine(_enableCameraObjectInputRoutine);
-                Debug.Log("---StopCoroutine EnableCameraObjectInputRoutine");
             }
         }
     }
