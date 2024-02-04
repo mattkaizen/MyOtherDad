@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7785685293499547075}
   - component: {fileID: 3090957444960980731}
   - component: {fileID: 8332891423977634081}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: 'Model: Open'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 4973269863149316179}
   - component: {fileID: 6671108548399051569}
   - component: {fileID: 5481319875778231257}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: HandRepresentation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -176,7 +176,7 @@ GameObject:
   - component: {fileID: 7915736555810841700}
   - component: {fileID: 2280355029241841691}
   - component: {fileID: 619991968922201306}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: 'Model: Close'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -344,6 +344,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectRigidbody: {fileID: 7572345654178142691}
+  objectThrown:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &2174981526742681065
 MonoBehaviour:
   m_ObjectHideFlags: 0

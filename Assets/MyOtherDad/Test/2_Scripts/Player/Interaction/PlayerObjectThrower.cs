@@ -62,7 +62,6 @@ namespace Player
                 throwable.Throw(_throwDirection, _currentThrowForce);
                 handController.RemoveCurrentItemOnHand();
                 handController.TurnOnCurrentItemHandDisplay();
-                
             }
             
         }

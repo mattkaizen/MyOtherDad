@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3689455097469901579}
   - component: {fileID: 2948329359328334691}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: HandRepresentation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -148,6 +148,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectRigidbody: {fileID: 2664633307076770896}
+  objectThrown:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &4726775200521507382
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -272,6 +275,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: c3bd6b98d45dd8e42a754b2e47b10c8e, type: 3}
       propertyPath: m_Name
       value: Model (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c3bd6b98d45dd8e42a754b2e47b10c8e, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

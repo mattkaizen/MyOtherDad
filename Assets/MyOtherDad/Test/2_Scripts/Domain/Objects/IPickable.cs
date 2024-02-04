@@ -1,10 +1,7 @@
-﻿using UnityEngine.Events;
-
-namespace Domain
+﻿namespace Domain
 {
     public interface IPickable
     {
-        public event UnityAction Picked;
-        public ItemData Pickup();
+         ItemData Pickup();
     }
 }

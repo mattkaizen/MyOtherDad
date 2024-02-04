@@ -6,12 +6,10 @@ namespace Objects
 {
     public class PickableObject : MonoBehaviour, IPickable
     {
-        public event UnityAction Picked = delegate {  };
         public ItemData Data => itemData;
         
         [SerializeField] private ItemData itemData;
         [SerializeField] private UnityEvent objectPicked;
-
 
         public ItemData Pickup()
         {
