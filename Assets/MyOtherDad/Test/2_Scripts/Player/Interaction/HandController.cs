@@ -135,7 +135,6 @@ namespace Player
             if (CurrentItemOnHand.WorldRepresentation.TryGetComponent<IHoldable>(out var holdable))
             {
                 holdable.HandRepresentation.transform.SetParent(holdable.WorldRepresentation.transform);
-                // holdable.HandRepresentation.transform.localPosition = Vector3.zero;
             }
         }
 

@@ -1,20 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
+using JetBrains.Annotations;
 using UnityEngine;
 
 public class HighlightObjectEffect : MonoBehaviour
 {
-    [ColorUsage(true, true)] [SerializeField]
-    private Color newEmissionColor;
+    [ColorUsage(true, true)] 
+    [SerializeField] private Color newEmissionColor;
 
-    [ColorUsage(true, true)] [SerializeField]
-    private Color blackEmissionColor;
+    [ColorUsage(true, true)]
+    [SerializeField] private Color blackEmissionColor;
 
     [SerializeField] private float lerpEmissiveColorToBaseColorTweenDuration;
     [SerializeField] private float lerpEmissiveColorToNewColorTweenDuration;
+    [SerializeField] private bool highLightChildren;
 
-    private readonly int baseColor = Shader.PropertyToID("_BaseColor");
     private readonly int emissionColor = Shader.PropertyToID("_EmissionColor");
 
     private Dictionary<Material, Color> _materialsToSetColor = new Dictionary<Material, Color>();
@@ -26,32 +27,82 @@ public class HighlightObjectEffect : MonoBehaviour
 
     private void Awake()
     {
-        Material[] materials = GetComponent<Renderer>().materials;
-
-        foreach (var material in materials)
+        if (highLightChildren)
         {
-            Color emissiveColor = material.GetColor(emissionColor);
-            _materialsToSetColor.Add(material, emissiveColor);
+            if (TryGetComponent<Renderer>(out var parentRenderer))
+            {
+                foreach (var material in parentRenderer.materials)
+                {
+                    Color emissiveColor = material.GetColor(emissionColor);
+                    _materialsToSetColor.Add(material, emissiveColor);
+                }
+            }
+
+            Renderer[] childrenRenderer = GetComponentsInChildren<Renderer>();
+
+            foreach (var childRenderer in childrenRenderer)
+            {
+                foreach (var childMaterial in childRenderer.materials)
+                {
+                    if (childMaterial.HasProperty(emissionColor))
+                    {
+                        Color emissiveColor = childMaterial.GetColor(emissionColor);
+                        _materialsToSetColor.Add(childMaterial, emissiveColor);
+                    }
+                    else
+                    {
+                        Debug.Log($"Material: {childMaterial.name} doesn't have the property: {emissionColor.ToString()}");
+                    }
+                }
+            }
+        }
+        else
+        {
+            
+            if (TryGetComponent<Renderer>(out var parentRenderer))
+            {
+                foreach (var material in parentRenderer.materials)
+                {
+                    if (material.HasProperty(emissionColor))
+                    {
+                        Color emissiveColor = material.GetColor(emissionColor);
+                        _materialsToSetColor.Add(material, emissiveColor);
+                    }
+                    else
+                    {
+                        Debug.Log($"Material: {material.name} doesn't have the property: {emissionColor.ToString()}");
+                    }
+                }
+            }
         }
     }
 
-    public void EnableHighLight()
+    [UsedImplicitly]
+    public void EnableHighLightFade()
     {
         if (!_isHighlighting)
         {
             KillLerpCurrenColorToBase();
             StartContinuousEmissiveColorChange();
             _isHighlighting = true;
-
         }
     }
 
-    public void DisableHighLight()
+    [UsedImplicitly]
+    public void DisableHighLightFade()
     {
         if (!_isHighlighting) return;
-        
+
         KillEmissionColorToNewColorTweener();
-        LerpCurrentEmissionColorToBase();
+        LerpCurrentEmissionColorToBase(lerpEmissiveColorToBaseColorTweenDuration);
+        _isHighlighting = false;
+    }
+
+    [UsedImplicitly]
+    public void DisableHighLightImmediately()
+    {
+        KillEmissionColorToNewColorTweener();
+        LerpCurrentEmissionColorToBase(0.0f);
         _isHighlighting = false;
     }
 
@@ -71,13 +122,13 @@ public class HighlightObjectEffect : MonoBehaviour
             lerpEmissionColorToNewColorTweeners.Add(tweener);
         }
     }
-    
-    private void LerpCurrentEmissionColorToBase()
+
+    private void LerpCurrentEmissionColorToBase(float duration)
     {
         foreach (var materialToSetColor in _materialsToSetColor)
         {
             Tweener tweener = materialToSetColor.Key.DOColor(blackEmissionColor, emissionColor,
-                    lerpEmissiveColorToBaseColorTweenDuration)
+                    duration)
                 .OnComplete((() => { DisableEmission(materialToSetColor.Key); }));
             lerpEmissionColorToBaseColorTweeners.Add(tweener);
         }

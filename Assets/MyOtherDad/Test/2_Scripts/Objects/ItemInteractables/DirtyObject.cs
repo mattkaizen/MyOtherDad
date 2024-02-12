@@ -5,7 +5,7 @@ using UnityEngine.Events;
 
 namespace Objects.UsableInteractable
 {
-    public class DirtyObject : MonoBehaviour, IUsableInteractable
+    public class DirtyObject : MonoBehaviour, IItemInteractable
     {
         public bool IsCleaned { get; set; }
         

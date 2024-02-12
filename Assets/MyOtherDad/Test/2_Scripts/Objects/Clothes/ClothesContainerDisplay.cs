@@ -15,7 +15,7 @@ namespace Objects.Clothes
         {
             if (container != null)
             {
-                container.OnItemSet += PerformCloseAnimation;
+                container.ItemPlaced.AddListener(PerformCloseAnimation);
             }
         }
 
@@ -23,7 +23,7 @@ namespace Objects.Clothes
         {
             if (container != null)
             {
-                container.OnItemSet -= PerformCloseAnimation;
+                container.ItemPlaced.RemoveListener(PerformCloseAnimation);
             }
         }
 

@@ -31,7 +31,7 @@ namespace Tasks
         
         private void OnThrowTrashTaskStarted()
         {
-            highLightBed.DisableHighLight();
+            highLightBed.DisableHighLightFade();
             enableProjectileTrajectory.RaiseEvent();
         }
 
@@ -54,11 +54,11 @@ namespace Tasks
             
             if (hasAllTrashOnHand)
             {
-                highLightBed.EnableHighLight();
+                highLightBed.EnableHighLightFade();
             }
             else
             {
-                highLightBed.DisableHighLight();
+                highLightBed.DisableHighLightFade();
 
             }
         }

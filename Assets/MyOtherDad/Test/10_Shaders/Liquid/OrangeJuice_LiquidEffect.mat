@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: OrangeJuice_Liquid 1
+  m_Name: OrangeJuice_LiquidEffect
   m_Shader: {fileID: -6465566751694194690, guid: fbb619c22266efe4bab72c8d2a86a5aa, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -57,18 +57,18 @@ Material:
     - _Amplitude: 0
     - _Fill: 0.546
     - _FillAmount: 0
-    - _FoamWidth: 0.04
+    - _FoamWidth: 0
     - _Foam_Smoothness: 0
     - _Frequency: 0
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _Rim_Power: 2
+    - _Rim_Power: 10
     - _WobbleX: 0
     - _WobbleZ: 0
     m_Colors:
-    - _BottomColor: {r: 0, g: 0.8207547, b: 0.2961154, a: 1}
-    - _FoamColor: {r: 0.2850213, g: 0.990566, b: 0.7492778, a: 1}
-    - _Rim_Color: {r: 0.693879, g: 1, b: 0.32547167, a: 1}
+    - _BottomColor: {r: 0.8, g: 0.38066667, b: 0.11999998, a: 1}
+    - _FoamColor: {r: 0, g: 1, b: 0.29870772, a: 1}
+    - _Rim_Color: {r: 0.34117648, g: 0.3229804, b: 0.28658825, a: 1}
     - _SideColor: {r: 0.799, g: 0.26979223, b: 0, a: 1}
-    - _TopColor: {r: 0.9098039, g: 0.31965423, b: 0.04549021, a: 1}
+    - _TopColor: {r: 0.9, g: 0.58451086, b: 0.225, a: 1}
   m_BuildTextureStacks: []

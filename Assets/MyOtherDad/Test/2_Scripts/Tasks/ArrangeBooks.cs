@@ -59,7 +59,7 @@ namespace Tasks
 
             foreach (var bookContainer in bookContainers)
             {
-                bookContainer.OnItemSet += UpdateAmountBookSet;
+                bookContainer.ItemPlaced.AddListener(UpdateAmountBookPlaced);
             }
         }
 
@@ -73,7 +73,7 @@ namespace Tasks
             
             foreach (var bookContainer in bookContainers)
             {
-                bookContainer.OnItemSet -= UpdateAmountBookSet;
+                bookContainer.ItemPlaced.RemoveListener(UpdateAmountBookPlaced);
             }
             
         }
@@ -94,7 +94,7 @@ namespace Tasks
             arrangeBooksTaskCompleted.RaiseEvent();
         }
 
-        private void UpdateAmountBookSet()
+        private void UpdateAmountBookPlaced()
         {
             _amountOfBookSet++;
             amountOfBookSetChanged.RaiseEvent(_amountOfBookSet);

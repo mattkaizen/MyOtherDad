@@ -3,42 +3,42 @@ using UnityEngine;
 [ExecuteInEditMode]
 public class Liquid : MonoBehaviour
 {
-    public enum UpdateMode { Normal, UnscaledTime }
+    public enum UpdateMode
+    {
+        Normal,
+        UnscaledTime
+    }
+
     public UpdateMode updateMode;
 
-    [SerializeField]
-    float MaxWobble = 0.03f;
-    [SerializeField]
-    float WobbleSpeedMove = 1f;
-    [SerializeField]
-    float fillAmount = 0.5f;
-    [SerializeField]
-    float Recovery = 1f;
-    [SerializeField]
-    float Thickness = 1f;
-    [Range(0, 1)]
-    public float CompensateShapeAmount;
-    [SerializeField]
-    Mesh mesh;
-    [SerializeField]
-    Renderer rend;
-    Vector3 pos;
-    Vector3 lastPos;
-    Vector3 velocity;
-    Quaternion lastRot;
-    Vector3 angularVelocity;
-    float wobbleAmountX;
-    float wobbleAmountZ;
-    float wobbleAmountToAddX;
-    float wobbleAmountToAddZ;
-    float pulse;
-    float sinewave;
-    float time = 0.5f;
-    Vector3 comp;
+    [SerializeField] float MaxWobble = 0.03f;
+    [SerializeField] float WobbleSpeedMove = 1f;
+    [Tooltip("The max amount is 0.463")]
+    [SerializeField] float fillAmount = 0.5f;
+    [SerializeField] float Recovery = 1f;
+    [SerializeField] float Thickness = 1f;
+    [Range(0, 1)] public float CompensateShapeAmount;
+    [SerializeField] private Mesh mesh;
+    [SerializeField] private Renderer rend;
+    
     private static readonly int WobbleZ = Shader.PropertyToID("_WobbleZ");
     private static readonly int WobbleX = Shader.PropertyToID("_WobbleX");
+    
+    private Vector3 pos;
+    private Vector3 lastPos;
+    private Vector3 velocity;
+    private Quaternion lastRot;
+    private Vector3 angularVelocity;
+    private float wobbleAmountX;
+    private float wobbleAmountZ;
+    private float wobbleAmountToAddX;
+    private float wobbleAmountToAddZ;
+    private float pulse;
+    private float sinewave;
+    private float time = 0.5f;
+    private Vector3 comp;
 
-    void Start()
+    void Awake()
     {
         GetMeshAndRend();
     }
@@ -54,11 +54,13 @@ public class Liquid : MonoBehaviour
         {
             mesh = GetComponent<MeshFilter>().sharedMesh;
         }
+
         if (rend == null)
         {
             rend = GetComponent<Renderer>();
         }
     }
+
     void Update()
     {
         float deltaTime = 0;
@@ -77,22 +79,17 @@ public class Liquid : MonoBehaviour
 
         if (deltaTime != 0)
         {
-
-
             // decrease wobble over time
             wobbleAmountToAddX = Mathf.Lerp(wobbleAmountToAddX, 0, (deltaTime * Recovery));
             wobbleAmountToAddZ = Mathf.Lerp(wobbleAmountToAddZ, 0, (deltaTime * Recovery));
 
-
-
             // make a sine wave of the decreasing wobble
             pulse = 2 * Mathf.PI * WobbleSpeedMove;
-            sinewave = Mathf.Lerp(sinewave, Mathf.Sin(pulse * time), deltaTime * Mathf.Clamp(velocity.magnitude + angularVelocity.magnitude, Thickness, 10));
+            sinewave = Mathf.Lerp(sinewave, Mathf.Sin(pulse * time),
+                deltaTime * Mathf.Clamp(velocity.magnitude + angularVelocity.magnitude, Thickness, 10));
 
             wobbleAmountX = wobbleAmountToAddX * sinewave;
             wobbleAmountZ = wobbleAmountToAddZ * sinewave;
-
-
 
             // velocity
             velocity = (lastPos - transform.position) / deltaTime;
@@ -100,8 +97,12 @@ public class Liquid : MonoBehaviour
             angularVelocity = GetAngularVelocity(lastRot, transform.rotation);
 
             // add clamped velocity to wobble
-            wobbleAmountToAddX += Mathf.Clamp((velocity.x + (velocity.y * 0.2f) + angularVelocity.z + angularVelocity.y) * MaxWobble, -MaxWobble, MaxWobble);
-            wobbleAmountToAddZ += Mathf.Clamp((velocity.z + (velocity.y * 0.2f) + angularVelocity.x + angularVelocity.y) * MaxWobble, -MaxWobble, MaxWobble);
+            wobbleAmountToAddX +=
+                Mathf.Clamp((velocity.x + (velocity.y * 0.2f) + angularVelocity.z + angularVelocity.y) * MaxWobble,
+                    -MaxWobble, MaxWobble);
+            wobbleAmountToAddZ +=
+                Mathf.Clamp((velocity.z + (velocity.y * 0.2f) + angularVelocity.x + angularVelocity.y) * MaxWobble,
+                    -MaxWobble, MaxWobble);
         }
 
         // Debug.Log($"Wobble:  X  {wobbleAmountX} ,  Z  {wobbleAmountZ}");
@@ -119,8 +120,8 @@ public class Liquid : MonoBehaviour
 
     void UpdatePos(float deltaTime)
     {
-
-        Vector3 worldPos = transform.TransformPoint(new Vector3(mesh.bounds.center.x, mesh.bounds.center.y, mesh.bounds.center.z));
+        Vector3 worldPos =
+            transform.TransformPoint(new Vector3(mesh.bounds.center.x, mesh.bounds.center.y, mesh.bounds.center.z));
         if (CompensateShapeAmount > 0)
         {
             // only lerp if not paused/normal update
@@ -139,6 +140,7 @@ public class Liquid : MonoBehaviour
         {
             pos = worldPos - transform.position - new Vector3(0, fillAmount, 0);
         }
+
         rend.sharedMaterial.SetVector("_FillAmount", pos);
     }
 
@@ -163,12 +165,14 @@ public class Liquid : MonoBehaviour
             var angle = Mathf.Acos(q.w);
             gain = 2.0f * angle / (Mathf.Sin(angle) * Time.deltaTime);
         }
+
         Vector3 angularVelocity = new Vector3(q.x * gain, q.y * gain, q.z * gain);
 
         if (float.IsNaN(angularVelocity.z))
         {
             angularVelocity = Vector3.zero;
         }
+
         return angularVelocity;
     }
 
@@ -180,7 +184,6 @@ public class Liquid : MonoBehaviour
 
         for (int i = 0; i < vertices.Length; i++)
         {
-
             Vector3 position = transform.TransformPoint(vertices[i]);
 
             if (position.y < lowestY)
@@ -189,6 +192,7 @@ public class Liquid : MonoBehaviour
                 lowestVert = position;
             }
         }
+
         return lowestVert.y;
     }
 }

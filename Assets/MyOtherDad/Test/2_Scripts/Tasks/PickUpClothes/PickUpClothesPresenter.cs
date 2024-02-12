@@ -61,7 +61,7 @@ namespace Tasks
         {
             foreach (var highlight in highLightStaticClothesContainer)
             {
-                highlight.EnableHighLight();
+                highlight.EnableHighLightFade();
             }
         }
 
@@ -70,7 +70,7 @@ namespace Tasks
             
             foreach (var highlight in highLightStaticClothesContainer)
             {
-                highlight.DisableHighLight();
+                highlight.DisableHighLightFade();
             }
         }
         

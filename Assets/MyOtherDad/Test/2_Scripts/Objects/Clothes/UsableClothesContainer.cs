@@ -25,21 +25,21 @@ namespace Objects.Clothes
             set => _hasFreeSpace = value;
         }
 
-        [Header("Container settings")] [SerializeField]
-        private List<GameObject> pickedClothes = new List<GameObject>();
+        [Header("Container settings")] 
+        [SerializeField] private List<GameObject> pickedClothes = new List<GameObject>();
         [SerializeField] private IntEventChannelData clothesPicked;
         [SerializeField] private VoidEventChannelData isUsableClothesContainerFull;
         [SerializeField] private VoidEventChannelData isUsableClothesContainerInteractedWithItem;
         [SerializeField] private ObjectDataProvider provider;
-
         [SerializeField] private int maxContainerCapacity;
 
-        [Space] [Header("Objects to interact")] [SerializeField]
-        private List<ItemData> clothesData;
+        [Space] 
+        [Header("Objects to interact")] 
+        [SerializeField] private List<ItemData> clothesData;
 
-        [Space] [Header("RayCast Settings")] [SerializeField]
-        private Transform mainCamera;
-
+        [Space] 
+        [Header("RayCast Settings")] 
+        [SerializeField] private Transform mainCamera;
         [SerializeField] private float rayDistance;
         [SerializeField] private LayerMask layerMask;
 
@@ -90,7 +90,7 @@ namespace Objects.Clothes
 
             if (!HasFreeSpace)
             {
-                TryInteractWithIHandInteractable();
+                TryInteractWithIItemInteractable();
             }
         }
 
@@ -105,13 +105,11 @@ namespace Objects.Clothes
             }
         }
 
-        private void TryInteractWithIHandInteractable()
+        private void TryInteractWithIItemInteractable()
         {
             if (Physics.Raycast(mainCamera.position, mainCamera.forward, out var hitInfo,
                     rayDistance, layerMask, QueryTriggerInteraction.Ignore))
             {
-                Debug.Log($"UsableClothesContainer: TryInteractWithIHandInteractable with {hitInfo.transform.gameObject.name}");
-
                 if (hitInfo.transform.gameObject.TryGetComponent<IItemInteractable>(out var itemInteractable))
                 {
                     Debug.Log($"UsableClothesContainer: tiene IItemInteractable");

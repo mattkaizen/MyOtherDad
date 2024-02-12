@@ -1,4 +1,5 @@
 ﻿using Data;
+using Objects;
 using UnityEngine;
 
 namespace Tasks
@@ -18,24 +19,26 @@ namespace Tasks
             set => _isStarted = value;
         }
         
-        [SerializeField] private VoidEventChannelData eventToCompleteBreakfastTask;
-        [Space]
+        [Header("Listen to Events Channels")]
+        [Header("Broadcast On Events Channels")]
         [SerializeField] private VoidEventChannelData breakfastTaskCompleted;
+        [Space]
+        [Header("Breakfast settings")]
+        [SerializeField] private ItemContainer ghostPickableTray;
 
         private bool _isStarted;
         private bool _isCompleted;
 
         private void OnEnable()
         {
-            eventToCompleteBreakfastTask.EventRaised += OnEventToCompleteBreakfastTaskRaised;
+            ghostPickableTray.ItemPlaced.AddListener(ItemPlaced);
         }
-
         private void OnDisable()
         {
-            eventToCompleteBreakfastTask.EventRaised -= OnEventToCompleteBreakfastTaskRaised;
+            ghostPickableTray.ItemPlaced.RemoveListener(ItemPlaced);
         }
-
-        private void OnEventToCompleteBreakfastTaskRaised()
+        
+        private void ItemPlaced()
         {
             if (IsCompleted) return;
 
@@ -49,6 +52,7 @@ namespace Tasks
 
         public void CompleteTask()
         {
+            Debug.Log("Breakfast task Completed");
             IsCompleted = true;
         }
     }

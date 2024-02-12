@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Objects
 {
-    public class UsableCloth : MonoBehaviour, IContinuousUsable
+    public class ContinuousUsableObject : MonoBehaviour, IContinuousUsable
     {
         public bool IsBeingUsed { get; set; }
 
@@ -42,9 +42,9 @@ namespace Objects
                     rayDistance, layerMask, QueryTriggerInteraction.Ignore))
             {
                 Debug.Log($"Cloth Hit {hitInfo.transform.gameObject.name}"); //TODO: Dibujar el rayo, choca con la pared
-                if (hitInfo.transform.gameObject.TryGetComponent<IUsableInteractable>(out var usable))
+                if (hitInfo.transform.gameObject.TryGetComponent<IItemInteractable>(out var interactable))
                 {
-                    usable.TryInteractWith(dataProvider.Data);
+                    interactable.TryInteractWith(dataProvider.Data);
                 }
             }
         }

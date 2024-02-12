@@ -6,37 +6,41 @@ namespace Objects
 {
     public class ItemContainer : MonoBehaviour, IInventoryInteractable, IItemInteractable
     {
-        public event UnityAction OnItemSet = delegate { };
+        public ItemData PlacedItem => placedItem;
 
-        public ItemData ItemSet => itemSet;
-
-        public bool HasItem
+        public bool HasItemPlaced
         {
             get
             {
-                if (itemSet != null)
+                if (placedItem != null)
                     return true;
                 return false;
             }
         }
+        public UnityEvent ItemPlaced
+        {
+            get => itemPlaced;
+            set => itemPlaced = value;
+        }
 
-        [SerializeField] private bool requireMultipleItemsToSet;
-        [SerializeField] private ItemData requiredItemToSet;
+        [SerializeField] private bool requireMultipleItemsToPlace;
+        [SerializeField] private ItemData requiredItemToPlace;
+        [SerializeField] private UnityEvent itemPlaced;
 
-        private ItemData itemSet;
+        private ItemData placedItem;
         private bool _hasItem;
         
         public bool TryInteractWith(ItemData item)
         {
-            return TrySetItem(item);
+            return TryPlaceItem(item);
         }
 
-        private bool TrySetItem(ItemData itemToSet)
+        private bool TryPlaceItem(ItemData itemToPlace)
         {
-            if (!requireMultipleItemsToSet && HasItem) return false;
-            if (itemToSet != requiredItemToSet) return false;
+            if (!requireMultipleItemsToPlace && HasItemPlaced) return false;
+            if (itemToPlace != requiredItemToPlace) return false;
 
-            SetItem(itemToSet);
+            SetItem(itemToPlace);
             return true;
         }
 
@@ -44,9 +48,9 @@ namespace Objects
         {
             if (newItem == null) return;
 
-            Debug.Log("item set");
-            itemSet = newItem;
-            OnItemSet?.Invoke();
+            Debug.Log("item placed");
+            placedItem = newItem;
+            itemPlaced?.Invoke();
         }
     }
 }
