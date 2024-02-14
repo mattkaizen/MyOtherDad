@@ -60,7 +60,6 @@ namespace PointerGesture
             {
                 ScaleOutRectTransform(gesturePointsToAnimate[i]).OnComplete((() =>
                 {
-                    Debug.Log($"Gesture Scale completed i {i} count {gesturePointsToAnimate.Count}");
                     amountFinishedScaleOutTween++;
                 }));
             }

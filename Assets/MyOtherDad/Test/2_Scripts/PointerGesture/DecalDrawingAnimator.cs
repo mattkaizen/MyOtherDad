@@ -2,18 +2,17 @@
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
-using UnityEngine.UI;
 
 namespace PointerGesture
 {
     public class DecalDrawingAnimator : MonoBehaviour
     {
-        [SerializeField] private Image imageToDraw;
         [SerializeField] private DecalProjector decalToDraw;
-
-        [Space] [SerializeField] private float alphaTweenDuration;
+        [Space] 
+        [SerializeField] private float alphaTweenDuration;
         [SerializeField] private Ease alphaEase;
-        [Space] [SerializeField] private float resetAlphaTweenDuration;
+        [Space] 
+        [SerializeField] private float resetAlphaTweenDuration;
         [SerializeField] private Ease resetAlphaEase;
 
         private int _fadeAmount;
@@ -57,7 +56,6 @@ namespace PointerGesture
 
         private void OnGestureCompleted()
         {
-            // _fades.Add(FadeAlphaImage());
             _fades.Add(FadeAlphaDecal());
         }
         
@@ -68,21 +66,11 @@ namespace PointerGesture
             newAlphaValue = 1.0f / _fadeAmount;
 
             newAlphaValue += decalToDraw.fadeFactor;
-            
+            Debug.Log($"Decal fade {gameObject.name} new value {newAlphaValue}");
+
             Tween fadeTween = DOTween.To(()=> decalToDraw.fadeFactor, x=> decalToDraw.fadeFactor = x, newAlphaValue, alphaTweenDuration)
                 .SetEase(alphaEase);
             return fadeTween;
-        }
-
-        private Tween FadeAlphaImage()
-        {
-            float newAlphaValue = 0;
-
-            newAlphaValue = 1.0f / _fadeAmount;
-            
-            newAlphaValue += imageToDraw.color.a;
-
-            return imageToDraw.DOFade(newAlphaValue, alphaTweenDuration).SetEase(alphaEase);
         }
 
         public void ResetAlphaDecal()
@@ -91,17 +79,11 @@ namespace PointerGesture
             {
                 fade.Kill();
             }
+            _fades.Clear();
+            
             DOTween.To(()=> decalToDraw.fadeFactor, x=> decalToDraw.fadeFactor = x, 0, resetAlphaTweenDuration)
                 .SetEase(resetAlphaEase);
         }
-        
-        public void ResetAlphaImage()
-        {
-            foreach (var fade in _fades)
-            {
-                fade.Kill();
-            }
-            imageToDraw.DOFade(0, resetAlphaTweenDuration).SetEase(resetAlphaEase);
-        }
+
     }
 }

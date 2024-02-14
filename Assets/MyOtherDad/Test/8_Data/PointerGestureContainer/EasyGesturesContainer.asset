@@ -13,9 +13,22 @@ MonoBehaviour:
   m_Name: EasyGesturesContainer
   m_EditorClassIdentifier: 
   totalTime: 60
-  amountPointerGestureToSpawn: 10
-  gesturePrefabs:
-  - {fileID: 3838678165650046792, guid: 5325122900da4d4469b138356d7aff40, type: 3}
-  - {fileID: 7486629794758563785, guid: aa1b593d670156c43ab1e8c27a7a47b6, type: 3}
-  - {fileID: 7233817224122386724, guid: 78c6ff0cec579bd44a41277cea5b85ba, type: 3}
-  - {fileID: 8056376803225486420, guid: e13c497aa32bf964dacd570fcbc484c1, type: 3}
+  phases:
+  - amountPointerGestureToSpawn: 5
+    gesturePrefabs:
+    - {fileID: 3838678165650046792, guid: 5325122900da4d4469b138356d7aff40, type: 3}
+    - {fileID: 7486629794758563785, guid: aa1b593d670156c43ab1e8c27a7a47b6, type: 3}
+    - {fileID: 7233817224122386724, guid: 78c6ff0cec579bd44a41277cea5b85ba, type: 3}
+    - {fileID: 8056376803225486420, guid: e13c497aa32bf964dacd570fcbc484c1, type: 3}
+  - amountPointerGestureToSpawn: 5
+    gesturePrefabs:
+    - {fileID: 3838678165650046792, guid: 5325122900da4d4469b138356d7aff40, type: 3}
+    - {fileID: 7486629794758563785, guid: aa1b593d670156c43ab1e8c27a7a47b6, type: 3}
+    - {fileID: 7233817224122386724, guid: 78c6ff0cec579bd44a41277cea5b85ba, type: 3}
+    - {fileID: 8056376803225486420, guid: e13c497aa32bf964dacd570fcbc484c1, type: 3}
+  - amountPointerGestureToSpawn: 5
+    gesturePrefabs:
+    - {fileID: 3838678165650046792, guid: 5325122900da4d4469b138356d7aff40, type: 3}
+    - {fileID: 7486629794758563785, guid: aa1b593d670156c43ab1e8c27a7a47b6, type: 3}
+    - {fileID: 7233817224122386724, guid: 78c6ff0cec579bd44a41277cea5b85ba, type: 3}
+    - {fileID: 8056376803225486420, guid: e13c497aa32bf964dacd570fcbc484c1, type: 3}
