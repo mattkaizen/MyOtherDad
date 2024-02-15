@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using Domain;
 using Objects;
 using UnityEngine;
 using UnityEngine.Events;
@@ -38,6 +37,8 @@ public class PlayerInventory : MonoBehaviour
 
     private void TryAddHoldableItem(ItemData item)
     {
+        if (item.Prefab == null) return;
+        
         if (item.Prefab.TryGetComponent<IHoldable>(out var holdable))
         {
             _availableHoldableItems.Add(item);
