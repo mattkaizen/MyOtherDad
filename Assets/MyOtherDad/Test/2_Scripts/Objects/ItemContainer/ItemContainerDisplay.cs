@@ -14,6 +14,9 @@ namespace Objects
         [SerializeField] private GameObject ghostModel;
         [SerializeField] private bool instantiateItemOnSet;
         [SerializeField] private bool enableColliderAfterInstantiate;
+        [SerializeField] private bool hasCustomTransform;
+        [SerializeField] private Vector3 instantiateScale = Vector3.one;
+        [SerializeField] private Vector3 instantiateRotation;
 
         private void OnEnable()
         {
@@ -32,6 +35,7 @@ namespace Objects
                 eventToDisplayGhostEffect.EventRaised -= OnEventToDisplayGhostEffectRaised;
             }
         }
+
         private void OnEventToDisplayGhostEffectRaised()
         {
             TurnOnGhostItem();
@@ -55,6 +59,12 @@ namespace Objects
                 var newModel = Instantiate(container.PlacedItem.Prefab, gameObject.transform);
                 newModel.transform.localPosition = Vector3.zero;
                 newModel.transform.localScale = Vector3.one;
+
+                if (hasCustomTransform)
+                {
+                    newModel.transform.localScale = instantiateScale;
+                    newModel.transform.rotation = Quaternion.Euler(instantiateRotation.x, instantiateRotation.y, instantiateRotation.z);
+                }
 
                 if (enableColliderAfterInstantiate)
                 {

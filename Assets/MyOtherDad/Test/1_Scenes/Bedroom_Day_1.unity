@@ -9021,26 +9021,110 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1723933340}
     m_Modifications:
-    - target: {fileID: 5229823873488560275, guid: 8951659582e583449af54433eee477c3, type: 3}
-      propertyPath: requiredItemToPlace
-      value: 
-      objectReference: {fileID: 11400000, guid: 44831cc7cd6af3e449583454da5e343a, type: 2}
+    - target: {fileID: 650162399604088290, guid: 8951659582e583449af54433eee477c3, type: 3}
+      propertyPath: hasCustomTransform
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 650162399604088290, guid: 8951659582e583449af54433eee477c3, type: 3}
+      propertyPath: instantiateScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 650162399604088290, guid: 8951659582e583449af54433eee477c3, type: 3}
+      propertyPath: instantiateScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 650162399604088290, guid: 8951659582e583449af54433eee477c3, type: 3}
+      propertyPath: instantiateScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 650162399604088290, guid: 8951659582e583449af54433eee477c3, type: 3}
+      propertyPath: instantiateItemOnSet
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 650162399604088290, guid: 8951659582e583449af54433eee477c3, type: 3}
+      propertyPath: instantiateRotation.x
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 2309104171865825259, guid: 8951659582e583449af54433eee477c3, type: 3}
+      propertyPath: hasCustomTransform
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2309104171865825259, guid: 8951659582e583449af54433eee477c3, type: 3}
+      propertyPath: instantiateScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2309104171865825259, guid: 8951659582e583449af54433eee477c3, type: 3}
+      propertyPath: instantiateScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2309104171865825259, guid: 8951659582e583449af54433eee477c3, type: 3}
+      propertyPath: instantiateScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2309104171865825259, guid: 8951659582e583449af54433eee477c3, type: 3}
+      propertyPath: instantiateItemOnSet
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2309104171865825259, guid: 8951659582e583449af54433eee477c3, type: 3}
+      propertyPath: instantiateRotation.x
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 2590577763212121117, guid: 8951659582e583449af54433eee477c3, type: 3}
+      propertyPath: hasCustomTransform
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2590577763212121117, guid: 8951659582e583449af54433eee477c3, type: 3}
+      propertyPath: instantiateScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2590577763212121117, guid: 8951659582e583449af54433eee477c3, type: 3}
+      propertyPath: instantiateScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2590577763212121117, guid: 8951659582e583449af54433eee477c3, type: 3}
+      propertyPath: instantiateScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2590577763212121117, guid: 8951659582e583449af54433eee477c3, type: 3}
+      propertyPath: instantiateItemOnSet
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2590577763212121117, guid: 8951659582e583449af54433eee477c3, type: 3}
+      propertyPath: instantiateRotation.x
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 2989454285901905717, guid: 8951659582e583449af54433eee477c3, type: 3}
+      propertyPath: hasCustomTransform
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2989454285901905717, guid: 8951659582e583449af54433eee477c3, type: 3}
+      propertyPath: instantiateScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2989454285901905717, guid: 8951659582e583449af54433eee477c3, type: 3}
+      propertyPath: instantiateScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2989454285901905717, guid: 8951659582e583449af54433eee477c3, type: 3}
+      propertyPath: instantiateScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2989454285901905717, guid: 8951659582e583449af54433eee477c3, type: 3}
+      propertyPath: instantiateItemOnSet
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2989454285901905717, guid: 8951659582e583449af54433eee477c3, type: 3}
+      propertyPath: instantiateRotation.x
+      value: 90
+      objectReference: {fileID: 0}
     - target: {fileID: 6842646089436975200, guid: 8951659582e583449af54433eee477c3, type: 3}
       propertyPath: m_Name
       value: ArrangeBooks
       objectReference: {fileID: 0}
-    - target: {fileID: 7033022114680300186, guid: 8951659582e583449af54433eee477c3, type: 3}
-      propertyPath: requiredItemToPlace
-      value: 
-      objectReference: {fileID: 11400000, guid: 5e0cb037e5ae93c4ca8495f55e1acc4e, type: 2}
-    - target: {fileID: 7089319590598797676, guid: 8951659582e583449af54433eee477c3, type: 3}
-      propertyPath: requiredItemToPlace
-      value: 
-      objectReference: {fileID: 11400000, guid: 44831cc7cd6af3e449583454da5e343a, type: 2}
-    - target: {fileID: 7560816511248532036, guid: 8951659582e583449af54433eee477c3, type: 3}
-      propertyPath: requiredItemToPlace
-      value: 
-      objectReference: {fileID: 11400000, guid: 5e0cb037e5ae93c4ca8495f55e1acc4e, type: 2}
+    - target: {fileID: 7131443718462947364, guid: 8951659582e583449af54433eee477c3, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8107965964688289160, guid: 8951659582e583449af54433eee477c3, type: 3}
       propertyPath: m_RootOrder
       value: -1
