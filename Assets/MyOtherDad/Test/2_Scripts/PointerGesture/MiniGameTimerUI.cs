@@ -14,7 +14,7 @@ namespace PointerGesture
         [SerializeField] private VoidEventChannelData timerFinished;
         [SerializeField] private TMP_Text timerUI;
 
-        [Header("Fade oOut Animation settings")] [SerializeField]
+        [Header("Fade Out Animation settings")] [SerializeField]
         private float fadeOutTime;
 
         [SerializeField] private Ease fadeOutEase;
@@ -48,12 +48,15 @@ namespace PointerGesture
             _currentTotalTime = totalTime;
 
             UpdateTextUI(_currentTotalTime);
+            UpdateTextUIColor(totalTime, 0.0f);
+
         }
 
         private void OnTimerCurrentTimeChanged(int currentTime)
         {
             UpdateTextUI(currentTime);
-            UpdateTextUIColor(currentTime);
+            Debug.Log($"COLOR: Current time {currentTime}");
+            UpdateTextUIColor(currentTime, 1.0f);
         }
 
         private void OnTimerFinished()
@@ -66,11 +69,13 @@ namespace PointerGesture
             timerUI.text = time.ToString();
         }
 
-        private void UpdateTextUIColor(int time)
+        private void UpdateTextUIColor(int time, float duration)
         {
-            float gradientTime = 1.0f - (time / _currentTotalTime);
+            Debug.Log($"Current total time: {_currentTotalTime}, division result: {time / _currentTotalTime} ");
+            float gradientTime = 1.0f - ((float) time / _currentTotalTime);
 
-            timerUI.DOColor(timerColor.Evaluate(gradientTime), 1.0f);
+            Debug.Log($"COLOR: Gradient time {gradientTime}");
+            timerUI.DOColor(timerColor.Evaluate(gradientTime), duration);
         }
 
         public void FadeInUI()

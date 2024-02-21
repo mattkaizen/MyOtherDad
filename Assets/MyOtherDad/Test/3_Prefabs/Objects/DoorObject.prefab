@@ -9,12 +9,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7432030640811695039}
+  - component: {fileID: 8457887302939636655}
   m_Layer: 0
   m_Name: DoorObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &7432030640811695039
 Transform:
@@ -30,8 +31,29 @@ Transform:
   m_Children:
   - {fileID: 7106978674480724210}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &8457887302939636655
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 467007142038112831}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.8402179, y: 1.7605284, z: 0.17303704}
+  m_Center: {x: 0.0011202693, y: -0.28664333, z: -2.0421997e-18}
 --- !u!1001 &7290120594283978521
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -46,15 +68,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b8faefad87c3bad4490cd45254577236, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.117414415
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b8faefad87c3bad4490cd45254577236, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.2371947
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b8faefad87c3bad4490cd45254577236, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.9152592
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b8faefad87c3bad4490cd45254577236, type: 3}
       propertyPath: m_LocalRotation.w
@@ -87,6 +109,14 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: b8faefad87c3bad4490cd45254577236, type: 3}
       propertyPath: m_Name
       value: Puerta pieza 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: b8faefad87c3bad4490cd45254577236, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 6592401360930831907, guid: b8faefad87c3bad4490cd45254577236, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
