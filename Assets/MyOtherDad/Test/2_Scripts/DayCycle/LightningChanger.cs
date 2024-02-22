@@ -6,6 +6,7 @@ namespace DayCycle
     [ExecuteAlways]
     public class LightningChanger : MonoBehaviour
     {
+
         public LightPresetData Preset
         {
             get => preset;
@@ -40,6 +41,11 @@ namespace DayCycle
             Vector3 newRotation = new Vector3(rotatedDegrees, 170f, 0);
 
             directionalLight.transform.localRotation = Quaternion.Euler(newRotation);
+        }
+
+        public void SetTimeOfTheDay(float newTime)
+        {
+            timeOfTheDay = newTime;
         }
 
         private void OnValidate()
