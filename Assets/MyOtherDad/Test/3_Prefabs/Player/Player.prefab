@@ -57,7 +57,7 @@ GameObject:
   - component: {fileID: 7163882143453517587}
   - component: {fileID: 1448927300579574829}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: Canvas_UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -505,7 +505,7 @@ GameObject:
   - component: {fileID: 855883382367080637}
   - component: {fileID: 3890958219116729129}
   m_Layer: 5
-  m_Name: Image
+  m_Name: Image_Crosshair
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -791,6 +791,61 @@ Transform:
   m_Father: {fileID: 5370283800507754456}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6684615810234274801
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8522558972978352664}
+  - component: {fileID: 4123156824662269764}
+  m_Layer: 0
+  m_Name: UI
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8522558972978352664
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6684615810234274801}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4262043115273787329}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4123156824662269764
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6684615810234274801}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fff879ab4c84663bffd8bf42aeecadb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  rayDistance: 3
+  mainCamera: {fileID: 5075993376410916227}
+  uiImage: {fileID: 3890958219116729129}
+  defaultCrosshair: {fileID: 11400000, guid: 9abe371cc39589a44bd41623f0474849, type: 2}
+  fadeOutDuration: 0.1
+  fadeInDuration: 0.1
+  enableCrosshair: {fileID: 11400000, guid: a58bbfd2efeb8a94c9bef4b54d482354, type: 2}
+  hideCrosshair: {fileID: 11400000, guid: 4703622729461d04b8f55019060458ea, type: 2}
 --- !u!1 &6904661392324327056
 GameObject:
   m_ObjectHideFlags: 0
@@ -984,7 +1039,6 @@ MonoBehaviour:
   mainCamera: {fileID: 5075993376410916227}
   inputReader: {fileID: 11400000, guid: a1918f9e9c68f0d47a13815a88d883a5, type: 2}
   inventory: {fileID: 7364777921164031435}
-  handController: {fileID: 0}
 --- !u!114 &7809134192686198516
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1036,6 +1090,7 @@ Transform:
   - {fileID: 351881213749995041}
   - {fileID: 4368592680488465727}
   - {fileID: 5028581797707233414}
+  - {fileID: 8522558972978352664}
   m_Father: {fileID: 5370283800507754456}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

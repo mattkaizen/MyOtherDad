@@ -2,6 +2,7 @@
 using Data;
 using Domain;
 using Effects;
+using Settings.UI;
 using UnityEngine;
 
 namespace Player
@@ -15,10 +16,11 @@ namespace Player
         private float cameraTransitionDuration;
         [SerializeField] private float delayToEnablePlayerInput;
 
-        [Header("Broadcast on Event Channels")] [SerializeField]
-        private VoidEventChannelData enablingPlayerCamera;
-
+        [Header("Broadcast on Event Channels")] 
+        [SerializeField] private VoidEventChannelData enablingPlayerCamera;
         [SerializeField] private VoidEventChannelData playerCameraLive;
+        [SerializeField] private InteractiveUIDisplay interactiveUIDisplay;
+
 
         private IInteractableCamera currentInteractableCamera;
         private IEnumerator _transitionRoutine;
@@ -43,6 +45,7 @@ namespace Player
             interactableCamera.EnablingCamera.RaiseEvent();
             playerInputToggle.DisablePlayerInput();
             screenFadeEffect.FadeScreenIn();
+            interactiveUIDisplay.HideCrosshair();
             yield return new WaitForSeconds(cameraTransitionDuration);
             screenFadeEffect.GetFadeScreenOutTween();
             playerInputToggle.EnableCameraObjectInput(interactableCamera.CameraInteraction, delayToEnablePlayerInput);
@@ -61,6 +64,8 @@ namespace Player
             screenFadeEffect.GetFadeScreenOutTween();
             playerInputToggle.EnablePlayerInput(delayToEnablePlayerInput);
             playerCameraLive.RaiseEvent();
+            interactiveUIDisplay.EnableCrosshair();
+
         }
 
         public void SetLiveNewCamera(IInteractableCamera interactableCamera)

@@ -3,6 +3,7 @@ using DG.Tweening;
 using Effects;
 using Domain;
 using Objects;
+using Settings.UI;
 using UnityEngine;
 
 namespace Player
@@ -15,6 +16,7 @@ namespace Player
         [SerializeField] private PlayerInputToggle playerInputToggle;
         [SerializeField] private CameraInteractableObject cameraChangeableObject;
         [SerializeField] private VoidEventChannelData wakeUpSequenceCompleted;
+        [SerializeField] private InteractiveUIDisplay interactiveUIDisplay;
 
         private IInteractableCamera newInteractableCamera;
 
@@ -36,6 +38,7 @@ namespace Player
 
         private void WakeUp()
         {
+            interactiveUIDisplay.HideCrosshair(0.0f);
             playerInputToggle.DisablePlayerInput(0.0f);
             SetPlayerOnCamera();
             screenFadeEffect.GetFadeScreenOutTween().OnComplete((() =>

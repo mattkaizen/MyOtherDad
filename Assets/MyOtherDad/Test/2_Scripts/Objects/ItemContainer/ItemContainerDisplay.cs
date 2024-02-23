@@ -1,9 +1,11 @@
 ﻿using Data;
+using Domain;
+using UI;
 using UnityEngine;
 
 namespace Objects
 {
-    public class ItemContainerDisplay : MonoBehaviour
+    public class ItemContainerDisplay : MonoBehaviour, IInteractiveUI
     {
         [Header("Broadcast on Event Channels")]
         [Space]
@@ -17,6 +19,9 @@ namespace Objects
         [SerializeField] private bool hasCustomTransform;
         [SerializeField] private Vector3 instantiateScale = Vector3.one;
         [SerializeField] private Vector3 instantiateRotation;
+        [Header("UI Settings")]
+        [SerializeField] private CrosshairData crosshair;
+
 
         private void OnEnable()
         {
@@ -74,6 +79,11 @@ namespace Objects
                     }
                 }
             }
+        }
+
+        public CrosshairData GetInteractionUI()
+        {
+            return crosshair;
         }
     }
 }

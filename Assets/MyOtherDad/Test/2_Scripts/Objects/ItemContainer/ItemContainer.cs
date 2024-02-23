@@ -1,10 +1,11 @@
 ﻿using Domain;
+using UI;
 using UnityEngine;
 using UnityEngine.Events;
 
 namespace Objects
 {
-    public class ItemContainer : MonoBehaviour, IInventoryInteractable, IItemInteractable
+    public class ItemContainer : MonoBehaviour, IInventoryInteractable
     {
         public ItemData PlacedItem => placedItem;
 

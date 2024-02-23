@@ -15,6 +15,7 @@ namespace PointerGesture
         [SerializeField] private VoidEventChannelData tutorialCompleted;
         [SerializeField] private VoidEventChannelData tutorialRestarted;
 
+
         [Header("Listen to Events Channels")]
         [SerializeField] private VoidEventChannelData eventToStartMiniGame;
         [SerializeField] private VoidEventChannelData timerFinished;

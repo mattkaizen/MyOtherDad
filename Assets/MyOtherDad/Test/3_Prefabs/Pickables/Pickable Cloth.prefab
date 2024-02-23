@@ -68,6 +68,7 @@ GameObject:
   - component: {fileID: 1223081420722850643}
   - component: {fileID: 2937056808848919698}
   - component: {fileID: 8075824798511381977}
+  - component: {fileID: 3693071751965316734}
   m_Layer: 0
   m_Name: Pickable Cloth
   m_TagString: Untagged
@@ -220,6 +221,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.13784885, y: 0.010915995, z: 0.12686801}
   m_Center: {x: 0.02520752, y: 0.0009049177, z: 0.0032316446}
+--- !u!114 &3693071751965316734
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7142521806995484662}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7eb887d27a3b4d8893867bac6dc5b634, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  crosshair: {fileID: 11400000, guid: 2c6d05d71f1c3dc47a1df15bfc423a72, type: 2}
 --- !u!1001 &4262684306965218041
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -48,6 +48,7 @@ GameObject:
   - component: {fileID: 6867141073998046831}
   - component: {fileID: 8162280648774379014}
   - component: {fileID: 4343126521730992294}
+  - component: {fileID: 214973487043450955}
   m_Layer: 0
   m_Name: Pickable Trash Can
   m_TagString: Untagged
@@ -202,6 +203,19 @@ CapsuleCollider:
   m_Height: 0.15835452
   m_Direction: 1
   m_Center: {x: 0.006192892, y: 0.005308017, z: -0.0016028509}
+--- !u!114 &214973487043450955
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8303139326655414547}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7eb887d27a3b4d8893867bac6dc5b634, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  crosshair: {fileID: 11400000, guid: 2c6d05d71f1c3dc47a1df15bfc423a72, type: 2}
 --- !u!1001 &1196868729609563174
 PrefabInstance:
   m_ObjectHideFlags: 0
