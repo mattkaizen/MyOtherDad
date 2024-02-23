@@ -174,7 +174,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 461108519761475072}
-  m_LocalRotation: {x: 0.44622126, y: -0.000000029802319, z: -0.000000014901159, w: 0.89492273}
+  m_LocalRotation: {x: 0.4741099, y: -0.026116729, z: 0.014071211, w: 0.87996584}
   m_LocalPosition: {x: 0, y: 0.49999994, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -184,7 +184,7 @@ Transform:
   - {fileID: 2217949658932642329}
   m_Father: {fileID: 5370283800507754456}
   m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: -0.03, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 55, y: 0, z: 0}
 --- !u!20 &5428665276246640946
 Camera:
   m_ObjectHideFlags: 0
@@ -432,7 +432,7 @@ CharacterController:
   m_Radius: 0.2
   m_SlopeLimit: 45
   m_StepOffset: 0.3
-  m_SkinWidth: 0.08
+  m_SkinWidth: 0.0001
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &2072635315446771366
@@ -451,7 +451,7 @@ MonoBehaviour:
   inputReader: {fileID: 11400000, guid: a1918f9e9c68f0d47a13815a88d883a5, type: 2}
   smoothMoveInputSpeed: 0.15
   smoothLookInputSpeed: 0.025
-  playerSpeed: 3
+  playerSpeed: 2
   runSpeed: 4.5
   stamina: 5
   timeToRecover: 3
@@ -1164,7 +1164,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8929677105379679930}
-  m_LocalRotation: {x: 0.44622126, y: 0, z: 0, w: 0.89492273}
+  m_LocalRotation: {x: 0.4741099, y: -0.026116693, z: 0.014071209, w: 0.8799658}
   m_LocalPosition: {x: 0, y: 0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1172,7 +1172,7 @@ Transform:
   - {fileID: 24266198636859704}
   m_Father: {fileID: 5370283800507754456}
   m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 53.003, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 56.63, y: -3.4, z: 0}
 --- !u!114 &6636383511649780563
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -15,6 +15,7 @@ public class HighlightObjectEffect : MonoBehaviour
     [SerializeField] private float lerpEmissiveColorToBaseColorTweenDuration;
     [SerializeField] private float lerpEmissiveColorToNewColorTweenDuration;
     [SerializeField] private bool highLightChildren;
+    [SerializeField] private bool highlightOnAwake;
 
     private readonly int emissionColor = Shader.PropertyToID("_EmissionColor");
 
@@ -75,6 +76,10 @@ public class HighlightObjectEffect : MonoBehaviour
                 }
             }
         }
+
+        if (!highlightOnAwake) return;
+        
+        EnableHighLightFade();
     }
 
     [UsedImplicitly]
