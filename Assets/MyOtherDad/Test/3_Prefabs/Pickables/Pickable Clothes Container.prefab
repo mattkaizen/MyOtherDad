@@ -121,8 +121,10 @@ GameObject:
   - component: {fileID: 2174981526742681065}
   - component: {fileID: 8752572421610422583}
   - component: {fileID: 3746594764128682770}
-  - component: {fileID: 7931377743611102325}
   - component: {fileID: 6498099281602209593}
+  - component: {fileID: 7101879940542932852}
+  - component: {fileID: 7931377743611102325}
+  - component: {fileID: 1186035904748385085}
   m_Layer: 0
   m_Name: Pickable Clothes Container
   m_TagString: Untagged
@@ -254,6 +256,40 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemData: {fileID: 11400000, guid: 2bb769cf5c630c14ab67d325c8f36426, type: 2}
+--- !u!114 &6498099281602209593
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5328879875029631062}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7eb887d27a3b4d8893867bac6dc5b634, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  crosshair: {fileID: 11400000, guid: 2c6d05d71f1c3dc47a1df15bfc423a72, type: 2}
+--- !u!65 &7101879940542932852
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5328879875029631062}
+  m_Material: {fileID: 13400000, guid: b90a87aa429ecb047bcae2caa93189a1, type: 2}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.3337536, y: 0.16362756, z: 0.33194146}
+  m_Center: {x: -0.00077819824, y: 0.11850309, z: 0}
 --- !u!136 &7931377743611102325
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -261,7 +297,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5328879875029631062}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: b90a87aa429ecb047bcae2caa93189a1, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -277,19 +313,27 @@ CapsuleCollider:
   m_Height: 0.4762212
   m_Direction: 1
   m_Center: {x: -0.00025981665, y: -0.03169316, z: 0.002781719}
---- !u!114 &6498099281602209593
-MonoBehaviour:
+--- !u!65 &1186035904748385085
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5328879875029631062}
+  m_Material: {fileID: 13400000, guid: b90a87aa429ecb047bcae2caa93189a1, type: 2}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7eb887d27a3b4d8893867bac6dc5b634, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  crosshair: {fileID: 11400000, guid: 2c6d05d71f1c3dc47a1df15bfc423a72, type: 2}
+  serializedVersion: 3
+  m_Size: {x: 0.3145666, y: 0.12175852, z: 0.32005864}
+  m_Center: {x: -0.00021219254, y: -0.20982838, z: 0}
 --- !u!1001 &4963826151466582900
 PrefabInstance:
   m_ObjectHideFlags: 0

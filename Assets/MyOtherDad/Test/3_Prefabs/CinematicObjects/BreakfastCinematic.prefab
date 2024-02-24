@@ -305,6 +305,13 @@ MonoBehaviour:
   eventToPlayTimeline: {fileID: 11400000, guid: 149e26d6f197e4047843109050c16436, type: 2}
   timelineStarted: {fileID: 11400000, guid: 76a71de789a2af14c89857189678958e, type: 2}
   timelineStopped: {fileID: 11400000, guid: d7b2b20e2d061d849bd08adadba9f5b4, type: 2}
+  cinematicStarted:
+    m_PersistentCalls:
+      m_Calls: []
+  cinematicStopped:
+    m_PersistentCalls:
+      m_Calls: []
+  disableCinematicWhenStops: 0
 --- !u!320 &7208220294929085953
 PlayableDirector:
   m_ObjectHideFlags: 0
@@ -328,6 +335,18 @@ PlayableDirector:
     value: {fileID: 3576849898679594506}
   - key: {fileID: -8778670216759437979, guid: a4e09368eb491cf44a4d3214ab5716c2, type: 2}
     value: {fileID: 5902340598804639078}
+  - key: {fileID: -5591274190455990848, guid: a4e09368eb491cf44a4d3214ab5716c2, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -3610353736902692281, guid: a4e09368eb491cf44a4d3214ab5716c2, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -8205891956803556127, guid: a4e09368eb491cf44a4d3214ab5716c2, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 148546040463224997, guid: a4e09368eb491cf44a4d3214ab5716c2, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -4778959970105209122, guid: a4e09368eb491cf44a4d3214ab5716c2, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 1780327950543686722, guid: a4e09368eb491cf44a4d3214ab5716c2, type: 2}
+    value: {fileID: 0}
   m_ExposedReferences:
     m_References:
     - b18fab79071f0a648ab3debd85944ec4: {fileID: 0}

@@ -1,27 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
+using Effects;
 using JetBrains.Annotations;
 using UnityEngine;
 
 public class HighlightObjectEffect : MonoBehaviour
 {
-    [ColorUsage(true, true)] 
-    [SerializeField] private Color newEmissionColor;
-
-    [ColorUsage(true, true)]
-    [SerializeField] private Color blackEmissionColor;
-
-    [SerializeField] private float lerpEmissiveColorToBaseColorTweenDuration;
-    [SerializeField] private float lerpEmissiveColorToNewColorTweenDuration;
+    [Header("Settings")]
+    [Space]
+    [SerializeField] private HighlightEffectData data;
     [SerializeField] private bool highLightChildren;
     [SerializeField] private bool highlightOnAwake;
 
     private readonly int emissionColor = Shader.PropertyToID("_EmissionColor");
 
     private Dictionary<Material, Color> _materialsToSetColor = new Dictionary<Material, Color>();
-    private List<Tweener> lerpEmissionColorToBaseColorTweeners = new List<Tweener>();
-    private List<Tweener> lerpEmissionColorToNewColorTweeners = new List<Tweener>();
+    private List<Tweener> _lerpEmissionColorToBaseColorTweeners = new List<Tweener>();
+    private List<Tweener> _lerpEmissionColorToNewColorTweeners = new List<Tweener>();
     private IEnumerator _highLightRoutine;
 
     private bool _isHighlighting;
@@ -99,7 +95,7 @@ public class HighlightObjectEffect : MonoBehaviour
         if (!_isHighlighting) return;
 
         KillEmissionColorToNewColorTweener();
-        LerpCurrentEmissionColorToBase(lerpEmissiveColorToBaseColorTweenDuration);
+        LerpCurrentEmissionColorToBase(data.LerpEmissiveColorToBaseColorTweenDuration);
         _isHighlighting = false;
     }
 
@@ -113,18 +109,18 @@ public class HighlightObjectEffect : MonoBehaviour
 
     private void StartContinuousEmissiveColorChange()
     {
-        lerpEmissionColorToNewColorTweeners.Clear();
+        _lerpEmissionColorToNewColorTweeners.Clear();
 
         foreach (var materialToSetColor in _materialsToSetColor)
         {
             EnableEmission(materialToSetColor.Key);
 
             Tweener tweener = materialToSetColor.Key
-                .DOColor(newEmissionColor, emissionColor, lerpEmissiveColorToNewColorTweenDuration)
+                .DOColor(data.NewEmissionColor, emissionColor, data.LerpEmissiveColorToNewColorTweenDuration)
                 .SetEase(Ease.Linear)
                 .SetLoops(-1, LoopType.Yoyo);
 
-            lerpEmissionColorToNewColorTweeners.Add(tweener);
+            _lerpEmissionColorToNewColorTweeners.Add(tweener);
         }
     }
 
@@ -132,31 +128,31 @@ public class HighlightObjectEffect : MonoBehaviour
     {
         foreach (var materialToSetColor in _materialsToSetColor)
         {
-            Tweener tweener = materialToSetColor.Key.DOColor(blackEmissionColor, emissionColor,
+            Tweener tweener = materialToSetColor.Key.DOColor(data.BlackEmissionColor, emissionColor,
                     duration)
                 .OnComplete((() => { DisableEmission(materialToSetColor.Key); }));
-            lerpEmissionColorToBaseColorTweeners.Add(tweener);
+            _lerpEmissionColorToBaseColorTweeners.Add(tweener);
         }
     }
 
     private void KillEmissionColorToNewColorTweener()
     {
-        foreach (var lerpEmissionColorToNewColorTweener in lerpEmissionColorToNewColorTweeners)
+        foreach (var lerpEmissionColorToNewColorTweener in _lerpEmissionColorToNewColorTweeners)
         {
             lerpEmissionColorToNewColorTweener.Kill();
         }
 
-        lerpEmissionColorToNewColorTweeners.Clear();
+        _lerpEmissionColorToNewColorTweeners.Clear();
     }
 
     private void KillLerpCurrenColorToBase()
     {
-        foreach (var lerpToCurrentColorTweener in lerpEmissionColorToBaseColorTweeners)
+        foreach (var lerpToCurrentColorTweener in _lerpEmissionColorToBaseColorTweeners)
         {
             lerpToCurrentColorTweener.Kill();
         }
 
-        lerpEmissionColorToBaseColorTweeners.Clear();
+        _lerpEmissionColorToBaseColorTweeners.Clear();
     }
 
     private void EnableEmission(Material material)

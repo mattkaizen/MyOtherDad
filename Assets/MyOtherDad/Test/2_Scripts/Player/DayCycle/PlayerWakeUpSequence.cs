@@ -5,6 +5,7 @@ using Domain;
 using Objects;
 using Settings.UI;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Player
 {
@@ -17,6 +18,7 @@ namespace Player
         [SerializeField] private CameraInteractableObject cameraChangeableObject;
         [SerializeField] private VoidEventChannelData wakeUpSequenceCompleted;
         [SerializeField] private InteractiveUIDisplay interactiveUIDisplay;
+        [SerializeField] private UnityEvent sequenceCompleted;
 
         private IInteractableCamera newInteractableCamera;
 

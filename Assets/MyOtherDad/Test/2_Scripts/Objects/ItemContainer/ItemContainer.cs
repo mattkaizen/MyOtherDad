@@ -5,7 +5,7 @@ using UnityEngine.Events;
 
 namespace Objects
 {
-    public class ItemContainer : MonoBehaviour, IInventoryInteractable
+    public class ItemContainer : MonoBehaviour, IInventoryInteractable, IItemInteractable
     {
         public ItemData PlacedItem => placedItem;
 

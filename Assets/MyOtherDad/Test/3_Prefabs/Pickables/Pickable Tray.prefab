@@ -48,6 +48,7 @@ GameObject:
   - component: {fileID: 7555921798456431211}
   - component: {fileID: 5108439599584686101}
   - component: {fileID: 4875371680028364092}
+  - component: {fileID: 3352581545770738215}
   m_Layer: 0
   m_Name: Pickable Tray
   m_TagString: Untagged
@@ -70,7 +71,7 @@ Transform:
   - {fileID: 8959478963829909715}
   - {fileID: 1872361727339621039}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &8853197366085979516
 BoxCollider:
@@ -224,6 +225,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemData: {fileID: 11400000, guid: 461b26019b8aec24fb40b3068a0e0ab2, type: 2}
+--- !u!114 &3352581545770738215
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7045117482998456991}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7eb887d27a3b4d8893867bac6dc5b634, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  crosshair: {fileID: 11400000, guid: 2c6d05d71f1c3dc47a1df15bfc423a72, type: 2}
 --- !u!1001 &8353338184009260132
 PrefabInstance:
   m_ObjectHideFlags: 0

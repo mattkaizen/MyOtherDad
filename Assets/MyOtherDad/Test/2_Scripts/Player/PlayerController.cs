@@ -31,6 +31,12 @@ namespace Player
         [Header("Camera")] 
         [Space] 
         [SerializeField] private Transform playerCam;
+        
+        
+        [Header("Mouse")] 
+        [Space] 
+        [SerializeField] private float minVerticalMouseRotation = -65f;
+        [SerializeField] private float maxVerticalMouseRotation = 60f;
     
         private Vector2 _playerLookInput;
         private Vector2 _smoothLookInput;
@@ -44,8 +50,6 @@ namespace Player
         private readonly float _gravity = -9.8f;
         private readonly float _mouseHorizontalSensibility = 0.25f;
         private readonly float _mouseVerticalSensibility = 0.2f;
-        private readonly float _minVerticalMouseRotation = -65f;
-        private readonly float _maxVerticalMouseRotation = 60f;
         private float _mouseHorizontalInput;
         private float _mouseVerticalInput;
 
@@ -120,7 +124,7 @@ namespace Player
             _mouseHorizontalInput = _mouseHorizontalSensibility * _smoothLookInput.x;
             _mouseVerticalInput += _mouseVerticalSensibility * _smoothLookInput.y;
         
-            _mouseVerticalInput = Mathf.Clamp(_mouseVerticalInput, _minVerticalMouseRotation, _maxVerticalMouseRotation);
+            _mouseVerticalInput = Mathf.Clamp(_mouseVerticalInput, minVerticalMouseRotation, maxVerticalMouseRotation);
             playerCam.localEulerAngles = new Vector3(-_mouseVerticalInput, 0, 0);
 
             transform.Rotate(0, _mouseHorizontalInput, 0);

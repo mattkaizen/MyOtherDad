@@ -162,8 +162,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2.1198883, y: 0.69122165, z: 1.5002469}
-  m_Center: {x: 0, y: 0.123882554, z: 0}
+  m_Size: {x: 2.1198883, y: 0.5322416, z: 1.5002469}
+  m_Center: {x: -0, y: 0.044392526, z: -0}
 --- !u!114 &837159225914977205
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -229,7 +229,7 @@ Transform:
   - {fileID: 6805202017601685}
   m_Father: {fileID: 5139297414287403455}
   m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+  m_LocalEulerAnglesHint: {x: -0, y: 0, z: 0}
 --- !u!114 &9023787501019385454
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -355,11 +355,38 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cama Fix
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f96f0d8dcb698ee4588e811bfe06d429, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: f96f0d8dcb698ee4588e811bfe06d429, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4396774249129016396}
   m_SourcePrefab: {fileID: 100100000, guid: f96f0d8dcb698ee4588e811bfe06d429, type: 3}
+--- !u!1 &5877609417830702100 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: f96f0d8dcb698ee4588e811bfe06d429, type: 3}
+  m_PrefabInstance: {fileID: 6723908663570276677}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4396774249129016396
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5877609417830702100}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b913683481c6c6e43b29e2920774c76b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data: {fileID: 11400000, guid: b675bada79ddd684d8f4bb9e34a60e3f, type: 2}
+  highLightChildren: 0
+  highlightOnAwake: 0
 --- !u!4 &6546727748406757038 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: f96f0d8dcb698ee4588e811bfe06d429, type: 3}
