@@ -58,6 +58,8 @@ namespace Tasks
         [SerializeField] private List<ItemData> trashDataToCheck;
         [SerializeField] private float lastItemMaxVerticalMovementThreshold;
         [SerializeField] private float lastItemMinVerticalMovementThreshold;
+        [Space]
+        [SerializeField] private UnityEvent taskCompleted;
 
         private IHoldable _lastItemThrown;
 
@@ -135,6 +137,7 @@ namespace Tasks
             trashDetectorTrigger.IsTrashDetectionEnabled = false;
             int score = trashDetectorTrigger.AmountObjectAdded;
             throwTrashTaskCompletedWithScoreOf.RaiseEvent(score);
+            taskCompleted?.Invoke();
         }
 
         private void OnItemRemoved(IHoldable item)

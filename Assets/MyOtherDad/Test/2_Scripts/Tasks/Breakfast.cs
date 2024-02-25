@@ -1,6 +1,7 @@
 ﻿using Data;
 using Objects;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Tasks
 {
@@ -22,6 +23,8 @@ namespace Tasks
         [Header("Listen to Events Channels")]
         [Header("Broadcast On Events Channels")]
         [SerializeField] private VoidEventChannelData breakfastTaskCompleted;
+        [Space]
+        [SerializeField] private UnityEvent breakfastTaskCompletedTask;
         [Space]
         [Header("Breakfast settings")]
         [SerializeField] private ItemContainer ghostPickableTray;
