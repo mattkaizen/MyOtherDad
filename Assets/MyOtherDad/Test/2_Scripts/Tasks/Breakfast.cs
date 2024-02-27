@@ -47,6 +47,7 @@ namespace Tasks
 
             CompleteTask();
             breakfastTaskCompleted.RaiseEvent();
+            breakfastTaskCompletedTask?.Invoke();
         }
         public void StartTask()
         {

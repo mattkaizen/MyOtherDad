@@ -83,7 +83,7 @@ namespace Tasks
 
         public void CompleteTask()
         {
-            if (!IsCompleted) return;
+            if (!IsStarted) return;
             
             IsCompleted = true;
             

@@ -68,7 +68,7 @@ namespace PointerGesture
         private void OnDrawingTaskStarted()
         {
             Debug.Log("PointerGestureMiniGamePresenter: Task started");
-            DisplayTutorialUI();
+            // DisplayTutorialUI();
         }
 
         private void OnDrawingTaskTutorialStarted()

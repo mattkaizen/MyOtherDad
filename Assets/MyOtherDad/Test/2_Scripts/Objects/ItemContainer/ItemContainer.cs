@@ -1,5 +1,4 @@
 ﻿using Domain;
-using UI;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -7,13 +6,12 @@ namespace Objects
 {
     public class ItemContainer : MonoBehaviour, IInventoryInteractable, IItemInteractable
     {
-        public ItemData PlacedItem => placedItem;
 
         public bool HasItemPlaced
         {
             get
             {
-                if (placedItem != null)
+                if (_placedItem != null)
                     return true;
                 return false;
             }
@@ -23,14 +21,17 @@ namespace Objects
             get => itemPlaced;
             set => itemPlaced = value;
         }
+        public ItemData PlacedItem => _placedItem;
+        public ItemData RequiredItemToPlace => requiredItemToPlace;
+        public bool HasItem => _hasItem;
 
         [SerializeField] private bool requireMultipleItemsToPlace;
         [SerializeField] private ItemData requiredItemToPlace;
         [SerializeField] private UnityEvent itemPlaced;
 
-        private ItemData placedItem;
+        private ItemData _placedItem;
         private bool _hasItem;
-        
+
         public bool TryInteractWith(ItemData item)
         {
             return TryPlaceItem(item);
@@ -39,7 +40,8 @@ namespace Objects
         private bool TryPlaceItem(ItemData itemToPlace)
         {
             if (!requireMultipleItemsToPlace && HasItemPlaced) return false;
-            if (itemToPlace != requiredItemToPlace) return false;
+            if (itemToPlace != requiredItemToPlace)
+                return false;
 
             SetItem(itemToPlace);
             return true;
@@ -49,8 +51,7 @@ namespace Objects
         {
             if (newItem == null) return;
 
-            Debug.Log("item placed");
-            placedItem = newItem;
+            _placedItem = newItem;
             itemPlaced?.Invoke();
         }
     }

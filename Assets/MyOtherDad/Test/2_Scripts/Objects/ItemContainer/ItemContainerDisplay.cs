@@ -5,8 +5,11 @@ using UnityEngine;
 
 namespace Objects
 {
-    public class ItemContainerDisplay : MonoBehaviour, IInteractiveUI
+    public class ContainerDisplay : MonoBehaviour, IInventoryInteractiveUI
     {
+        public bool IsInteractionEnabled { get; set; }
+        public ItemData RequiredItemToSet => container.RequiredItemToPlace;
+
         [Header("Broadcast on Event Channels")]
         [Space]
         [SerializeField] private VoidEventChannelData eventToDisplayGhostEffect;
@@ -20,8 +23,10 @@ namespace Objects
         [SerializeField] private Vector3 instantiateScale = Vector3.one;
         [SerializeField] private Vector3 instantiateRotation;
         [Header("UI Settings")]
-        [SerializeField] private CrosshairData crosshair;
+        [SerializeField] private CrosshairData crosshairCanInteract;
+        [SerializeField] private CrosshairData crosshairCantInteract;
 
+        private CrosshairData _currentCrosshair;
 
         private void OnEnable()
         {
@@ -29,6 +34,7 @@ namespace Objects
             {
                 container.ItemPlaced.AddListener(ItemPlaced);
                 eventToDisplayGhostEffect.EventRaised += OnEventToDisplayGhostEffectRaised;
+                IsInteractionEnabled = true;
             }
         }
 
@@ -53,6 +59,7 @@ namespace Objects
 
         private void ItemPlaced()
         {
+            DisableInteractiveUI();
             ghostModel.SetActive(false);
             InstantiateSetItemPrefab();
         }
@@ -68,7 +75,8 @@ namespace Objects
                 if (hasCustomTransform)
                 {
                     newModel.transform.localScale = instantiateScale;
-                    newModel.transform.rotation = Quaternion.Euler(instantiateRotation.x, instantiateRotation.y, instantiateRotation.z);
+                    newModel.transform.rotation = Quaternion.Euler(instantiateRotation.x, instantiateRotation.y,
+                        instantiateRotation.z);
                 }
 
                 if (enableColliderAfterInstantiate)
@@ -81,9 +89,35 @@ namespace Objects
             }
         }
 
+        public void EnableInteractiveUI()
+        {
+            IsInteractionEnabled = true;
+        }
+
+        public void DisableInteractiveUI()
+        {
+            IsInteractionEnabled = false;
+        }
+
         public CrosshairData GetInteractionUI()
         {
-            return crosshair;
+            return _currentCrosshair;
+        }
+
+
+        public bool TryInteractWithItem(ItemData inventoryItem)
+        {
+            if (inventoryItem == container.RequiredItemToPlace)
+            {
+                Debug.Log("Inventory item is equals to required item to place");
+                _currentCrosshair = crosshairCanInteract;
+                return true;
+            }
+
+            Debug.Log("Inventory item isn't equals to required item to place");
+
+            _currentCrosshair = crosshairCantInteract;
+            return false;
         }
     }
 }

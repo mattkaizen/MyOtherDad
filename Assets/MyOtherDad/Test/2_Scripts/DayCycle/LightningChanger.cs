@@ -1,4 +1,5 @@
-﻿using Lightning;
+﻿using DG.Tweening;
+using Lightning;
 using UnityEngine;
 
 namespace DayCycle
@@ -12,18 +13,18 @@ namespace DayCycle
             set => preset = value;
         }
 
-        [Range(0, 24)] [SerializeField] private float timeOfTheDay;
         [Header("Directional Light Rotation Angles ")]
         [Range(-90, 270)] [SerializeField] private float minAngle = 30f;
         [Range(-90, 270)] [SerializeField] private float maxAngle = 150f;
         [SerializeField] private Light directionalLight;
         [SerializeField] private LightPresetData preset;
+        [SerializeField] private DayCycleController dayCycleController;
 
         private void Update()
         {
             if (preset == null) return;
 
-            UpdateLightning(timeOfTheDay / 24);
+            UpdateLightning(dayCycleController.TimeOfTheDay / 24);
         }
 
         private void UpdateLightning(float timePercent)
@@ -41,10 +42,7 @@ namespace DayCycle
             directionalLight.transform.localRotation = Quaternion.Euler(newRotation);
         }
 
-        public void SetTimeOfTheDay(float newTime)
-        {
-            timeOfTheDay = newTime;
-        }
+
 
         private void OnValidate()
         {

@@ -51,6 +51,7 @@ namespace Tasks
         public void CompleteTask()
         {
             _isCompleted = true;
+            Debug.Log("take pills completedsz");
         }
     }
 }

@@ -59,6 +59,7 @@ namespace Tasks
 
         public void CompleteTask()
         {
+            Debug.Log($"Drawing mini game Completed: {gameObject.name}");
             IsCompleted = true;
 
             inputActionManager.GetUpActionControl.EnableInput();

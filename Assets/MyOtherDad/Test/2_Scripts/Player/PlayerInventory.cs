@@ -46,6 +46,18 @@ public class PlayerInventory : MonoBehaviour
         }
     }
 
+    public bool HasItem(ItemData itemToCheck)
+    {
+        return _items.ContainsKey(itemToCheck);
+    }
+    
+    public ItemData TryGetItem(ItemData item)
+    {
+        if (!HasItems() || !HasItem(item)) return null;
+    
+        return RemoveItem(item);
+    }
+
     public void TryRemoveThrowableItem(ItemData item, int index)
     {
         if (index < _availableHoldableItems.Count && index > -1)
@@ -53,13 +65,6 @@ public class PlayerInventory : MonoBehaviour
             _availableHoldableItems.RemoveAt(index);
             RemoveItem(item);
         }
-    }
-
-    public ItemData TryGetItem(ItemData item)
-    {
-        if (!HasItems() || !_items.ContainsKey(item)) return null;
-
-        return RemoveItem(item);
     }
 
     public ItemData RemoveItem(ItemData item)

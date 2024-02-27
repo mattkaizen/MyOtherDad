@@ -1,12 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using Data;
+using JetBrains.Annotations;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace PointerGesture
 {
     public class DrawingMiniGameController : MonoBehaviour
     {
+        
+        [SerializeField] [UsedImplicitly] private UnityEvent drawingMiniGameCompleted;
+        [Space]
         [Header("Broadcast on Events Channels")]
         [SerializeField] private VoidEventChannelData miniGameStarted;
         [SerializeField] private VoidEventChannelData miniGameCompleted;
@@ -129,7 +134,7 @@ namespace PointerGesture
 
         private void CompleteMiniGame()
         {
-            if (!_isMiniGameStarted) return;
+            // if (!_isMiniGameStarted) return;
 
             Debug.Log("MiniGameCompleted");
 

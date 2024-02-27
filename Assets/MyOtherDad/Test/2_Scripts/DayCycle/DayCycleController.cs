@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using DG.Tweening;
+using UnityEngine;
 
 namespace DayCycle
 {
@@ -17,25 +19,54 @@ namespace DayCycle
             get => _currentDayCycle;
             set => _currentDayCycle = value;
         }
+        public float TimeOfTheDay => timeOfTheDay;
+
+        public const float MorningTime = 6.0f;
+        public const float AfternoonTime = 12.0f;
+        public const float EveningTime = 17.0f;
+        public const float NightTime = 22.0f;
         
-        [SerializeField] private LightningChanger lightningChanger;
+        [Range(0, 24)] [SerializeField] private float timeOfTheDay;
         
         private DayCycle _currentDayCycle = DayCycle.MORNING;
 
         public void SetDayCycle(DayCycle newDayCycle)
         {
-            if(newDayCycle == DayCycle.MORNING)
-                lightningChanger.SetTimeOfTheDay(6.0f);
-            
-            else if(newDayCycle == DayCycle.AFTERNOON)
-                lightningChanger.SetTimeOfTheDay(12.0f);
-            
-            else if(newDayCycle == DayCycle.EVENING)
-                lightningChanger.SetTimeOfTheDay(17.0f);
-            
-            else if(newDayCycle == DayCycle.NIGHT)
-                lightningChanger.SetTimeOfTheDay(22.0f);
-            
+            switch (newDayCycle)
+            {
+                case DayCycle.MORNING:
+                    SetTimeOfTheDay(MorningTime);
+                    _currentDayCycle = DayCycle.MORNING;
+                    break;
+
+                case DayCycle.AFTERNOON:
+                    SetTimeOfTheDay(AfternoonTime);
+                    _currentDayCycle = DayCycle.AFTERNOON;
+                    break;
+
+                case DayCycle.EVENING:
+                    SetTimeOfTheDay(EveningTime);
+                    _currentDayCycle = DayCycle.EVENING;
+                    break;
+
+                case DayCycle.NIGHT:
+                    SetTimeOfTheDay(NightTime);
+                    _currentDayCycle = DayCycle.NIGHT;
+                    break;
+            }
+        }
+        
+        public void SetTimeOfTheDay(float newTime)
+        {
+            timeOfTheDay = newTime;
+        }
+
+        public void SetTimeOfTheDayWithFade(DayCycle day)
+        {
+        }
+        public void SetTimeOfTheDayWithFade(float newTime, float duration)
+        {
+            DOTween.To(()=> timeOfTheDay, x=> timeOfTheDay = x, newTime, duration);
         }
     }
 }

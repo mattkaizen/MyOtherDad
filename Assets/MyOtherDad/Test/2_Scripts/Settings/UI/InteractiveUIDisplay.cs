@@ -19,6 +19,8 @@ namespace Settings.UI
         [SerializeField] private CrosshairData defaultCrosshair;
         [SerializeField] private float fadeOutDuration;
         [SerializeField] private float fadeInDuration;
+        [Header("Player Inventory")]
+        [SerializeField] private PlayerInventory inventory;
         [Header("Listen to Event Channels")]
         [SerializeField] private VoidEventChannelData enableCrosshair;
         [SerializeField] private VoidEventChannelData hideCrosshair;
@@ -32,11 +34,17 @@ namespace Settings.UI
             hideCrosshair.EventRaised += OnHideCrosshair;
         }
 
+        private void OnDisable()
+        {
+            enableCrosshair.EventRaised -= OnEnableCrosshair;
+            hideCrosshair.EventRaised -= OnHideCrosshair;
+        }
+
         private void Update()
         {
             RayCastToInteractiveUIObject();
         }
-        
+
         private void OnHideCrosshair()
         {
             EnableCrosshair();
@@ -47,14 +55,71 @@ namespace Settings.UI
             HideCrosshair();
         }
 
+        // private void RayCastToInteractiveUIObject()
+        // {
+        //     if (Physics.Raycast(mainCamera.position, mainCamera.forward, out var hitInfo,
+        //             rayDistance, layerMask, QueryTriggerInteraction.Ignore))
+        //     {
+        //         if (hitInfo.transform.TryGetComponent<IItemInteractiveUI>(out var interactiveUI))
+        //         {
+        //             if(hitInfo.transform.TryGetComponent<IInventoryInteractiveUI>(out var inventoryInteractiveUI))
+        //             {
+        //                 if (inventory.HasItem(inventoryInteractiveUI.RequiredItemToSet))
+        //                 {
+        //                     inventoryInteractiveUI.TryInteractWithItem(inventoryInteractiveUI.RequiredItemToSet);
+        //                 }
+        //             }
+        //             
+        //             if (interactiveUI.IsInteractionEnabled)
+        //             {
+        //                 SetCrossHair(interactiveUI.GetInteractionUI());
+        //             }
+        //             else
+        //             {
+        //                 SetCrossHair(defaultCrosshair);
+        //             }
+        //         }
+        //         else
+        //         {
+        //             SetCrossHair(defaultCrosshair);
+        //         }
+        //     }
+        //     else
+        //     {
+        //         SetCrossHair(defaultCrosshair);
+        //     }
+        // }
+
         private void RayCastToInteractiveUIObject()
         {
-            if (Physics.Raycast(mainCamera.position, mainCamera.forward, out var hitInfo,
-                    rayDistance, layerMask, QueryTriggerInteraction.Ignore))
+            if (Physics.Raycast(mainCamera.position, mainCamera.forward, out var hitInfo, rayDistance, layerMask,
+                    QueryTriggerInteraction.Ignore))
             {
-                if (hitInfo.transform.TryGetComponent<IInteractiveUI>(out var interactiveUI))
+                HandleInteractiveUI(hitInfo.transform);
+            }
+            else
+            {
+                SetCrossHair(defaultCrosshair);
+            }
+        }
+
+        private void HandleInteractiveUI(Transform hitTransform)
+        {
+            if (hitTransform.TryGetComponent<IItemInteractiveUI>(out var interactiveUI))
+            {
+                if (interactiveUI.IsInteractionEnabled)
                 {
-                    SetCrossHair(interactiveUI.GetInteractionUI());
+                    if (interactiveUI is IInventoryInteractiveUI inventoryInteractiveUI)
+                    {
+                        if (TryHandleInventoryInteractiveUI(inventoryInteractiveUI))
+                        {
+                            SetCrossHair(interactiveUI.GetInteractionUI());
+                        }
+                    }
+                    else
+                    {
+                        SetCrossHair(interactiveUI.GetInteractionUI());
+                    }
                 }
                 else
                 {
@@ -67,6 +132,18 @@ namespace Settings.UI
             }
         }
         
+        private bool TryHandleInventoryInteractiveUI(IInventoryInteractiveUI interactiveUI)
+        {
+            ItemData requiredItem = interactiveUI.RequiredItemToSet;
+            if (inventory.HasItem(requiredItem))
+            {
+                interactiveUI.TryInteractWithItem(requiredItem);
+                return true;
+            }
+
+            return false;
+        }
+
         private void SetCrossHair(CrosshairData newCrosshair)
         {
             uiImage.sprite = newCrosshair.CrosshairSprite;
@@ -78,7 +155,6 @@ namespace Settings.UI
         {
             KillCrosshairTweeners();
             _fadeInTween = uiImage.DOColor(Color.white, fadeInDuration);
-
         }
 
         public void HideCrosshair()
@@ -86,7 +162,7 @@ namespace Settings.UI
             KillCrosshairTweeners();
             _fadeOutTween = uiImage.DOColor(Color.clear, fadeOutDuration);
         }
-        
+
         public void HideCrosshair(float duration)
         {
             KillCrosshairTweeners();
@@ -98,7 +174,5 @@ namespace Settings.UI
             _fadeInTween.Kill();
             _fadeOutTween.Kill();
         }
-
-
     }
 }

@@ -2,18 +2,25 @@
 using System.Collections.Generic;
 using System.Linq;
 using Data;
+using JetBrains.Annotations;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Tasks
 {
     public class TasksChecker : MonoBehaviour
     {
+        [Header("Broadcast on Events")]
         [SerializeField] private VoidEventChannelData allTaskAreCompleted;
+        [Space][UsedImplicitly]
+        [SerializeField] private UnityEvent allTaskAreCompletedEvent;
+        [Space]
         [SerializeField] private List<GameObject> principalTasksPrefabToCheck;
         [SerializeField] private List<GameObject> secondaryTasksPrefabToCheck;
 
         private List<ITask> _principalTasksToCheck = new List<ITask>();
         private List<ITask> _secondaryTasksToCheck = new List<ITask>();
+
         private void Awake()
         {
             TryGetTasks();
@@ -21,7 +28,7 @@ namespace Tasks
 
         private void Start()
         {
-            if(HaveTasksToCheck())
+            if (HaveTasksToCheck())
             {
                 StartCoroutine(WaitForAllTaskCompletedRoutine());
             }
@@ -60,6 +67,7 @@ namespace Tasks
         {
             yield return new WaitUntil(AreAllTaskCompleted);
 
+            Debug.Log("All task are completed");
             foreach (var secondaryTask in _secondaryTasksToCheck)
             {
                 if (secondaryTask.IsStarted)
@@ -67,7 +75,11 @@ namespace Tasks
                     yield return new WaitUntil((() => secondaryTask.IsCompleted));
                 }
             }
-            allTaskAreCompleted.RaiseEvent();
+
+            if (allTaskAreCompleted != null)
+                allTaskAreCompleted.RaiseEvent();
+         
+            allTaskAreCompletedEvent?.Invoke();
         }
     }
 }
