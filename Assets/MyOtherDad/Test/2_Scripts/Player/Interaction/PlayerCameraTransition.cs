@@ -82,6 +82,7 @@ namespace Player
 
             currentInteractableCamera.Camera.Priority = StandByCameraPriority;
             currentInteractableCamera.Camera.enabled = false;
+            currentInteractableCamera.CameraOnStandBy.RaiseEvent();
             currentInteractableCamera = null;
         }
     }

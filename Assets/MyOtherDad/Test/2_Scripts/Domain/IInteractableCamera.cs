@@ -10,5 +10,6 @@ namespace Domain
         VoidEventChannelData CameraLive { get; }
         VoidEventChannelData EnablingCamera { get; }
         VoidEventChannelData DisablingCamera { get; }
+        VoidEventChannelData CameraOnStandBy { get; }
     }
 }

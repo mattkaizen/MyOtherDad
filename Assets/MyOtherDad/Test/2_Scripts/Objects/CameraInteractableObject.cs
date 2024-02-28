@@ -23,6 +23,7 @@ namespace Objects
         public VoidEventChannelData EnablingCamera => enablingObjectCamera;
         public VoidEventChannelData DisablingCamera => disablingObjectCamera;
         public VoidEventChannelData CameraLive => objectCameraLive;
+        public VoidEventChannelData CameraOnStandBy => cameraOnStandby;
 
         [SerializeField] private CinemachineVirtualCamera currentCamera;
         [SerializeField] private CameraMovementMode cameraMovementMode;
@@ -33,6 +34,7 @@ namespace Objects
         [SerializeField] private VoidEventChannelData objectCameraLive;
         [SerializeField] private VoidEventChannelData disablingObjectCamera;
         [SerializeField] private VoidEventChannelData interactingWithObject;
+        [SerializeField] private VoidEventChannelData cameraOnStandby;
 
 
         private bool _isBeingUsed;

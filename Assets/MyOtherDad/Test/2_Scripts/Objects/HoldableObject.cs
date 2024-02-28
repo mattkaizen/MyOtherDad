@@ -1,4 +1,5 @@
 ﻿    using UnityEngine;
+    using UnityEngine.Events;
     using Random = UnityEngine.Random;
 
     namespace Objects
@@ -8,6 +9,9 @@
         public GameObject WorldRepresentation => gameObject;
         
         public GameObject HandRepresentation => handRepresentation;
+
+        public UnityEvent handRepresentationEnabled;
+        public UnityEvent handRepresentationDisabled;
         
         [SerializeField] private GameObject handRepresentation;
 
@@ -19,11 +23,13 @@
         public void TurnOnHandRepresentation()
         {
             handRepresentation.SetActive(true);
+            handRepresentationEnabled?.Invoke();
         }
 
         public void TurnOffHandRepresentation()
         {
             handRepresentation.SetActive(false);
+            handRepresentationDisabled?.Invoke();
         }
     }   
 }

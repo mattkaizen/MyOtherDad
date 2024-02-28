@@ -514,7 +514,6 @@ GameObject:
   - component: {fileID: 7227296090046142285}
   - component: {fileID: 3159472108346282072}
   - component: {fileID: 1723983295017829219}
-  - component: {fileID: 6057647794999063193}
   m_Layer: 0
   m_Name: Dependencies
   m_TagString: Untagged
@@ -632,39 +631,6 @@ MonoBehaviour:
   hasCustomHotspot: 1
   customHotSpot: {x: 0, y: 129}
   cursorMode: 1
---- !u!114 &6057647794999063193
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3691815217658381587}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5e53f192b61a444887cd9ff509ba1f19, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  drawingTaskStarted: {fileID: 11400000, guid: 5ed720b03f35d2d43be59f9666d0d8f6, type: 2}
-  drawingTaskTutorialStarted: {fileID: 11400000, guid: 014a66741ae91a6498cd5c27d8cb0484, type: 2}
-  drawingTaskCompleted: {fileID: 11400000, guid: 5f5d791206e52a24eb87165367984301, type: 2}
-  tutorialCompleted: {fileID: 11400000, guid: a8cd881eee549ee4693a2fefa26d8a42, type: 2}
-  tutorialRestarted: {fileID: 11400000, guid: a40f298a12e070d4181019f357aa427b, type: 2}
-  pencilCursor: {fileID: 1723983295017829219}
-  pencil: {fileID: 7265602085953976701}
-  pencilMovementDuration: 1.5
-  movementEase: 4
-  startPosition: {fileID: 1280885220540385606}
-  endPosition: {fileID: 4909678147659046456}
-  pencilFadeInDuration: 0.15
-  pencilFadeInEase: 9
-  pencilFadeOutDuration: 0.24
-  pencilFadeOutEase: 9
-  tutorialText: {fileID: 4055624276646363730}
-  tutorialTextFadeInDuration: 0.15
-  tutorialTextFadeInEase: 9
-  disableUIDuration: 0.15
-  disableUIEase: 9
-  tutorialGestureAnimator: {fileID: 1696065413990253842}
 --- !u!1 &3726893457994081336
 GameObject:
   m_ObjectHideFlags: 0
@@ -891,6 +857,7 @@ MonoBehaviour:
   objectCameraLive: {fileID: 11400000, guid: 8079b512e3a6047418be8d59a6c17261, type: 2}
   disablingObjectCamera: {fileID: 11400000, guid: e62735c2b79b9224c80b825296dd7905, type: 2}
   interactingWithObject: {fileID: 11400000, guid: 3bb087c290e94c545921d7b2a3a6d596, type: 2}
+  cameraOnStandby: {fileID: 11400000, guid: 1ece2c9659f6d464bb8af552695e80f1, type: 2}
 --- !u!114 &7206942872417216219
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -904,6 +871,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   crosshair: {fileID: 11400000, guid: 2c6d05d71f1c3dc47a1df15bfc423a72, type: 2}
+  enableInteractiveUIOnAwake: 1
 --- !u!1 &4344933338424200882
 GameObject:
   m_ObjectHideFlags: 0
@@ -1188,13 +1156,14 @@ GameObject:
   m_Component:
   - component: {fileID: 4780829214237525055}
   - component: {fileID: 3827111082380309599}
+  - component: {fileID: 5413586506530154375}
   m_Layer: 0
-  m_Name: DrawingMiniGameController
+  m_Name: DrawingMiniGameController_Sketch
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4780829214237525055
 Transform:
   m_ObjectHideFlags: 0
@@ -1222,6 +1191,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 857baf4875e9400bb3854b3eb31f148a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  drawingMiniGameCompleted:
+    m_PersistentCalls:
+      m_Calls: []
   miniGameStarted: {fileID: 11400000, guid: 5ed720b03f35d2d43be59f9666d0d8f6, type: 2}
   miniGameCompleted: {fileID: 11400000, guid: 5f5d791206e52a24eb87165367984301, type: 2}
   miniGameRestarted: {fileID: 11400000, guid: 44b0b5018a403314bbc73a208f11b027, type: 2}
@@ -1241,6 +1213,39 @@ MonoBehaviour:
   - {fileID: 2692937095684210074}
   displayTutorial: 1
   additionalGestureToSpawn: 3
+--- !u!114 &5413586506530154375
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5965060514896790030}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e53f192b61a444887cd9ff509ba1f19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  drawingTaskStarted: {fileID: 11400000, guid: 5ed720b03f35d2d43be59f9666d0d8f6, type: 2}
+  drawingTaskTutorialStarted: {fileID: 11400000, guid: 014a66741ae91a6498cd5c27d8cb0484, type: 2}
+  drawingTaskCompleted: {fileID: 11400000, guid: 5f5d791206e52a24eb87165367984301, type: 2}
+  tutorialCompleted: {fileID: 11400000, guid: a8cd881eee549ee4693a2fefa26d8a42, type: 2}
+  tutorialRestarted: {fileID: 11400000, guid: a40f298a12e070d4181019f357aa427b, type: 2}
+  pencilCursor: {fileID: 1723983295017829219}
+  pencil: {fileID: 7265602085953976701}
+  pencilMovementDuration: 1.5
+  movementEase: 4
+  startPosition: {fileID: 1280885220540385606}
+  endPosition: {fileID: 4909678147659046456}
+  pencilFadeInDuration: 0.15
+  pencilFadeInEase: 9
+  pencilFadeOutDuration: 0.24
+  pencilFadeOutEase: 9
+  tutorialText: {fileID: 4055624276646363730}
+  tutorialTextFadeInDuration: 0.15
+  tutorialTextFadeInEase: 9
+  disableUIDuration: 0.15
+  disableUIEase: 9
+  tutorialGestureAnimator: {fileID: 1696065413990253842}
 --- !u!1 &6004583743146581244
 GameObject:
   m_ObjectHideFlags: 0

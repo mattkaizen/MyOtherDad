@@ -182,6 +182,7 @@ MonoBehaviour:
   objectCameraLive: {fileID: 11400000, guid: 6d7b83d6140dcda4394c9906736a2ff0, type: 2}
   disablingObjectCamera: {fileID: 11400000, guid: 36839d3c9ae1dda45a5161df2be01d0d, type: 2}
   interactingWithObject: {fileID: 11400000, guid: b2b23a078499f704bb332f916ba3f173, type: 2}
+  cameraOnStandby: {fileID: 11400000, guid: 02c449386b4846647992147fba787902, type: 2}
 --- !u!114 &1017093817200029205
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -195,6 +196,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   crosshair: {fileID: 11400000, guid: 2c6d05d71f1c3dc47a1df15bfc423a72, type: 2}
+  enableInteractiveUIOnAwake: 1
 --- !u!1 &8887895859986836506
 GameObject:
   m_ObjectHideFlags: 0

@@ -19,6 +19,7 @@ namespace Tasks
             set => _isStarted = value;
         }
 
+        [SerializeField] private UnityEvent taskStarted;
         [SerializeField] private UnityEvent taskCompleted;
         [Space]
         [Header("Listen to Event Channels")]
@@ -58,6 +59,7 @@ namespace Tasks
             enableCameraObjectInputInterrupted.RaiseEvent();
             inputActionManager.GetUpActionControl.DisableInput();
             inputActionManager.PaintActionControl.EnableInput();
+            taskStarted?.Invoke();
         }
 
         public void CompleteTask()
