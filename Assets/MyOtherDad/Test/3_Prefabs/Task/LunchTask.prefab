@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 577609398575529572}
   - component: {fileID: 781429261045763059}
   m_Layer: 0
-  m_Name: AudioSource_DinnerCinematic
+  m_Name: AudioSource_LunchCinematic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -73,7 +73,7 @@ AudioSource:
       outWeight: 0
     - serializedVersion: 3
       time: 0.09762559
-      value: 0.4928894
+      value: 0.5996704
       inSlope: -4.1903543
       outSlope: -4.1903543
       tangentMode: 0
@@ -82,7 +82,7 @@ AudioSource:
       outWeight: 0
     - serializedVersion: 3
       time: 0.21699496
-      value: 0.2428894
+      value: 0.3496704
       inSlope: -1.0475886
       outSlope: -1.0475886
       tangentMode: 0
@@ -91,7 +91,7 @@ AudioSource:
       outWeight: 0
     - serializedVersion: 3
       time: 0.4557337
-      value: 0.117889404
+      value: 0.22467041
       inSlope: -0.15602687
       outSlope: -0.15602687
       tangentMode: 0
@@ -99,8 +99,8 @@ AudioSource:
       inWeight: 0
       outWeight: 0.23382431
     - serializedVersion: 3
-      time: 0.9549549
-      value: 0.0625
+      time: 0.8438404
+      value: 0.169281
       inSlope: -0.06547429
       outSlope: -0.06547429
       tangentMode: 0
@@ -109,7 +109,7 @@ AudioSource:
       outWeight: 0
     - serializedVersion: 3
       time: 1
-      value: 0.059684683
+      value: 0.0027083606
       inSlope: -0.059708487
       outSlope: -0.059708487
       tangentMode: 0
@@ -175,12 +175,12 @@ GameObject:
   - component: {fileID: 181576506730867593}
   - component: {fileID: 2115802652503729007}
   m_Layer: 0
-  m_Name: DinnerTask
+  m_Name: LunchTask
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &181576506730867593
 Transform:
   m_ObjectHideFlags: 0
@@ -213,7 +213,46 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0bec1c837a8473ab3cf6f48fedadf21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dinnerTaskCompleted: {fileID: 11400000, guid: 8a32197a7de96c54d8f97797bbe2e207, type: 2}
+  taskCompleted:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+  lunchTaskCompleted: {fileID: 11400000, guid: 8a32197a7de96c54d8f97797bbe2e207, type: 2}
   ghostPickableTray: {fileID: 1832970757404723223}
 --- !u!1001 &217552833784735400
 PrefabInstance:
@@ -223,6 +262,66 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 181576506730867593}
     m_Modifications:
+    - target: {fileID: 1093175128299549910, guid: 9de899636f483d449b7d3486a3d83d70, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 99abffe45796e5c47a09a4efcf076939, type: 2}
+    - target: {fileID: 1093175128299549910, guid: 9de899636f483d449b7d3486a3d83d70, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 99abffe45796e5c47a09a4efcf076939, type: 2}
+    - target: {fileID: 1093175128299549910, guid: 9de899636f483d449b7d3486a3d83d70, type: 3}
+      propertyPath: m_Materials.Array.data[2]
+      value: 
+      objectReference: {fileID: 2100000, guid: 99abffe45796e5c47a09a4efcf076939, type: 2}
+    - target: {fileID: 1453326277098968323, guid: 9de899636f483d449b7d3486a3d83d70, type: 3}
+      propertyPath: m_Name
+      value: Pan con queso Top
+      objectReference: {fileID: 0}
+    - target: {fileID: 1618027095607838303, guid: 9de899636f483d449b7d3486a3d83d70, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1618027095607838303, guid: 9de899636f483d449b7d3486a3d83d70, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 99abffe45796e5c47a09a4efcf076939, type: 2}
+    - target: {fileID: 1673556030224686420, guid: 9de899636f483d449b7d3486a3d83d70, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 99abffe45796e5c47a09a4efcf076939, type: 2}
+    - target: {fileID: 3333571697441214905, guid: 9de899636f483d449b7d3486a3d83d70, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 99abffe45796e5c47a09a4efcf076939, type: 2}
+    - target: {fileID: 4350726297045965648, guid: 9de899636f483d449b7d3486a3d83d70, type: 3}
+      propertyPath: objectRigidbody
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4630536424278537418, guid: 9de899636f483d449b7d3486a3d83d70, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 99abffe45796e5c47a09a4efcf076939, type: 2}
+    - target: {fileID: 4630536424278537418, guid: 9de899636f483d449b7d3486a3d83d70, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 99abffe45796e5c47a09a4efcf076939, type: 2}
+    - target: {fileID: 4630536424278537418, guid: 9de899636f483d449b7d3486a3d83d70, type: 3}
+      propertyPath: m_Materials.Array.data[2]
+      value: 
+      objectReference: {fileID: 2100000, guid: 99abffe45796e5c47a09a4efcf076939, type: 2}
+    - target: {fileID: 5091843813752207481, guid: 9de899636f483d449b7d3486a3d83d70, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 99abffe45796e5c47a09a4efcf076939, type: 2}
+    - target: {fileID: 8441951896744799406, guid: 9de899636f483d449b7d3486a3d83d70, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8441951896744799406, guid: 9de899636f483d449b7d3486a3d83d70, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 99abffe45796e5c47a09a4efcf076939, type: 2}
     - target: {fileID: 348653486278262498, guid: b78c805c3d471e24b931fade72e68fca, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -333,7 +432,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 99abffe45796e5c47a09a4efcf076939, type: 2}
     - target: {fileID: 8270591465637779403, guid: b78c805c3d471e24b931fade72e68fca, type: 3}
       propertyPath: m_Name
-      value: Ghost Container Pickable Tray Dinner Variant_1
+      value: Ghost Container Pickable Tray Lunch Variant_1
       objectReference: {fileID: 0}
     - target: {fileID: 8270591465637779403, guid: b78c805c3d471e24b931fade72e68fca, type: 3}
       propertyPath: m_IsActive
@@ -353,66 +452,6 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 99abffe45796e5c47a09a4efcf076939, type: 2}
     - target: {fileID: 9160066972640519912, guid: b78c805c3d471e24b931fade72e68fca, type: 3}
       propertyPath: m_Materials.Array.data[2]
-      value: 
-      objectReference: {fileID: 2100000, guid: 99abffe45796e5c47a09a4efcf076939, type: 2}
-    - target: {fileID: 1093175128299549910, guid: 9de899636f483d449b7d3486a3d83d70, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 99abffe45796e5c47a09a4efcf076939, type: 2}
-    - target: {fileID: 1093175128299549910, guid: 9de899636f483d449b7d3486a3d83d70, type: 3}
-      propertyPath: m_Materials.Array.data[1]
-      value: 
-      objectReference: {fileID: 2100000, guid: 99abffe45796e5c47a09a4efcf076939, type: 2}
-    - target: {fileID: 1093175128299549910, guid: 9de899636f483d449b7d3486a3d83d70, type: 3}
-      propertyPath: m_Materials.Array.data[2]
-      value: 
-      objectReference: {fileID: 2100000, guid: 99abffe45796e5c47a09a4efcf076939, type: 2}
-    - target: {fileID: 1453326277098968323, guid: 9de899636f483d449b7d3486a3d83d70, type: 3}
-      propertyPath: m_Name
-      value: Pan con queso Top
-      objectReference: {fileID: 0}
-    - target: {fileID: 1618027095607838303, guid: 9de899636f483d449b7d3486a3d83d70, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1618027095607838303, guid: 9de899636f483d449b7d3486a3d83d70, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 99abffe45796e5c47a09a4efcf076939, type: 2}
-    - target: {fileID: 1673556030224686420, guid: 9de899636f483d449b7d3486a3d83d70, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 99abffe45796e5c47a09a4efcf076939, type: 2}
-    - target: {fileID: 3333571697441214905, guid: 9de899636f483d449b7d3486a3d83d70, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 99abffe45796e5c47a09a4efcf076939, type: 2}
-    - target: {fileID: 4350726297045965648, guid: 9de899636f483d449b7d3486a3d83d70, type: 3}
-      propertyPath: objectRigidbody
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 4630536424278537418, guid: 9de899636f483d449b7d3486a3d83d70, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 99abffe45796e5c47a09a4efcf076939, type: 2}
-    - target: {fileID: 4630536424278537418, guid: 9de899636f483d449b7d3486a3d83d70, type: 3}
-      propertyPath: m_Materials.Array.data[1]
-      value: 
-      objectReference: {fileID: 2100000, guid: 99abffe45796e5c47a09a4efcf076939, type: 2}
-    - target: {fileID: 4630536424278537418, guid: 9de899636f483d449b7d3486a3d83d70, type: 3}
-      propertyPath: m_Materials.Array.data[2]
-      value: 
-      objectReference: {fileID: 2100000, guid: 99abffe45796e5c47a09a4efcf076939, type: 2}
-    - target: {fileID: 5091843813752207481, guid: 9de899636f483d449b7d3486a3d83d70, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 99abffe45796e5c47a09a4efcf076939, type: 2}
-    - target: {fileID: 8441951896744799406, guid: 9de899636f483d449b7d3486a3d83d70, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8441951896744799406, guid: 9de899636f483d449b7d3486a3d83d70, type: 3}
-      propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 99abffe45796e5c47a09a4efcf076939, type: 2}
     m_RemovedComponents:
@@ -554,6 +593,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 181576506730867593}
     m_Modifications:
+    - target: {fileID: 1453326277098968323, guid: 9de899636f483d449b7d3486a3d83d70, type: 3}
+      propertyPath: m_Name
+      value: Pan con queso Top
+      objectReference: {fileID: 0}
+    - target: {fileID: 4350726297045965648, guid: 9de899636f483d449b7d3486a3d83d70, type: 3}
+      propertyPath: objectRigidbody
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 1045996118252156952, guid: b78c805c3d471e24b931fade72e68fca, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -652,19 +699,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8270591465637779403, guid: b78c805c3d471e24b931fade72e68fca, type: 3}
       propertyPath: m_Name
-      value: Static Pickable Tray Dinner Variant
+      value: Static Pickable Tray Lunch Variant
       objectReference: {fileID: 0}
     - target: {fileID: 8270591465637779403, guid: b78c805c3d471e24b931fade72e68fca, type: 3}
       propertyPath: m_IsActive
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1453326277098968323, guid: 9de899636f483d449b7d3486a3d83d70, type: 3}
-      propertyPath: m_Name
-      value: Pan con queso Top
-      objectReference: {fileID: 0}
-    - target: {fileID: 4350726297045965648, guid: 9de899636f483d449b7d3486a3d83d70, type: 3}
-      propertyPath: objectRigidbody
-      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7628712945522407464, guid: b78c805c3d471e24b931fade72e68fca, type: 3}
@@ -758,7 +797,7 @@ PrefabInstance:
       objectReference: {fileID: 4084934184444577984}
     - target: {fileID: 8270591465637779403, guid: b78c805c3d471e24b931fade72e68fca, type: 3}
       propertyPath: m_Name
-      value: Pickable Tray Dinner
+      value: Pickable Tray Lunch
       objectReference: {fileID: 0}
     - target: {fileID: 8270591465637779403, guid: b78c805c3d471e24b931fade72e68fca, type: 3}
       propertyPath: m_IsActive
@@ -1011,7 +1050,7 @@ PrefabInstance:
       objectReference: {fileID: 8430093869246407810}
     - target: {fileID: 8565371128148894298, guid: 3350d67cf3cd8e649a95d591d1546eca, type: 3}
       propertyPath: m_Name
-      value: DinnerCinematic
+      value: LunchCinematic
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

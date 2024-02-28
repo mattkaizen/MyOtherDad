@@ -82,6 +82,7 @@ namespace Tasks
 
         public void CompleteTask()
         {
+            Debug.Log("CleanUpTask Completed");
             cleanUpTaskCompleted.RaiseEvent();
             IsCompleted = true;
         }

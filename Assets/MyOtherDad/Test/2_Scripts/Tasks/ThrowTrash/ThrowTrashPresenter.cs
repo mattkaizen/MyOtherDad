@@ -3,15 +3,17 @@ using UnityEngine;
 
 namespace Tasks
 {
+    [DefaultExecutionOrder(-1)]
     public class ThrowTrashPresenter : MonoBehaviour
     {
         [SerializeField] private ThrowTrash throwTrash;
         [SerializeField] private HighlightObjectEffect highLightBed;
         [SerializeField] private VoidEventChannelData enableProjectileTrajectory;
         [SerializeField] private VoidEventChannelData disableProjectileTrajectory;
-
         private void OnEnable()
         {
+            Debug.Log("Enable throwTrashPresenter");
+
             throwTrash.HasAllTrashOnHand += OnHasAllTrashOnHand;
 
             throwTrash.ThrowTrashTaskStarted.EventRaised += OnThrowTrashTaskStarted;
@@ -50,6 +52,7 @@ namespace Tasks
 
         private void OnHasAllTrashOnHand(bool hasAllTrashOnHand)
         {
+            Debug.Log($"Has All trash on hand {hasAllTrashOnHand}");
             if (throwTrash.IsCompleted) return;
             
             if (hasAllTrashOnHand)

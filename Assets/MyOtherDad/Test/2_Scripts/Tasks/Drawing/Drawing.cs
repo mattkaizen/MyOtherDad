@@ -1,6 +1,7 @@
 ﻿using CustomInput;
 using Data;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Tasks
 {
@@ -18,6 +19,8 @@ namespace Tasks
             set => _isStarted = value;
         }
 
+        [SerializeField] private UnityEvent taskCompleted;
+        [Space]
         [Header("Listen to Event Channels")]
         [SerializeField] private VoidEventChannelData eventToCompleteDrawingTask;
         [SerializeField] private VoidEventChannelData eventToStartDrawingTask;
@@ -64,6 +67,9 @@ namespace Tasks
 
             inputActionManager.GetUpActionControl.EnableInput();
             inputActionManager.PaintActionControl.DisableInput();
+            
+            drawingTaskCompleted.RaiseEvent();
+            taskCompleted?.Invoke();
         }
 
         private void OnEventToStopDrawingTaskRaised()
@@ -84,7 +90,6 @@ namespace Tasks
             if (IsCompleted) return;
 
             CompleteTask();
-            drawingTaskCompleted.RaiseEvent();
         }
 
         private void TryStopTask()

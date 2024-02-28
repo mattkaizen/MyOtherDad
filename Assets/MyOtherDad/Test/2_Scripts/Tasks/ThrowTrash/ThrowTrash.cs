@@ -17,43 +17,29 @@ namespace Tasks
         public bool IsStarted { get; set; }
 
         public VoidEventChannelData ThrowTrashTaskStarted => throwTrashTaskStarted;
-
-        public bool IsPreStarted
-        {
-            get => _isPreStarted;
-            set => _isPreStarted = value;
-        }
-
         public VoidEventChannelData ThrowTrashTaskStopped => throwTrashTaskStopped;
-
         public IntEventChannelData ThrowTrashTaskCompletedWithScoreOf => throwTrashTaskCompletedWithScoreOf;
 
-        [Header("Event Channels to listen")] [SerializeField]
-        private VoidEventChannelData eventToPreStartTask;
-
+        [Header("Event Channels to listen")]
+        [SerializeField] private VoidEventChannelData eventToPreStartTask;
         [SerializeField] private VoidEventChannelData eventToStartTask;
-
         [SerializeField] private VoidEventChannelData eventToStopTask;
-
-        [Space] [Header("Broadcast on Event Channels")] [SerializeField]
-        private VoidEventChannelData throwTrashTaskPreStarted;
-
+        [Space]
+        [Header("Broadcast on Event Channels")]
+        [SerializeField] private VoidEventChannelData throwTrashTaskPreStarted;
         [SerializeField] private VoidEventChannelData throwTrashTaskStarted;
-
         [SerializeField] private VoidEventChannelData throwTrashTaskStopped;
         [SerializeField] private IntEventChannelData throwTrashTaskCompletedWithScoreOf;
         [SerializeField] private VoidEventChannelData enableCameraObjectInputInterrupted;
-
-        [Header("Dependencies")] [SerializeField]
-        private TrashDetectorTrigger trashDetectorTrigger;
-
+        [Space]
+        [Header("Dependencies")]
+        [SerializeField] private TrashDetectorTrigger trashDetectorTrigger;
         [SerializeField] private HandController handController;
         [SerializeField] private PlayerObjectThrower playerObjectThrower;
         [SerializeField] private InputActionControlManagerData inputActionManager;
-
-        [Header("Task settings")] [SerializeField]
-        private float newThrowForce = 20.0f;
-
+        [Space]
+        [Header("Task settings")]
+        [SerializeField] private float newThrowForce = 20.0f;
         [SerializeField] private int amountOfTrashToPick;
         [SerializeField] private List<ItemData> trashDataToCheck;
         [SerializeField] private float lastItemMaxVerticalMovementThreshold;
@@ -70,12 +56,15 @@ namespace Tasks
 
         private void OnEnable()
         {
+            Debug.Log("Enable throwTrash");
             eventToStartTask.EventRaised += OnEventToStartTaskRaised;
             eventToStopTask.EventRaised += OnEventToStopTaskRaised;
             eventToPreStartTask.EventRaised += OnEventToPreStartTaskRaised;
 
             handController.ItemAdded += OnItemAdded;
             handController.ItemRemoved += OnItemRemoved;
+
+            TryAddAmountOfTrash();
         }
 
         private void OnDisable()
@@ -158,15 +147,42 @@ namespace Tasks
 
         private void OnItemAdded(IHoldable item)
         {
-            if (item.WorldRepresentation.TryGetComponent<IObjectData>(out var objectData))
-            {
-                if (trashDataToCheck.Contains(objectData.Data))
-                {
-                    _amountOfTrashPicked++;
+            if (!PlayerHasTrashOnHand(item)) return;
 
-                    HasAllTrashOnHand?.Invoke(PlayerHasTargetAmountOfTrashOnHand());
-                }
+            _amountOfTrashPicked++;
+
+            HasAllTrashOnHand?.Invoke(PlayerHasTargetAmountOfTrashOnHand());
+
+            // if (item.WorldRepresentation.TryGetComponent<IObjectData>(out var objectData))
+            // {
+            //     if (trashDataToCheck.Contains(objectData.Data))
+            //     {
+            //         _amountOfTrashPicked++;
+            //
+            //         HasAllTrashOnHand?.Invoke(PlayerHasTargetAmountOfTrashOnHand());
+            //     }
+            // }
+        }
+
+        private void TryAddAmountOfTrash()
+        {
+            foreach (var item in handController.ItemsOnHand)
+            {
+                if (!PlayerHasTrashOnHand(item)) continue;
+
+                _amountOfTrashPicked++;
             }
+
+            Debug.Log($"amount of trash picked {_amountOfTrashPicked}; amountOfTrashToPick {amountOfTrashToPick}");
+
+            HasAllTrashOnHand?.Invoke(PlayerHasTargetAmountOfTrashOnHand());
+        }
+
+        private bool PlayerHasTrashOnHand(IHoldable item)
+        {
+            if (!item.WorldRepresentation.TryGetComponent<IObjectData>(out var objectData)) return false;
+
+            return trashDataToCheck.Contains(objectData.Data);
         }
 
         private bool PlayerHasTargetAmountOfTrashOnHand()

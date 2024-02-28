@@ -1,4 +1,5 @@
-﻿using DG.Tweening;
+﻿using System.Collections.Generic;
+using DG.Tweening;
 using Domain;
 using UnityEngine;
 using UnityEngine.Events;
@@ -12,7 +13,7 @@ namespace Objects.UsableInteractable
         public UnityEvent wasCleaned; 
 
         [SerializeField] private ItemData requiredItemToInteract;
-        [SerializeField] private MeshRenderer meshRenderer;
+        [SerializeField] private List<MeshRenderer> meshRenderers = new List<MeshRenderer>();
         [SerializeField] private float cleanFactor;
         [SerializeField] private float cleanTweenDuration;
         [SerializeField] private Ease cleanEase;
@@ -25,11 +26,17 @@ namespace Objects.UsableInteractable
 
         private readonly int dirtyAmount = Shader.PropertyToID("_DirtAmount");
 
-        private Material[] _materials;
+        private List<Material> _materials = new List<Material>();
 
         private void Awake()
         {
-            _materials = meshRenderer.materials;
+            foreach (var meshRenderer in meshRenderers)
+            {
+                foreach (var material in meshRenderer.materials)
+                {
+                    _materials.Add(material);
+                }
+            }
 
             if (startDirty && _materials != null)
             {

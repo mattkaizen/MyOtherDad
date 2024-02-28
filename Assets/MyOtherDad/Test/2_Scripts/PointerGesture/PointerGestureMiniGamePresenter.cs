@@ -68,6 +68,7 @@ namespace PointerGesture
         private void OnDrawingTaskStarted()
         {
             Debug.Log("PointerGestureMiniGamePresenter: Task started");
+            DisplayMiniGameCursor();
             // DisplayTutorialUI();
         }
 
@@ -75,6 +76,7 @@ namespace PointerGesture
         {
             Debug.Log("PointerGestureMiniGamePresenter: Task tutorial started");
 
+            DisplayMiniGameCursor();
             DisplayTutorialUI();
         }
 
@@ -98,7 +100,6 @@ namespace PointerGesture
 
         private void DisplayTutorialUI()
         {
-            DisplayMiniGameCursor();
             StartPencilAnimation();
             tutorialText.DOFade(1.0f, tutorialTextFadeInDuration).SetEase(tutorialTextFadeInEase);
             tutorialGestureAnimator.gameObject.SetActive(true);

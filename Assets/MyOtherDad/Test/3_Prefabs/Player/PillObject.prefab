@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 8718588908896303040}
   - component: {fileID: 4401770592419466332}
   m_Layer: 0
-  m_Name: KeyObject
+  m_Name: PillObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -114,8 +114,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2880604291449131641}
   - {fileID: 7320093256028416288}
+  - {fileID: 2880604291449131641}
   m_Father: {fileID: 0}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -181,6 +181,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   crosshair: {fileID: 11400000, guid: 2c6d05d71f1c3dc47a1df15bfc423a72, type: 2}
+  enableInteractiveUIOnAwake: 1
 --- !u!1001 &7069678850077298379
 PrefabInstance:
   m_ObjectHideFlags: 0
