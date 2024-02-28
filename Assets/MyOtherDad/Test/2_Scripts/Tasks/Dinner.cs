@@ -5,7 +5,7 @@ using UnityEngine.Events;
 
 namespace Tasks
 {
-    public class Lunch : MonoBehaviour, ITask
+    public class Dinner : MonoBehaviour, ITask
     {
         public bool IsCompleted
         {
@@ -23,7 +23,7 @@ namespace Tasks
         [Space]
         [Header("Listen to Events Channels")]
         [Header("Broadcast On Events Channels")]
-        [SerializeField] private VoidEventChannelData lunchTaskCompleted;
+        [SerializeField] private VoidEventChannelData dinnerTaskCompleted;
         [Space]
         [Header("Breakfast settings")]
         [SerializeField] private ItemContainer ghostPickableTray;
@@ -54,7 +54,7 @@ namespace Tasks
         {
             Debug.Log("Dinner task Completed");
             IsCompleted = true;
-            lunchTaskCompleted.RaiseEvent();
+            dinnerTaskCompleted.RaiseEvent();
             taskCompleted?.Invoke();
         }
     }
