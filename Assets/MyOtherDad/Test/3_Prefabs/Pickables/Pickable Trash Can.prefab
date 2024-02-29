@@ -144,6 +144,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4c2a869d88443b68dad2cefdbfd8583, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  handRepresentationEnabled:
+    m_PersistentCalls:
+      m_Calls: []
+  handRepresentationDisabled:
+    m_PersistentCalls:
+      m_Calls: []
   handRepresentation: {fileID: 2758118743040379433}
 --- !u!114 &6867141073998046831
 MonoBehaviour:
@@ -216,6 +222,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   crosshair: {fileID: 11400000, guid: 2c6d05d71f1c3dc47a1df15bfc423a72, type: 2}
+  enableInteractiveUIOnAwake: 1
 --- !u!1001 &1196868729609563174
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -275,13 +282,36 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e43cfca986a60a94a954d2fb6b2876fa, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4363582629699465699}
   m_SourcePrefab: {fileID: 100100000, guid: e43cfca986a60a94a954d2fb6b2876fa, type: 3}
 --- !u!4 &1663685036212997069 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: e43cfca986a60a94a954d2fb6b2876fa, type: 3}
   m_PrefabInstance: {fileID: 1196868729609563174}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2043869062188732791 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: e43cfca986a60a94a954d2fb6b2876fa, type: 3}
+  m_PrefabInstance: {fileID: 1196868729609563174}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4363582629699465699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2043869062188732791}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b913683481c6c6e43b29e2920774c76b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data: {fileID: 11400000, guid: b675bada79ddd684d8f4bb9e34a60e3f, type: 2}
+  highLightChildren: 0
+  highlightOnAwake: 0
 --- !u!1001 &7748333868642715181
 PrefabInstance:
   m_ObjectHideFlags: 0

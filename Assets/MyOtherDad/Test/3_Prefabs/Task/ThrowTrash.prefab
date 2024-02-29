@@ -221,7 +221,7 @@ MonoBehaviour:
   playerObjectThrower: {fileID: 0}
   inputActionManager: {fileID: 11400000, guid: acabe8a265f9d8e4aabe5f84bbf14a37, type: 2}
   newThrowForce: 15
-  amountOfTrashToPick: 3
+  amountOfTrashToPick: 5
   trashDataToCheck:
   - {fileID: 11400000, guid: 0f923f5e7a0edd34eb52425da6e66171, type: 2}
   - {fileID: 11400000, guid: 59b532573bec0a64d9dee38d3e73c34d, type: 2}
@@ -244,5 +244,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   throwTrash: {fileID: 6118718492214307548}
   highLightBed: {fileID: 0}
+  trashToHighlight:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   enableProjectileTrajectory: {fileID: 11400000, guid: 916994546931494439757c785f2ffa58, type: 2}
   disableProjectileTrajectory: {fileID: 11400000, guid: d0086fd32a52c0b4da3446561f8711a7, type: 2}

@@ -4,7 +4,7 @@ namespace DayCycle
 {
     public class TrailerSettings : MonoBehaviour
     {
-        [SerializeField] private DayCycleController dayCycleController;
+        [SerializeField] private DailyCycleController dailyCycleController;
         [SerializeField] private GameObject fanLight;
         [SerializeField] private GameObject morningLight;
 
@@ -12,28 +12,28 @@ namespace DayCycle
         {
             if (Input.GetKeyDown(KeyCode.Alpha1))
             {
-                dayCycleController.SetDayCycle(DayCycleController.DayCycle.MORNING);
+                dailyCycleController.SetDayCycle(DailyCycleController.DayCycle.MORNING);
                 morningLight.SetActive(true);
                 fanLight.SetActive(false);
             }
 
             if (Input.GetKeyDown(KeyCode.Alpha2))
             {
-                dayCycleController.SetDayCycle(DayCycleController.DayCycle.AFTERNOON);
+                dailyCycleController.SetDayCycle(DailyCycleController.DayCycle.AFTERNOON);
                 morningLight.SetActive(false);
                 fanLight.SetActive(false);
             }
 
             if (Input.GetKeyDown(KeyCode.Alpha3))
             {
-                dayCycleController.SetDayCycle(DayCycleController.DayCycle.EVENING);
+                dailyCycleController.SetDayCycle(DailyCycleController.DayCycle.EVENING);
                 morningLight.SetActive(false);
                 fanLight.SetActive(false);
             }
 
             if (Input.GetKeyDown(KeyCode.Alpha4))
             {
-                dayCycleController.SetDayCycle(DayCycleController.DayCycle.NIGHT);
+                dailyCycleController.SetDayCycle(DailyCycleController.DayCycle.NIGHT);
                 morningLight.SetActive(false);
                 fanLight.SetActive(true);
             }

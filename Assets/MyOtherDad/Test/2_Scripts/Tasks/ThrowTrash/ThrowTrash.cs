@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using CustomInput;
 using Data;
@@ -19,6 +20,7 @@ namespace Tasks
         public VoidEventChannelData ThrowTrashTaskStarted => throwTrashTaskStarted;
         public VoidEventChannelData ThrowTrashTaskStopped => throwTrashTaskStopped;
         public IntEventChannelData ThrowTrashTaskCompletedWithScoreOf => throwTrashTaskCompletedWithScoreOf;
+        public VoidEventChannelData ThrowTrashTaskPreStarted => throwTrashTaskPreStarted;
 
         [Header("Event Channels to listen")]
         [SerializeField] private VoidEventChannelData eventToPreStartTask;
@@ -53,10 +55,11 @@ namespace Tasks
         private bool _isCompleted;
         private bool _isStarted;
         private bool _isPreStarted;
+        
+        //TODO: Create a class with all pickable objects in scene, get all items with ItemData of trashDataToCheck, create a list with all trash in scene, highlight all trash
 
         private void OnEnable()
         {
-            Debug.Log("Enable throwTrash");
             eventToStartTask.EventRaised += OnEventToStartTaskRaised;
             eventToStopTask.EventRaised += OnEventToStopTaskRaised;
             eventToPreStartTask.EventRaised += OnEventToPreStartTaskRaised;
@@ -152,16 +155,6 @@ namespace Tasks
             _amountOfTrashPicked++;
 
             HasAllTrashOnHand?.Invoke(PlayerHasTargetAmountOfTrashOnHand());
-
-            // if (item.WorldRepresentation.TryGetComponent<IObjectData>(out var objectData))
-            // {
-            //     if (trashDataToCheck.Contains(objectData.Data))
-            //     {
-            //         _amountOfTrashPicked++;
-            //
-            //         HasAllTrashOnHand?.Invoke(PlayerHasTargetAmountOfTrashOnHand());
-            //     }
-            // }
         }
 
         private void TryAddAmountOfTrash()
@@ -173,10 +166,9 @@ namespace Tasks
                 _amountOfTrashPicked++;
             }
 
-            Debug.Log($"amount of trash picked {_amountOfTrashPicked}; amountOfTrashToPick {amountOfTrashToPick}");
-
             HasAllTrashOnHand?.Invoke(PlayerHasTargetAmountOfTrashOnHand());
         }
+        
 
         private bool PlayerHasTrashOnHand(IHoldable item)
         {
