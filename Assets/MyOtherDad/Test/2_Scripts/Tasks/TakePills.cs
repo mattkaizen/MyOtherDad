@@ -1,6 +1,6 @@
 ﻿using Data;
-using Objects;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Tasks
 {
@@ -18,6 +18,8 @@ namespace Tasks
             set => _isStarted = value;
         }
         
+        [SerializeField] private UnityEvent taskCompleted;
+        [Space]
         [SerializeField] private VoidEventChannelData eventToCompleteTakePill;
         [Space]
         [SerializeField] private VoidEventChannelData takePillTaskCompleted;
@@ -39,7 +41,6 @@ namespace Tasks
             if (IsCompleted) return;
 
             CompleteTask();
-            takePillTaskCompleted.RaiseEvent();
         }
         
 
@@ -51,7 +52,8 @@ namespace Tasks
         public void CompleteTask()
         {
             _isCompleted = true;
-            Debug.Log("take pills completedsz");
+            takePillTaskCompleted.RaiseEvent();
+            taskCompleted?.Invoke();
         }
     }
 }

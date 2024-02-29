@@ -1,6 +1,7 @@
 ﻿using Data;
 using Objects.Clothes;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Tasks
 {
@@ -13,21 +14,22 @@ namespace Tasks
         public int RequiredAmountOfClothesToPick => requiredAmountOfClothesToPick;
         public bool IsCompleted { get; set; }
         public bool IsStarted { get; set; }
+        
 
-        [Header("Event Channels to listen")] [SerializeField]
-        private VoidEventChannelData eventToStartTask;
-
+        [SerializeField] private UnityEvent taskCompleted;
+        [Space] 
+        [Header("Event Channels to listen")] 
+        [SerializeField] private VoidEventChannelData eventToStartTask;
         [SerializeField] private VoidEventChannelData eventToCompleteTask;
         [SerializeField] private VoidEventChannelData eventToStopTask;
-
-        [Space] [Header("Broadcast on Event Channels")] [SerializeField]
-        private VoidEventChannelData pickUpClothesTaskStarted;
-
+        [Space] 
+        [Header("Broadcast on Event Channels")] 
+        [SerializeField] private VoidEventChannelData pickUpClothesTaskStarted;
         [SerializeField] private VoidEventChannelData pickUpClothesTaskStopped;
         [SerializeField] private VoidEventChannelData pickUpClothesTaskCompleted;
-
-        [Space] [Header("Task Settings")] [SerializeField]
-        private int requiredAmountOfClothesToPick;
+        [Space] 
+        [Header("Task Settings")] 
+        [SerializeField] private int requiredAmountOfClothesToPick;
         [SerializeField] private UsableClothesContainer clothesContainer;
 
         private void OnEnable()
@@ -89,6 +91,7 @@ namespace Tasks
             
             Debug.Log("Task Clothes: Completed");
             pickUpClothesTaskCompleted.RaiseEvent();
+            taskCompleted?.Invoke();
         }
     }
 }

@@ -54,7 +54,6 @@ namespace Tasks
         private int _amountOfTrashPicked;
         private bool _isCompleted;
         private bool _isStarted;
-        private bool _isPreStarted;
         
         //TODO: Create a class with all pickable objects in scene, get all items with ItemData of trashDataToCheck, create a list with all trash in scene, highlight all trash
 
@@ -82,7 +81,6 @@ namespace Tasks
 
         private void OnEventToPreStartTaskRaised()
         {
-            _isPreStarted = true;
             throwTrashTaskPreStarted.RaiseEvent();
         }
 

@@ -1,0 +1,210 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1172750586686823352
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5409951586425719432}
+  - component: {fileID: 2808453855534151989}
+  - component: {fileID: 3954521257524038181}
+  m_Layer: 0
+  m_Name: DrawingMiniGameController_LineArt
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5409951586425719432
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1172750586686823352}
+  m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: -5.3999996, y: 0.91901404, z: -2.4499946}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5323679834953487526}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2808453855534151989
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1172750586686823352}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 857baf4875e9400bb3854b3eb31f148a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  drawingMiniGameCompleted:
+    m_PersistentCalls:
+      m_Calls: []
+  miniGameStarted: {fileID: 11400000, guid: 5ed720b03f35d2d43be59f9666d0d8f6, type: 2}
+  miniGameCompleted: {fileID: 11400000, guid: f9c49371be8b2b94a8cd8d5a967943de, type: 2}
+  miniGameRestarted: {fileID: 11400000, guid: 44b0b5018a403314bbc73a208f11b027, type: 2}
+  tutorialStarted: {fileID: 11400000, guid: 014a66741ae91a6498cd5c27d8cb0484, type: 2}
+  tutorialCompleted: {fileID: 11400000, guid: a8cd881eee549ee4693a2fefa26d8a42, type: 2}
+  tutorialRestarted: {fileID: 11400000, guid: a40f298a12e070d4181019f357aa427b, type: 2}
+  eventToStartMiniGame: {fileID: 11400000, guid: d29ed3cc85e3fc449b3ef4a65863e9ce, type: 2}
+  timerFinished: {fileID: 11400000, guid: 96f21ea68053d06419150c50e8dadb2e, type: 2}
+  eventToCompleteMiniGame: {fileID: 0}
+  miniGameData: {fileID: 11400000, guid: 5dda0c568994f2240901bd19195b9c15, type: 2}
+  miniGameTimer: {fileID: 0}
+  miniGameTimerUI: {fileID: 0}
+  pointerGestureSpawner: {fileID: 0}
+  decalDrawingAnimators:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  displayTutorial: 0
+  additionalGestureToSpawn: 3
+--- !u!114 &3954521257524038181
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1172750586686823352}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e53f192b61a444887cd9ff509ba1f19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  drawingTaskStarted: {fileID: 11400000, guid: 5ed720b03f35d2d43be59f9666d0d8f6, type: 2}
+  drawingTaskTutorialStarted: {fileID: 11400000, guid: 014a66741ae91a6498cd5c27d8cb0484, type: 2}
+  drawingTaskCompleted: {fileID: 11400000, guid: 5f5d791206e52a24eb87165367984301, type: 2}
+  tutorialCompleted: {fileID: 11400000, guid: a8cd881eee549ee4693a2fefa26d8a42, type: 2}
+  tutorialRestarted: {fileID: 11400000, guid: a40f298a12e070d4181019f357aa427b, type: 2}
+  pencilCursor: {fileID: 0}
+  pencil: {fileID: 0}
+  pencilMovementDuration: 1.5
+  movementEase: 4
+  startPosition: {fileID: 0}
+  endPosition: {fileID: 0}
+  pencilFadeInDuration: 0.15
+  pencilFadeInEase: 9
+  pencilFadeOutDuration: 0.24
+  pencilFadeOutEase: 9
+  tutorialText: {fileID: 0}
+  tutorialTextFadeInDuration: 0.15
+  tutorialTextFadeInEase: 9
+  disableUIDuration: 0.15
+  disableUIEase: 9
+  tutorialGestureAnimator: {fileID: 0}
+--- !u!1 &6163586643360782830
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5323679834953487526}
+  - component: {fileID: 4844457713257138084}
+  m_Layer: 0
+  m_Name: Drawing_LineArt
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &5323679834953487526
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6163586643360782830}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 5409951586425719432}
+  m_Father: {fileID: 0}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4844457713257138084
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6163586643360782830}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00a522d7a04547d0bda88c03cceeaf31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  taskStarted:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: Player.HandController, Assembly-CSharp
+        m_MethodName: TurnOffCurrentItemHandDisplay
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: HighlightObjectEffect, Assembly-CSharp
+        m_MethodName: DisableHighLightImmediately
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  taskCompleted:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: DayCycle.DailyCycleController, Assembly-CSharp
+        m_MethodName: FadeToNextPeriodPhase
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+  eventToCompleteDrawingTask: {fileID: 11400000, guid: f9c49371be8b2b94a8cd8d5a967943de, type: 2}
+  eventToStartDrawingTask: {fileID: 11400000, guid: 8079b512e3a6047418be8d59a6c17261, type: 2}
+  eventToStopDrawingTask: {fileID: 11400000, guid: e62735c2b79b9224c80b825296dd7905, type: 2}
+  drawingTaskCompleted: {fileID: 11400000, guid: 0699d1c2dce0218469990e7ce0a4171a, type: 2}
+  drawingTaskStarted: {fileID: 11400000, guid: d29ed3cc85e3fc449b3ef4a65863e9ce, type: 2}
+  drawingTaskStopped: {fileID: 11400000, guid: 093f78b30b39d1c4e8fb21e457685e37, type: 2}
+  enableCameraObjectInputInterrupted: {fileID: 11400000, guid: 2a4bea7a0e6543e40931b4c63e7b6f74, type: 2}
+  inputActionManager: {fileID: 11400000, guid: acabe8a265f9d8e4aabe5f84bbf14a37, type: 2}
