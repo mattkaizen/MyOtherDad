@@ -47,6 +47,8 @@ namespace Player
             {
                 playerInputToggle.EnableCameraObjectInput(newInteractableCamera.CameraInteraction);
                 wakeUpSequenceCompleted.RaiseEvent();
+                sequenceCompleted?.Invoke();
+                Debug.Log("Termino secuencia");
             }));
         }
     }

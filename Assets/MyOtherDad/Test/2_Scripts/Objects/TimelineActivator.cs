@@ -20,14 +20,18 @@ namespace Objects
 
         private void OnEnable()
         {
-            eventToPlayTimeline.EventRaised += OnEventToPlayCinematicRaised;
+            if (eventToPlayTimeline != null)
+                eventToPlayTimeline.EventRaised += OnEventToPlayCinematicRaised;
+
             playableDirector.played += OnTimelineStarted;
             playableDirector.stopped += OnTimelineStopped;
         }
 
         private void OnDisable()
         {
-            eventToPlayTimeline.EventRaised -= OnEventToPlayCinematicRaised;
+            if (eventToPlayTimeline != null)
+                eventToPlayTimeline.EventRaised -= OnEventToPlayCinematicRaised;
+
             playableDirector.played -= OnTimelineStarted;
             playableDirector.stopped -= OnTimelineStopped;
         }
@@ -35,29 +39,31 @@ namespace Objects
         private void OnEventToPlayCinematicRaised()
         {
             if (playableDirector.state == PlayState.Playing) return;
-            
-            playableDirector.Play();
-            cinematicStarted?.Invoke();
-            Debug.Log("Cinematic starting");
+
+            PlayTimeLine();
         }
 
+        public void PlayTimeLine()
+        {
+            playableDirector.Play();
+            cinematicStarted?.Invoke();
+        }
 
         private void OnTimelineStopped(PlayableDirector obj)
         {
-            timelineStopped.RaiseEvent();
+            if (timelineStopped != null)
+                timelineStopped.RaiseEvent();
+            
             cinematicStopped?.Invoke();
-
-            Debug.Log("Cinematic stopped");
 
             if (disableCinematicWhenStops)
                 this.enabled = false;
-            
-            Debug.Log("Timeline Activator disabled");
-            
         }
 
         private void OnTimelineStarted(PlayableDirector obj)
         {
+            if (timelineStarted == null) return;
+
             timelineStarted.RaiseEvent();
         }
     }

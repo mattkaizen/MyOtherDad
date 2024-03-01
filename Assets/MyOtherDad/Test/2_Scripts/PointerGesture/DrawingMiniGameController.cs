@@ -11,6 +11,7 @@ namespace PointerGesture
     {
         
         [SerializeField] [UsedImplicitly] private UnityEvent drawingMiniGameCompleted;
+        [SerializeField] [UsedImplicitly] private UnityEvent currentGestureCompleted;
         [Space]
         [Header("Broadcast on Events Channels")]
         [SerializeField] private VoidEventChannelData miniGameStarted;
@@ -52,8 +53,13 @@ namespace PointerGesture
                 timerFinished.EventRaised += OnTimerFinishedRaised;
 
             if (pointerGestureSpawner != null)
+            {
                 pointerGestureSpawner.GesturesCompleted.EventRaised += OnGesturesCompleted;
+                pointerGestureSpawner.CurrentGestureCompleted += OnCurrentGestureCompleted;
+            }
         }
+
+
 
         private void OnDisable()
         {
@@ -67,7 +73,10 @@ namespace PointerGesture
                 timerFinished.EventRaised -= OnTimerFinishedRaised;
 
             if (pointerGestureSpawner != null)
+            {
                 pointerGestureSpawner.GesturesCompleted.EventRaised -= OnGesturesCompleted;
+                pointerGestureSpawner.CurrentGestureCompleted -= OnCurrentGestureCompleted;
+            }
         }
 
         private void OnEventToStartMiniGameRaised()
@@ -103,6 +112,11 @@ namespace PointerGesture
             {
                 LoadPhase(_currentPhase);
             }
+        }
+        
+        private void OnCurrentGestureCompleted()
+        {
+            currentGestureCompleted?.Invoke();
         }
 
         private void StartMiniGame()

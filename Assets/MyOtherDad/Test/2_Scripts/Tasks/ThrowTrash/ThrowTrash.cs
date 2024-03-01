@@ -21,6 +21,7 @@ namespace Tasks
         public VoidEventChannelData ThrowTrashTaskStopped => throwTrashTaskStopped;
         public IntEventChannelData ThrowTrashTaskCompletedWithScoreOf => throwTrashTaskCompletedWithScoreOf;
         public VoidEventChannelData ThrowTrashTaskPreStarted => throwTrashTaskPreStarted;
+        public int MaxAmountOfTrashToScore => amountOfTrashToPick;
 
         [Header("Event Channels to listen")]
         [SerializeField] private VoidEventChannelData eventToPreStartTask;

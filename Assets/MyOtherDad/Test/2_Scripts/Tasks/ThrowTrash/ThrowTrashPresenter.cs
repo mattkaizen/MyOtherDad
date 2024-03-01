@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Audio;
 using Data;
 using UnityEngine;
 
@@ -12,6 +13,11 @@ namespace Tasks
         [SerializeField] private List<HighlightObjectEffect> trashToHighlight = new List<HighlightObjectEffect>();
         [SerializeField] private VoidEventChannelData enableProjectileTrajectory;
         [SerializeField] private VoidEventChannelData disableProjectileTrajectory;
+        [Header("Audio Settings")]
+        [SerializeField] private AudioSourceController soundMaxScore;
+        [SerializeField] private AudioSourceController soundHalfOrMoreScore;
+        [SerializeField] private AudioSourceController soundHalfOrLessScore;
+
         private void OnEnable()
         {
             throwTrash.HasAllTrashOnHand += OnHasAllTrashOnHand;
@@ -25,7 +31,7 @@ namespace Tasks
         private void OnDisable()
         {
             throwTrash.HasAllTrashOnHand -= OnHasAllTrashOnHand;
-            
+
             throwTrash.ThrowTrashTaskStarted.EventRaised -= OnThrowTrashTaskStarted;
             throwTrash.ThrowTrashTaskStopped.EventRaised -= OnThrowTrashTaskStopped;
             throwTrash.ThrowTrashTaskCompletedWithScoreOf.EventRaised -= OnThrowTrashTaskCompleted;
@@ -33,12 +39,12 @@ namespace Tasks
 
             DisableHighlightFade();
         }
-        
+
         private void OnThrowTrashTaskPreStarted()
         {
             EnableHighlightTrash();
         }
-        
+
         private void OnThrowTrashTaskStarted()
         {
             highLightBed.DisableHighLightFade();
@@ -47,21 +53,27 @@ namespace Tasks
 
         private void OnThrowTrashTaskCompleted(int score)
         {
+            Debug.Log("Throw Trash Task Completed");
             throwTrash.HasAllTrashOnHand -= OnHasAllTrashOnHand;
             disableProjectileTrajectory.RaiseEvent();
-            
-            //TODO: si el score es x.. reproducir tal timeline tal vez o sonido, desbloquear inputs luego
+
+            AudioSourceController selectedSound = SelectSoundByScore(score);
+
+            if (selectedSound != null)
+            {
+                Debug.Log("Throw Trash Task Completed SOUND");
+                selectedSound.Play();
+            }
         }
 
         private void OnThrowTrashTaskStopped()
         {
-            
         }
 
         private void OnHasAllTrashOnHand(bool hasAllTrashOnHand)
         {
             if (throwTrash.IsCompleted) return;
-            
+
             if (hasAllTrashOnHand)
             {
                 highLightBed.EnableHighLightFade();
@@ -92,6 +104,19 @@ namespace Tasks
             {
                 highlightObjectEffect.DisableHighLightFade();
             }
+        }
+
+        private AudioSourceController SelectSoundByScore(int score)
+        {
+            if (score >= throwTrash.MaxAmountOfTrashToScore)
+                return soundMaxScore;
+
+            float halfOfMaxScore = throwTrash.MaxAmountOfTrashToScore * 0.5f;
+
+            if (score >= halfOfMaxScore)
+                return soundHalfOrMoreScore;
+
+            return soundHalfOrLessScore;
         }
     }
 }

@@ -10,7 +10,7 @@ namespace Audio
         [SerializeField] private AudioSource audioSourceToControl;
         [Header("Fade settings")]
         [SerializeField] private bool getMaxVolumeFromAudioSource = true;
-        [SerializeField] private float maxVolume;
+        [SerializeField] private float maxVolume = 1;
 
         private void Awake()
         {

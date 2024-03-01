@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Data;
 using UnityEngine;
+using UnityEngine.Events;
 using Random = UnityEngine.Random;
 
 namespace PointerGesture
@@ -26,6 +27,7 @@ namespace PointerGesture
             }
         }
 
+        public event UnityAction CurrentGestureCompleted;
         public List<GameObject> SpawnedPointerGestures => _spawnedPointerGestures;
         public VoidEventChannelData GesturesCompleted => gesturesCompleted;
         public List<PointerGesturePool> PointerGesturePools => _pointerGesturePools;
@@ -109,7 +111,7 @@ namespace PointerGesture
 
                     spawnedPointerGesture.gameObject.SetActive(true);
                     yield return new WaitUntil(() => pointerGesture.Checker.IsGestureCompleted);
-                    Debug.Log("gesture completed");
+                    CurrentGestureCompleted?.Invoke();
                 }
             }
 
