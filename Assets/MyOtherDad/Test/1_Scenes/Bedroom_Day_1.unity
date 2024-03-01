@@ -8875,31 +8875,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5075993376410916227, guid: 4133b9a6b163228478de6c0db064d776, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -5.881512
       objectReference: {fileID: 0}
     - target: {fileID: 5075993376410916227, guid: 4133b9a6b163228478de6c0db064d776, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.49999994
+      value: 0.33275396
       objectReference: {fileID: 0}
     - target: {fileID: 5075993376410916227, guid: 4133b9a6b163228478de6c0db064d776, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0.7238879
       objectReference: {fileID: 0}
     - target: {fileID: 5075993376410916227, guid: 4133b9a6b163228478de6c0db064d776, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.87996584
+      value: 0.97981197
       objectReference: {fileID: 0}
     - target: {fileID: 5075993376410916227, guid: 4133b9a6b163228478de6c0db064d776, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.4741099
+      value: 0.19045615
       objectReference: {fileID: 0}
     - target: {fileID: 5075993376410916227, guid: 4133b9a6b163228478de6c0db064d776, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.026116729
+      value: -0.059670627
       objectReference: {fileID: 0}
     - target: {fileID: 5075993376410916227, guid: 4133b9a6b163228478de6c0db064d776, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.014071211
+      value: 0.011598802
       objectReference: {fileID: 0}
     - target: {fileID: 5370283800507754456, guid: 4133b9a6b163228478de6c0db064d776, type: 3}
       propertyPath: m_RootOrder
@@ -9691,6 +9691,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1723933340}
     m_Modifications:
+    - target: {fileID: 569938900934377274, guid: fb85dd04786fa4b43b2e45d05b68633f, type: 3}
+      propertyPath: m_SceneBindings.Array.size
+      value: 29
+      objectReference: {fileID: 0}
+    - target: {fileID: 569938900934377274, guid: fb85dd04786fa4b43b2e45d05b68633f, type: 3}
+      propertyPath: m_SceneBindings.Array.data[28].key
+      value: 
+      objectReference: {fileID: -8547904267089426641, guid: abf7f73ce1763814ba6c384a6f0a0699, type: 2}
+    - target: {fileID: 569938900934377274, guid: fb85dd04786fa4b43b2e45d05b68633f, type: 3}
+      propertyPath: m_SceneBindings.Array.data[28].value
+      value: 
+      objectReference: {fileID: 2883358773934806187}
+    - target: {fileID: 2099524714232532482, guid: fb85dd04786fa4b43b2e45d05b68633f, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2924477578948133304, guid: fb85dd04786fa4b43b2e45d05b68633f, type: 3}
       propertyPath: itemPlaced.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
@@ -9714,6 +9730,10 @@ PrefabInstance:
     - target: {fileID: 7357115122819783516, guid: fb85dd04786fa4b43b2e45d05b68633f, type: 3}
       propertyPath: m_Name
       value: DinnerTask
+      objectReference: {fileID: 0}
+    - target: {fileID: 7357115122819783516, guid: fb85dd04786fa4b43b2e45d05b68633f, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7854059150679453222, guid: fb85dd04786fa4b43b2e45d05b68633f, type: 3}
       propertyPath: m_RootOrder
@@ -9764,6 +9784,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fb85dd04786fa4b43b2e45d05b68633f, type: 3}
+--- !u!82 &2883358773934806187 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 6664346987385823944, guid: fb85dd04786fa4b43b2e45d05b68633f, type: 3}
+  m_PrefabInstance: {fileID: 2883358773934806186}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2886973086607432853
 PrefabInstance:
   m_ObjectHideFlags: 0
