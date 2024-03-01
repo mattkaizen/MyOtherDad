@@ -10,7 +10,7 @@ namespace EventListener
         [SerializeField] private Condition currentCondition;
         [SerializeField] private int goalAccomplishedConditions;
 
-        private int _currentAccomplishedConditions;
+        [SerializeField] private int _currentAccomplishedConditions;
 
         [UsedImplicitly]
         public void SetConditionNumberTo(int newNumberOfConditions)

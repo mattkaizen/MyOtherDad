@@ -233,7 +233,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: -2741111179036265061, guid: a65ea052deabe424aa9d270392b9c5eb, type: 2}
   m_audioClip: {fileID: 8300000, guid: 968d0470170829544946667f4cc14ebe, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.7
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -477,7 +477,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2595062680991957726
 Transform:
   m_ObjectHideFlags: 0
@@ -775,6 +775,7 @@ MonoBehaviour:
         m_CallState: 2
   currentCondition: 0
   goalAccomplishedConditions: 6
+  _currentAccomplishedConditions: 0
 --- !u!1 &8010128611942856198
 GameObject:
   m_ObjectHideFlags: 0
@@ -837,6 +838,7 @@ MonoBehaviour:
         m_CallState: 2
   currentCondition: 0
   goalAccomplishedConditions: 13
+  _currentAccomplishedConditions: 0
 --- !u!1 &8919655553462189810
 GameObject:
   m_ObjectHideFlags: 0
@@ -899,3 +901,4 @@ MonoBehaviour:
         m_CallState: 2
   currentCondition: 0
   goalAccomplishedConditions: 10
+  _currentAccomplishedConditions: 0

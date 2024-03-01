@@ -16,5 +16,6 @@ namespace Settings
         {
             Application.targetFrameRate = frameRate;
         }
+        
     }
 }
