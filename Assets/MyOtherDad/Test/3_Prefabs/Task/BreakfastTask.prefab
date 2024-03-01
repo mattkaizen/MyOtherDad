@@ -88,6 +88,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: DayCycle.DailyCycleController, Assembly-CSharp
+        m_MethodName: FadeToNextPeriodPhase
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
   ghostPickableTray: {fileID: 3559563587822829171}
 --- !u!1001 &1449269935831274462
 PrefabInstance:
@@ -274,7 +286,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 99abffe45796e5c47a09a4efcf076939, type: 2}
     - target: {fileID: 1832111087724527085, guid: 9de899636f483d449b7d3486a3d83d70, type: 3}
       propertyPath: m_Name
-      value: Ghost Pickable Tray Breakfast (1)
+      value: 'Ghost Container Tray Breakfast '
       objectReference: {fileID: 0}
     - target: {fileID: 1832111087724527085, guid: 9de899636f483d449b7d3486a3d83d70, type: 3}
       propertyPath: m_IsActive

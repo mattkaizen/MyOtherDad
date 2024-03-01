@@ -868,7 +868,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   taskCompleted:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: DayCycle.DailyCycleController, Assembly-CSharp
+        m_MethodName: FadeToNextPeriodPhase
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   dinnerTaskCompleted: {fileID: 11400000, guid: 9a8c3950e3a97894eafabc373eba268c, type: 2}
   ghostPickableTray: {fileID: 2924477578948133304}
 --- !u!1001 &452379825890062277
@@ -887,6 +899,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1059843249981942211, guid: b78c805c3d471e24b931fade72e68fca, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 99abffe45796e5c47a09a4efcf076939, type: 2}
     - target: {fileID: 1550614436487944653, guid: b78c805c3d471e24b931fade72e68fca, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -964,6 +980,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3927713971006275109, guid: b78c805c3d471e24b931fade72e68fca, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 99abffe45796e5c47a09a4efcf076939, type: 2}
+    - target: {fileID: 4395647260244708397, guid: b78c805c3d471e24b931fade72e68fca, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 99abffe45796e5c47a09a4efcf076939, type: 2}
@@ -1828,6 +1848,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1035874021101966925}
     m_Modifications:
+    - target: {fileID: 1059843249981942211, guid: b78c805c3d471e24b931fade72e68fca, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 99abffe45796e5c47a09a4efcf076939, type: 2}
     - target: {fileID: 1550614436487944653, guid: b78c805c3d471e24b931fade72e68fca, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -1897,6 +1921,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2100000, guid: 99abffe45796e5c47a09a4efcf076939, type: 2}
     - target: {fileID: 3927713971006275109, guid: b78c805c3d471e24b931fade72e68fca, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 99abffe45796e5c47a09a4efcf076939, type: 2}
+    - target: {fileID: 4395647260244708397, guid: b78c805c3d471e24b931fade72e68fca, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 99abffe45796e5c47a09a4efcf076939, type: 2}
