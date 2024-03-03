@@ -7,49 +7,41 @@ namespace PointerGesture
 {
     public class MiniGameTimerUI : MonoBehaviour
     {
-        [Header("Listen to Events Channels")] [SerializeField]
-        private IntEventChannelData currentTimeChanged;
-
+        [Header("Listen to Events Channels")] 
+        [SerializeField] private IntEventChannelData currentTimeChanged;
         [SerializeField] private IntEventChannelData timerStarted;
         [SerializeField] private VoidEventChannelData timerFinished;
         [SerializeField] private TMP_Text timerUI;
-
-        [Header("Fade Out Animation settings")] [SerializeField]
-        private float fadeOutTime;
-
+        
+        [Header("Fade Out Animation settings")] 
+        [SerializeField] private float fadeOutTime;
         [SerializeField] private Ease fadeOutEase;
-
-        [Space] [Header("Fade In Animation settings")] [SerializeField]
-        private float fadeInTime;
-
+        [Space] 
+        [Header("Fade In Animation settings")] 
+        [SerializeField] private float fadeInTime;
         [SerializeField] private Ease fadeInEase;
-
-        [Header("Timer Colors")] [SerializeField]
-        private Gradient timerColor;
+        
+        [Header("Timer Colors")] 
+        [SerializeField] private Gradient timerColor;
 
         private int _currentTotalTime;
 
         private void OnEnable()
         {
+            timerStarted.EventRaised += OnTimerStarted;
             currentTimeChanged.EventRaised += OnTimerCurrentTimeChanged;
             timerFinished.EventRaised += OnTimerFinished;
-            timerStarted.EventRaised += OnTimerStarted;
         }
-
         private void OnDisable()
         {
+            timerStarted.EventRaised -= OnTimerStarted;
             currentTimeChanged.EventRaised -= OnTimerCurrentTimeChanged;
             timerFinished.EventRaised -= OnTimerFinished;
-            timerStarted.EventRaised -= OnTimerStarted;
         }
 
         private void OnTimerStarted(int totalTime)
         {
-            _currentTotalTime = totalTime;
-
-            UpdateTextUI(_currentTotalTime);
-            UpdateTextUIColor(totalTime, 0.0f);
-
+            // _currentTotalTime = totalTime;
         }
 
         private void OnTimerCurrentTimeChanged(int currentTime)
@@ -78,9 +70,9 @@ namespace PointerGesture
             timerUI.DOColor(timerColor.Evaluate(gradientTime), duration);
         }
 
-        public void FadeInUI()
+        private Tweener FadeInUI()
         {
-            timerUI.DOFade(1.0f, fadeInTime).SetEase(fadeInEase);
+            return timerUI.DOFade(1.0f, fadeInTime).SetEase(fadeInEase);
         }
 
         public void FadeOutUI()
@@ -91,13 +83,19 @@ namespace PointerGesture
         public void SetInitialUIColor()
         {
             timerUI.color = timerColor.Evaluate(0.0f);
+
+            // Color newColor = new Color(timerColor.Evaluate(0.0f).r, timerColor.Evaluate(0.0f).g,
+            //     timerColor.Evaluate(0.0f).b, 0.0f);
+            // timerUI.color = newColor;
         }
 
-        public void Initialize()
+        public Tweener Initialize(int totalTimerTime)
         {
+            _currentTotalTime = totalTimerTime;
             SetInitialUIColor();
+            UpdateTextUI(_currentTotalTime);
             timerUI.alpha = 0.0f;
-            FadeInUI();
+            return FadeInUI();
         }
     }
 }

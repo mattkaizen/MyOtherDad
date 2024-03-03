@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
+using TMPro;
 using UnityEngine;
 
 namespace PointerGesture
@@ -12,21 +12,24 @@ namespace PointerGesture
         [SerializeField] private PointerGesturePointChecker pointerGesturePointChecker;
         [SerializeField] private float delayToAnimateNextPointerGesture;
 
-        [Header("Scale Int settings")] [Space] [SerializeField]
-        private Vector3 maxScaleGesturePointTween;
-
+        [Header("Scale Int settings")] 
+        [Space] 
+        [SerializeField] private Vector3 maxScaleGesturePointTween;
         [SerializeField] private float scaleInTweenDuration;
         [SerializeField] private Ease scaleInTweenEase;
-
-        [Header("Scale Out settings")] [SerializeField]
-        private Vector3 minScaleGesturePointTween;
-
+        
+        [Header("Scale Out settings")] 
+        [SerializeField] private Vector3 minScaleGesturePointTween;
         [SerializeField] private float scaleOutTweenDuration;
         [SerializeField] private Ease scaleOutTweenEase;
+        [Header("Text settings")] 
 
         private IEnumerator _scaleRoutine;
 
         private List<Tween> _scaleTweens = new List<Tween>();
+        private List<TMP_Text> _numberTexts = new List<TMP_Text>();
+
+        private bool areNumberTextsInitialized;
 
         private void OnDisable()
         {
@@ -38,8 +41,23 @@ namespace PointerGesture
 
         private void OnGestureInitialized()
         {
+            TryInitializeNumberText();
             InitializeScale();
             StartScalePointGestureRoutine();
+        }
+
+        private void TryInitializeNumberText()
+        {
+            if (areNumberTextsInitialized) return;
+            
+            for (int i = 0; i < gesturePointsToAnimate.Count; i++)
+            {
+                TMP_Text tmpText = gesturePointsToAnimate[i].GetComponentInChildren<TMP_Text>();
+                tmpText.text = (i + 1).ToString();
+
+            }
+
+            areNumberTextsInitialized = true;
         }
 
         private void OnGestureCompleted()
@@ -139,6 +157,18 @@ namespace PointerGesture
         {
             return rectTransform.DOScale(minScaleGesturePointTween, scaleOutTweenDuration)
                 .SetEase(scaleOutTweenEase);
+        }
+        
+        public Sequence ScaleOutRectTransforms()
+        {
+            Sequence scaleOutPoints = DOTween.Sequence();
+            KillScaleTweens();
+            for (int i = 0; i < gesturePointsToAnimate.Count; i++)
+            {
+                scaleOutPoints.Join(ScaleOutRectTransform(gesturePointsToAnimate[i]));
+            }
+            
+            return scaleOutPoints;
         }
 
         private void StartScalePointGestureRoutine()

@@ -1,5 +1,4 @@
-﻿using System;
-using DG.Tweening;
+﻿using DG.Tweening;
 using JetBrains.Annotations;
 using UnityEngine;
 
@@ -7,10 +6,12 @@ namespace Audio
 {
     public class AudioSourceController : MonoBehaviour
     {
+        public AudioSource AudioSourceToControl => audioSourceToControl;
+
         [SerializeField] private AudioSource audioSourceToControl;
         [Header("Fade settings")]
-        [SerializeField] private bool getMaxVolumeFromAudioSource = true;
         [SerializeField] private float maxVolume = 1;
+        [SerializeField] private bool getMaxVolumeFromAudioSource = true;
 
         private void Awake()
         {
@@ -27,7 +28,8 @@ namespace Audio
                 Debug.LogWarning($"Empty {typeof(AudioSource)} ");
                 return;
             }
-
+            SetVolume(maxVolume);
+            
             audioSourceToControl.Play();
         }
 

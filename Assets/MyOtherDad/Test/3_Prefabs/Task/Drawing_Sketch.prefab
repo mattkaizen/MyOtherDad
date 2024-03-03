@@ -29,7 +29,8 @@ Transform:
   m_LocalPosition: {x: -5.3999996, y: 0.91901404, z: -2.4499946}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 7693834776939522841}
   m_Father: {fileID: 2595062680991957726}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -87,6 +88,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1644972255461135125}
+        m_TargetAssemblyTypeName: Audio.MultipleAudioSourceController, Assembly-CSharp
+        m_MethodName: PlayByListOrder
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   miniGameStarted: {fileID: 11400000, guid: 5ed720b03f35d2d43be59f9666d0d8f6, type: 2}
   miniGameCompleted: {fileID: 11400000, guid: 5f5d791206e52a24eb87165367984301, type: 2}
   miniGameRestarted: {fileID: 11400000, guid: 44b0b5018a403314bbc73a208f11b027, type: 2}
@@ -118,13 +131,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e53f192b61a444887cd9ff509ba1f19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tutorialGestureCompleted:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1644972255461135125}
+        m_TargetAssemblyTypeName: Audio.MultipleAudioSourceController, Assembly-CSharp
+        m_MethodName: PlayByListOrder
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   drawingTaskStarted: {fileID: 11400000, guid: 5ed720b03f35d2d43be59f9666d0d8f6, type: 2}
   drawingTaskTutorialStarted: {fileID: 11400000, guid: 014a66741ae91a6498cd5c27d8cb0484, type: 2}
   drawingTaskCompleted: {fileID: 11400000, guid: 5f5d791206e52a24eb87165367984301, type: 2}
   tutorialCompleted: {fileID: 11400000, guid: a8cd881eee549ee4693a2fefa26d8a42, type: 2}
   tutorialRestarted: {fileID: 11400000, guid: a40f298a12e070d4181019f357aa427b, type: 2}
   pencilCursor: {fileID: 0}
-  pencil: {fileID: 0}
+  tutorialPencil: {fileID: 0}
   pencilMovementDuration: 1.5
   movementEase: 4
   startPosition: {fileID: 0}
@@ -219,8 +247,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioSourceToControl: {fileID: 3878286593110697312}
-  getMaxVolumeFromAudioSource: 1
   maxVolume: 1
+  getMaxVolumeFromAudioSource: 1
 --- !u!82 &3878286593110697312
 AudioSource:
   m_ObjectHideFlags: 0
@@ -363,8 +391,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioSourceToControl: {fileID: 5176645926764247643}
-  getMaxVolumeFromAudioSource: 1
   maxVolume: 1
+  getMaxVolumeFromAudioSource: 1
 --- !u!82 &5176645926764247643
 AudioSource:
   m_ObjectHideFlags: 0
@@ -461,6 +489,62 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!1 &4959391071823959270
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7693834776939522841}
+  - component: {fileID: 1644972255461135125}
+  m_Layer: 0
+  m_Name: MultipleAudioSourceController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7693834776939522841
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4959391071823959270}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7108572029798544573}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1644972255461135125
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4959391071823959270}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3014517942643d789d2a6f748445cad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioSourcesControllers:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  disableInactiveAudioSourcesOnAwake: 1
+  disableIfLastAudioSourceIsNotPlaying: 1
 --- !u!1 &5303019785049122123
 GameObject:
   m_ObjectHideFlags: 0
@@ -477,7 +561,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2595062680991957726
 Transform:
   m_ObjectHideFlags: 0
@@ -615,8 +699,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioSourceToControl: {fileID: 5389513528848064703}
-  getMaxVolumeFromAudioSource: 1
   maxVolume: 1
+  getMaxVolumeFromAudioSource: 1
 --- !u!82 &5389513528848064703
 AudioSource:
   m_ObjectHideFlags: 0

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using Data;
+using DG.Tweening;
 using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.Events;
@@ -58,9 +59,6 @@ namespace PointerGesture
                 pointerGestureSpawner.CurrentGestureCompleted += OnCurrentGestureCompleted;
             }
         }
-
-
-
         private void OnDisable()
         {
             if (eventToStartMiniGame != null)
@@ -127,18 +125,18 @@ namespace PointerGesture
             _isMiniGameStarted = true;
             _currentPhase = 0;
 
-            miniGameTimerUI.Initialize();
-            miniGameTimer.StartTimer(miniGameData.TotalTime);
-
-            pointerGestureSpawner.Initialize(miniGameData);
-            LoadPhase(_currentPhase);
-
-            miniGameStarted.RaiseEvent();
+            miniGameTimerUI.Initialize(miniGameData.TotalTime).OnComplete((() =>
+            {
+                Debug.Log("Start Timer");
+                miniGameTimer.StartTimer(miniGameData.TotalTime);
+                pointerGestureSpawner.Initialize(miniGameData);
+                LoadPhase(_currentPhase);
+                miniGameStarted.RaiseEvent();
+            }));
         }
-
+        
         private void LoadPhase(int phase)
         {
-            Debug.Log($"Load phase {phase}");
             pointerGestureSpawner.StartSpawnPointerGestures(phase);
 
             decalDrawingAnimators[phase].InitializeSystem(
@@ -148,10 +146,6 @@ namespace PointerGesture
 
         private void CompleteMiniGame()
         {
-            // if (!_isMiniGameStarted) return;
-
-            Debug.Log("MiniGameCompleted");
-
             _hasMiniGameCompleted = true;
 
             miniGameTimer.StopTimer();
@@ -177,12 +171,16 @@ namespace PointerGesture
 
             _currentPhase = 0;
             pointerGestureSpawner.StopSpawnPointerGestures();
-            pointerGestureSpawner.ResetSpawnedPointerGesturesPool();
-            miniGameTimerUI.Initialize();
-            miniGameTimer.StartTimer(miniGameData.TotalTime);
-            pointerGestureSpawner.Initialize(miniGameData);
-            pointerGestureSpawner.StartSpawnPointerGestures(_currentPhase);
-            miniGameRestarted.RaiseEvent();
+            pointerGestureSpawner.ResetSpawnedPointerGesturesPool(false).OnComplete((() =>
+            {
+                miniGameTimerUI.Initialize(miniGameData.TotalTime).OnComplete((() =>
+                {
+                    miniGameTimer.StartTimer(miniGameData.TotalTime);
+                    pointerGestureSpawner.Initialize(miniGameData);
+                    pointerGestureSpawner.StartSpawnPointerGestures(_currentPhase);
+                    miniGameRestarted.RaiseEvent();
+                }));
+            }));
         }
 
         private void StartTutorial()
@@ -210,19 +208,28 @@ namespace PointerGesture
 
             _currentPhase = 0;
             pointerGestureSpawner.StopSpawnPointerGestures();
-            pointerGestureSpawner.ResetSpawnedPointerGesturesPool();
-            pointerGestureSpawner.Initialize(miniGameData);
-            pointerGestureSpawner.StartSpawnPointerGestures(_currentPhase);
-            StartCoroutine(TryCompleteTutorialRoutine(_currentPhase, additionalGestureToSpawn));
+            pointerGestureSpawner.ResetSpawnedPointerGesturesPool(false).OnComplete(() =>
+            {
+                pointerGestureSpawner.Initialize(miniGameData, additionalGestureToSpawn);//Demas???
+                pointerGestureSpawner.StartSpawnPointerGestures(_currentPhase);
+                StartCoroutine(TryCompleteTutorialRoutine(_currentPhase, additionalGestureToSpawn));
 
-            tutorialRestarted.RaiseEvent();
+                tutorialRestarted.RaiseEvent();
+            });
         }
 
         private void CompleteTutorial()
         {
-            miniGameTimerUI.Initialize();
-            miniGameTimer.StartTimer(miniGameData.TotalTime);
             tutorialCompleted.RaiseEvent();
+            pointerGestureSpawner.StopSpawnPointerGestures();
+            pointerGestureSpawner.ResetSpawnedPointerGesturesPool(true).OnComplete((() =>
+            {
+                miniGameTimerUI.Initialize(miniGameData.TotalTime).OnComplete((() =>
+                {
+                    pointerGestureSpawner.StartSpawnPointerGestures(_currentPhase, additionalGestureToSpawn);
+                    miniGameTimer.StartTimer(miniGameData.TotalTime);
+                }));  
+            }));
         }
 
         private IEnumerator TryCompleteTutorialRoutine(int phase, int amountToCompleteTutorial)

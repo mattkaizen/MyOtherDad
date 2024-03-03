@@ -10,7 +10,6 @@ namespace PointerGesture
         [SerializeField] private IntEventChannelData currentTimeChanged;
         [SerializeField] private VoidEventChannelData timerFinished;
         [SerializeField] private IntEventChannelData timerStarted;
-
         private IEnumerator _timerRoutine;
 
         private IEnumerator RunTimerRoutine(int totalTime)
@@ -20,7 +19,7 @@ namespace PointerGesture
             int secondsPassed = 0;
             int timeToWait = 1;
             int currentTime = totalTime;
-            
+
             while (secondsPassed < totalTime)
             {
                 yield return new WaitForSeconds(timeToWait);

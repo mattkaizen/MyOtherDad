@@ -18,6 +18,7 @@ namespace PointerGesture
             get => checker;
             set => checker = value;
         }
+        public PointerGesturePointAnimator Animator => animator;
 
         [SerializeField] private RectTransform rectTransform;
         [SerializeField] private List<RectTransform> pointsToSpawnGesture = new List<RectTransform>();

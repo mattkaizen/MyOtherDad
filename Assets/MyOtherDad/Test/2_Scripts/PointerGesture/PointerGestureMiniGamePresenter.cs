@@ -3,12 +3,15 @@ using DG.Tweening;
 using Player;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 namespace PointerGesture
 {
     public class PointerGestureMiniGamePresenter : MonoBehaviour
     {
+        [SerializeField] private UnityEvent tutorialGestureCompleted;
+        [Space]
         [Header("Listen to Event Channels")]
         [SerializeField] private VoidEventChannelData drawingTaskStarted;
         [SerializeField] private VoidEventChannelData drawingTaskTutorialStarted;
@@ -20,7 +23,7 @@ namespace PointerGesture
         [Space]
         [Header("Pencil Tween Settings")]
         [Header("Movement")]
-        [SerializeField] private Image pencil;
+        [SerializeField] private Image tutorialPencil;
         [SerializeField] private float pencilMovementDuration;
         [SerializeField] private Ease movementEase;
         [SerializeField] private RectTransform startPosition;
@@ -42,7 +45,7 @@ namespace PointerGesture
         [Header("Disable UI settings")]
         [SerializeField] private float disableUIDuration;
         [SerializeField] private Ease disableUIEase;
-        [SerializeField] private PointerGesturePointAnimator tutorialGestureAnimator;
+        [SerializeField] private PointerGesture tutorialGestureAnimator;
 
         private Sequence _pencilSequence;
 
@@ -53,8 +56,9 @@ namespace PointerGesture
             drawingTaskCompleted.EventRaised += OnDrawingTaskCompleted;
             tutorialCompleted.EventRaised += OnTutorialCompleted;
             tutorialRestarted.EventRaised += OnTutorialRestarted;
+            tutorialGestureAnimator.Checker.GestureCompleted += OnTutorialGestureComplete;
         }
-
+        
         private void OnDisable()
         {
             drawingTaskStarted.EventRaised -= OnDrawingTaskStarted;
@@ -62,28 +66,22 @@ namespace PointerGesture
             drawingTaskCompleted.EventRaised -= OnDrawingTaskCompleted;
             tutorialCompleted.EventRaised -= OnTutorialCompleted;
             tutorialRestarted.EventRaised -= OnTutorialRestarted;
-
+            tutorialGestureAnimator.Checker.GestureCompleted -= OnTutorialGestureComplete;
         }
 
         private void OnDrawingTaskStarted()
         {
-            Debug.Log("PointerGestureMiniGamePresenter: Task started");
             DisplayMiniGameCursor();
-            // DisplayTutorialUI();
         }
 
         private void OnDrawingTaskTutorialStarted()
         {
-            Debug.Log("PointerGestureMiniGamePresenter: Task tutorial started");
-
             DisplayMiniGameCursor();
             DisplayTutorialUI();
         }
 
         private void OnDrawingTaskCompleted()
         {
-            Debug.Log("PointerGestureMiniGamePresenter: Task completed");
-
             pencilCursor.DisableCursorImage();
         }
         
@@ -96,6 +94,13 @@ namespace PointerGesture
         private void OnTutorialCompleted()
         {
             HideTutorialUI();
+        }
+        
+        private void OnTutorialGestureComplete()
+        {
+            _pencilSequence.Kill();
+            FadeOutTutorialPencil();
+            tutorialGestureCompleted?.Invoke();
         }
 
         private void DisplayTutorialUI()
@@ -115,21 +120,26 @@ namespace PointerGesture
         {
             _pencilSequence.Kill();
             tutorialText.DOFade(0.0f, disableUIDuration).SetEase(disableUIEase);
-            pencil.DOFade(0.0f, disableUIDuration).SetEase(disableUIEase);
-            tutorialGestureAnimator.ScaleOutAnimation();
+            FadeOutTutorialPencil();
+        }
+
+        private void FadeOutTutorialPencil()
+        {
+            tutorialPencil.DOFade(0.0f, disableUIDuration).SetEase(disableUIEase);
+            tutorialGestureAnimator.Animator.ScaleOutAnimation();
         }
 
         private void StartPencilAnimation()
         {
              _pencilSequence = DOTween.Sequence();
 
-             _pencilSequence.Append(pencil.DOFade(0.0f, 0.0f));
-             _pencilSequence.Append(pencil.rectTransform.DOAnchorPos(startPosition.anchoredPosition, 0.0f));
-             _pencilSequence.Append(pencil.rectTransform.DOAnchorPos(endPosition.anchoredPosition, pencilMovementDuration)
+             _pencilSequence.Append(tutorialPencil.DOFade(0.0f, 0.0f));
+             _pencilSequence.Append(tutorialPencil.rectTransform.DOAnchorPos(startPosition.anchoredPosition, 0.0f));
+             _pencilSequence.Append(tutorialPencil.rectTransform.DOAnchorPos(endPosition.anchoredPosition, pencilMovementDuration)
                 .SetEase(movementEase));
-             _pencilSequence.Join(pencil.DOFade(1.0f, pencilFadeInDuration).SetEase(pencilFadeInEase));
+             _pencilSequence.Join(tutorialPencil.DOFade(1.0f, pencilFadeInDuration).SetEase(pencilFadeInEase));
              _pencilSequence.Insert(_pencilSequence.Duration(),
-                pencil.DOFade(0.0f, pencilFadeOutDuration).SetEase(pencilFadeOutEase));
+                tutorialPencil.DOFade(0.0f, pencilFadeOutDuration).SetEase(pencilFadeOutEase));
 
              _pencilSequence.SetLoops(-1, LoopType.Restart);
         }

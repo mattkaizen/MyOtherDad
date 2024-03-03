@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Data;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.Events;
 using Random = UnityEngine.Random;
@@ -85,6 +86,7 @@ namespace PointerGesture
                     GenerateSpawnedPointerGesturePool(i, drawingMiniGame.Phases[i].AmountPointerGestureToSpawn);
                 }
             }
+
             _arePoolsInitialized = true;
         }
 
@@ -119,6 +121,31 @@ namespace PointerGesture
             gesturesCompleted.RaiseEvent();
         }
 
+        private IEnumerator SpawnPointerGestureRoutine(List<GameObject> spawnedPointerGestures,
+            int amountOfGesturesToSkip)
+        {
+            int i = 0;
+            foreach (var spawnedPointerGesture in spawnedPointerGestures)
+            {
+                i++;
+                if (i < amountOfGesturesToSkip)
+                    continue;
+
+                if (spawnedPointerGesture.TryGetComponent<PointerGesture>(out var pointerGesture))
+                {
+                    Vector2 spawnPosition = pointerGesture.GetRandomSpawnPosition();
+                    pointerGesture.RectTransform.anchoredPosition = spawnPosition;
+
+                    spawnedPointerGesture.gameObject.SetActive(true);
+                    yield return new WaitUntil(() => pointerGesture.Checker.IsGestureCompleted);
+                    CurrentGestureCompleted?.Invoke();
+                }
+            }
+
+            Debug.Log("All gestures completed");
+            gesturesCompleted.RaiseEvent();
+        }
+
         private void GenerateSpawnedPointerGesturePool(int poolIndex, int amountToSpawn)
         {
             for (int i = 0; i < amountToSpawn; i++)
@@ -131,27 +158,48 @@ namespace PointerGesture
 
         public void StartSpawnPointerGestures(int currentPhase)
         {
-            Debug.Log($"Spawned Pointer Gestures {_pointerGesturePools[currentPhase].SpawnedPointerGestures2.Count}");
             _spawnCoroutine = SpawnPointerGestureRoutine(_pointerGesturePools[currentPhase].SpawnedPointerGestures2);
             StartCoroutine(_spawnCoroutine);
         }
 
-        public void ResetSpawnedPointerGesturesPool()
+        public void StartSpawnPointerGestures(int currentPhase, int amountOfGesturesToSkip)
         {
+            _spawnCoroutine = SpawnPointerGestureRoutine(_pointerGesturePools[currentPhase].SpawnedPointerGestures2,
+                amountOfGesturesToSkip);
+            StartCoroutine(_spawnCoroutine);
+        }
+
+        public Sequence ResetSpawnedPointerGesturesPool(bool disableInstantly)
+        {
+            Sequence scaleOut = DOTween.Sequence();
+
             foreach (var pool in _pointerGesturePools)
             {
                 foreach (var spawnedPointerGesture in pool.SpawnedPointerGestures2)
                 {
-                    if (spawnedPointerGesture.TryGetComponent<PointerGesturePointChecker>(out var checker))
+                    if (spawnedPointerGesture.TryGetComponent<PointerGesture>(out var gesture))
                     {
-                        checker.ResetCheckingSystem();
-                    }
+                        gesture.Checker.ResetCheckingSystem();
 
-                    spawnedPointerGesture.SetActive(false);
+                        if (disableInstantly)
+                        {
+                            spawnedPointerGesture.SetActive(false);
+                        }
+                        else
+                        {
+                            scaleOut.Join(gesture.Animator.ScaleOutRectTransforms().OnComplete(() =>
+                            {
+                                spawnedPointerGesture.SetActive(false);
+                            }));  
+                        }
+
+                    }
                 }
 
                 pool.SpawnedPointerGestures2.OrderBy(x => Guid.NewGuid()).ToList();
             }
+
+            return scaleOut;
         }
 
         public void StopSpawnPointerGestures()
