@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3223768299501631239}
   - component: {fileID: 5422489699739166198}
+  - component: {fileID: 8788019524652481626}
   m_Layer: 0
   m_Name: Puerta
   m_TagString: Untagged
@@ -24,13 +25,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1992065400597810502}
-  m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.59904, y: 0, z: -0.0776}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8445314549933994565}
-  m_Father: {fileID: 7946935652869050344}
+  m_Father: {fileID: 4843467984357465474}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &5422489699739166198
@@ -54,6 +55,52 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.6004235, y: 1.6148692, z: 0.10022202}
   m_Center: {x: -0.3002155, y: 0.79682106, z: 0.04078183}
+--- !u!114 &8788019524652481626
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1992065400597810502}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee14ea95f38a4e92b1ec4436c782ec8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  turnedOn:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6878967337873711969}
+        m_TargetAssemblyTypeName: Objects.TweenerMovement, Assembly-CSharp
+        m_MethodName: TweenLocalRotationToTargetRotation
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  turnedOff:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6878967337873711969}
+        m_TargetAssemblyTypeName: Objects.TweenerMovement, Assembly-CSharp
+        m_MethodName: TweenLocalRotationToInitialRotation
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  switched:
+    m_PersistentCalls:
+      m_Calls: []
+  currentState: 1
 --- !u!1 &2595328089950706686
 GameObject:
   m_ObjectHideFlags: 0
@@ -64,7 +111,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4843467984357465474}
   m_Layer: 0
-  m_Name: PuertaArmarioLeft
+  m_Name: PivotPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -77,11 +124,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2595328089950706686}
-  m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.59904, y: 0, z: 0.0776}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 3223768299501631239}
   m_Father: {fileID: 7946935652869050344}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -94,6 +142,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7946935652869050344}
+  - component: {fileID: 6878967337873711969}
   m_Layer: 0
   m_Name: PuertaAmarioRight
   m_TagString: Untagged
@@ -113,11 +162,26 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 3223768299501631239}
   - {fileID: 4843467984357465474}
   m_Father: {fileID: 0}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!114 &6878967337873711969
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2785030238104432229}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc36f73ec2324091b03a00d2e8414b66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectToTween: {fileID: 2595328089950706686}
+  targetRotation: {x: 0, y: 90, z: 0}
+  movementSpeed: 10
+  movementEase: 4
 --- !u!1001 &8266763574496302510
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -129,6 +193,14 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 525aeb7305db89a48bafaf1a38e8c3e1, type: 3}
       propertyPath: m_RootOrder
       value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 525aeb7305db89a48bafaf1a38e8c3e1, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 525aeb7305db89a48bafaf1a38e8c3e1, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 525aeb7305db89a48bafaf1a38e8c3e1, type: 3}
       propertyPath: m_LocalPosition.x

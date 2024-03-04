@@ -1,5 +1,133 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2623918668101438917
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3940530329659007556}
+  - component: {fileID: 659037184904751063}
+  m_Layer: 0
+  m_Name: AudiosSource_Pastillas
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3940530329659007556
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2623918668101438917}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8371137682913153945}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &659037184904751063
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2623918668101438917}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 2150472569045499774, guid: a65ea052deabe424aa9d270392b9c5eb, type: 2}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &4980341765949626902
 GameObject:
   m_ObjectHideFlags: 0
@@ -29,6 +157,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 8371137682913153945}
   - {fileID: 8058348056153990354}
   - {fileID: 3549230330497585494}
   m_Father: {fileID: 0}
@@ -46,8 +175,100 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19cecb84e007414ba7979889650dcf45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  taskCompleted:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: DayCycle.DailyCycleController, Assembly-CSharp
+        m_MethodName: FadeToNextPeriodPhase
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   eventToCompleteTakePill: {fileID: 11400000, guid: acf5a0fb10e0b7e45bde87dbbcc34e49, type: 2}
   takePillTaskCompleted: {fileID: 11400000, guid: 3b3f8bdc228b17246b25b70aa951b2dd, type: 2}
+--- !u!1 &8818161767027814429
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8371137682913153945}
+  - component: {fileID: 3048573747455063975}
+  - component: {fileID: 5625975998808201500}
+  m_Layer: 0
+  m_Name: TimeLine_TomarPastillas
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8371137682913153945
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8818161767027814429}
+  m_LocalRotation: {x: -0, y: -0.8060315, z: -0, w: 0.59187263}
+  m_LocalPosition: {x: -5.4907, y: 0.7807121, z: -5.3083}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 3940530329659007556}
+  m_Father: {fileID: 7746466017301702678}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!320 &3048573747455063975
+PlayableDirector:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8818161767027814429}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_PlayableAsset: {fileID: 11400000, guid: 1a714d08b70d370479e64dc6cc672ad5, type: 2}
+  m_InitialState: 0
+  m_WrapMode: 2
+  m_DirectorUpdateMode: 1
+  m_InitialTime: 0
+  m_SceneBindings:
+  - key: {fileID: 3226910171226103329, guid: 1a714d08b70d370479e64dc6cc672ad5, type: 2}
+    value: {fileID: 659037184904751063}
+  m_ExposedReferences:
+    m_References:
+    - 6f3bacb213f7d38498b34ed9efbc0109: {fileID: 2623918668101438917}
+--- !u!114 &5625975998808201500
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8818161767027814429}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee8d1f4a99144ced9f1cd31b89ab4a70, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playableDirector: {fileID: 3048573747455063975}
+  eventToPlayTimeline: {fileID: 0}
+  timelineStarted: {fileID: 0}
+  timelineStopped: {fileID: 0}
+  cinematicStarted:
+    m_PersistentCalls:
+      m_Calls: []
+  cinematicStopped:
+    m_PersistentCalls:
+      m_Calls: []
+  disableCinematicWhenStops: 1
 --- !u!1001 &3948495046665615037
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -286,6 +507,34 @@ PrefabInstance:
     - target: {fileID: 7988790512104387482, guid: c731c257584a8fc4a8bece4309816700, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8718588908896303040, guid: c731c257584a8fc4a8bece4309816700, type: 3}
+      propertyPath: objectPicked.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8718588908896303040, guid: c731c257584a8fc4a8bece4309816700, type: 3}
+      propertyPath: objectPicked.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8718588908896303040, guid: c731c257584a8fc4a8bece4309816700, type: 3}
+      propertyPath: objectPicked.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 5625975998808201500}
+    - target: {fileID: 8718588908896303040, guid: c731c257584a8fc4a8bece4309816700, type: 3}
+      propertyPath: objectPicked.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8718588908896303040, guid: c731c257584a8fc4a8bece4309816700, type: 3}
+      propertyPath: objectPicked.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: PlayTimeLine
+      objectReference: {fileID: 0}
+    - target: {fileID: 8718588908896303040, guid: c731c257584a8fc4a8bece4309816700, type: 3}
+      propertyPath: objectPicked.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: Objects.TimelineActivator, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8718588908896303040, guid: c731c257584a8fc4a8bece4309816700, type: 3}
+      propertyPath: objectPicked.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
