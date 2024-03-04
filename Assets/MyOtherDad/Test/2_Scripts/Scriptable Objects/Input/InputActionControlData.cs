@@ -31,7 +31,7 @@ namespace CustomInput
             else
                 Debug.LogWarning($"Empty {typeof(VoidEventChannelData)} in {this.name}");
             
-            Debug.Log($"Input: {_input.name} , state: {_input.enabled}");
+            // Debug.Log($"Input: {_input.name} , state: {_input.enabled}");
         }
 
         public void DisableInput()
@@ -43,7 +43,7 @@ namespace CustomInput
             else
                 Debug.LogWarning($"Empty {typeof(VoidEventChannelData)} in {this.name}");
             
-            Debug.Log($"Input: {_input.name} , state: {_input.enabled}");
+            // Debug.Log($"Input: {_input.name} , state: {_input.enabled}");
 
         }
     }
