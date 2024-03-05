@@ -18,7 +18,7 @@ namespace Objects
         
         private void Awake()
         {
-            _initialRotation = transform.localEulerAngles;
+            _initialRotation = objectToTween.transform.localEulerAngles;
         }
 
         [UsedImplicitly]

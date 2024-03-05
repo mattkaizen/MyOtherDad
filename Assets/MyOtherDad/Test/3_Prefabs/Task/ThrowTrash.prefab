@@ -80,8 +80,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioSourceToControl: {fileID: 9097721698517269923}
-  getMaxVolumeFromAudioSource: 1
   maxVolume: 1
+  getMaxVolumeFromAudioSource: 1
 --- !u!82 &9097721698517269923
 AudioSource:
   m_ObjectHideFlags: 0
@@ -94,7 +94,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: -2741111179036265061, guid: a65ea052deabe424aa9d270392b9c5eb, type: 2}
   m_audioClip: {fileID: 8300000, guid: 7e87cab02e7d016409ddddab1afc118a, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.7
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -224,8 +224,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioSourceToControl: {fileID: 1886021053457576077}
-  getMaxVolumeFromAudioSource: 1
   maxVolume: 1
+  getMaxVolumeFromAudioSource: 1
 --- !u!82 &1886021053457576077
 AudioSource:
   m_ObjectHideFlags: 0
@@ -238,7 +238,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: -2741111179036265061, guid: a65ea052deabe424aa9d270392b9c5eb, type: 2}
   m_audioClip: {fileID: 8300000, guid: 6ddc0f9a3fcaf674c87de78b738701b3, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.7
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -368,8 +368,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioSourceToControl: {fileID: 9135470492712541489}
-  getMaxVolumeFromAudioSource: 1
   maxVolume: 1
+  getMaxVolumeFromAudioSource: 1
 --- !u!82 &9135470492712541489
 AudioSource:
   m_ObjectHideFlags: 0
@@ -382,7 +382,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: -2741111179036265061, guid: a65ea052deabe424aa9d270392b9c5eb, type: 2}
   m_audioClip: {fileID: 8300000, guid: 5a32a576668eb174ab5eadd0f31834c4, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.7
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -700,6 +700,30 @@ MonoBehaviour:
       - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: DayCycle.DailyCycleController, Assembly-CSharp
         m_MethodName: FadeToNextPeriodPhase
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: EventListener.ConditionalEvent, Assembly-CSharp
+        m_MethodName: AddConditionCompleted
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: Tasks.TaskDisplay, Assembly-CSharp
+        m_MethodName: StrikeThroughText
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

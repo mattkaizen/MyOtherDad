@@ -1,4 +1,5 @@
-﻿using Domain;
+﻿using System;
+using Domain;
 using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.Events;
@@ -11,6 +12,23 @@ namespace Objects.Interactable
         [SerializeField] private UnityEvent turnedOff;
         [SerializeField] private UnityEvent switched;
         [SerializeField] private bool currentState;
+        [SerializeField] private bool setInitialStateOnAwake;
+        [SerializeField] private bool initialState;
+
+        private void Awake()
+        {
+            if (!setInitialStateOnAwake) return;
+            
+            
+            if (initialState)
+            {
+                TurnOn();
+            }
+            else
+            {
+                TurnOff();
+            }
+        }
 
         public void Interact()
         {

@@ -187,6 +187,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: Tasks.TaskDisplay, Assembly-CSharp
+        m_MethodName: StrikeThroughText
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   eventToStartTask: {fileID: 11400000, guid: 2301a5755b526814b841274fbee2635d, type: 2}
   eventToCompleteTask: {fileID: 11400000, guid: 9d82e00a1e1445943ba73baae93e2c6e, type: 2}
   eventToStopTask: {fileID: 0}
