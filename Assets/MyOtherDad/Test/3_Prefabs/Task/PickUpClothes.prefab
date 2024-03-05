@@ -172,6 +172,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7075fe6401a8469a83abdd1641240eb5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  taskCompleted:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: DayCycle.DailyCycleController, Assembly-CSharp
+        m_MethodName: FadeToNextPeriodPhase
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   eventToStartTask: {fileID: 11400000, guid: 2301a5755b526814b841274fbee2635d, type: 2}
   eventToCompleteTask: {fileID: 11400000, guid: 9d82e00a1e1445943ba73baae93e2c6e, type: 2}
   eventToStopTask: {fileID: 0}
@@ -946,7 +961,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b913683481c6c6e43b29e2920774c76b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data: {fileID: 0}
+  data: {fileID: 11400000, guid: b675bada79ddd684d8f4bb9e34a60e3f, type: 2}
   highLightChildren: 0
   highlightOnAwake: 0
 --- !u!1001 &8225318930781360901
