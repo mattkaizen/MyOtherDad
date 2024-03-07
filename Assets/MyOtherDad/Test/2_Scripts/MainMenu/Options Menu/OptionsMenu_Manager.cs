@@ -12,10 +12,11 @@ public class OptionsMenu_Manager : MonoBehaviour
     [SerializeField] Slider sliderAmbient;
     [SerializeField] Slider sliderSFX;
 
-    [SerializeField] AudioMixerGroup ambientMixer;
-    [SerializeField] AudioMixerGroup sfxMixer;
+    [SerializeField] AudioMixer masterMixer;
 
+    [Range (-20, 20)]
     private float ambientVol;
+    [Range (-20, 20)]
     private float sfxVol;
 
     public void TurnOffOptions()
@@ -47,6 +48,16 @@ public class OptionsMenu_Manager : MonoBehaviour
 
     void Update()
     {
-        
+        AmbientVolume();
+    }
+
+    public void AmbientVolume()
+    {
+        masterMixer.SetFloat("AmbientVolume", Mathf.Log10(sliderAmbient.value) * 20);
+    }
+
+    public void SfxVolume() 
+    {
+        masterMixer.SetFloat("SFXVolume", Mathf.Log10(sliderSFX.value) * 20); 
     }
 }
