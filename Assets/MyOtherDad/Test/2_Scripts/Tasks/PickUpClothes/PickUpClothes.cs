@@ -57,7 +57,6 @@ namespace Tasks
             if (eventToCompleteTask != null)
                 eventToCompleteTask.EventRaised -= OnEventToCompleteTaskRaised;
             
-
         }
         
         private void OnEventToCompleteTaskRaised()

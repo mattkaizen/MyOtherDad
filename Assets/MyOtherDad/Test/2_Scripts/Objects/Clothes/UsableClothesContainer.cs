@@ -3,6 +3,7 @@ using Data;
 using Domain;
 using Domain.Objects;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Objects.Clothes
 {
@@ -25,6 +26,8 @@ namespace Objects.Clothes
             set => _hasFreeSpace = value;
         }
 
+        [SerializeField] private UnityEvent containerFull;
+        [SerializeField] private UnityEvent clothesPickedUp;
         [Header("Container settings")] 
         [SerializeField] private List<GameObject> pickedClothes = new List<GameObject>();
         [SerializeField] private IntEventChannelData clothesPicked;
@@ -61,6 +64,7 @@ namespace Objects.Clothes
                     _amountOfClothesPicked++;
                     pickedClothes.Add(objectToCheck);
                     clothesPicked.RaiseEvent(_amountOfClothesPicked);
+                    clothesPickedUp?.Invoke();
                     objectToCheck.SetActive(false);
 
                     Debug.Log($"Task Clothes: Usable Container: Pick Up Clothe { _amountOfClothesPicked}");
@@ -70,6 +74,7 @@ namespace Objects.Clothes
 
                         HasFreeSpace = false;
                         isUsableClothesContainerFull.RaiseEvent();
+                        containerFull?.Invoke();
                     }
                 }
                 else

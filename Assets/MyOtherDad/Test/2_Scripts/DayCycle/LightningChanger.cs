@@ -15,6 +15,8 @@ namespace DayCycle
         [Header("Directional Light Rotation Angles ")]
         [Range(-90, 270)] [SerializeField] private float minAngle = 30f;
         [Range(-90, 270)] [SerializeField] private float maxAngle = 150f;
+        [Range(-90, 270)] [SerializeField] private float directionalLightXRotation = 170f;
+        [Range(-90, 270)] [SerializeField] private float directionalLightZRotation;
         [SerializeField] private Light directionalLight;
         [SerializeField] private LightPresetData preset;
         [SerializeField] private DailyCycleController dailyCycleController;
@@ -36,7 +38,7 @@ namespace DayCycle
             directionalLight.color = preset.DirectionalColor.Evaluate(timePercent);
 
             float rotatedDegrees = minAngle + (timePercent * (maxAngle - minAngle));
-            Vector3 newRotation = new Vector3(rotatedDegrees, 170f, 0);
+            Vector3 newRotation = new Vector3(directionalLightXRotation, rotatedDegrees, directionalLightZRotation);
 
             directionalLight.transform.localRotation = Quaternion.Euler(newRotation);
         }

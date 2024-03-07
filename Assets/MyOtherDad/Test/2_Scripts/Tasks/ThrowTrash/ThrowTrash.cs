@@ -48,6 +48,7 @@ namespace Tasks
         [SerializeField] private float lastItemMaxVerticalMovementThreshold;
         [SerializeField] private float lastItemMinVerticalMovementThreshold;
         [Space]
+        [SerializeField] private UnityEvent taskStarted;
         [SerializeField] private UnityEvent taskCompleted;
 
         private IHoldable _lastItemThrown;
@@ -111,6 +112,7 @@ namespace Tasks
             playerObjectThrower.SetNewThrowForce(newThrowForce);
             trashDetectorTrigger.IsTrashDetectionEnabled = true;
             throwTrashTaskStarted.RaiseEvent();
+            taskStarted?.Invoke();
         }
 
         private void StopTask()

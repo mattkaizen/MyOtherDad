@@ -217,8 +217,8 @@ MonoBehaviour:
           m_BoolArgument: 1
         m_CallState: 2
       - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: DayCycle.DailyCycleController, Assembly-CSharp
-        m_MethodName: FadeToNextPeriodPhase
+        m_TargetAssemblyTypeName: Tasks.TaskDisplay, Assembly-CSharp
+        m_MethodName: StrikeThroughText
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -229,8 +229,20 @@ MonoBehaviour:
           m_BoolArgument: 1
         m_CallState: 2
       - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Tasks.TaskDisplay, Assembly-CSharp
-        m_MethodName: StrikeThroughText
+        m_TargetAssemblyTypeName: EventListener.ConditionalEvent, Assembly-CSharp
+        m_MethodName: AddConditionCompleted
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: Objects.TimelineActivator, Assembly-CSharp
+        m_MethodName: PlayTimeLine
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -294,6 +306,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1997777139569549088, guid: 433872dc986527a43afa1f1cbff377d0, type: 3}
+      propertyPath: cinematicStarted.m_PersistentCalls.m_Calls.Array.size
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 1997777139569549088, guid: 433872dc986527a43afa1f1cbff377d0, type: 3}
+      propertyPath: cinematicStarted.m_PersistentCalls.m_Calls.Array.data[12].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1997777139569549088, guid: 433872dc986527a43afa1f1cbff377d0, type: 3}
       propertyPath: cinematicStarted.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
       objectReference: {fileID: 4852228071172532783}
@@ -337,6 +357,22 @@ PrefabInstance:
       propertyPath: cinematicStarted.m_PersistentCalls.m_Calls.Array.data[11].m_Target
       value: 
       objectReference: {fileID: 4365832760770242479}
+    - target: {fileID: 1997777139569549088, guid: 433872dc986527a43afa1f1cbff377d0, type: 3}
+      propertyPath: cinematicStarted.m_PersistentCalls.m_Calls.Array.data[12].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1997777139569549088, guid: 433872dc986527a43afa1f1cbff377d0, type: 3}
+      propertyPath: cinematicStarted.m_PersistentCalls.m_Calls.Array.data[12].m_MethodName
+      value: FadeToNextPeriodPhase
+      objectReference: {fileID: 0}
+    - target: {fileID: 1997777139569549088, guid: 433872dc986527a43afa1f1cbff377d0, type: 3}
+      propertyPath: cinematicStarted.m_PersistentCalls.m_Calls.Array.data[12].m_TargetAssemblyTypeName
+      value: DayCycle.DailyCycleController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1997777139569549088, guid: 433872dc986527a43afa1f1cbff377d0, type: 3}
+      propertyPath: cinematicStarted.m_PersistentCalls.m_Calls.Array.data[12].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 6119259325249760173, guid: 433872dc986527a43afa1f1cbff377d0, type: 3}
       propertyPath: m_Name
       value: BreakfastCinematic
