@@ -1,5 +1,149 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &728612497406563610
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7651103651496127506}
+  - component: {fileID: 4108882549309636631}
+  - component: {fileID: 4369544103591786700}
+  m_Layer: 0
+  m_Name: AudioSource3D_TraySet
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7651103651496127506
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 728612497406563610}
+  m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: -11.785, y: 0.047, z: 0.376}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7383401519385266492}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4108882549309636631
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 728612497406563610}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e262e4ea551145d89bd6f87e36f80a69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioSourceToControl: {fileID: 4369544103591786700}
+  maxVolume: 1
+  getMaxVolumeFromAudioSource: 1
+--- !u!82 &4369544103591786700
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 728612497406563610}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 2150472569045499774, guid: a65ea052deabe424aa9d270392b9c5eb, type: 2}
+  m_audioClip: {fileID: 8300000, guid: 4db6072c8bd4bfe43ae3723cee906b39, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 0.5
+  MaxDistance: 5
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &880184192617959816
 GameObject:
   m_ObjectHideFlags: 0
@@ -161,6 +305,7 @@ Transform:
   - {fileID: 3369907892948935295}
   - {fileID: 353991094581360558}
   - {fileID: 1168930514823874320}
+  - {fileID: 7651103651496127506}
   m_Father: {fileID: 0}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -243,6 +388,18 @@ MonoBehaviour:
       - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Objects.TimelineActivator, Assembly-CSharp
         m_MethodName: PlayTimeLine
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 4108882549309636631}
+        m_TargetAssemblyTypeName: Audio.AudioSourceController, Assembly-CSharp
+        m_MethodName: Play
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -833,7 +990,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1186056946851761433, guid: 9de899636f483d449b7d3486a3d83d70, type: 3}
       propertyPath: handRepresentationEnabled.m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1186056946851761433, guid: 9de899636f483d449b7d3486a3d83d70, type: 3}
       propertyPath: handRepresentationDisabled.m_PersistentCalls.m_Calls.Array.size
@@ -844,6 +1001,10 @@ PrefabInstance:
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 1186056946851761433, guid: 9de899636f483d449b7d3486a3d83d70, type: 3}
+      propertyPath: handRepresentationEnabled.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1186056946851761433, guid: 9de899636f483d449b7d3486a3d83d70, type: 3}
       propertyPath: handRepresentationDisabled.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 6
       objectReference: {fileID: 0}
@@ -852,11 +1013,19 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 4681261725329291379}
     - target: {fileID: 1186056946851761433, guid: 9de899636f483d449b7d3486a3d83d70, type: 3}
+      propertyPath: handRepresentationEnabled.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 6154057072907529873}
+    - target: {fileID: 1186056946851761433, guid: 9de899636f483d449b7d3486a3d83d70, type: 3}
       propertyPath: handRepresentationDisabled.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 4681261725329291379}
     - target: {fileID: 1186056946851761433, guid: 9de899636f483d449b7d3486a3d83d70, type: 3}
       propertyPath: handRepresentationEnabled.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1186056946851761433, guid: 9de899636f483d449b7d3486a3d83d70, type: 3}
+      propertyPath: handRepresentationEnabled.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1186056946851761433, guid: 9de899636f483d449b7d3486a3d83d70, type: 3}
@@ -868,12 +1037,20 @@ PrefabInstance:
       value: SetActive
       objectReference: {fileID: 0}
     - target: {fileID: 1186056946851761433, guid: 9de899636f483d449b7d3486a3d83d70, type: 3}
+      propertyPath: handRepresentationEnabled.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: PlayByListOrder
+      objectReference: {fileID: 0}
+    - target: {fileID: 1186056946851761433, guid: 9de899636f483d449b7d3486a3d83d70, type: 3}
       propertyPath: handRepresentationDisabled.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: SetActive
       objectReference: {fileID: 0}
     - target: {fileID: 1186056946851761433, guid: 9de899636f483d449b7d3486a3d83d70, type: 3}
       propertyPath: handRepresentationEnabled.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: UnityEngine.GameObject, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 1186056946851761433, guid: 9de899636f483d449b7d3486a3d83d70, type: 3}
+      propertyPath: handRepresentationEnabled.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: Audio.MultipleAudioSourceController, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 1186056946851761433, guid: 9de899636f483d449b7d3486a3d83d70, type: 3}
       propertyPath: handRepresentationDisabled.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
@@ -884,7 +1061,15 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1186056946851761433, guid: 9de899636f483d449b7d3486a3d83d70, type: 3}
+      propertyPath: handRepresentationEnabled.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_BoolArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1186056946851761433, guid: 9de899636f483d449b7d3486a3d83d70, type: 3}
       propertyPath: handRepresentationEnabled.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 1186056946851761433, guid: 9de899636f483d449b7d3486a3d83d70, type: 3}
+      propertyPath: handRepresentationEnabled.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 1186056946851761433, guid: 9de899636f483d449b7d3486a3d83d70, type: 3}
@@ -1022,6 +1207,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b913683481c6c6e43b29e2920774c76b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6154057072907529873 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3221003151575033428, guid: 9de899636f483d449b7d3486a3d83d70, type: 3}
+  m_PrefabInstance: {fileID: 8778877975633922245}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3014517942643d789d2a6f748445cad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &6871677450109008879 stripped

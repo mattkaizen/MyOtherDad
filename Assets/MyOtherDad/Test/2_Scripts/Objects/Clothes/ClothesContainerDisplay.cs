@@ -1,11 +1,13 @@
 ﻿using Data;
 using JetBrains.Annotations;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Objects.Clothes
 {
     public class ClothesContainerDisplay : MonoBehaviour
     {
+        [SerializeField] private UnityEvent closeAnimation;
         [SerializeField] private ItemContainer container;
         [SerializeField] private VoidEventChannelData closeAnimationEnded;
         [SerializeField] private Animator animator;
@@ -35,7 +37,10 @@ namespace Objects.Clothes
         private void PerformCloseAnimation()
         {
             if (animator != null)
+            {
                 animator.SetTrigger(close);
+            }
+            closeAnimation?.Invoke();
         }
 
         [UsedImplicitly]

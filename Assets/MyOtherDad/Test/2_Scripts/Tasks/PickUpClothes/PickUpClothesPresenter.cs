@@ -67,7 +67,6 @@ namespace Tasks
 
         public void DisableHighLightClothesContainer()
         {
-            
             foreach (var highlight in highLightStaticClothesContainer)
             {
                 highlight.DisableHighLightFade();

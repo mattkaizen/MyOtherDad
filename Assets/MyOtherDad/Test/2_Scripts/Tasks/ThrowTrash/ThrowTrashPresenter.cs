@@ -53,7 +53,6 @@ namespace Tasks
 
         private void OnThrowTrashTaskCompleted(int score)
         {
-            Debug.Log("Throw Trash Task Completed");
             throwTrash.HasAllTrashOnHand -= OnHasAllTrashOnHand;
             disableProjectileTrajectory.RaiseEvent();
 
@@ -61,7 +60,6 @@ namespace Tasks
 
             if (selectedSound != null)
             {
-                Debug.Log("Throw Trash Task Completed SOUND");
                 selectedSound.Play();
             }
         }
