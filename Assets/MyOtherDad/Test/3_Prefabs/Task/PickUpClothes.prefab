@@ -205,7 +205,7 @@ MonoBehaviour:
   pickUpClothesTaskStarted: {fileID: 11400000, guid: 483cd2ff359617b4e88497f3a5302fb1, type: 2}
   pickUpClothesTaskStopped: {fileID: 11400000, guid: 7d9fa698e8305694eb62fbff0969cabb, type: 2}
   pickUpClothesTaskCompleted: {fileID: 11400000, guid: 1fe43dca8de4e0e45a74f7d519bc3ccb, type: 2}
-  requiredAmountOfClothesToPick: 5
+  requiredAmountOfClothesToPick: 9
   clothesContainer: {fileID: 1454603448985397442}
 --- !u!114 &3192543905206901619
 MonoBehaviour:
@@ -372,7 +372,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5403362980967483144, guid: 61a578396b387b2478c81d6ec3f95f9b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -11.793
+      value: -9.522
       objectReference: {fileID: 0}
     - target: {fileID: 5403362980967483144, guid: 61a578396b387b2478c81d6ec3f95f9b, type: 3}
       propertyPath: m_LocalPosition.y
@@ -380,7 +380,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5403362980967483144, guid: 61a578396b387b2478c81d6ec3f95f9b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.193
+      value: 0.056
       objectReference: {fileID: 0}
     - target: {fileID: 5403362980967483144, guid: 61a578396b387b2478c81d6ec3f95f9b, type: 3}
       propertyPath: m_LocalRotation.w
@@ -664,7 +664,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5403362980967483144, guid: 61a578396b387b2478c81d6ec3f95f9b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -11.853
+      value: -10.478
       objectReference: {fileID: 0}
     - target: {fileID: 5403362980967483144, guid: 61a578396b387b2478c81d6ec3f95f9b, type: 3}
       propertyPath: m_LocalPosition.y
@@ -672,7 +672,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5403362980967483144, guid: 61a578396b387b2478c81d6ec3f95f9b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.323
+      value: 1.431
       objectReference: {fileID: 0}
     - target: {fileID: 5403362980967483144, guid: 61a578396b387b2478c81d6ec3f95f9b, type: 3}
       propertyPath: m_LocalRotation.w
@@ -730,7 +730,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2706640453243783936, guid: 75d664b091c34874689e75d997427e1d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.801
+      value: -6.713
       objectReference: {fileID: 0}
     - target: {fileID: 2706640453243783936, guid: 75d664b091c34874689e75d997427e1d, type: 3}
       propertyPath: m_LocalPosition.y
@@ -738,23 +738,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2706640453243783936, guid: 75d664b091c34874689e75d997427e1d, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.522
+      value: 1.237
       objectReference: {fileID: 0}
     - target: {fileID: 2706640453243783936, guid: 75d664b091c34874689e75d997427e1d, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.9239797
       objectReference: {fileID: 0}
     - target: {fileID: 2706640453243783936, guid: 75d664b091c34874689e75d997427e1d, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2706640453243783936, guid: 75d664b091c34874689e75d997427e1d, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: -0.38244155
       objectReference: {fileID: 0}
     - target: {fileID: 2706640453243783936, guid: 75d664b091c34874689e75d997427e1d, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2706640453243783936, guid: 75d664b091c34874689e75d997427e1d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -762,7 +762,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2706640453243783936, guid: 75d664b091c34874689e75d997427e1d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: -44.97
       objectReference: {fileID: 0}
     - target: {fileID: 2706640453243783936, guid: 75d664b091c34874689e75d997427e1d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -913,11 +913,23 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6671108548399051569, guid: 0296115d94ce8ec4f87b620c3c4d4b5d, type: 3}
+      propertyPath: maxContainerCapacity
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 6671108548399051569, guid: 0296115d94ce8ec4f87b620c3c4d4b5d, type: 3}
       propertyPath: clothesPickedUp.m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6671108548399051569, guid: 0296115d94ce8ec4f87b620c3c4d4b5d, type: 3}
       propertyPath: clothesPickedUp.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6671108548399051569, guid: 0296115d94ce8ec4f87b620c3c4d4b5d, type: 3}
+      propertyPath: clothesPickedUp.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6671108548399051569, guid: 0296115d94ce8ec4f87b620c3c4d4b5d, type: 3}
+      propertyPath: clothesPickedUp.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6671108548399051569, guid: 0296115d94ce8ec4f87b620c3c4d4b5d, type: 3}
@@ -925,7 +937,23 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6671108548399051569, guid: 0296115d94ce8ec4f87b620c3c4d4b5d, type: 3}
+      propertyPath: clothesPickedUp.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6671108548399051569, guid: 0296115d94ce8ec4f87b620c3c4d4b5d, type: 3}
+      propertyPath: clothesPickedUp.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6671108548399051569, guid: 0296115d94ce8ec4f87b620c3c4d4b5d, type: 3}
       propertyPath: clothesPickedUp.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: AddConditionCompleted
+      objectReference: {fileID: 0}
+    - target: {fileID: 6671108548399051569, guid: 0296115d94ce8ec4f87b620c3c4d4b5d, type: 3}
+      propertyPath: clothesPickedUp.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: AddConditionCompleted
+      objectReference: {fileID: 0}
+    - target: {fileID: 6671108548399051569, guid: 0296115d94ce8ec4f87b620c3c4d4b5d, type: 3}
+      propertyPath: clothesPickedUp.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
       value: AddConditionCompleted
       objectReference: {fileID: 0}
     - target: {fileID: 6671108548399051569, guid: 0296115d94ce8ec4f87b620c3c4d4b5d, type: 3}
@@ -933,7 +961,23 @@ PrefabInstance:
       value: EventListener.ConditionalEvent, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 6671108548399051569, guid: 0296115d94ce8ec4f87b620c3c4d4b5d, type: 3}
+      propertyPath: clothesPickedUp.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: EventListener.ConditionalEvent, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6671108548399051569, guid: 0296115d94ce8ec4f87b620c3c4d4b5d, type: 3}
+      propertyPath: clothesPickedUp.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
+      value: EventListener.ConditionalEvent, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6671108548399051569, guid: 0296115d94ce8ec4f87b620c3c4d4b5d, type: 3}
       propertyPath: clothesPickedUp.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 6671108548399051569, guid: 0296115d94ce8ec4f87b620c3c4d4b5d, type: 3}
+      propertyPath: clothesPickedUp.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 6671108548399051569, guid: 0296115d94ce8ec4f87b620c3c4d4b5d, type: 3}
+      propertyPath: clothesPickedUp.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 6680549375241981248, guid: 0296115d94ce8ec4f87b620c3c4d4b5d, type: 3}

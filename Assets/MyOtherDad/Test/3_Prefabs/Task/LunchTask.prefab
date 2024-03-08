@@ -173,9 +173,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 577609398575529572}
+  - component: {fileID: 550969218949253185}
   - component: {fileID: 781429261045763059}
   m_Layer: 0
-  m_Name: AudioSource3D_Outside
+  m_Name: AudioSource3D_VA_Neighbors
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -189,13 +190,28 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3337562078006539070}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -7.174, y: 0, z: -9.76}
+  m_LocalPosition: {x: -7.174, y: -2.5, z: -9.76}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 181576506730867593}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &550969218949253185
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3337562078006539070}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e262e4ea551145d89bd6f87e36f80a69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioSourceToControl: {fileID: 781429261045763059}
+  maxVolume: 1
+  getMaxVolumeFromAudioSource: 1
 --- !u!82 &781429261045763059
 AudioSource:
   m_ObjectHideFlags: 0
@@ -205,10 +221,10 @@ AudioSource:
   m_GameObject: {fileID: 3337562078006539070}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -2741111179036265061, guid: a65ea052deabe424aa9d270392b9c5eb, type: 2}
+  m_audioClip: {fileID: 8300000, guid: 883894ddf6fe57b4d8b419a4c1bc11b9, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.6
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -530,6 +546,66 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 181576506730867593}
     m_Modifications:
+    - target: {fileID: 1093175128299549910, guid: 9de899636f483d449b7d3486a3d83d70, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 99abffe45796e5c47a09a4efcf076939, type: 2}
+    - target: {fileID: 1093175128299549910, guid: 9de899636f483d449b7d3486a3d83d70, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 99abffe45796e5c47a09a4efcf076939, type: 2}
+    - target: {fileID: 1093175128299549910, guid: 9de899636f483d449b7d3486a3d83d70, type: 3}
+      propertyPath: m_Materials.Array.data[2]
+      value: 
+      objectReference: {fileID: 2100000, guid: 99abffe45796e5c47a09a4efcf076939, type: 2}
+    - target: {fileID: 1453326277098968323, guid: 9de899636f483d449b7d3486a3d83d70, type: 3}
+      propertyPath: m_Name
+      value: Pan con queso Top
+      objectReference: {fileID: 0}
+    - target: {fileID: 1618027095607838303, guid: 9de899636f483d449b7d3486a3d83d70, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1618027095607838303, guid: 9de899636f483d449b7d3486a3d83d70, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 99abffe45796e5c47a09a4efcf076939, type: 2}
+    - target: {fileID: 1673556030224686420, guid: 9de899636f483d449b7d3486a3d83d70, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 99abffe45796e5c47a09a4efcf076939, type: 2}
+    - target: {fileID: 3333571697441214905, guid: 9de899636f483d449b7d3486a3d83d70, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 99abffe45796e5c47a09a4efcf076939, type: 2}
+    - target: {fileID: 4350726297045965648, guid: 9de899636f483d449b7d3486a3d83d70, type: 3}
+      propertyPath: objectRigidbody
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4630536424278537418, guid: 9de899636f483d449b7d3486a3d83d70, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 99abffe45796e5c47a09a4efcf076939, type: 2}
+    - target: {fileID: 4630536424278537418, guid: 9de899636f483d449b7d3486a3d83d70, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 99abffe45796e5c47a09a4efcf076939, type: 2}
+    - target: {fileID: 4630536424278537418, guid: 9de899636f483d449b7d3486a3d83d70, type: 3}
+      propertyPath: m_Materials.Array.data[2]
+      value: 
+      objectReference: {fileID: 2100000, guid: 99abffe45796e5c47a09a4efcf076939, type: 2}
+    - target: {fileID: 5091843813752207481, guid: 9de899636f483d449b7d3486a3d83d70, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 99abffe45796e5c47a09a4efcf076939, type: 2}
+    - target: {fileID: 8441951896744799406, guid: 9de899636f483d449b7d3486a3d83d70, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8441951896744799406, guid: 9de899636f483d449b7d3486a3d83d70, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 99abffe45796e5c47a09a4efcf076939, type: 2}
     - target: {fileID: 348653486278262498, guid: b78c805c3d471e24b931fade72e68fca, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -698,66 +774,6 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[2]
       value: 
       objectReference: {fileID: 2100000, guid: 99abffe45796e5c47a09a4efcf076939, type: 2}
-    - target: {fileID: 1093175128299549910, guid: 9de899636f483d449b7d3486a3d83d70, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 99abffe45796e5c47a09a4efcf076939, type: 2}
-    - target: {fileID: 1093175128299549910, guid: 9de899636f483d449b7d3486a3d83d70, type: 3}
-      propertyPath: m_Materials.Array.data[1]
-      value: 
-      objectReference: {fileID: 2100000, guid: 99abffe45796e5c47a09a4efcf076939, type: 2}
-    - target: {fileID: 1093175128299549910, guid: 9de899636f483d449b7d3486a3d83d70, type: 3}
-      propertyPath: m_Materials.Array.data[2]
-      value: 
-      objectReference: {fileID: 2100000, guid: 99abffe45796e5c47a09a4efcf076939, type: 2}
-    - target: {fileID: 1453326277098968323, guid: 9de899636f483d449b7d3486a3d83d70, type: 3}
-      propertyPath: m_Name
-      value: Pan con queso Top
-      objectReference: {fileID: 0}
-    - target: {fileID: 1618027095607838303, guid: 9de899636f483d449b7d3486a3d83d70, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1618027095607838303, guid: 9de899636f483d449b7d3486a3d83d70, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 99abffe45796e5c47a09a4efcf076939, type: 2}
-    - target: {fileID: 1673556030224686420, guid: 9de899636f483d449b7d3486a3d83d70, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 99abffe45796e5c47a09a4efcf076939, type: 2}
-    - target: {fileID: 3333571697441214905, guid: 9de899636f483d449b7d3486a3d83d70, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 99abffe45796e5c47a09a4efcf076939, type: 2}
-    - target: {fileID: 4350726297045965648, guid: 9de899636f483d449b7d3486a3d83d70, type: 3}
-      propertyPath: objectRigidbody
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 4630536424278537418, guid: 9de899636f483d449b7d3486a3d83d70, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 99abffe45796e5c47a09a4efcf076939, type: 2}
-    - target: {fileID: 4630536424278537418, guid: 9de899636f483d449b7d3486a3d83d70, type: 3}
-      propertyPath: m_Materials.Array.data[1]
-      value: 
-      objectReference: {fileID: 2100000, guid: 99abffe45796e5c47a09a4efcf076939, type: 2}
-    - target: {fileID: 4630536424278537418, guid: 9de899636f483d449b7d3486a3d83d70, type: 3}
-      propertyPath: m_Materials.Array.data[2]
-      value: 
-      objectReference: {fileID: 2100000, guid: 99abffe45796e5c47a09a4efcf076939, type: 2}
-    - target: {fileID: 5091843813752207481, guid: 9de899636f483d449b7d3486a3d83d70, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 99abffe45796e5c47a09a4efcf076939, type: 2}
-    - target: {fileID: 8441951896744799406, guid: 9de899636f483d449b7d3486a3d83d70, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8441951896744799406, guid: 9de899636f483d449b7d3486a3d83d70, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 99abffe45796e5c47a09a4efcf076939, type: 2}
     m_RemovedComponents:
     - {fileID: 7628712945522407464, guid: b78c805c3d471e24b931fade72e68fca, type: 3}
     - {fileID: 947639536292084728, guid: b78c805c3d471e24b931fade72e68fca, type: 3}
@@ -897,6 +913,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 181576506730867593}
     m_Modifications:
+    - target: {fileID: 1453326277098968323, guid: 9de899636f483d449b7d3486a3d83d70, type: 3}
+      propertyPath: m_Name
+      value: Pan con queso Top
+      objectReference: {fileID: 0}
+    - target: {fileID: 4350726297045965648, guid: 9de899636f483d449b7d3486a3d83d70, type: 3}
+      propertyPath: objectRigidbody
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 1045996118252156952, guid: b78c805c3d471e24b931fade72e68fca, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -1000,14 +1024,6 @@ PrefabInstance:
     - target: {fileID: 8270591465637779403, guid: b78c805c3d471e24b931fade72e68fca, type: 3}
       propertyPath: m_IsActive
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1453326277098968323, guid: 9de899636f483d449b7d3486a3d83d70, type: 3}
-      propertyPath: m_Name
-      value: Pan con queso Top
-      objectReference: {fileID: 0}
-    - target: {fileID: 4350726297045965648, guid: 9de899636f483d449b7d3486a3d83d70, type: 3}
-      propertyPath: objectRigidbody
-      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7628712945522407464, guid: b78c805c3d471e24b931fade72e68fca, type: 3}
@@ -1387,6 +1403,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6021676425189116475, guid: 3350d67cf3cd8e649a95d591d1546eca, type: 3}
+      propertyPath: cinematicStarted.m_PersistentCalls.m_Calls.Array.data[12].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6021676425189116475, guid: 3350d67cf3cd8e649a95d591d1546eca, type: 3}
       propertyPath: cinematicStarted.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
       objectReference: {fileID: 2254150293542071240}
@@ -1433,7 +1453,7 @@ PrefabInstance:
     - target: {fileID: 6021676425189116475, guid: 3350d67cf3cd8e649a95d591d1546eca, type: 3}
       propertyPath: cinematicStarted.m_PersistentCalls.m_Calls.Array.data[12].m_Target
       value: 
-      objectReference: {fileID: 781429261045763059}
+      objectReference: {fileID: 550969218949253185}
     - target: {fileID: 6021676425189116475, guid: 3350d67cf3cd8e649a95d591d1546eca, type: 3}
       propertyPath: cinematicStarted.m_PersistentCalls.m_Calls.Array.data[13].m_Target
       value: 
@@ -1474,6 +1494,22 @@ PrefabInstance:
       propertyPath: cinematicStarted.m_PersistentCalls.m_Calls.Array.data[22].m_Target
       value: 
       objectReference: {fileID: 8430093869246407810}
+    - target: {fileID: 6021676425189116475, guid: 3350d67cf3cd8e649a95d591d1546eca, type: 3}
+      propertyPath: cinematicStarted.m_PersistentCalls.m_Calls.Array.data[12].m_MethodName
+      value: Play
+      objectReference: {fileID: 0}
+    - target: {fileID: 6021676425189116475, guid: 3350d67cf3cd8e649a95d591d1546eca, type: 3}
+      propertyPath: cinematicStarted.m_PersistentCalls.m_Calls.Array.data[12].m_TargetAssemblyTypeName
+      value: Audio.AudioSourceController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6021676425189116475, guid: 3350d67cf3cd8e649a95d591d1546eca, type: 3}
+      propertyPath: cinematicStarted.m_PersistentCalls.m_Calls.Array.data[12].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6021676425189116475, guid: 3350d67cf3cd8e649a95d591d1546eca, type: 3}
+      propertyPath: cinematicStarted.m_PersistentCalls.m_Calls.Array.data[12].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 6335491695775079022, guid: 3350d67cf3cd8e649a95d591d1546eca, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -1509,6 +1545,10 @@ PrefabInstance:
     - target: {fileID: 8565371128148894298, guid: 3350d67cf3cd8e649a95d591d1546eca, type: 3}
       propertyPath: m_Name
       value: LunchCinematic
+      objectReference: {fileID: 0}
+    - target: {fileID: 8565371128148894298, guid: 3350d67cf3cd8e649a95d591d1546eca, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

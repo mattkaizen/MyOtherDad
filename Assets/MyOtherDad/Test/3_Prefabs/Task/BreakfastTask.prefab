@@ -41,7 +41,7 @@ AudioSource:
   m_GameObject: {fileID: 880184192617959816}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -2741111179036265061, guid: a65ea052deabe424aa9d270392b9c5eb, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -897,7 +897,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3700530421614090269, guid: 9de899636f483d449b7d3486a3d83d70, type: 3}
       propertyPath: objectPicked.m_PersistentCalls.m_Calls.Array.size
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3700530421614090269, guid: 9de899636f483d449b7d3486a3d83d70, type: 3}
       propertyPath: objectPicked.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
@@ -906,10 +906,18 @@ PrefabInstance:
     - target: {fileID: 3700530421614090269, guid: 9de899636f483d449b7d3486a3d83d70, type: 3}
       propertyPath: objectPicked.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 4681261725329291379}
+      objectReference: {fileID: 0}
     - target: {fileID: 3700530421614090269, guid: 9de899636f483d449b7d3486a3d83d70, type: 3}
       propertyPath: objectPicked.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: 
+      value: AddConditionCompleted
+      objectReference: {fileID: 0}
+    - target: {fileID: 3700530421614090269, guid: 9de899636f483d449b7d3486a3d83d70, type: 3}
+      propertyPath: objectPicked.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: EventListener.ConditionalEvent, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 3700530421614090269, guid: 9de899636f483d449b7d3486a3d83d70, type: 3}
+      propertyPath: objectPicked.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4350726297045965648, guid: 9de899636f483d449b7d3486a3d83d70, type: 3}
       propertyPath: objectThrown.m_PersistentCalls.m_Calls.Array.data[0].m_Target

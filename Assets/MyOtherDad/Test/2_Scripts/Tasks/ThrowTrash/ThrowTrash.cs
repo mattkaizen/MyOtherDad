@@ -23,6 +23,7 @@ namespace Tasks
         public VoidEventChannelData ThrowTrashTaskPreStarted => throwTrashTaskPreStarted;
         public int MaxAmountOfTrashToScore => amountOfTrashToPick;
 
+
         [Header("Event Channels to listen")]
         [SerializeField] private VoidEventChannelData eventToPreStartTask;
         [SerializeField] private VoidEventChannelData eventToStartTask;
@@ -50,6 +51,8 @@ namespace Tasks
         [Space]
         [SerializeField] private UnityEvent taskStarted;
         [SerializeField] private UnityEvent taskCompleted;
+        [SerializeField] private UnityEvent trashPicked;
+        [SerializeField] private UnityEvent allTrashPicked;
 
         private IHoldable _lastItemThrown;
 
@@ -153,8 +156,13 @@ namespace Tasks
         {
             if (!PlayerHasTrashOnHand(item)) return;
 
+            
             _amountOfTrashPicked++;
+            trashPicked?.Invoke();
 
+            if(PlayerHasTargetAmountOfTrashOnHand())
+                allTrashPicked?.Invoke();
+            
             HasAllTrashOnHand?.Invoke(PlayerHasTargetAmountOfTrashOnHand());
         }
 
@@ -167,6 +175,8 @@ namespace Tasks
                 _amountOfTrashPicked++;
             }
 
+            if(PlayerHasTargetAmountOfTrashOnHand())
+                allTrashPicked?.Invoke();
             HasAllTrashOnHand?.Invoke(PlayerHasTargetAmountOfTrashOnHand());
         }
         
