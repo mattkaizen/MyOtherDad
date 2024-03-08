@@ -13,13 +13,11 @@ namespace Player
         public void EnableCursorImage()
         {
            Cursor.visible = true;
-           Debug.Log("Enable cursor");
         }
         
         public void DisableCursorImage()
         {
             Cursor.visible = false;
-            Debug.Log("Disable cursor");
         }
         
         public void ChangeCursorImage()
@@ -36,7 +34,6 @@ namespace Player
             }
 
             Cursor.SetCursor(texture2D, newHotspot, cursorMode);
-            Debug.Log("Change cursor");
         }
     }
 }

@@ -2,8 +2,10 @@
 using Data;
 using DG.Tweening;
 using Domain;
+using Player;
 using UI;
 using UnityEngine;
+using UnityEngine.Rendering.LookDev;
 using UnityEngine.UI;
 
 namespace Settings.UI
@@ -19,8 +21,9 @@ namespace Settings.UI
         [SerializeField] private CrosshairData defaultCrosshair;
         [SerializeField] private float fadeOutDuration;
         [SerializeField] private float fadeInDuration;
-        [Header("Player Inventory")]
+        [Header("Player dependencies")]
         [SerializeField] private PlayerInventory inventory;
+        [SerializeField] private HandController handController;
         [Header("Listen to Event Channels")]
         [SerializeField] private VoidEventChannelData enableCrosshair;
         [SerializeField] private VoidEventChannelData hideCrosshair;
@@ -116,6 +119,17 @@ namespace Settings.UI
                             SetCrossHair(interactiveUI.GetInteractionUI());
                         }
                     }
+                    else if (interactiveUI is IHandItemInteractiveUI handItemInteractiveUI)
+                    {
+                        if (TryHandleHandItemInteractiveUI(handItemInteractiveUI))
+                        {
+                            SetCrossHair(interactiveUI.GetInteractionUI());
+                        }
+                        else
+                        {
+                            SetCrossHair(interactiveUI.GetInteractionUI());
+                        }
+                    }
                     else
                     {
                         SetCrossHair(interactiveUI.GetInteractionUI());
@@ -131,7 +145,7 @@ namespace Settings.UI
                 SetCrossHair(defaultCrosshair);
             }
         }
-        
+
         private bool TryHandleInventoryInteractiveUI(IInventoryInteractiveUI interactiveUI)
         {
             ItemData requiredItem = interactiveUI.RequiredItemToSet;
@@ -141,6 +155,23 @@ namespace Settings.UI
                 return true;
             }
 
+            return false;
+        }
+
+        private bool TryHandleHandItemInteractiveUI(IHandItemInteractiveUI handItemInteractiveUI)
+        {
+            ItemData requiredItem = handItemInteractiveUI.RequiredItemToInteract;
+
+            if (handController.CurrentItemOnHand == null) return false;
+            
+            if (handController.CurrentItemOnHand.WorldRepresentation.TryGetComponent<IObjectData>(out var objectData))
+            {
+                if (objectData.Data == requiredItem)
+                {
+                    handItemInteractiveUI.TryInteractWithItem(requiredItem);
+                    return true;
+                }
+            }
             return false;
         }
 

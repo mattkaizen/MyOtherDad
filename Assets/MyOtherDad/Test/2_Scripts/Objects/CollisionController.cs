@@ -23,9 +23,6 @@ namespace Objects
 
         private void OnCollisionEnter(Collision collision)
         {
-            Debug.Log($"Collision {collision.gameObject.name}");
-            Debug.Log($"{gameObject.name} Collision enter, velocity {collisionRigidbody.velocity}");
-
             if (!hasCollisionWithPlayer)
             {
                 if (collision.gameObject.TryGetComponent<PlayerController>(out var playerController)) return;
