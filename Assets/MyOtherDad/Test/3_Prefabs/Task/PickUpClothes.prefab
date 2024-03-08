@@ -1072,6 +1072,30 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6671108548399051569, guid: 0296115d94ce8ec4f87b620c3c4d4b5d, type: 3}
+      propertyPath: containerFull.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6671108548399051569, guid: 0296115d94ce8ec4f87b620c3c4d4b5d, type: 3}
+      propertyPath: containerFull.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6671108548399051569, guid: 0296115d94ce8ec4f87b620c3c4d4b5d, type: 3}
+      propertyPath: containerFull.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6671108548399051569, guid: 0296115d94ce8ec4f87b620c3c4d4b5d, type: 3}
+      propertyPath: containerFull.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: TryShowDialogue
+      objectReference: {fileID: 0}
+    - target: {fileID: 6671108548399051569, guid: 0296115d94ce8ec4f87b620c3c4d4b5d, type: 3}
+      propertyPath: containerFull.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: Dialogue.DialogueSystem, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6671108548399051569, guid: 0296115d94ce8ec4f87b620c3c4d4b5d, type: 3}
+      propertyPath: containerFull.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: Dialogue.DialogueEntry, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 7594758662141690060, guid: 0296115d94ce8ec4f87b620c3c4d4b5d, type: 3}
       propertyPath: m_Name
       value: AudioSource3D_Impact_4

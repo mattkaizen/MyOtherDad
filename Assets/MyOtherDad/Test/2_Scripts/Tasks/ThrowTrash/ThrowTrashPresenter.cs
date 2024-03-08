@@ -2,12 +2,17 @@
 using Audio;
 using Data;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Tasks
 {
     [DefaultExecutionOrder(-1)]
     public class ThrowTrashPresenter : MonoBehaviour
     {
+        [SerializeField] private UnityEvent maxScore;
+        [SerializeField] private UnityEvent moreThanHalfScore;
+        [SerializeField] private UnityEvent lessThanHalfScore;
+        [Space]
         [SerializeField] private ThrowTrash throwTrash;
         [SerializeField] private HighlightObjectEffect highLightBed;
         [SerializeField] private List<HighlightObjectEffect> trashToHighlight = new List<HighlightObjectEffect>();
@@ -56,6 +61,7 @@ namespace Tasks
             throwTrash.HasAllTrashOnHand -= OnHasAllTrashOnHand;
             disableProjectileTrajectory.RaiseEvent();
 
+            EnableScoreEvents(score);
             AudioSourceController selectedSound = SelectSoundByScore(score);
 
             if (selectedSound != null)
@@ -115,6 +121,26 @@ namespace Tasks
                 return soundHalfOrMoreScore;
 
             return soundHalfOrLessScore;
+        }
+
+        private void EnableScoreEvents(int score)
+        {
+            if (score >= throwTrash.MaxAmountOfTrashToScore)
+            {
+                maxScore?.Invoke();
+                return;
+            }
+
+            float halfOfMaxScore = throwTrash.MaxAmountOfTrashToScore * 0.5f;
+
+            if (score >= halfOfMaxScore)
+            {
+                moreThanHalfScore?.Invoke();
+                return;
+            }
+
+            lessThanHalfScore?.Invoke();
+
         }
     }
 }
