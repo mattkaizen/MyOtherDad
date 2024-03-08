@@ -1,12 +1,27 @@
+using System;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
 public class MainMenu_Manager : MonoBehaviour
 {
+    [SerializeField] private UnityEvent awakeEvent; 
     [SerializeField] int sceneIndex;
     [SerializeField] GameObject optionsMenu;
 
-    [SerializeField] Animator myAnim; 
+    [SerializeField] Animator myAnim;
+
+    private void Awake()
+    {
+        Application.targetFrameRate = 60;
+        InitializeSettings();
+    }
+
+    private void InitializeSettings()
+    {
+        awakeEvent?.Invoke();
+    }
+    
 
     public void LoadScene()
     {
