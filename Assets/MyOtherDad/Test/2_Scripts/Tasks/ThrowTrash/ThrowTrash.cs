@@ -53,6 +53,7 @@ namespace Tasks
         [SerializeField] private UnityEvent taskCompleted;
         [SerializeField] private UnityEvent trashPicked;
         [SerializeField] private UnityEvent allTrashPicked;
+        [SerializeField] private UnityEvent hasNotAllTrashOnHand;
 
         private IHoldable _lastItemThrown;
 
@@ -162,6 +163,10 @@ namespace Tasks
 
             if(PlayerHasTargetAmountOfTrashOnHand())
                 allTrashPicked?.Invoke();
+            else
+            {
+                hasNotAllTrashOnHand?.Invoke();
+            }
             
             HasAllTrashOnHand?.Invoke(PlayerHasTargetAmountOfTrashOnHand());
         }
@@ -177,6 +182,10 @@ namespace Tasks
 
             if(PlayerHasTargetAmountOfTrashOnHand())
                 allTrashPicked?.Invoke();
+            else
+            {
+                hasNotAllTrashOnHand?.Invoke();
+            }
             HasAllTrashOnHand?.Invoke(PlayerHasTargetAmountOfTrashOnHand());
         }
         

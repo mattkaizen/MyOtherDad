@@ -60,6 +60,13 @@ namespace Dialogue
             dialogueUI.TranslationName = dialogue.Data.TranslationName;
         }
 
+        [UsedImplicitly]
+        public void FinishCurrentDialogueEntry()
+        {
+            _isShowingDialogueEntry = false;
+            DialogueEntryFinished?.Invoke();
+        }
+
         private void StartShowDialogueEntryRoutine(bool isFirstDialogueEntry)
         {
             _showDialogueEntryRoutine = ShowDialogueEntryRoutine(_currentDialogueEntry, isFirstDialogueEntry);
@@ -67,7 +74,7 @@ namespace Dialogue
             StartCoroutine(_showDialogueEntryRoutine);
         }
 
-        private void StopShowDialogueEntryRoutine()
+        public void StopShowDialogueEntryRoutine()
         {
             if (_showDialogueEntryRoutine != null)
                 StopCoroutine(_showDialogueEntryRoutine);
