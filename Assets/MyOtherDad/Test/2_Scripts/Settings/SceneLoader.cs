@@ -11,6 +11,12 @@ namespace Settings
         {
             SceneManager.LoadScene(sceneName);
         }
+        
+        [UsedImplicitly]
+        public void LoadScene(int sceneIndex)
+        {
+            SceneManager.LoadScene(sceneIndex);
+        }
 
         [UsedImplicitly]
         public void ExitGame()

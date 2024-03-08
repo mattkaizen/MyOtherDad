@@ -135,6 +135,7 @@ GameObject:
   - component: {fileID: 42804245}
   - component: {fileID: 42804244}
   - component: {fileID: 42804243}
+  - component: {fileID: 42804246}
   m_Layer: 5
   m_Name: MenuBackground_Animation
   m_TagString: Untagged
@@ -154,7 +155,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1569399401}
+  m_Father: {fileID: 661475504}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -197,7 +198,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -221,6 +222,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 42804241}
   m_CullTransparentMesh: 1
+--- !u!114 &42804246
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 42804241}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c08f81dbf295f84cbe66ef5bdaa5dc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneIndex: 1
+  optionsMenu: {fileID: 732773520}
+  myAnim: {fileID: 42804243}
 --- !u!1 &77969013
 GameObject:
   m_ObjectHideFlags: 0
@@ -764,6 +780,7 @@ RectTransform:
   - {fileID: 2001599297}
   - {fileID: 1468048572}
   - {fileID: 1074114718}
+  - {fileID: 42804242}
   - {fileID: 732773521}
   m_Father: {fileID: 2142091356}
   m_RootOrder: -1
@@ -3036,8 +3053,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 42804242}
+  m_Children: []
   m_Father: {fileID: 661475504}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4062,8 +4078,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 661475507}
-        m_TargetAssemblyTypeName: MainMenu_SceneLoader, Assembly-CSharp
-        m_MethodName: LoadScene
+        m_TargetAssemblyTypeName: MainMenu_Manager, Assembly-CSharp
+        m_MethodName: PlayAnimation
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4101,7 +4117,7 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
-  m_UseSpriteMesh: 0
+  m_UseSpriteMesh: 1
   m_PixelsPerUnitMultiplier: 1
 --- !u!222 &2001599300
 CanvasRenderer:

@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -11,7 +10,11 @@ public class MainMenu_Manager : MonoBehaviour
 
     public void LoadScene()
     {
-        StartCoroutine(StartScene());
+        SceneManager.LoadScene(sceneIndex);
+    }
+    public void PlayAnimation()
+    {
+        myAnim.SetBool("Play", true);
     }
 
     public void QuitGame()
@@ -30,10 +33,4 @@ public class MainMenu_Manager : MonoBehaviour
         optionsMenu.SetActive(false);
     }
 
-    IEnumerator StartScene()
-    {
-        myAnim.SetBool("Play", true);
-        yield return new WaitForSeconds(1.5f);
-        SceneManager.LoadScene(sceneIndex);
-    }
 }
