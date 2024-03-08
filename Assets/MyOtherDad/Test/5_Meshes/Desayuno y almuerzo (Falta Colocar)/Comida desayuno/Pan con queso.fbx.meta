@@ -3,9 +3,24 @@ guid: 5315ba6d77c95034ca27b21d43d3c9f3
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Borde pan
+    second: {fileID: 2100000, guid: de58a530e83cfd0408688503ac79bf46, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Queso
+    second: {fileID: 2100000, guid: 44af240cd9142024fa3b9e63020d2b3f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Relleno
+    second: {fileID: 2100000, guid: 610c9b3b18c26c74db6ee5b8e8e93ea6, type: 2}
   materials:
-    materialImportMode: 2
+    materialImportMode: 1
     materialName: 0
     materialSearch: 1
     materialLocation: 1

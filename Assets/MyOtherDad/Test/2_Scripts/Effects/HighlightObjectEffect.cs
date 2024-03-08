@@ -26,7 +26,7 @@ public class HighlightObjectEffect : MonoBehaviour
     {
         if (highLightChildren)
         {
-            if (TryGetComponent<Renderer>(out var parentRenderer))
+            if (gameObject.TryGetComponent<Renderer>(out var parentRenderer))
             {
                 foreach (var material in parentRenderer.materials)
                 {
@@ -56,7 +56,7 @@ public class HighlightObjectEffect : MonoBehaviour
         else
         {
             
-            if (TryGetComponent<Renderer>(out var parentRenderer))
+            if (gameObject.TryGetComponent<Renderer>(out var parentRenderer))
             {
                 foreach (var material in parentRenderer.materials)
                 {

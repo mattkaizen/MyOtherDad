@@ -3,9 +3,24 @@ guid: 3367b7da2df376a4d948f90e49870d0f
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Bandeja
+    second: {fileID: 2100000, guid: 0f6a0fd00161cd241bee2576ebf20ed8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Manijas
+    second: {fileID: 2100000, guid: aa688d0a7627134428320cebfa7c4e51, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Servilleta
+    second: {fileID: 2100000, guid: af2dcfb3b49839c4387b55106b6d3787, type: 2}
   materials:
-    materialImportMode: 2
+    materialImportMode: 1
     materialName: 0
     materialSearch: 1
     materialLocation: 1

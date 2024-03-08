@@ -3,9 +3,19 @@ guid: ed0d71e689feff343bd97040330bb23d
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: cafe con leche
+    second: {fileID: 2100000, guid: a7f8bf9329a139642b2862b0ce8da0a6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: taza
+    second: {fileID: 2100000, guid: b1ffebedf9fdf174a9197da54ad536e3, type: 2}
   materials:
-    materialImportMode: 2
+    materialImportMode: 1
     materialName: 0
     materialSearch: 1
     materialLocation: 1

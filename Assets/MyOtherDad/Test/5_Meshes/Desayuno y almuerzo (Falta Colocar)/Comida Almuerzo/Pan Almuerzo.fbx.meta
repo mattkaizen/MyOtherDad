@@ -3,9 +3,19 @@ guid: a1946d48e13a9554194bc02b34032865
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Borde pan
+    second: {fileID: 2100000, guid: 50977efaa67f1be49bdb7143ecfa158b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Relleno
+    second: {fileID: 2100000, guid: 11cca478606d2ef4caef3c4b66df6a7c, type: 2}
   materials:
-    materialImportMode: 2
+    materialImportMode: 1
     materialName: 0
     materialSearch: 1
     materialLocation: 1
