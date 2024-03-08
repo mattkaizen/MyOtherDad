@@ -3,9 +3,9 @@ using Data;
 using DG.Tweening;
 using Domain;
 using Player;
+using TMPro;
 using UI;
 using UnityEngine;
-using UnityEngine.Rendering.LookDev;
 using UnityEngine.UI;
 
 namespace Settings.UI
@@ -21,6 +21,11 @@ namespace Settings.UI
         [SerializeField] private CrosshairData defaultCrosshair;
         [SerializeField] private float fadeOutDuration;
         [SerializeField] private float fadeInDuration;
+        [Header("Crosshair input text settings")]
+        [SerializeField] private Color uiInteractionTextTarget;
+        [SerializeField] private TMP_Text uiInteractionText;
+        [SerializeField] private float fadeOutTextDuration;
+        [SerializeField] private float fadeInTextDuration;
         [Header("Player dependencies")]
         [SerializeField] private PlayerInventory inventory;
         [SerializeField] private HandController handController;
@@ -30,6 +35,10 @@ namespace Settings.UI
 
         private Tweener _fadeOutTween;
         private Tweener _fadeInTween;
+        private Tweener _fadeOutTextTween;
+        private Tweener _fadeInTextTween;
+
+        private bool _isUITextEnabled = true;
 
         private void Awake()
         {
@@ -102,6 +111,7 @@ namespace Settings.UI
             }
             else
             {
+                FadeOutUIInteractionText();
                 SetCrossHair(defaultCrosshair);
             }
         }
@@ -116,6 +126,7 @@ namespace Settings.UI
                     {
                         if (TryHandleInventoryInteractiveUI(inventoryInteractiveUI))
                         {
+                            FadeInUIInteractionText();
                             SetCrossHair(interactiveUI.GetInteractionUI());
                         }
                     }
@@ -123,6 +134,7 @@ namespace Settings.UI
                     {
                         if (TryHandleHandItemInteractiveUI(handItemInteractiveUI))
                         {
+                            FadeInUIInteractionText();
                             SetCrossHair(interactiveUI.GetInteractionUI());
                         }
                         else
@@ -132,16 +144,19 @@ namespace Settings.UI
                     }
                     else
                     {
+                        FadeInUIInteractionText();
                         SetCrossHair(interactiveUI.GetInteractionUI());
                     }
                 }
                 else
                 {
+                    FadeOutUIInteractionText();
                     SetCrossHair(defaultCrosshair);
                 }
             }
             else
             {
+                FadeOutUIInteractionText();
                 SetCrossHair(defaultCrosshair);
             }
         }
@@ -163,7 +178,7 @@ namespace Settings.UI
             ItemData requiredItem = handItemInteractiveUI.RequiredItemToInteract;
 
             if (handController.CurrentItemOnHand == null) return false;
-            
+
             if (handController.CurrentItemOnHand.WorldRepresentation.TryGetComponent<IObjectData>(out var objectData))
             {
                 if (objectData.Data == requiredItem)
@@ -172,6 +187,7 @@ namespace Settings.UI
                     return true;
                 }
             }
+
             return false;
         }
 
@@ -186,24 +202,54 @@ namespace Settings.UI
         {
             KillCrosshairTweeners();
             _fadeInTween = uiImage.DOColor(Color.white, fadeInDuration);
+            _fadeInTextTween = uiInteractionText.DOColor(uiInteractionTextTarget, fadeInDuration);
         }
 
         public void HideCrosshair()
         {
             KillCrosshairTweeners();
             _fadeOutTween = uiImage.DOColor(Color.clear, fadeOutDuration);
+            FadeOutUIInteractionText();
         }
 
         public void HideCrosshair(float duration)
         {
             KillCrosshairTweeners();
             _fadeOutTween = uiImage.DOColor(Color.clear, duration);
+            FadeOutUIInteractionText();
+        }
+
+        public void FadeInUIInteractionText()
+        {
+            if (!_isUITextEnabled) return;
+            _fadeInTextTween = uiInteractionText.DOColor(uiInteractionTextTarget, fadeInTextDuration);
+        }
+
+        public void FadeOutUIInteractionText()
+        {
+            _fadeOutTextTween = uiInteractionText.DOColor(Color.clear, fadeOutTextDuration);
+        }
+
+        public void EnableUIInteractionText()
+        {
+            _isUITextEnabled = true;
+        }
+        
+        public void DisableUIInteractionText()
+        {
+            _isUITextEnabled = false;
         }
 
         private void KillCrosshairTweeners()
         {
             _fadeInTween.Kill();
             _fadeOutTween.Kill();
+        }
+
+        private void KillUITextTweeners()
+        {
+            _fadeOutTextTween.Kill();
+            _fadeInTextTween.Kill();
         }
     }
 }

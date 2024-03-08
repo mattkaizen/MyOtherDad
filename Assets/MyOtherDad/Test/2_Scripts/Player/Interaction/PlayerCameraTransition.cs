@@ -46,6 +46,8 @@ namespace Player
             playerInputToggle.DisablePlayerInput();
             screenFadeEffect.FadeScreenIn();
             interactiveUIDisplay.HideCrosshair();
+            interactiveUIDisplay.DisableUIInteractionText();
+            interactiveUIDisplay.FadeOutUIInteractionText();
             yield return new WaitForSeconds(cameraTransitionDuration);
             screenFadeEffect.GetFadeScreenOutTween();
             playerInputToggle.EnableCameraObjectInput(interactableCamera.CameraInteraction, delayToEnablePlayerInput);
@@ -65,6 +67,7 @@ namespace Player
             playerInputToggle.EnablePlayerInput(delayToEnablePlayerInput);
             playerCameraLive.RaiseEvent();
             interactiveUIDisplay.EnableCrosshair();
+            interactiveUIDisplay.EnableUIInteractionText();
 
         }
 
